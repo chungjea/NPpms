@@ -11,7 +11,7 @@
 <title>Good day!!</title>
 <script type="text/javascript">
 function noticeDetail(notice_num){
-	location.href="${path}/noticeboardDetail.do?notice_num="+notice_num
+	location.href="${path}/noticeboardDetail?notice_num="+notice_num
 }
 </script>
 
@@ -162,7 +162,7 @@ function noticeDetail(notice_num){
 	</a>
   		<script type="text/javascript">
   		$("#insBtn").click(function(){
-			location.href="${path}/insertNoticeFrm.do"
+			location.href="${path}/insertNoticeFrm"
 		})
 		</script>	
 	<!-- Logout Modal-->

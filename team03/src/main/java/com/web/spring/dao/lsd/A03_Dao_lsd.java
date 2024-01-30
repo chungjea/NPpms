@@ -37,6 +37,12 @@ public interface A03_Dao_lsd {
 	@Select("select * from Noticeboard_f")
 	List<Noticeboard_f> noticePage(NoticeSch_f sch);*/
 
+	// 검색
+	@Select(" select * from Noticeboard_f where title like '%'||#{title}||'%' \r\n"
+			+ " and notice_num like '%'||#{notice_num}||'%' ")
+	List<Noticeboard_f> noticeSch(Noticeboard_f sch);
+	
+	// 페이징 처리, 전체조회
 	@Select("select * \r\n"
 			+ "		from(\r\n"
 			+ "		SELECT rownum cnt, nf.*\r\n"
