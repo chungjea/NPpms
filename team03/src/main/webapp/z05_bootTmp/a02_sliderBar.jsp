@@ -46,9 +46,9 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="http://localhost:5080/team03/getnoticeboard.do">공지 게시판</a> 
 						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
-						<a class="collapse-item" href="${path}/z05_bootTmp/a82_forgot-password.jsp">결재</a>
-						<a class="collapse-item" href="${path}/z05_bootTmp/a50_404.jsp">리스크 관리</a> <a
-							class="collapse-item" href="${path}/z05_bootTmp/a51_blank.jsp">회의록</a>
+						<a class="collapse-item" href="${path}/myapv?wempno=1000&mempno=1000&sts=대기">결재</a>
+						<a class="collapse-item" href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000">리스크 관리</a> <a
+							class="collapse-item" href="${path}/meeting?deptno=10">회의록</a>
 					</div>
 				</div></li>
 
