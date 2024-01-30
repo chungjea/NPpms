@@ -40,13 +40,12 @@ public class A01_Controller_lsd {
 	@Autowired
 	private A02_Service_lsd service;
 
-	// 검색
-	/*@RequestMapping("noticeSearch")
-	public List<Noticeboard_f> noticeSearch(Noticeboard_f sch){
-		
+	//검색
+	@RequestMapping("noticeSch")
+	public String noticeSch(Noticeboard_f sch, Model d) {
+		d.addAttribute("noticeSch", service.noticeSch(sch));
 		return "lsd/noticeBoard";
-	}*/
-	// 시험해봄
+	}
 	
 	// 공지 전체 + 페이지
 	// http://localhost:3333/noticePage
