@@ -46,6 +46,7 @@ public class A01_Controller_lsd {
 		
 		return "lsd/noticeBoard";
 	}*/
+	// 시험해봄
 	
 	// 공지 전체 + 페이지
 	// http://localhost:3333/noticePage
