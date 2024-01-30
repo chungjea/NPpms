@@ -20,14 +20,13 @@ public class A02_Service_lsd {
 	@Autowired(required = false)
 	private A03_Dao_lsd dao;
 
-	/*public List<Noticeboard_f> getNoticeboard(Noticeboard_f sch) {
-		if (sch.getNotice_num() == 0)
-			sch.setNotice_num(0);
-		if (sch.getWriter() == null)
-			sch.setWriter("");
-		return dao.getNoticeboard(sch);
-	}// getNoticeboard() 공지 전체*/
+	public List<Noticeboard_f> noticeSch(Noticeboard_f sch) {
+		if (sch.getTitle() == null)
+			sch.setTitle("");
+		return dao.noticeSch(sch);
+	}//noticeSch 검색
 
+	// 공지 전체조회 및 페이징처리
 	public List<Noticeboard_f> noticePage(NoticeSch_f sch){
 		if(sch.getTitle()==null) sch.setTitle("");
 		if(sch.getWriter()==null) sch.setWriter("");
@@ -51,15 +50,21 @@ public class A02_Service_lsd {
 		return dao.noticePage(sch);
 	}//noticePage() 공지전체+페이징처리	
 	
-	public Noticeboard_f noticeboardDetail(@RequestParam(value = "detail", defaultValue = "0") int datail) {
-		return noticeDetail(datail);
-	}// noticeboardDetail() 공지 세부
+	//@RequestParam(value = "notice_num", defaultValue = "0") 안되면 껴넣을것 ▽
+		public Noticeboard_f noticeboardDetail(int notice_num) {
+			// 조회할 떄, 조회수 +1
+			System.out.println("##############조회수 수정성공:"+dao.readCntUptNotice(notice_num));
+			Noticeboard_f f =noticeDetail(notice_num);
+			System.out.println("#####조회수결과 : "+f.getReadcnt());
+			return noticeDetail(notice_num);
+		}// noticeboardDetail() 공지 세부
 
-	public Noticeboard_f noticeDetail(int datail) {
-		Noticeboard_f noticeboard = dao.noticeboardDetail(datail);
-		noticeboard.setFname(dao.getNoticeFile(datail));
-		return noticeboard;
-	}// noticeDetail() 공지 세부
+		// 안되면 detail로 위아래 세부사항 전부
+		public Noticeboard_f noticeDetail(int notice_num) {
+			Noticeboard_f noticeboard = dao.noticeboardDetail(notice_num);
+			noticeboard.setFname(dao.getNoticeFile(notice_num));
+			return noticeboard;
+		}// noticeDetail() 공지 세부
 
 	/*public int insertNotice(Noticeboard_f ins) {
 		return dao.insertNotice(ins);

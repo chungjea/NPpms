@@ -58,7 +58,7 @@
 --%>
 	<div class="container">
 		<form method="post" enctype="multipart/form-data"
-			action="${path}/insertNotice.do">
+			action="${path}/insertNotice">
 			<%-- <div class="input-group mb-3">	
 		<div class="input-group-prepend ">
 			<span class="input-group-text  justify-content-center">
@@ -112,11 +112,11 @@
 				var msg = "${msg}"
 				if (msg != "") {
 					if (!confirm(msg + "\n계속 등록하시겠습니까?")) {
-						location.href = "${path}/noticePage.do"
+						location.href = "${path}/noticePage"
 					}
 				}
 				$("#mainBtn").click(function() {
-					location.href = "${path}/noticePage.do"
+					location.href = "${path}/noticePage"
 				})
 			</script>
 		</form>
