@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="project" type="com.web.spring.vo.Project_f"/>
+		<typeAlias alias="emp" type="com.web.spring.vo.Emp_pinfo_f"/>
+		<typeAlias alias="emplist" type="com.web.spring.vo.Emp_master_f"/>
+		<typeAlias alias="approve" type="com.web.spring.vo.Approve_f"/>
+		<typeAlias alias="apvSch" type="com.web.spring.vo.ApproveSch"/>
+		<typeAlias alias="noticeboard" type="com.web.spring.vo.Noticeboard_f"/>
+		<typeAlias alias="risk" type="com.web.spring.vo.Risk_f"/>
+		<typeAlias alias="riskSch" type="com.web.spring.vo.RiskSch"/>
+		<typeAlias alias="errs" type="com.web.spring.vo.Error_f"/>
+		<typeAlias alias="meeting" type="com.web.spring.vo.Meeting_f"/>
+		<typeAlias alias="metSch" type="com.web.spring.vo.MeetingSch_f"/>
+		<typeAlias alias="projectSch" type="com.web.spring.vo.ProjectSch"/>
+	</typeAliases>
+
+</configuration>

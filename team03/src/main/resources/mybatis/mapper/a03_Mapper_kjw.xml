@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.spring.dao.kjw.A03_Dao_kjw">
+		<select id="login" resultType="emp">
+		SELECT * FROM emp_pinfo_f where empno=#{empno} and passwd=#{passwd}
+	</select>
+			<select id="Emplist" resultType="emp">
+		SELECT * FROM emp_master_f
+	</select>
+		<insert id="register" parameterType="emplist">
+		INSERT INTO emp_master_f values(
+		empnoc.nextval,#{ename},#{egrade},#{deptno},
+			#{dname},to_char(#{hiredate}),0,0,sysdate,0,#{passwd}
+		) 
+
+	</insert>
+
+<select id="empcnt" parameterType="emplist">
+SELECT COUNT(*) FROM emp_master_f
+
+</select>
+
+</mapper>

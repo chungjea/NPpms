@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.web.spring.dao.cjw.A03_Dao_cjw">
+	<select id="myapv" resultType="approve" parameterType="apvSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
+						emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, af.REGDTE, af.sts 
+					FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
+					WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
+					AND af.wempno = #{wempno} AND af.sts = #{sts} 
+					ORDER BY APVNO DESC) a
+			) 
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="ckapv" resultType="approve" parameterType="apvSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
+					emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, af.REGDTE, af.sts 
+				FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
+				WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
+				AND aaf.mempno = #{mempno} AND af.sts = '대기' ORDER BY APVNO DESC) a
+			) 
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="detailapv" resultType="approve" parameterType="int">
+		SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
+			emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, 
+			af.REGDTE, aaf.ckdte, af.sts, aaf.feedback , af.content
+		FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df
+		WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND 
+		emf.DEPTNO = df.DEPTNO AND af.apvno = #{apvno} 
+		ORDER BY APVNO DESC
+	</select>
+	
+	<select id="myrsk" resultType="risk" parameterType="riskSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
+						FROM RISK_F rf, RISKADMIN_F rf2 
+						WHERE rf.rskno = rf2.rskno 
+						AND rf.wempno = #{wempno} AND rf.sts = '발생예정' 
+						ORDER BY rskNO DESC) a
+			)
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="ckrsk" resultType="risk" parameterType="riskSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
+					FROM RISK_F rf, RISKADMIN_F rf2 
+					WHERE rf.rskno = rf2.rskno 
+					AND rf2.manager = #{manager} AND rf.sts = '발생예정' 
+					ORDER BY rskNO DESC) a
+			)
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="torsk" resultType="risk" parameterType="riskSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, 
+					emf.ENAME||' / '||df.DNAME charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
+				FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
+				WHERE rf.rskno = rf2.rskno AND rf2.cempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
+				AND rf2.cempno = #{cempno} AND rf.sts = '처리중' 
+				ORDER BY rskNO DESC) a
+			)
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="finrsk" resultType="risk" parameterType="riskSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, 
+					emf.ENAME||' / '||df.DNAME charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
+				FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
+				WHERE rf.rskno = rf2.rskno AND rf2.cempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
+				AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' 
+				ORDER BY rskNO DESC) a
+			)
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="detailrsk" resultType="risk" parameterType="int">
+		SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, rf.regdte, 
+			emf.ENAME||' / '||df.DNAME charge, rf2.cempno, rf2.finaldte, rf.sts, 
+			rf2.priority, rf2.probability, rf2.danger, rf2.manager, rf.content, rf2.feedback 
+		FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
+		WHERE rf.rskno = rf2.rskno(+) AND rf2.cempno = emf.EMPNO(+) AND emf.DEPTNO = df.DEPTNO(+) 
+		AND rf.rskno = #{rskno} 
+		ORDER BY rskNO DESC
+	</select>
+	
+	<select id="metlist" resultType="meeting" parameterType="metSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT mf.METNO, mf.TITLE, mf.METDTE, mf.wempno, 
+					emf.ENAME||' / '||df.DNAME writer, mf.regdte 
+				FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df 
+				WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno} 
+				AND 1=1 ORDER BY mf.METNO DESC) a
+			)
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<insert id="insertmet" parameterType="meeting">
+		INSERT INTO meeting_f 
+			values(met_seq.nextval,#{title}, to_date(#{metdteStr},'YYYY-MM-DD'), 
+					to_date(#{metdteStr}||'T'||#{starttmStr}||'+09:00','YYYY-MM-DD"T"HH24:MI"+09:00"'), 
+					to_date(#{metdteStr}||'T'||#{fintmStr}||'+09:00','YYYY-MM-DD"T"HH24:MI"+09:00"'), 
+					#{participant}, #{wempno}, #{content}, #{conclusion}, sysdate)
+	</insert>
+	<select id="detailmet" resultType="meeting" parameterType="int">
+		SELECT mf.METNO, to_char(mf.METDTE, 'YYYY-MM-DD') metdteStr, 
+			to_char(mf.STARTTM, 'HH24:MI') starttmStr, to_char(mf.finTM, 'HH24:MI') fintmStr, 
+			mf.regdte, mf.wempno, emf.ENAME||' / '||df.DNAME writer, 
+			mf.PARTICIPANT, mf.TITLE, mf.content, mf.conclusion 
+		FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df 
+		WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND metno = #{metno}
+	</select>
+	<update id="updatemet" parameterType="meeting">
+		UPDATE meeting_f 
+			SET title = #{title}, metdte = to_date(#{metdteStr},'YYYY-MM-DD'), 
+				starttm = to_date(#{metdteStr}||'T'||#{starttmStr}||'+09:00','YYYY-MM-DD"T"HH24:MI"+09:00"'), 
+				fintm = to_date(#{metdteStr}||'T'||#{fintmStr}||'+09:00','YYYY-MM-DD"T"HH24:MI"+09:00"'), 
+				participant = #{participant}, content = #{content}, conclusion = #{conclusion} 
+		WHERE metno = #{metno}
+	</update>
+</mapper>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+<mapper namespace="com.web.spring.dao.hcj.A03_Dao_hcj">
+	<select id="getprojectsAdmin" parameterType="int" resultType="project">
+		SELECT rownum,f.*
+		from
+		(SELECT PROJECT_F.*,pg.progress
+		FROM PROJECT_F ,
+		(SELECT pcode,avg(PROGRESS) PROGRESS 
+		FROM PROJECT_WORK_F pwf 
+		GROUP BY pcode) pg
+		WHERE PROJECT_F.pcode = pg.pcode(+)
+		AND empno = #{empno}
+		ORDER BY CASE WHEN status ='진행중' THEN 1
+		ELSE 2 END,enddte) f
+		 <![CDATA[WHERE rownum <= 5]]>
+	</select>
+	
+	<select id="getprojectsNormal" parameterType="int" resultType="project">
+		SELECT rownum cnt,fin.*
+		FROM 
+			(SELECT mypj.*,avpg.progress
+			from
+				(SELECT pf.pcode ,pf.pname ,pf.startdte ,pf.enddte,pf.status, pf.tname, pf.ptype, pf.content
+				FROM TMEM_F tf ,PROJECT_F pf
+				WHERE tf.EMPNO = #{empno}
+				AND tf.PCODE = pf.PCODE ) mypj,
+				(SELECT  pcode ,avg(PROGRESS) PROGRESS 
+				FROM PROJECT_WORK_F pwf 
+				GROUP BY PCODE) avpg
+		WHERE mypj.PCODE = avpg.pcode(+)
+		ORDER BY CASE when status = '진행중' THEN 1 ELSE 2 END, enddte) fin
+		<![CDATA[WHERE rownum <=5]]>
+	</select>
+
+
+
+	<select id="getMyErrsListNormal" parameterType="int" resultType="errs">
+		SELECT rownum ,fin.* 
+		from
+		(SELECT ef.* ,pwf.EMPNO,pf.PNAME ,pwf.wname
+		FROM ERROR_F ef,PROJECT_WORK_F pwf,PROJECT_F pf 
+		WHERE ef.wno = pwf.wno
+		AND pwf.PCODE = pf.PCODE 
+		AND pwf.empno = #{empno}
+		ORDER BY CASE WHEN ef.STATUS ='미처리' THEN 1 
+		ELSE 2 END) fin
+		 <![CDATA[WHERE rownum <= 5]]>
+	</select>
+	
+	<select id="getMyErrsListAdmin" parameterType="int" resultType="errs">
+		SELECT rownum cnt, fin.*
+		FROM 
+			(SELECT werrs.*, pc.pname
+			FROM 
+					(SELECT PCODE ,pname
+					FROM PROJECT_F pf 
+					WHERE empno = #{empno}) pc ,
+					(SELECT pwf.pcode , ef.*
+					FROM ERROR_F ef,PROJECT_WORK_F pwf
+					WHERE pwf.wno = ef.wno) werrs
+		WHERE pc.pcode = werrs.pcode
+		ORDER BY CASE WHEN status = '미처리' THEN 1 ELSE 2 END) fin
+		<![CDATA[WHERE rownum <=5]]>
+	</select>
+	
+	
+<!-- ######################### 관리자 담당 프로젝트 ########################## -->
+
+								<!-- 리스트 -->
+	<select id="getprojectListAdmim" parameterType="projectSch" resultType="project">
+		SELECT fin.*
+		FROM 
+			(SELECT rownum cnt, PROJECT_F.*,pg.progress
+				FROM PROJECT_F ,
+					(SELECT pcode,avg(PROGRESS) PROGRESS 
+					FROM PROJECT_WORK_F pwf 
+					GROUP BY pcode) pg
+				WHERE PROJECT_F.pcode = pg.pcode(+)
+				AND empno = #{empno}
+				AND pname LIKE '%'||#{pname}||'%'
+				<if test="status != null">
+				AND STATUS = #{status}
+				</if>
+				<![CDATA[AND rownum <= #{end} )]]> fin
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	
+								<!-- 데이터 갯수 -->
+	<select id="getprojectListCntAdmim" parameterType="projectSch" resultType="int">
+		SELECT count(*)
+		FROM PROJECT_F 
+		WHERE empno = #{empno}
+		AND pname LIKE '%'||#{pname}||'%'
+		<if test="status!=null">
+		AND STATUS = #{status}
+		</if>
+	</select>
+
+<!--  ######################### 사원 참가 프로젝트  ########################## -->	
+
+	<select id="getprojectListNormal" parameterType="projectSch" resultType="project">
+		SELECT *
+		from
+			(SELECT rownum cnt,fin.*
+			FROM 
+				(SELECT mypj.*,avpg.progress
+				from
+					(SELECT pf.pcode ,pf.pname ,pf.startdte ,pf.enddte,pf.status, pf.tname, pf.ptype, pf.content
+					FROM TMEM_F tf ,PROJECT_F pf
+					WHERE tf.EMPNO = #{empno}
+					AND tf.PCODE = pf.PCODE ) mypj,
+					(SELECT  pcode ,avg(PROGRESS) PROGRESS 
+					FROM PROJECT_WORK_F pwf 
+					GROUP BY PCODE) avpg
+				WHERE mypj.PCODE = avpg.pcode(+)
+				) fin
+			<![CDATA[WHERE rownum <= #{end}]]>
+			AND pname LIKE '%'||#{pname}||'%'
+			<if test="status != null">
+			AND status = #{status}
+			</if>
+			)
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	
+	<select id="getprojectListCntNormal" parameterType="projectSch" resultType="int">
+		SELECT count(*)
+		FROM TMEM_F tf ,PROJECT_F pf
+		WHERE tf.EMPNO = #{empno}
+		AND tf.PCODE = pf.PCODE
+		AND pname LIKE '%'||#{pname}||'%'
+		<if test="status!=null">
+		AND STATUS = #{status}
+		</if>
+	</select>
+	
+	
+	
+	
+</mapper>
