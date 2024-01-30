@@ -62,17 +62,17 @@
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/meeting.do3?deptno=10"
+			location.href="${path}/meeting?deptno=10"
 		}
 		$("#mainBtn").click(function(){
-			location.href="${path}/meeting.do3?deptno=10"
+			location.href="${path}/meeting?deptno=10"
 		})
 		$("#uptBtn").click(function(){
-			$("#frm01").attr("action","${path}/updatemetFrm.do3")
+			$("#frm01").attr("action","${path}/updatemetFrm")
 			$("#frm01").submit()
 		})
 		$("#delBtn").click(function(){
-			$("#frm01").attr("action","${path}/deletemet.do3")
+			$("#frm01").attr("action","${path}/deletemet")
 			$("#frm01").submit()
 		})
 	});
@@ -182,7 +182,7 @@
 			<script type="text/javascript">
 				function download(fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download.do3?fname="+fname
+						location.href="${path}/download?fname="+fname
 					}
 				}
 			</script>
