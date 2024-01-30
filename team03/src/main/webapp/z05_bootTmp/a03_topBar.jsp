@@ -37,7 +37,7 @@
 	 <%
 Date time = new Date();
 SimpleDateFormat formatter = new SimpleDateFormat(
-		"yyyy-MM-dd HH:mm:ss"
+		"HH:mm:ss"
 		);
 long lasttime=session.getLastAccessedTime();
 long createdtime=session.getCreationTime();
