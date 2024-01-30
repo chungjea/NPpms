@@ -56,7 +56,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-	<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a02_sliderBar.jsp" %>
+	<%@ include file="/z05_bootTmp/a02_sliderBar.jsp" %>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -69,7 +69,7 @@
 				
 				<!-- Topbar   %>  
 				-->
-				<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a03_topBar.jsp" %> 
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp" %> 
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
