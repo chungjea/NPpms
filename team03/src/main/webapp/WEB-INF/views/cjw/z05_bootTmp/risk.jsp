@@ -72,7 +72,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">리스크 관리</h1>
-                        <a href="${path}/insertrskFrm.do3" class="btn btn-secondary btn-icon-split">
+                        <a href="${path}/insertrskFrm" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
@@ -144,27 +144,27 @@
                     </form>
                     <script type="text/javascript">
 	                    function goPage1(){
-	            			location.href="${path}/myrsk.do3?wempno=1000&cempno=1000&manager=1000"
+	            			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
 	            		}
 	                    function goPage2(no){
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
-							$("#frm01").attr("action","${path}/ckrsk.do3")
+							$("#frm01").attr("action","${path}/ckrsk")
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage3(no){
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
-							$("#frm01").attr("action","${path}/torsk.do3")
+							$("#frm01").attr("action","${path}/torsk")
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage4(no){
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
-							$("#frm01").attr("action","${path}/finrsk.do3")
+							$("#frm01").attr("action","${path}/finrsk")
 					    	$("#frm01").submit()
 	            		}
                     </script>
@@ -190,7 +190,7 @@
 					    	</c:forEach>
 					    </tbody>
 					</table>
-					<form method="post" id="frm02" action="${path}/detailrsk.do3">
+					<form method="post" id="frm02" action="${path}/detailrsk">
 							<input id="test" name="rskno" type="hidden">
 					</form>
 					<script type="text/javascript">

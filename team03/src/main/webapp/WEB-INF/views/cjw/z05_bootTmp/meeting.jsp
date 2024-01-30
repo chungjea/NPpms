@@ -72,7 +72,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">회의록</h1>
-                        <a href="${path}/insertmetFrm.do3" class="btn btn-secondary btn-icon-split">
+                        <a href="${path}/insertmetFrm" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
@@ -103,7 +103,7 @@
 					    	</c:forEach>
 					    </tbody>
 					</table>
-					<form method="post" id="frm02" action="${path}/detailmet.do3">
+					<form method="post" id="frm02" action="${path}/detailmet">
 						<input id="test" name="metno" type="hidden">
 					</form>
 					<script type="text/javascript">

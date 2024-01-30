@@ -53,7 +53,7 @@
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/myrsk.do3?wempno=1000&cempno=1000&manager=1000"
+			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
 		}		
 		$("#regBtn").click(function(){
 			if($("[name=title]").val()==""){
@@ -69,7 +69,7 @@
 			}
 		})
 		$("#mainBtn").click(function(){
-			location.href="${path}/myrsk.do3?wempno=1000&cempno=1000&manager=1000"
+			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
 		})
 	});
 </script>
@@ -102,7 +102,7 @@
                     </div>
 					<br>
 					<div align="center">
-                    	<form method="post" enctype="multipart/form-data" action="${path}/insertrsk.do3">
+                    	<form method="post" enctype="multipart/form-data" action="${path}/insertrsk">
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">제목(*)</span>

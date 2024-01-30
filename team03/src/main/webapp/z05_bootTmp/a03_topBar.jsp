@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import ="java.text.SimpleDateFormat" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <nav
@@ -13,7 +14,13 @@
 		<i class="fa fa-bars"></i>
 	</button>
 
-	<!-- Topbar Search -->
+
+<input type="hidden" id="sessionTimeOut" name="sessionTimeOut" value=<%=session.getMaxInactiveInterval() %>>
+ 
+ 
+ 
+
+	<!-- Topbar Search1 -->
 	<form
 		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
 		<div class="input-group">
@@ -27,9 +34,24 @@
 			</div>
 		</div>
 	</form>
+	 <%
+Date time = new Date();
+SimpleDateFormat formatter = new SimpleDateFormat(
+		"HH:mm:ss"
+		);
+long lasttime=session.getLastAccessedTime();
+long createdtime=session.getCreationTime();
+long time_used=(lasttime-createdtime)/60000;
+%>
 
+	<div class="text-truncate">
+	${emp.ename}님 로그인 시각:<%=formatter.format(time)%> 접속 후 지난시간:<%=time_used%></div>
+						
+
+<!-- abc -->
 	<!-- Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
+
 
 		<!-- Nav Item - Search Dropdown (Visible Only XS) -->
 		<li class="nav-item dropdown no-arrow d-sm-none"><a
@@ -183,7 +205,7 @@
 					Log
 				</a>
 				<div class="dropdown-divider"></div>
-				<a class="dropdown-item" href="#" data-toggle="modal"
+				<a class="dropdown-item" href="logout_function.jsp" data-toggle="modal" 
 					data-target="#logoutModal"> <i
 					class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
 					Logout

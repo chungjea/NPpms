@@ -64,7 +64,7 @@
 	var sts = "${dapv.sts}"
 	$(document).ready(function(){
 		$("#mainBtn").click(function(){
-			location.href="${path}/myapv.do3?wempno=1000&mempno=1000&sts="+sts
+			location.href="${path}/myapv?wempno=1000&mempno=1000&sts="+sts
 		})
 		$("#okModal").click(function(){
 			$("#modalTitle").text("승인 피드백")
@@ -97,15 +97,15 @@
 	function apvajax(){
 		$.ajax({
 			type : "post",
-			url : "${path}/doapv.do3",
+			url : "${path}/doapv",
 			data : $("#frm02").serialize(),
 			dataType : "json",
 			success : function(data) {
 				$("#clsBtn").click()
 				if(confirm(data.msg+"결재 홈으로 돌아가시겠습니까?")){
-					location.href="${path}/myapv.do3?wempno=1000&mempno=1000&sts="+sts
+					location.href="${path}/myapv?wempno=1000&mempno=1000&sts="+sts
 				}else{
-					location.href="${path}/detailapv.do3?apvno="+apvno
+					location.href="${path}/detailapv?apvno="+apvno
 				}
 				
 			},
@@ -144,7 +144,7 @@
                     </div>
 					<br><br>
 					<div align="center">
-                    	<form method="post" enctype="multipart/form-data" action="${path}/insertapv.do3">
+                    	<form method="post" enctype="multipart/form-data" action="${path}/insertapv">
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">제목</span>
@@ -245,7 +245,7 @@
 			<script type="text/javascript">
 				function download(fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download.do3?fname="+fname
+						location.href="${path}/download?fname="+fname
 					}
 				}
 			</script>

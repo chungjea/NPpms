@@ -64,7 +64,7 @@
 	var manager = "${drsk.manager}"
 	$(document).ready(function(){
 		$("#mainBtn").click(function(){
-			location.href="${path}/myrsk.do3?wempno=1000&cempno=1000&manager=1000"
+			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
 		})
 		if(sts=="완료"){
 			$("#ckModal").hide();
@@ -90,15 +90,15 @@
 			}
 			$.ajax({
 				type : "post",
-				url : "${path}/dorsk.do3",
+				url : "${path}/dorsk",
 				data : $("#frm02").serialize(),
 				dataType : "json",
 				success : function(data) {
 					$("#clsBtn").click()
 					if(confirm(data.msg+"리스크 관리 페이지로 돌아가시겠습니까?")){
-						location.href="${path}/myrsk.do3?wempno=1000&cempno=1000&manager=1000"
+						location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
 					}else{
-						location.href="${path}/detailrsk.do3?rskno="+rskno
+						location.href="${path}/detailrsk?rskno="+rskno
 					}
 				},
 				error : function(err) {
@@ -109,14 +109,14 @@
 		$("#finBtn").click(function(){
 			$.ajax({
 				type : "post",
-				url : "${path}/donersk.do3",
+				url : "${path}/donersk",
 				data : $("#frm01").serialize(),
 				dataType : "json",
 				success : function(data) {
 					if(confirm(data.msg+"리스크 관리 페이지로 돌아가시겠습니까?")){
-						location.href="${path}/myrsk.do3?wempno=1000&cempno=1000&manager=1000"
+						location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
 					}else{
-						location.href="${path}/detailrsk.do3?rskno="+rskno
+						location.href="${path}/detailrsk?rskno="+rskno
 					}
 				},
 				error : function(err) {
@@ -329,7 +329,7 @@
 			<script type="text/javascript">
 				function download(fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download.do3?fname="+fname
+						location.href="${path}/download?fname="+fname
 					}
 				}
 			</script>
