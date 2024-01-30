@@ -89,5 +89,11 @@ public class A01_Controller_hcj {
 		return "hcj/z05_bootTmp/projectList";
 	}
 	
+	@RequestMapping("project")
+	public String project() {	
+		return "hcj/z05_bootTmp/gantt";
+	}
+	
+	
 	
 }
