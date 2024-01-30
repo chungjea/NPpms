@@ -59,10 +59,12 @@
 	//var empno = ${mem.empno}
 	//var name = ${mem.ename}+" / "+${mem.dname}
 	var apvno = "${dapv.apvno}"
+	var wempno = "${dapv.wempno}"
 	var mempno = "${dapv.mempno}"
+	var sts = "${dapv.sts}"
 	$(document).ready(function(){
 		$("#mainBtn").click(function(){
-			location.href="${path}/myapv.do3?wempno=1000&mempno=1000"
+			location.href="${path}/myapv.do3?wempno=1000&mempno=1000&sts="+sts
 		})
 		$("#okModal").click(function(){
 			$("#modalTitle").text("승인 피드백")
@@ -101,7 +103,7 @@
 			success : function(data) {
 				$("#clsBtn").click()
 				if(confirm(data.msg+"결재 홈으로 돌아가시겠습니까?")){
-					location.href="${path}/myapv.do3?wempno=1000&mempno=1000"
+					location.href="${path}/myapv.do3?wempno=1000&mempno=1000&sts="+sts
 				}else{
 					location.href="${path}/detailapv.do3?apvno="+apvno
 				}

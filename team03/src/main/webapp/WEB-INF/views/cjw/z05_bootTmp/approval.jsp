@@ -134,17 +134,22 @@
 					<br>
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage('대기')">상신한 문서</a>
-                    	<a class="page-link" id="return" href="javascript:goPage('반려')">반려된 문서</a>
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('대기')">상신한 문서</a>
+                    	<a class="page-link" id="return" href="javascript:goPage1('반려')">반려된 문서</a>
                     	<a class="page-link" id="tocheck" href="javascript:goPage2()">결재할 문서</a>
-                    	<a class="page-link" id="finish" href="javascript:goPage('완료')">완료된 문서</a>
+                    	<a class="page-link" id="finish" href="javascript:goPage1('완료')">완료된 문서</a>
                     </div>
+                    <form method="post" id="frm01">
+                    	<input type="hidden" name="wempno" value="1000"/>
+                    	<input type="hidden" name="mempno" value="1000"/>
+                    	<input type="hidden" id="msts" name="sts" value="${param.sts}"/>
+                    </form>
                     <script type="text/javascript">
-	                    function goPage(sts){
-	            			location.href="${path}/myapv.do3?wempno=1000&mempno=1000&sts="+sts
+	                    function goPage1(sts){
+	            			location.href="${path}/myapv.do3?curPage=1&wempno=1000&mempno=1000&sts="+sts
 	            		}
 	                    function goPage2(){
-	            			location.href="${path}/ckapv.do3?wempno=1000&mempno=1000"//+empno
+	            			location.href="${path}/ckapv.do3?curPage=1&wempno=1000&mempno=1000"//+empno
 	            		}
 	                	function goDetail(apvno){
 	                		location.href="${path}/detailapv.do3?apvno="+apvno
@@ -173,7 +178,7 @@
 					    </tbody>
 					</table>
 					<form method="post" id="frm02" action="${path}/detailapv.do3">
-							<input id="test" name="apvno" type="hidden">
+						<input id="test" name="apvno" type="hidden">
 					</form>
 					<script type="text/javascript">
 					    function goDetail(no){
@@ -181,13 +186,28 @@
 					    	$("#frm02").submit()
 					    }
 					</script>
- 					<ul class="pagination justify-content-center">
-					  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-					  <li class="page-item"><a class="page-link" href="#">1</a></li>
-					  <li class="page-item"><a class="page-link" href="#">2</a></li>
-					  <li class="page-item"><a class="page-link" href="#">3</a></li>
-					  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+ 					<form method="get" id="frm03">
+						<input type="hidden" name="curPage" value="${sch.curPage}"/>
+						<input type="hidden" name="wempno" value="1000"/>
+						<input type="hidden" name="mempno" value="1000"/>
+						<input type="hidden" id="sts" name="sts" value="대기"/>
+					</form>
+					<ul class="pagination  justify-content-center">
+						<li class="page-item">
+						<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
+						<c:forEach var="pcnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+							<li class="page-item ${sch.curPage==pcnt?'active':''}">
+							<a class="page-link" href="javascript:goPage(${pcnt})">${pcnt}</a></li>
+						</c:forEach>
+						<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.endBlock+1})">Next</a></li>
 					</ul>
+					<script type="text/javascript">
+						function goPage(pcnt){
+							$("#sts").val("${param.sts}")
+							$("[name=curPage]").val(pcnt)
+							$("#frm03").submit();
+						}
+					</script>	
 				</div>
 				<!-- /.container-fluid -->
 
@@ -228,11 +248,5 @@
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
 </body>
 </html>
