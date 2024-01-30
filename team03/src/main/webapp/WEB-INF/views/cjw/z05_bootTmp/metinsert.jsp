@@ -55,11 +55,11 @@
 		var type = "${type}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/meeting.do3?deptno=10"
+			location.href="${path}/meeting?deptno=10"
 		}
 		if(msg2!=""){
 			alert(msg2)
-			$("#frm01").attr("action","${path}/detailmet.do3")
+			$("#frm01").attr("action","${path}/detailmet")
 			$("#frm01").submit()
 		}
 		if(type=="reg"){
@@ -102,7 +102,7 @@
 				return;
 			}
 			if(confirm("등록하시겠습니까?")){
-				$("#frm01").attr("action","${path}/insertmet.do3")
+				$("#frm01").attr("action","${path}/insertmet")
 				$("#frm01").submit()
 			}
 		})
@@ -136,12 +136,12 @@
 				return;
 			}
 			if(confirm("수정하시겠습니까?")){
-				$("#frm01").attr("action","${path}/updatemet.do3")
+				$("#frm01").attr("action","${path}/updatemet")
 				$("#frm01").submit()
 			}
 		})
 		$("#mainBtn").click(function(){
-			location.href="${path}/meeting.do3?deptno=10"
+			location.href="${path}/meeting?deptno=10"
 		})
 	});
 </script>

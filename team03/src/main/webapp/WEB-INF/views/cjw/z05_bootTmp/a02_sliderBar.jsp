@@ -44,7 +44,7 @@
 				<div id="collapsePages" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="${path}/z05_bootTmp/a83_login.jsp">공지 게시판</a> 
+						<a class="collapse-item" href="http://localhost:5080/team03/getNoticeboard.do">공지 게시판</a> 
 						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
 						<a class="collapse-item" href="${path}/z05_bootTmp/a82_forgot-password.jsp">결재</a>
 						<a class="collapse-item" href="${path}/z05_bootTmp/a50_404.jsp">리스크 관리</a> <a
@@ -64,9 +64,26 @@
 					<span>재정관리</span>
 			</a></li>
 			
-			<li class="nav-item"><a class="nav-link" href="${path}/z05_bootTmp/a70_table.jsp">
+			<li class="nav-item"><a class="nav-link" onclick="return f_clickFunc()" href="mypagefilter.do4">
 					<span>마이페이지</span>
 			</a></li>
+			 <script>
+	var auth = "${emp.auth}"
+		
+		var sessAuth = "${emp.auth}"
+				function f_clickFunc(){	
+		if(sessAuth=="관리자") {
+			location.href="${path}/z05_bootTmp/a70_tablesadmin.jsp" 
+			
+			
+		}else if(sessAuth=="직원"){
+			location.href="${path}/z05_bootTmp/a70_tables.jsp" 
+		}else
+			alert("마이페이지권한이 없습니다. 로그인화면으로 돌아갑니다.")
+		}
+	
+ 
+ </script>
 			
 			<!-- Divider -->
 			<hr class="sidebar-divider d-none d-md-block">

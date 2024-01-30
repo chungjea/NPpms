@@ -53,7 +53,7 @@
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/myapv.do3?wempno=1000&mempno=1000"
+			location.href="${path}/myapv?wempno=1000&mempno=1000"
 		}		
 		$("#regBtn").click(function(){
 			if($("[name=title]").val()==""){
@@ -69,7 +69,7 @@
 			}
 		})
 		$("#mainBtn").click(function(){
-			location.href="${path}/myapv.do3?wempno=1000&mempno=1000"
+			location.href="${path}/myapv?wempno=1000&mempno=1000"
 		})
 	});
 </script>
@@ -102,7 +102,7 @@
                     </div>
 					<br><br>
 					<div align="center">
-                    	<form method="post" enctype="multipart/form-data" action="${path}/insertapv.do3">
+                    	<form method="post" enctype="multipart/form-data" action="${path}/insertapv">
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">제목(*)</span>

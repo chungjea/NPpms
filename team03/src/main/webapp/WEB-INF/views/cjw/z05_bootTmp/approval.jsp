@@ -72,7 +72,7 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">결재</h1>
-                        <a href="${path}/insertapvFrm.do3" class="btn btn-secondary btn-icon-split">
+                        <a href="${path}/insertapvFrm" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
@@ -146,13 +146,13 @@
                     </form>
                     <script type="text/javascript">
 	                    function goPage1(sts){
-	            			location.href="${path}/myapv.do3?curPage=1&wempno=1000&mempno=1000&sts="+sts
+	            			location.href="${path}/myapv?curPage=1&wempno=1000&mempno=1000&sts="+sts
 	            		}
 	                    function goPage2(){
-	            			location.href="${path}/ckapv.do3?curPage=1&wempno=1000&mempno=1000"//+empno
+	            			location.href="${path}/ckapv?curPage=1&wempno=1000&mempno=1000"//+empno
 	            		}
 	                	function goDetail(apvno){
-	                		location.href="${path}/detailapv.do3?apvno="+apvno
+	                		location.href="${path}/detailapv?apvno="+apvno
 	                	}
                     </script>
                     <br>
@@ -177,7 +177,7 @@
 					    	</c:forEach>
 					    </tbody>
 					</table>
-					<form method="post" id="frm02" action="${path}/detailapv.do3">
+					<form method="post" id="frm02" action="${path}/detailapv">
 						<input id="test" name="apvno" type="hidden">
 					</form>
 					<script type="text/javascript">

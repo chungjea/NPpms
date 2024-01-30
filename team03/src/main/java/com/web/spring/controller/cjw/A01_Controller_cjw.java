@@ -22,7 +22,7 @@ public class A01_Controller_cjw {
 	@Autowired
 	private A02_Service_cjw service;
 	// 결재
-	// http://localhost:7080/team03/myapv.do3?wempno=1000&mempno=1000
+	// http://localhost:3333/myapv?wempno=1000&mempno=1000&sts=대기
 	@GetMapping("myapv")
 	public String myapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
 		if(sch.getSts()==null) sch.setSts("대기");
@@ -31,7 +31,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
 		d.addAttribute("goodapvcnt", service.goodapvcnt(sch));
 		d.addAttribute("toapvcnt", service.toapvcnt(sch));
-		return "approval";
+		return "cjw/z05_bootTmp/approval";
 	}
 	
 	@GetMapping("ckapv")
@@ -41,7 +41,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
 		d.addAttribute("goodapvcnt", service.goodapvcnt(sch));
 		d.addAttribute("toapvcnt", service.toapvcnt(sch));
-		return "approval";
+		return "cjw/z05_bootTmp/approval";
 	}
 	
 	@GetMapping("insertapvFrm")
@@ -64,7 +64,7 @@ public class A01_Controller_cjw {
 	@RequestMapping("download")
 	public String download(@RequestParam("fname") String fname, Model d) {
 		d.addAttribute("downloadFile", fname);
-		return "cjw/z05_bootTmp/downloadViewer_cjw";
+		return "downloadViewer/downloadViewer_cjw";
 	}
 	
 	@PostMapping("doapv")
@@ -74,7 +74,7 @@ public class A01_Controller_cjw {
 	}
 	
 	// 리스크 관리
-	// http://localhost:7080/team03/myrsk.do3?wempno=1000&cempno=1000&manager=1000
+	// http://localhost:3333/myrsk?wempno=1000&cempno=1000&manager=1000
 	@GetMapping("myrsk")
 	public String myrsk(@ModelAttribute("sch") RiskSch sch, Model d) {
 		d.addAttribute("rskList", service.myrsk(sch));
@@ -82,7 +82,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
-		return "risk";
+		return "cjw/z05_bootTmp/risk";
 	}
 	
 	@PostMapping("ckrsk")
@@ -92,7 +92,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
-		return "risk";
+		return "cjw/z05_bootTmp/risk";
 	}
 	
 	@PostMapping("torsk")
@@ -102,7 +102,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
-		return "risk";
+		return "cjw/z05_bootTmp/risk";
 	}
 	
 	@PostMapping("finrsk")
@@ -112,7 +112,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
-		return "risk";
+		return "cjw/z05_bootTmp/risk";
 	}
 	
 	@GetMapping("insertrskFrm")
@@ -145,7 +145,7 @@ public class A01_Controller_cjw {
 	}
 	
 	// 회의록
-	// http://localhost:7080/team03/meeting.do3?deptno=10
+	// http://localhost:3333/meeting?deptno=10
 	@GetMapping("meeting")
 	public String meeting(@ModelAttribute("sch")MeetingSch_f sch, Model d) {
 		d.addAttribute("metList", service.metlist(sch));
