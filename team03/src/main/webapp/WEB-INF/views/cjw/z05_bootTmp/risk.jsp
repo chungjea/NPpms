@@ -132,7 +132,7 @@
 					<br>
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage()">등록한 리스크</a>
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1()">등록한 리스크</a>
                     	<a class="page-link" id="myck" href="javascript:goPage2('1000')">처리할 리스크</a>
                     	<a class="page-link" id="tocheck" href="javascript:goPage3('1000')">담당중인 리스크</a>
                     	<a class="page-link" id="finish" href="javascript:goPage4('1000')">완료된 리스크</a>
@@ -143,7 +143,7 @@
                     	<input type="hidden" name="manager" id="3"/>
                     </form>
                     <script type="text/javascript">
-	                    function goPage(){
+	                    function goPage1(){
 	            			location.href="${path}/myrsk.do3?wempno=1000&cempno=1000&manager=1000"
 	            		}
 	                    function goPage2(no){
@@ -199,13 +199,27 @@
 					    	$("#frm02").submit()
 					    }
 					</script>
- 					<ul class="pagination justify-content-center">
-					  <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-					  <li class="page-item"><a class="page-link" href="#">1</a></li>
-					  <li class="page-item"><a class="page-link" href="#">2</a></li>
-					  <li class="page-item"><a class="page-link" href="#">3</a></li>
-					  <li class="page-item"><a class="page-link" href="#">Next</a></li>
+ 					<form method="get" id="frm03">
+						<input type="hidden" name="curPage" value="${sch.curPage}"/>
+						<input type="hidden" name="wempno" value="1000"/>
+						<input type="hidden" name="cempno" value="1000"/>
+						<input type="hidden" name="manager" value="1000"/>
+					</form>
+					<ul class="pagination  justify-content-center">
+						<li class="page-item">
+						<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
+						<c:forEach var="pcnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+							<li class="page-item ${sch.curPage==pcnt?'active':''}">
+							<a class="page-link" href="javascript:goPage(${pcnt})">${pcnt}</a></li>
+						</c:forEach>
+						<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.endBlock+1})">Next</a></li>
 					</ul>
+					<script type="text/javascript">
+						function goPage(pcnt){
+							$("[name=curPage]").val(pcnt)
+							$("#frm03").submit();
+						}
+					</script>	
 				</div>
 				<!-- /.container-fluid -->
 

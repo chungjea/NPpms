@@ -9,11 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.dao.cjw.A03_Dao_cjw;
+import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
 import com.web.spring.vo.Metfile_f;
+import com.web.spring.vo.RiskSch;
 import com.web.spring.vo.Risk_f;
 import com.web.spring.vo.Rskfile_f;
 
@@ -23,27 +25,63 @@ public class A02_Service_cjw {
 	private A03_Dao_cjw dao;
 	
 	// 결재 : 상신한 대기/반려/완료 문서 리스트
-	public List<Approve_f> myapv(Approve_f sch){
+	public List<Approve_f> myapv(ApproveSch sch){
+		sch.setCount(dao.mycnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
 		return dao.myapv(sch);
-	}
+	}	
 	// 결재 : 결재처리를 해야하는 문서 리스트
-	public List<Approve_f> ckapv(Approve_f sch){
+	public List<Approve_f> ckapv(ApproveSch sch){
+		sch.setCount(dao.toapvcnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
 		return dao.ckapv(sch);
 	}
 	// 결재 : 상신한 대기 문서의 수
-	public int myapvcnt(Approve_f sch) {
+	public int myapvcnt(ApproveSch sch) {
 		return dao.myapvcnt(sch);
 	}
 	// 결재 : 상신한 반려 문서의 수
-	public int badapvcnt(Approve_f sch) {
+	public int badapvcnt(ApproveSch sch) {
 		return dao.badapvcnt(sch);
 	}
 	// 결재 : 상신한 완료 문서의 수
-	public int goodapvcnt(Approve_f sch) {
+	public int goodapvcnt(ApproveSch sch) {
 		return dao.goodapvcnt(sch);
 	}
 	// 결재 : 결재처리를 해야하는 문서의 수
-	public int toapvcnt(Approve_f sch) {
+	public int toapvcnt(ApproveSch sch) {
 		return dao.toapvcnt(sch);
 	}
 
@@ -102,20 +140,108 @@ public class A02_Service_cjw {
 	
 	
 	// 리스크 : 등록한 리스크 리스트
-	public List<Risk_f> myrsk(Risk_f sch){
+	public List<Risk_f> myrsk(RiskSch sch){
+		sch.setCount(dao.myrskcnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
 		return dao.myrsk(sch);
 	}
 	// 리스크 : 담당자를 지정해야 하는 리스크 리스트
-	public List<Risk_f> ckrsk(Risk_f sch){
+	public List<Risk_f> ckrsk(RiskSch sch){
+		sch.setCount(dao.ckrskcnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
 		return dao.ckrsk(sch);
 	}
 	// 리스크 : 처리할 리스크 리스트
-	public List<Risk_f> torsk(Risk_f sch){
+	public List<Risk_f> torsk(RiskSch sch){
+		sch.setCount(dao.torskcnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
 		return dao.torsk(sch);
 	}
 	// 리스크 : 완료된 (등록/처리했던)리스크 리스트
-	public List<Risk_f> finrsk(Risk_f sch){
+	public List<Risk_f> finrsk(RiskSch sch){
+		sch.setCount(dao.finrskcnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
 		return dao.finrsk(sch);
+	}
+	// 리스크 : 등록된 리스크의 수
+	public int myrskcnt(RiskSch sch) {
+		return dao.myrskcnt(sch);
+	}
+	// 리스크 : 담당자를 지정해야 할 리스크의 수
+	public int ckrskcnt(RiskSch sch) {
+		return dao.ckrskcnt(sch);
+	}
+	// 리스크 : 처리할 리스크의 수
+	public int torskcnt(RiskSch sch) {
+		return dao.torskcnt(sch);
+	}
+	// 리스크 : 완료된 리스크의 수
+	public int finrskcnt(RiskSch sch) {
+		return dao.finrskcnt(sch);
 	}
 	
 	// 리스크 : 리스크 등록

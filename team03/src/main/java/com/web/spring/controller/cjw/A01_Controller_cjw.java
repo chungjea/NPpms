@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.spring.service.cjw.A02_Service_cjw;
+import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
+import com.web.spring.vo.RiskSch;
 import com.web.spring.vo.Risk_f;
 
 @Controller
@@ -22,24 +24,24 @@ public class A01_Controller_cjw {
 	// 결재
 	// http://localhost:7080/team03/myapv.do3?wempno=1000&mempno=1000
 	@GetMapping("myapv")
-	public String myapv(Approve_f sch, Model d) {
+	public String myapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
 		if(sch.getSts()==null) sch.setSts("대기");
 		d.addAttribute("apvList", service.myapv(sch));
 		d.addAttribute("myapvcnt", service.myapvcnt(sch));
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
 		d.addAttribute("goodapvcnt", service.goodapvcnt(sch));
 		d.addAttribute("toapvcnt", service.toapvcnt(sch));
-		return "cjw/z05_bootTmp/approval";
+		return "approval";
 	}
 	
 	@GetMapping("ckapv")
-	public String ckapv(Approve_f sch, Model d) {
+	public String ckapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
 		d.addAttribute("apvList", service.ckapv(sch));
 		d.addAttribute("myapvcnt", service.myapvcnt(sch));
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
 		d.addAttribute("goodapvcnt", service.goodapvcnt(sch));
 		d.addAttribute("toapvcnt", service.toapvcnt(sch));
-		return "cjw/z05_bootTmp/approval";
+		return "approval";
 	}
 	
 	@GetMapping("insertapvFrm")
@@ -74,43 +76,43 @@ public class A01_Controller_cjw {
 	// 리스크 관리
 	// http://localhost:7080/team03/myrsk.do3?wempno=1000&cempno=1000&manager=1000
 	@GetMapping("myrsk")
-	public String myrsk(Risk_f sch, Model d) {
+	public String myrsk(@ModelAttribute("sch") RiskSch sch, Model d) {
 		d.addAttribute("rskList", service.myrsk(sch));
-		d.addAttribute("myrskcnt", service.myrsk(sch).size());
-		d.addAttribute("ckrskcnt", service.ckrsk(sch).size());
-		d.addAttribute("torskcnt", service.torsk(sch).size());
-		d.addAttribute("finrskcnt", service.finrsk(sch).size());
-		return "cjw/z05_bootTmp/risk";
+		d.addAttribute("myrskcnt", service.myrskcnt(sch));
+		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
+		d.addAttribute("torskcnt", service.torskcnt(sch));
+		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		return "risk";
 	}
 	
 	@PostMapping("ckrsk")
-	public String ckrsk(Risk_f sch, Model d) {
+	public String ckrsk(@ModelAttribute("sch") RiskSch sch, Model d) {
 		d.addAttribute("rskList", service.ckrsk(sch));
-		d.addAttribute("myrskcnt", service.myrsk(sch).size());
-		d.addAttribute("ckrskcnt", service.ckrsk(sch).size());
-		d.addAttribute("torskcnt", service.torsk(sch).size());
-		d.addAttribute("finrskcnt", service.finrsk(sch).size());
-		return "cjw/z05_bootTmp/risk";
+		d.addAttribute("myrskcnt", service.myrskcnt(sch));
+		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
+		d.addAttribute("torskcnt", service.torskcnt(sch));
+		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		return "risk";
 	}
 	
 	@PostMapping("torsk")
-	public String torsk(Risk_f sch, Model d) {
+	public String torsk(@ModelAttribute("sch") RiskSch sch, Model d) {
 		d.addAttribute("rskList", service.torsk(sch));
-		d.addAttribute("myrskcnt", service.myrsk(sch).size());
-		d.addAttribute("ckrskcnt", service.ckrsk(sch).size());
-		d.addAttribute("torskcnt", service.torsk(sch).size());
-		d.addAttribute("finrskcnt", service.finrsk(sch).size());
-		return "cjw/z05_bootTmp/risk";
+		d.addAttribute("myrskcnt", service.myrskcnt(sch));
+		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
+		d.addAttribute("torskcnt", service.torskcnt(sch));
+		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		return "risk";
 	}
 	
 	@PostMapping("finrsk")
-	public String finrsk(Risk_f sch, Model d) {
+	public String finrsk(@ModelAttribute("sch") RiskSch sch, Model d) {
 		d.addAttribute("rskList", service.finrsk(sch));
-		d.addAttribute("myrskcnt", service.myrsk(sch).size());
-		d.addAttribute("ckrskcnt", service.ckrsk(sch).size());
-		d.addAttribute("torskcnt", service.torsk(sch).size());
-		d.addAttribute("finrskcnt", service.finrsk(sch).size());
-		return "cjw/z05_bootTmp/risk";
+		d.addAttribute("myrskcnt", service.myrskcnt(sch));
+		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
+		d.addAttribute("torskcnt", service.torskcnt(sch));
+		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		return "risk";
 	}
 	
 	@GetMapping("insertrskFrm")

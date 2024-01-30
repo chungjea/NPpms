@@ -8,32 +8,37 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
 import com.web.spring.vo.Metfile_f;
+import com.web.spring.vo.RiskSch;
 import com.web.spring.vo.Risk_f;
 import com.web.spring.vo.Rskfile_f;
 
 @Mapper
 public interface A03_Dao_cjw {
 	// 결재
-	List<Approve_f> myapv(Approve_f sch);
+	List<Approve_f> myapv(ApproveSch sch);
 	
-	List<Approve_f> ckapv(Approve_f sch);
+	List<Approve_f> ckapv(ApproveSch sch);
+	
+	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts=#{sts}")
+	int mycnt(ApproveSch sch);
 	
 	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='대기'")
-	int myapvcnt(Approve_f sch);
+	int myapvcnt(ApproveSch sch);
 	
 	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='반려'")
-	int badapvcnt(Approve_f sch);
+	int badapvcnt(ApproveSch sch);
 	
 	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='완료'")
-	int goodapvcnt(Approve_f sch);
+	int goodapvcnt(ApproveSch sch);
 	
 	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기'")
-	int toapvcnt(Approve_f sch);
+	int toapvcnt(ApproveSch sch);
 	
 	@Insert("INSERT INTO approve_f values(apv_seq.nextval, #{title}, #{content}, #{wempno}, sysdate, '대기', #{writer})")
 	int insertapv(Approve_f ins);
@@ -56,13 +61,25 @@ public interface A03_Dao_cjw {
 	int doapv2(Approve_f apv);
 	
 	// 리스크 관리
-	List<Risk_f> myrsk(Risk_f sch);
+	List<Risk_f> myrsk(RiskSch sch);
 	
-	List<Risk_f> ckrsk(Risk_f sch);
+	List<Risk_f> ckrsk(RiskSch sch);
 	
-	List<Risk_f> torsk(Risk_f sch);
+	List<Risk_f> torsk(RiskSch sch);
 	
-	List<Risk_f> finrsk(Risk_f sch);
+	List<Risk_f> finrsk(RiskSch sch);
+	
+	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정'")
+	int myrskcnt(RiskSch sch);
+	
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정'")
+	int ckrskcnt(RiskSch sch);
+	
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중'")
+	int torskcnt(RiskSch sch);
+	
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료'")
+	int finrskcnt(RiskSch sch);
 	
 	@Insert("INSERT INTO RISK_F values(rsk_seq.nextval,#{title},sysdate,NULL,#{wempno},#{writer},#{content},'발생예정')")
 	int insertrsk(Risk_f ins);

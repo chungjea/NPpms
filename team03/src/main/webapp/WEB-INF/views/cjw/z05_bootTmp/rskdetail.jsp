@@ -107,7 +107,6 @@
 			})
 		})
 		$("#finBtn").click(function(){
-			alert($("#frm01").serialize())
 			$.ajax({
 				type : "post",
 				url : "${path}/donersk.do3",
