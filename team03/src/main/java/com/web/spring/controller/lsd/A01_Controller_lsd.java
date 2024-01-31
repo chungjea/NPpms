@@ -2,6 +2,7 @@ package com.web.spring.controller.lsd;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -39,27 +40,34 @@ public class A01_Controller_lsd {
 	@Autowired
 	private A02_Service_lsd service;
 
+	//검색
+	@RequestMapping("noticeSch")
+	public String noticeSch(Noticeboard_f sch, Model d) {
+		d.addAttribute("noticeSch", service.noticeSch(sch));
+		return "lsd/noticeBoard";
+	}
+	
 	// 공지 전체 + 페이지
-	// http://localhost:5080/team03/noticePage.do
+	// http://localhost:3333/noticePage
 	@RequestMapping("noticePage")
 	public String getNoticeboard(@ModelAttribute("sch") NoticeSch_f sch, Model d) {
 		d.addAttribute("noticeboard", service.noticePage(sch));
-		return "lsd/z05_bootTmp/noticeBoard";
+		return "lsd/noticeBoard";
 	}// getNoticeboard()
 
 	// 공지 세부
-	// http://localhost:5080/team03/noticeboardDetail.do
+	// http://localhost:3333/team03/noticeboardDetail
 	@RequestMapping("noticeboardDetail")
 	public String noticeboardDetail(@RequestParam("notice_num") int notice_num, Model d) {
 		d.addAttribute("notice", service.noticeboardDetail(notice_num));
-		return "lsd/z05_bootTmp/noticeDetail";
+		return "lsd/noticeDetail";
 	}// getNoticeboard()
 
 	// 공지 등록 폼
-	// http://localhost:7080/springweb/insertNoticeFrm.do
+	// http://localhost:3333/springweb/insertNoticeFrm
 	@RequestMapping("insertNoticeFrm")
 	public String insertNoticeFrm(Noticeboard_f noticeIns) {
-		return "lsd/z05_bootTmp/InsertNotice";
+		return "lsd/InsertNotice";
 	}// insertNoticeFrm()
 
 	// 공지 등록
@@ -67,7 +75,7 @@ public class A01_Controller_lsd {
 	public String insertNotice(Noticeboard_f ins, Model d) {
 		System.out.println(ins.getContent());
 		d.addAttribute("msg", service.insertNotice(ins));
-		return "lsd/z05_bootTmp/InsertNotice";
+		return "lsd/InsertNotice";
 	}// insertNotice()
 
 	// 수정
@@ -82,23 +90,23 @@ public class A01_Controller_lsd {
 		d.addAttribute("msg", service.updateNotice(upt));
 		// 수정이후, 데이터(상세정보가 보임)
 		d.addAttribute("afterUpt", service.noticeboardDetail(upt.getNotice_num()));
-		return "lsd/z05_bootTmp/noticeDetail";
+		return "lsd/noticeDetail";
 	}// updateBoard()
 
-	// http://localhost:7080/board/deleteNotice.do?no=10
-	// 삭제 deleteBoard.do?no=10
+	// http://localhost:3333/board/deleteNotice?no=10
+	// 삭제 deleteBoard?no=10
 	@RequestMapping("deleteNotice")
 	public String deleteNotice(@RequestParam("no") int notice_num, Model d) {
 		d.addAttribute("proc", "del");
 		d.addAttribute("msg", service.deleteNotice(notice_num));
-		return "lsd/z05_bootTmp/noticeDetail";
+		return "lsd/noticeDetail";
 	}// deleteNotice{}
 
 	// 파일업로드
 	// 파일 업로드 폼
 	@GetMapping("noticeFileupload")
 	public String noticeFileuploadFrm() {
-		return "lsd/z05_bootTmp/noticefileupload";
+		return "lsd/noticefileupload";
 	}
 	
 	// 파일 업로드 경로
@@ -126,18 +134,18 @@ public class A01_Controller_lsd {
 		} else {
 			d.addAttribute("msg", "파일등록 실패");
 		}
-		return "lsd/z05_bootTmp/noticefileupload";
+		return "lsd/noticefileupload";
 	}//noticefileupload()
 	
 	// 클라이언트에서 요청 처리
-	// location.href="${path}/downloadNotice.do?fname=1.pdf"
+	// location.href="${path}/downloadNotice?fname=1.pdf"
 	@RequestMapping("downloadNotice.do")
 	public String download(@RequestParam("fname") String fname,
 					Model d) {
 		// view에서 사용할 파일명
 			d.addAttribute("downloadNotice", fname);
 			// 파일명 전달하고 내가 어떤 view를 호출할 것인가
-			return "lsd/z05_bootTmp/downloadViewer_lsd";
+			return "lsd/downloadViewer_lsd";
 		}//download()
 		/* view의 이름 : downloadViewer
 		 	모델명 : downloadFile

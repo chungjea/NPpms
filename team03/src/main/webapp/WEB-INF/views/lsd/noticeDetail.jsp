@@ -49,18 +49,18 @@
 	if (proc != "") {
 		if (proc == "upt") {
 			if (confirm(msg + "\n메인화면으로 이동하시겠습니까?")) {
-				location.href = "${path}/noticePage.do"
+				location.href = "${path}/noticePage"
 			}
 		}
 		if (proc == "del") {
 			alert(msg)
-			location.href = "${path}/noticePage.do"
+			location.href = "${path}/noticePage"
 		}
 	}
 
 	$(document).ready(function() {
 		$("#mainBtn").click(function() {
-			location.href = "${path}/noticePage.do"
+			location.href = "${path}/noticePage"
 		})
 		var sessId = "${emp.auth}"
 		$("#uptBtn").click(function() {
@@ -73,11 +73,11 @@
 				return
 			}*/
 			// 수정처리하는 controller    		 
-			$("form").attr("action", "${path}/updateNotice.do")
+			$("form").attr("action", "${path}/updateNotice")
 			$("form").submit()
 		})
 
-		/*deleteBoard.do?no=10*/
+		/*deleteBoard?no=10*/
 
 		$("#delBtn").click(function() {
 			/*var writer = $("[name=writer]").val()
@@ -87,7 +87,7 @@
 			}*/
 			var no = $("[name=notice_num]").val()
 			if (confirm("삭제하시겠습니까?")) {
-				location.href = "${path}/deleteNotice.do?no=" + no
+				location.href = "${path}/deleteNotice?no=" + no
 			}
 		})
 
@@ -99,7 +99,7 @@
 			}*/
 			var no = $("[name=notice_num]").val()
 			if (confirm("등록하시겠습니까?")) {
-				location.href = "${path}/InsertBoard.do"
+				location.href = "${path}/InsertBoard"
 			}
 		})
 	});
@@ -180,7 +180,7 @@ private Date updateDate;
 	<script type="text/javascript">
 		function download(fname){
 			if( confirm(fname+" 다운로드 하시겠습니까?")){
-				location.href="${path}/downloadNotice.do?fname="+fname
+				location.href="${path}/downloadNotice?fname="+fname
 			}
 		}
 	</script>	

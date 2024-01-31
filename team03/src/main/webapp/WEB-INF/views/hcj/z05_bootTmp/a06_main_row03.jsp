@@ -168,10 +168,10 @@
       </div>
     </div>
   </div>
-</div>
+</div>ㅇ
  --%>
 
-<script src="${path}/WEB-INF/views/hcj/a00_com/vendor/chart.js/Chart.min.js"></script>
+<script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 	<script type="text/javascript">
 	
 	
