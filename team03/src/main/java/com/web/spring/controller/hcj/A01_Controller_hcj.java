@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.web.spring.service.hcj.A02_Service_hcj;
 import com.web.spring.vo.Emp_pinfo_f;
@@ -90,10 +92,17 @@ public class A01_Controller_hcj {
 	}
 	
 	@RequestMapping("project")
-	public String project() {	
+	public String project(Model d) {	
 		return "hcj/z05_bootTmp/gantt";
 	}
 	
 	
+	@RequestMapping("Taskdata")
+	public ModelAndView taskdata() {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject(service.getTaskdatas());
+		return modelAndView;
+	}
 	
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.web.spring.vo.Data;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Error_f;
 import com.web.spring.vo.ProjectSch;
@@ -177,4 +178,9 @@ public interface A03_Dao_hcj {
 	List<Emp_pinfo_f> getemplistByLike(Emp_pinfo_f sch);
 	@Select("select * from emp_pinfo_f where empno = #{empno} or dname = #{dname}")
 	List<Emp_pinfo_f> getemplist(Emp_pinfo_f sch);
+	
+	
+	// 프로젝트 간트차트
+	@Select("select * from data ")
+	List<Data> getTaskdatas();
 }

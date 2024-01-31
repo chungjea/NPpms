@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.web.spring.dao.hcj.A03_Dao_hcj;
+import com.web.spring.vo.Data;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Error_f;
 import com.web.spring.vo.ProjectSch;
@@ -148,6 +149,11 @@ public class A02_Service_hcj {
 		System.out.println("status"+sch.getStatus());
 		
 		return auth.equals("관리자")?dao.getprojectListAdmim(sch):dao.getprojectListNormal(sch);
+	}
+	
+	// 프로젝트 테스크 출력
+	public List<Data> getTaskdatas() {
+		return dao.getTaskdatas();
 	}
 	
 }
