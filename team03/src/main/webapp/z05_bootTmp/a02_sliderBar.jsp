@@ -44,7 +44,7 @@
 				<div id="collapsePages" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="http://localhost:5080/team03/getnoticeboard.do">공지 게시판</a> 
+						<a class="collapse-item" href="${path}/noticePage">공지 게시판</a> 
 						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
 						<a class="collapse-item" href="${path}/myapv?wempno=1000&mempno=1000&sts=대기">결재</a>
 						<a class="collapse-item" href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000">리스크 관리</a> <a

@@ -135,9 +135,11 @@
 				</div>
 				<!-- /.container-fluid -->
 				<div style="text-align: right;">
-					<!--<c:if test="${not empty sessionScope.emp and sessionScope.emp eq 'auth'}">
-          <input type="button" class="btn btn-success" value="등록" id="insBtn"/>
-        </c:if>-->
+					<c:if
+						test="${not empty sessionScope.emp and sessionScope.emp eq 'auth'}">
+						<input type="button" class="btn btn-success" value="등록"
+							id="insBtn" />
+					</c:if>
 					<input type="button" class="btn btn-success" value="등록" id="insBtn" />
 				</div>
 			</div>

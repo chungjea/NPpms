@@ -58,7 +58,7 @@ public interface A03_Dao_lsd {
 	Noticeboard_f noticeboardDetail(@Param("notice_num") int notice_num);
 
 	// 공지 등록
-	@Insert("insert into Noticeboard_f values(board_seq.nextval,#{writer},#{content},sysdate,sysdate,#{title})")
+	@Insert("insert into Noticeboard_f values(board_seq.nextval,#{writer},#{content},sysdate,sysdate,#{title},0)")
 	int insertNotice(Noticeboard_f ins);
 
 	// 공지 수정

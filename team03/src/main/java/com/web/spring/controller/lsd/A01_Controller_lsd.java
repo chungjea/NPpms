@@ -56,7 +56,7 @@ public class A01_Controller_lsd {
 	}// getNoticeboard()
 
 	// 공지 세부
-	// http://localhost:3333/team03/noticeboardDetail
+	// http://localhost:3333/noticeboardDetail
 	@RequestMapping("noticeboardDetail")
 	public String noticeboardDetail(@RequestParam("notice_num") int notice_num, Model d) {
 		d.addAttribute("notice", service.noticeboardDetail(notice_num));
