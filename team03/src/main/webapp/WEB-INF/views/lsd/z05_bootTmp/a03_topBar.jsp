@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@page import ="java.text.SimpleDateFormat" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <nav
@@ -13,6 +14,8 @@
 		<i class="fa fa-bars"></i>
 	</button>
 
+<input type="hidden" id="sessionTimeOut" name="sessionTimeOut" value=<%=session.getMaxInactiveInterval() %>>
+ 
 	<!-- Topbar Search -->
 	<form
 		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
@@ -28,7 +31,17 @@
 			</div>
 		</div>
 	</form>
-
+	 <%
+Date time = new Date();
+SimpleDateFormat formatter = new SimpleDateFormat(
+		"HH:mm:ss"
+		);
+long lasttime=session.getLastAccessedTime();
+long createdtime=session.getCreationTime();
+long time_used=(lasttime-createdtime)/60000;
+%>
+<div class="text-truncate">
+	${emp.ename}님 로그인 시각:<%=formatter.format(time)%> 접속 후 지난시간:<%=time_used%></div>
 	<!-- Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
 
@@ -169,8 +182,8 @@
 			class="nav-link dropdown-toggle" href="#" id="userDropdown"
 			role="button" data-toggle="dropdown" aria-haspopup="true"
 			aria-expanded="false"> <span
-				class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas
-					McGee</span> <img class="img-profile rounded-circle"
+				class="mr-2 d-none d-lg-inline text-gray-600 small">${emp.ename}
+					</span> <img class="img-profile rounded-circle"
 				src="${path}/a00_com/img/undraw_profile.svg">
 		</a> <!-- Dropdown - User Information -->
 			<div
