@@ -70,7 +70,7 @@
 <!--  <script>
  onclick="f_clickFunc()"
 	var auth = "${emp.auth}"
-		
+		1234
 		var sessAuth = "${emp.auth}"
 				function f_clickFunc(){	
 		if(sessAuth=="관리자") {

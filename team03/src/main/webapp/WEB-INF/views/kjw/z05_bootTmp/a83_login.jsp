@@ -29,7 +29,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 	var empno = "${emp.empno}"
 		var sessEmpno = "${emp.empno}"
 						if(sessEmpno!="") {
-							location.href="${path}/mainpage.do2" 
+							location.href="${path}/mainpage" 
 							
 							
 						}else{
@@ -38,7 +38,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 								if(empno!=""){
 									
 									alert("로그인 성공\n메인페이지로 이동")
-								 	location.href="${path}/mainpage.do2" 
+								 	location.href="${path}/mainpage" 
 								}else{
 									alert("로그인 실패2\n다시 로그인하세요")	
 									
@@ -76,7 +76,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block">
-                            <img src="${path}/a00_com/images/pms_logo_re.png"/>
+                            <img src="a00_com/images/pms_logo_re.png"/>
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-5">

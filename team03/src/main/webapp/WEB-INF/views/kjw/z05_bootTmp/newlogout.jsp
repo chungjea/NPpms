@@ -30,7 +30,7 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script type="text/javascript">
 	$(document).ready(function(){
-		location.href="${path}/login.do4"
+		location.href="${path}/login"
 	});
 </script>
 </head>

@@ -150,7 +150,7 @@
 			var msg = "${msg}"
 			if(msg!=""){
 				if(!confirm(msg+"\n계속 등록하시겠습니까?")){
-					location.href="${path}/registerFrm.do4"
+					location.href="${path}/registerFrm"
 				}
 			}
 			</script>
