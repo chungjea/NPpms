@@ -14,11 +14,11 @@
 			<br>
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="${path}/z05_bootTmp/a01_index.jsp">
+				href="kjw/z05_bootTmp/a01_index.jsp">
 				<div class="sidebar-brand-icon rotate-n-15">
 				</div>
 					<img class="sidebar-card-illustration mb-2"
-					src="${path}/a00_com/img/logo.png" alt="늘품 PMS" width="100" height="90">
+					src="/a00_com/img/logo.png" alt="늘품 PMS" width="100" height="90">
 			</a>
 			<br>
 			<!-- Divider -->
@@ -26,7 +26,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active"><a class="nav-link"
-				href="${path}/z05_bootTmp/a01_index.jsp"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>대시보드 Dashboard</span></a>
+				href="kjw/z05_bootTmp/a01_index.jsp"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>대시보드 Dashboard</span></a>
 			</li>
 
 			<!-- Divider -->
@@ -64,7 +64,7 @@
 					<span>재정관리</span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link"  href="mypagefilter.do4">
+			<li class="nav-item"><a class="nav-link"  href="${path}/mypagefilter">
 					<span>마이페이지</span>
 			</a></li>
 <!--  <script>

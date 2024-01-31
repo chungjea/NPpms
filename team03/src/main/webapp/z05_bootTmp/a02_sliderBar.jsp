@@ -64,7 +64,7 @@
 					<span>재정관리</span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link"  href="${path}/mypagefilter">
+			<li class="nav-item"><a class="nav-link"  href="mypagefilter">
 					<span>마이페이지</span>
 			</a></li>
 <!--  <script>
