@@ -161,6 +161,7 @@ public class A01_Controller_cjw {
 	@PostMapping("detailmet")
 	public String detailmet(int metno, Model d) {
 		d.addAttribute("dmet", service.detailmet(metno));
+		d.addAttribute("dmetfile", service.getmetfile(metno));
 		return "cjw/z05_bootTmp/metdetail";
 	}
 	

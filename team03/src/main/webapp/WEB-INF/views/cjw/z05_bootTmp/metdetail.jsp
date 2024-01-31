@@ -144,14 +144,16 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">첨부파일</span>
 							</div>
-							<c:if test="${not empty dmet.fnames}">
-								<c:forEach var="fname" items="${dmet.fnames}">
-									<span ondblclick="download('${fname}')" class="form-control">${fname}</span>	
-								</c:forEach>
-							</c:if>
-							<c:if test="${empty dmet.fnames}">
-								<span class="form-control"></span>
-							</c:if>
+							<c:choose>
+								<c:when test="${not empty dmetfile}">
+									<c:forEach var="mf" items="${dmetfile}">
+										<span ondblclick="download('${mf.fno}')" class="form-control">${mf.fname}</span>	
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<span class="form-control"></span>
+								</c:otherwise>
+							</c:choose>
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">

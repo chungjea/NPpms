@@ -99,7 +99,7 @@
 					    </thead>	
 					    <tbody>
 					    	<c:forEach var="met" items="${metList}">
-					    		<tr ondblclick="goDetail(${met.metno})"><td>${met.metno}</td><td><fmt:formatDate value="${met.metdte}"/></td><td>${met.title}</td><td>${met.writer}</td><td><fmt:formatDate value="${met.regdte}"/></td></tr>
+					    		<tr ondblclick="goDetail(${met.metno})"><td>${met.cnt}</td><td><fmt:formatDate value="${met.metdte}"/></td><td>${met.title}</td><td>${met.writer}</td><td><fmt:formatDate value="${met.regdte}"/></td></tr>
 					    	</c:forEach>
 					    </tbody>
 					</table>

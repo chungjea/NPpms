@@ -22,6 +22,8 @@ public class Meeting_f {
 	private Date regdte;
 	private MultipartFile[] reports;
 	private List<String> fnames;
+	private int cnt;
+	private int fno;
 	
 	public Meeting_f() {
 	}
@@ -185,6 +187,22 @@ public class Meeting_f {
 
 	public void setFnames(List<String> fnames) {
 		this.fnames = fnames;
+	}
+
+	public int getFno() {
+		return fno;
+	}
+
+	public void setFno(int fno) {
+		this.fno = fno;
+	}
+
+	public int getCnt() {
+		return cnt;
+	}
+
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
 	}
 	
 }
