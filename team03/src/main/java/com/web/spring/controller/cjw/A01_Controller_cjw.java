@@ -64,7 +64,7 @@ public class A01_Controller_cjw {
 	@RequestMapping("download")
 	public String download(@RequestParam("fname") String fname, Model d) {
 		d.addAttribute("downloadFile", fname);
-		return "downloadViewer/downloadViewer_cjw";
+		return "downloadViewer_cjw";
 	}
 	
 	@PostMapping("doapv")
