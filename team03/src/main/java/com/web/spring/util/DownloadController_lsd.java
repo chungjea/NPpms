@@ -10,7 +10,7 @@ public class DownloadController_lsd {
 	
 	@RequestMapping("downloadNotice")
 	public String download(@RequestParam("fname") String fname, Model d) {
-		d.addAttribute("downloadFile", fname);
+		d.addAttribute("downloadNotice", fname);
 		return "downloadViewer_lsd";
 	}
 }
