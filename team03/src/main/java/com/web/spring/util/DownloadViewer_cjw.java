@@ -23,7 +23,9 @@ public class DownloadViewer_cjw extends AbstractView {
 			throws Exception {
 		// 1. 파일명 가져오기(controller단에서 모델명으로 전달)
 		String fileName = (String)model.get("downloadFile");
+		String realfile = (String)model.get("realFile");
 		// 2. File객체 만들기(경로와 파일명)
+		System.out.println("저장된 파일명:"+fileName);
 		File file = new File(path+fileName);
 		// 3. client에 이 파일을 전달해줄 response객체 속성 전달
 		// 		1) 파일전송용 contentType설정
@@ -32,10 +34,10 @@ public class DownloadViewer_cjw extends AbstractView {
 		res.setContentLengthLong(file.length());
 		//		3) 파일명이 한글일 때를 대비해서 한글 encoding 처리
 		//		   공백부분이 +로 나와서 이것을 " "으로 다시 변경 처리
-		fileName = URLEncoder.encode(fileName, "utf-8").replaceAll("\\+", " ");
+		realfile = URLEncoder.encode(realfile, "utf-8").replaceAll("\\+", " ");
 		//		4) 파일전송을 위한 response객체의 Header 속성 설정
 		//		   파일명지정(Content-Disposition),
-		res.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\"");
+		res.setHeader("Content-Disposition", "attachment;filename=\""+realfile+"\"");
 		//		   attachment;filename="aaa.txt" 로 처리하기 위해 설정
 		//		   binary데이터 처리(Content-Transfer-Encoding)
 		res.setHeader("Content-Transfer-Encoding", "binary");

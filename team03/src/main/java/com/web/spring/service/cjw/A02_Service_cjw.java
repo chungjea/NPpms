@@ -348,8 +348,9 @@ public class A02_Service_cjw {
 					if(mpf!=null) {
 						String fname = mpf.getOriginalFilename();
 						if(!fname.trim().equals("")) {
-							mpf.transferTo(new File(path+fname));
-							ckf+=dao.insertmetfile(new Metfile_f(fname,path));
+							String fno = ""+dao.getfno();
+							mpf.transferTo(new File(path+fno));
+							ckf+=dao.insertmetfile(new Metfile_f(fname,path,fno));
 						}
 					}
 				}
@@ -370,9 +371,13 @@ public class A02_Service_cjw {
 	
 	// 회의록 : 회의록 상세
 	public Meeting_f detailmet(int metno) {
-		Meeting_f met = dao.detailmet(metno);
-		met.setFnames(dao.getmetfile(metno));
-		return met;
+		return dao.detailmet(metno);
+	}
+	public List<Metfile_f> getmetfile(int metno) {
+		return dao.getmetfile(metno);
+	}
+	public String getmetfname(String fno) {
+		return dao.getmetfname(fno);
 	}
 	
 	// 회의록 : 회의록 수정
@@ -388,7 +393,7 @@ public class A02_Service_cjw {
 	
 	// 회의록 : 회의록 삭제
 	public String deletemet(int metno) {
-		List<String> delFnames = dao.getmetfile(metno);
+		List<String> delFnames = dao.getfnobyname(metno);
 		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
 		for(String fname:delFnames) {
 			File fileToDelete = new File(path+fname);
