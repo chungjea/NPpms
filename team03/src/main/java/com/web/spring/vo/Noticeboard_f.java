@@ -16,13 +16,15 @@ public class Noticeboard_f {
 	// 클라이언트에서 서버로 업로드되는 파일을 받는 객체
 	private MultipartFile[] reports;
 	private List<String> fname;
+	private int readcnt;
 
 	public Noticeboard_f() {
 
 	}
 
 	public Noticeboard_f(int cnt, int notice_num, String writer, String content, Date regDate, Date updateDate,
-			String title, MultipartFile[] reports, List<String> fname) {
+			String title, MultipartFile[] reports, List<String> fname, int readcnt) {
+		super();
 		this.cnt = cnt;
 		this.notice_num = notice_num;
 		this.writer = writer;
@@ -32,6 +34,7 @@ public class Noticeboard_f {
 		this.title = title;
 		this.reports = reports;
 		this.fname = fname;
+		this.readcnt = readcnt;
 	}
 
 	public int getCnt() {
@@ -106,6 +109,12 @@ public class Noticeboard_f {
 		this.fname = fname;
 	}
 
-	
+	public int getReadcnt() {
+		return readcnt;
+	}
+
+	public void setReadcnt(int readcnt) {
+		this.readcnt = readcnt;
+	}
 
 }// Noticeboard_f
