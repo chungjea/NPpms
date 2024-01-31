@@ -10,9 +10,7 @@ public class DownloadController_cjw {
 	
 	@RequestMapping("download.do")
 	public String download(@RequestParam("fname") String fname, Model d) {
-		
 		d.addAttribute("downloadFile", fname);
-		
 		return "downloadViewer_cjw";
 	}
 }
