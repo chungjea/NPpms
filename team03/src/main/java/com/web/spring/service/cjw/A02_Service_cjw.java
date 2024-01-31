@@ -88,7 +88,7 @@ public class A02_Service_cjw {
 	// 결재 : 결재 상신
 	public String insertapv(Approve_f ins) {
 		String msg = "";
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		if(dao.insertapv(ins)>0 && dao.insertapv2(ins)>0) {
 			msg = "결재 상신 완료\\n";
 		}else {
@@ -247,7 +247,7 @@ public class A02_Service_cjw {
 	// 리스크 : 리스크 등록
 	public String insertrsk(Risk_f ins) {
 		String msg = "";
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		if(dao.insertrsk(ins)>0 && dao.insertrsk2(ins)>0) {
 			msg = "리스크 등록 완료\\n";
 		}else {
@@ -334,7 +334,7 @@ public class A02_Service_cjw {
 	// 회의록 : 회의록 등록
 	public String insertmet(Meeting_f ins) {
 		String msg = "";
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		if(dao.insertmet(ins)>0) {
 			msg = "회의록 등록 완료\\n";
 		}else {
