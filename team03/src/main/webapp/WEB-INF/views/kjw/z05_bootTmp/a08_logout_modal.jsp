@@ -19,7 +19,7 @@
 			<div class="modal-body">로그아웃페이지를 눌러 이전페이지로 이동합니다</div>
 			<div class="modal-footer">
 				<button class="btn btn-secondary" type="button" data-dismiss="modal">취소</button>
-				<a class="btn btn-primary" href="${path}/logout.do4">로그아웃</a>
+				<a class="btn btn-primary" href="${path}/logout">로그아웃</a>
 			</div>
 		</div>
 	</div>
