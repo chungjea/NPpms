@@ -49,9 +49,7 @@
 <link href="${path}/a00_com/css/sb-admin-2.min.css" rel="stylesheet">
 
 
-<script type="text/javascript">
-alert("${emp.auth}")
-</script>
+
 </head>
 <body id="page-top">
 

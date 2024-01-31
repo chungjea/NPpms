@@ -185,8 +185,10 @@ private Date updateDate;
 		}
 	</script>	
 			<div style="text-align: right;">
+			<c:if test="${emp.auth eq '관리자'}">
 				<input type="button" class="btn btn-warning" value="수정" id="uptBtn" />
 				<input type="button" class="btn btn-danger" value="삭제" id="delBtn" />
+				</c:if>
 				<input type="button" class="btn btn-success" value="전체공지"
 					id="mainBtn" />
 			</div>
