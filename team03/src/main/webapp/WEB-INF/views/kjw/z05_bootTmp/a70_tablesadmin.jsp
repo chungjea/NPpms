@@ -25,7 +25,7 @@
 	});
 </script>
  --%>
- 
+
  
      <!-- Custom fonts for this template-->
     <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -36,17 +36,7 @@
     <!-- Custom styles for this template-->
     <link href="${path}/a00_com/css/sb-admin-2.min.css" rel="stylesheet">
  
-<script type="text/javascript">
 
-	var sessId = "${emp.empno}"
-	if(sessId==""){
-		alert("로그인을 하여야 현재화면을 볼 수 있습니다\n로그인 페이지 이동")
-		location.href="${path}/login.do4"
-	}
-	$(document).ready(function(){
-
-	});
-</script> 
 </head>
 <body id="page-top">
 	<!-- Page Wrapper -->
@@ -70,14 +60,14 @@
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 <div class="row">
-                                            <div class="col-xl-3 col-md-6 mb-4" id="link1">
+                                            <div class="col-xl-3 col-md-6 mb-4" id="link1" >
                             <div class="card border-left-primary shadow h-100 py-2">
                                 <div class="card-body">
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 현재 사원수</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">${empcnt}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800" id="checking">40</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -142,8 +132,38 @@
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                                     <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
+                                 
+                                        <a href="#" class="btn btn-danger btn-icon-split" id="delBtn">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-trash"></i>
+                                        </span>
+                                        <span class="text">사원 삭제</span>
+                                    </a>
+                                    
+                                        <a href="#" class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                           
+                                        
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                           
+                                        </span>
+                                        <span class="text">사원정보수정</span>
+                                    </a>
+                                     </c:if>
+<%--                                       <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
+                                         <a href="#" class="btn btn-warning btn-icon-split">
+                                        <span class="icon text-white-50">
+                           
+                                        
+                                            <i class="fas fa-exclamation-triangle"></i>
+                                           
+                                        </span>
+                                        <span class="text">사원정보수정</span>
+                                    </a>
+                                    </c:if> --%>
                         </div>
+                         
                         <div class="card-body">
                             <div class="table-responsive">
                                    
@@ -153,13 +173,12 @@
                                         <tr>
                                         <th>사원번호</th>
         								<th>사원명</th>
-       									 
         								<th>부서명</th>
+        								<th><input type="checkbox"  id="chkAll"></th>
         								<th>입사일</th>
         								<th>급여</th>
         								<th>수정시각</th>
         								<th>패널티횟수</th>
-        								<th><input type="checkbox" name="allcheck" onclick='allCheck()'></th>
                                         </tr>
                                     </thead>
                                     
@@ -169,7 +188,7 @@
                                             <td>${el.empno}</td>
                                             <td>${el.ename}</td>
                                             <td>${el.dname}</td>
-                                            <td><input type="checkbox" id="chk" class="chkGrp" value="<c:out value='${el.empno}'/>" ></td>
+                                            <td><input type="checkbox" id="chk" class="chkGrp" value="${el.empno}" name="checkboxModel"></td>
  <%--                                           <td>${el.hiredate}</td>
                                              <td>${el.salary}</td>
                                             <td>${el.lastfix}</td>
@@ -211,7 +230,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 	<!-- Logout Modal-->
-	<%@ include file="/z05_bootTmp/a08_logout_modal.jsp" %>
+	<%@ include file="a08_logout_modal.jsp" %>
 	
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
@@ -231,4 +250,37 @@
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 </body>
+<script type="text/javascript" defer>
+$("#checking").hide();
+	var sessId = "${emp.empno}"
+	if(sessId==""){
+		alert("로그인을 하여야 현재화면을 볼 수 있습니다\n로그인 페이지 이동")
+		location.href="${path}/login.do4"
+	}
+	$(function (){
+		$("#chkAll").click(function(){
+			$(".chkGrp").attr("checked",this.checked);
+			var chk=$(this).is(":checked");
+			console.log(chk);
+		});
+	});
+
+
+
+	
+	
+	
+var dname= "${emp.dname}"
+	var auth="${emp.auth}"
+
+			$("#link1").hover(function(){
+				if(dname=="인사팀"&&auth=="관리자"){
+					$("#checking").show();
+				}
+			},function(){
+				$("#checking").hide();
+			})
+
+	
+</script> 
 </html>

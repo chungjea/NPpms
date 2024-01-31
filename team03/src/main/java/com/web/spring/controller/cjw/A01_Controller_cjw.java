@@ -61,12 +61,6 @@ public class A01_Controller_cjw {
 		return "cjw/z05_bootTmp/apvdetail";
 	}
 	
-	@RequestMapping("download")
-	public String download(@RequestParam("fname") String fname, Model d) {
-		d.addAttribute("downloadFile", fname);
-		return "downloadViewer_cjw";
-	}
-	
 	@PostMapping("doapv")
 	public String doapv(Approve_f apv, Model d) {
 		d.addAttribute("msg", service.doapv(apv));
