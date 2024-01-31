@@ -67,7 +67,7 @@ public String mypagefilter(Model d,HttpServletRequest request) {
 public String test() {
 	return "kjw/z05_bootTmp/a01_index";
 }
-@RequestMapping("registerFrm.do4")
+@RequestMapping("registerFrm")
 public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
