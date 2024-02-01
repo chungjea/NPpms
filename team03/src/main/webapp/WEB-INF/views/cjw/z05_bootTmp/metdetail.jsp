@@ -147,7 +147,7 @@
 							<c:choose>
 								<c:when test="${not empty dmetfile}">
 									<c:forEach var="mf" items="${dmetfile}">
-										<span ondblclick="download('${mf.fno}')" class="form-control">${mf.fname}</span>	
+										<span ondblclick="download('${mf.fno}','${mf.fname}')" class="form-control">${mf.fname}</span>	
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -182,9 +182,9 @@
 			</div>
 			<!-- End of Main Content -->
 			<script type="text/javascript">
-				function download(fname){
+				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fname="+fname
+						location.href="${path}/download?fno="+fno+"&fname="+fname
 					}
 				}
 			</script>

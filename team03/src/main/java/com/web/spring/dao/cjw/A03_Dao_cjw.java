@@ -111,7 +111,7 @@ public interface A03_Dao_cjw {
 	
 	int insertmet(Meeting_f ins);
 	
-	@Insert("INSERT INTO metfile_f values(met_seq.currval, #{fname}, #{path}, #{fname_new})")
+	@Insert("INSERT INTO metfile_f values(met_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertmetfile(Metfile_f ins);
 	
 	@Select("SELECT fno_seq.nextval FROM dual")
@@ -121,9 +121,6 @@ public interface A03_Dao_cjw {
 	
 	@Select("SELECT fname, fno FROM metfile_f WHERE metno = #{metno}")
 	List<Metfile_f> getmetfile(int metno);
-	
-	@Select("SELECT fname from metfile_f where fname_new = #{fno}")
-	String getmetfname(String fno);
 	
 	@Select("SELECT fno FROM metfile_f WHERE metno = #{metno}")
 	List<String> getfnobyname (int metno);

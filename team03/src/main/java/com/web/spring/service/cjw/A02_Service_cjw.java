@@ -376,9 +376,6 @@ public class A02_Service_cjw {
 	public List<Metfile_f> getmetfile(int metno) {
 		return dao.getmetfile(metno);
 	}
-	public String getmetfname(String fno) {
-		return dao.getmetfname(fno);
-	}
 	
 	// 회의록 : 회의록 수정
 	public String updatemet(Meeting_f upt) {
