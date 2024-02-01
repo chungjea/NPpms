@@ -172,24 +172,30 @@
 						gantt.init("gantt_here");
 						/* gantt.message({text: "Some asddsa", expire: -1});
 						gantt.message({text: "Some gsdgsh", type: "error", expire: -1}); */
-						$.ajax({
+						//gantt.load("${path}/Taskdata","string","")
+						  $.ajax({
 							url:"Taskdata",
 							dataType:"json",
 							success:function(data){
-								var tttt = data
-								alert(data)
+								//gantt.parse(data)
 								
-								gantt.parse(gantt.load(data));
 
 							}
-						})
-				/* 	 var testtest = {"data":[
+						})  
+						gantt.load("${path}/Taskdata","json")
+					//	console.log(gantt.load("${path}/Taskdata","String",null))
+					
+						//console.log(gantt.load("${path}/Taskdata"),"JSON")
+						
+						
+				 /* 	  var testtest = {"data":[
 						{"id":11, "text":"Project #1", type:gantt.config.types.project, "progress": 0.6, "open": true},
 
 						]}
 						
 						
-						gantt.parse(testtest) */
+						gantt.parse(testtest)  */ 
+						
 					</script>
 
 <!-- Page level custom scripts -->

@@ -12,6 +12,7 @@ import java.util.Date;
  * */
 public class Data {
 	private int id;
+	private String text;
 	private String start_date;
 	private int duration;
 	private double progress;
@@ -19,13 +20,24 @@ public class Data {
 	public Data() {
 		// TODO Auto-generated constructor stub
 	}
-	public Data(int id, String start_date, int duration, double progress, int parent) {
+	
+	
+	public Data(int id, String text, String start_date, int duration, double progress, int parent) {
 		this.id = id;
+		this.text = text;
 		this.start_date = start_date;
 		this.duration = duration;
 		this.progress = progress;
 		this.parent = parent;
 	}
+	public String getText() {
+		return text;
+	}
+	public void setText(String text) {
+		this.text = text;
+	}
+
+
 	public int getId() {
 		return id;
 	}

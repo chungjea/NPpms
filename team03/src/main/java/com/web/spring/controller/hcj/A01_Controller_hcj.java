@@ -101,7 +101,7 @@ public class A01_Controller_hcj {
 	public ModelAndView taskdata() {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
-		modelAndView.addObject(service.getTaskdatas());
+		modelAndView.addObject("data",service.getTaskdatas());
 		return modelAndView;
 	}
 	

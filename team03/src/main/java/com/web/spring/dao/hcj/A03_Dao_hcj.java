@@ -181,6 +181,9 @@ public interface A03_Dao_hcj {
 	
 	
 	// 프로젝트 간트차트
-	@Select("select * from data ")
+	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'DD-MM-YYYY') start_date, \r\n"
+			+ " ENDDTE-STARTDTE duration, PROGRESS/100 PROGRESS,\r\n"
+			+ "REFNO parent\r\n"
+			+ "FROM PROJECT_WORK_F pwf")
 	List<Data> getTaskdatas();
 }
