@@ -1,4 +1,4 @@
-a<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -13,42 +13,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 
 
 
-<%--
-<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-<script
-	src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api"
-	type="text/javascript"></script>
 
-<script type="text/javascript">
-	$(document).ready(function() {
-
-	});
-</script>
- --%>
- <script>
-	var empno = "${emp.empno}"
-		var sessEmpno = "${emp.empno}"
-						if(sessEmpno!="") {
-							location.href="${path}/mainpage" 
-							
-							
-						}else{
-							if("${param.empno}"!=""){
-
-								if(empno!=""){
-									
-									alert("로그인 성공\n메인페이지로 이동")
-								 	location.href="${path}/mainpage" 
-								}else{
-									alert("로그인 실패2\n다시 로그인하세요")	
-									
-								}
-							}
-				}		
-		
-		
- 
- </script>
  
      <!-- Custom fonts for this template-->
     <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -83,7 +48,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">로그인</h1>
                                     </div>
-                                    <form class="user" method="post">
+                                    <form class="user" method="post" >
                                         <div class="form-group">
                                             <input type="text" name="empno" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
@@ -135,5 +100,33 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!-- Page level custom scripts -->
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
+<script>
+
+
+var empno = "${emp.empno}"
+var sessEmpno = "${emp.empno}"
+$("[name=passwd]").keyup(function() {
+	if (event.keyCode == 13) {
+		if ($("[name=passwd]").val()!= "") {
+			if($("[name=empno]").val()!=""){
+			$(".user").submit();
+			}
+			
+	}
+	}
+	})
+if ("${param.empno}" != "") {
+			if (empno != "") {
+				alert("로그인 성공\n메인페이지로 이동")
+				location.href = "${path}/mainpage"
+			} else {
+				alert("로그인 실패2\n다시 로그인하세요")
+
+			}
+		}
+
+</script>
+
+
 </body>
 </html>
