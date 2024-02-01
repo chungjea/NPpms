@@ -75,16 +75,9 @@
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
-			
 					<div class="main-content">
 						<div id="gantt_here" style='width:100%; height:100%;padding: 0px;'></div>
 					</div>
-					
-					
-			
-
-					
-
 				</div>
 				
 				<!-- /.container-fluid -->
@@ -170,31 +163,9 @@
 						];
 					
 						gantt.init("gantt_here");
-						/* gantt.message({text: "Some asddsa", expire: -1});
-						gantt.message({text: "Some gsdgsh", type: "error", expire: -1}); */
-						//gantt.load("${path}/Taskdata","string","")
-						  $.ajax({
-							url:"Taskdata",
-							dataType:"json",
-							success:function(data){
-								//gantt.parse(data)
-								
-
-							}
-						})  
-						gantt.load("${path}/Taskdata","json")
-					//	console.log(gantt.load("${path}/Taskdata","String",null))
 					
-						//console.log(gantt.load("${path}/Taskdata"),"JSON")
-						
-						
-				 /* 	  var testtest = {"data":[
-						{"id":11, "text":"Project #1", type:gantt.config.types.project, "progress": 0.6, "open": true},
-
-						]}
-						
-						
-						gantt.parse(testtest)  */ 
+						gantt.load("${path}/Taskdata","json")
+					
 						
 					</script>
 
