@@ -110,7 +110,7 @@
 		<!-- End of Content Wrapper -->
 
 	</div>
-	<!-- End of Page Wrapper -->
+	<!-- End of Page Wrapper1 -->
 
 	<!-- Scroll to Top Button-->
 	<a class="scroll-to-top rounded" href="#page-top"> 
