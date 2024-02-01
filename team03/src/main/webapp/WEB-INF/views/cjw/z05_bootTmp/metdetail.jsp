@@ -122,7 +122,7 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">등록 날짜</span>
 							</div>
-							<span class="form-control"><fmt:formatDate value="${dmet.regdte}" pattern="YYYY-MM-DD" type="date"/></span>	
+							<span class="form-control"><fmt:formatDate value="${dmet.regdte}" pattern="yyyy-MM-dd" type="date"/></span>	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">작성자</span>
 							</div>

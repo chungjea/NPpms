@@ -56,7 +56,7 @@
 				<%-- <%@ include file="backendweb/z05_bootTmp/a03_topBar.jsp" %>   
 				     <jsp:include page="${path}/z05_bootTmp/a03_topBar.jsp"/>
 				--%>
-				<!-- Topbar   %>  
+				<!-- Topbar%>  
 				-->
 				<%@ include file="/z05_bootTmp/a03_topBar.jsp" %> 
 				<!-- End of Topbar -->
@@ -75,9 +75,7 @@
 					<!-- Content Row -->
 					<div class="row">
 						<%@ include file="/z05_bootTmp/a04_main_row01.jsp" %>
-
 					</div>
-
 					<!-- Content Row -->
 
 					<div class="row">
@@ -87,15 +85,12 @@
 					<!-- Content Row -->
 					<div class="row">
 						<%@ include file="/z05_bootTmp/a06_main_row03.jsp" %>
-
 					</div>
-
 				</div>
 				<!-- /.container-fluid -->
 
 			</div>
 			<!-- End of Main Content -->
-
 			<!-- Footer -->
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">

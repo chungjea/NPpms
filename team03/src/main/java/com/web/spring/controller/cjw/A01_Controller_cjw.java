@@ -58,6 +58,7 @@ public class A01_Controller_cjw {
 	@PostMapping("detailapv")
 	public String detailapv(int apvno, Model d) {
 		d.addAttribute("dapv", service.detailapv(apvno));
+		d.addAttribute("dapvfile", service.getapvfile(apvno));
 		return "cjw/z05_bootTmp/apvdetail";
 	}
 	
@@ -123,6 +124,7 @@ public class A01_Controller_cjw {
 	@PostMapping("detailrsk")
 	public String detailrsk(int rskno, Model d) {
 		d.addAttribute("drsk", service.detailrsk(rskno));
+		d.addAttribute("drskfile", service.getrskfile(rskno));
 		return "cjw/z05_bootTmp/rskdetail";
 	}
 	
@@ -177,6 +179,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("msg2", service.updatemet(upt));
 		d.addAttribute("type", "upt");
 		d.addAttribute("umet", service.detailmet(metno));
+		d.addAttribute("umetfile", service.getmetfile(metno));
 		return "cjw/z05_bootTmp/metinsert";
 	}
 	

@@ -102,8 +102,9 @@ public class A02_Service_cjw {
 					if(mpf!=null) {
 						String fname = mpf.getOriginalFilename();
 						if(!fname.trim().equals("")) {
-							mpf.transferTo(new File(path+fname));
-							ckf+=dao.insertapvfile(new Apvfile_f(fname,path));
+							String fno = ""+dao.getfno();
+							mpf.transferTo(new File(path+fno));
+							ckf+=dao.insertapvfile(new Apvfile_f(fname,path,fno));
 						}
 					}
 				}
@@ -124,9 +125,10 @@ public class A02_Service_cjw {
 	
 	// 결재 : 결재 상세
 	public Approve_f detailapv(int apvno) {
-		Approve_f apv = dao.detailapv(apvno);
-		apv.setFnames(dao.getapvfile(apvno));
-		return apv;
+		return dao.detailapv(apvno);
+	}
+	public List<Apvfile_f> getapvfile(int apvno) {
+		return dao.getapvfile(apvno);
 	}
 	
 	// 결재 : 결재 처리
@@ -261,8 +263,9 @@ public class A02_Service_cjw {
 					if(mpf!=null) {
 						String fname = mpf.getOriginalFilename();
 						if(!fname.trim().equals("")) {
-							mpf.transferTo(new File(path+fname));
-							ckf+=dao.insertrskfile(new Rskfile_f(fname,path));
+							String fno = ""+dao.getfno();
+							mpf.transferTo(new File(path+fno));
+							ckf+=dao.insertrskfile(new Rskfile_f(fname,path,fno));
 						}
 					}
 				}
@@ -285,8 +288,10 @@ public class A02_Service_cjw {
 	public Risk_f detailrsk(int rskno) {
 		Risk_f rsk = dao.detailrsk(rskno);
 		if(rsk.getCharge().equals(" / ")) rsk.setCharge("");
-		rsk.setFnames(dao.getrskfile(rskno));
 		return rsk;
+	}
+	public List<Rskfile_f> getrskfile(int rskno) {
+		return dao.getrskfile(rskno);
 	}
 	
 	// 리스크 : 담당자 지정
@@ -390,7 +395,7 @@ public class A02_Service_cjw {
 	
 	// 회의록 : 회의록 삭제
 	public String deletemet(int metno) {
-		List<String> delFnames = dao.getfnobyname(metno);
+		List<String> delFnames = dao.getfnobynamem(metno);
 		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
 		for(String fname:delFnames) {
 			File fileToDelete = new File(path+fname);
