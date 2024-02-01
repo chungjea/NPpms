@@ -172,7 +172,7 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">등록일자</span>
 							</div>
-							<span class="form-control"><fmt:formatDate value="${drsk.regdte}" pattern="YYYY-MM-DD" type="date"/></span>	
+							<span class="form-control"><fmt:formatDate value="${drsk.regdte}" pattern="yyyy-MM-dd" type="date"/></span>	
 						</div>		
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
@@ -208,14 +208,16 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">첨부파일</span>
 							</div>
-							<c:if test="${not empty drsk.fnames}">
-								<c:forEach var="fname" items="${drsk.fnames}">
-									<span ondblclick="download('${fname}')" class="form-control">${fname}</span>	
-								</c:forEach>
-							</c:if>
-							<c:if test="${empty drsk.fnames}">
-								<span class="form-control"></span>
-							</c:if>
+							<c:choose>
+								<c:when test="${not empty drskfile}">
+									<c:forEach var="rf" items="${drskfile}">
+										<span ondblclick="download('${rf.fno}','${rf.fname}')" class="form-control">${rf.fname}</span>	
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<span class="form-control"></span>
+								</c:otherwise>
+							</c:choose>
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
@@ -327,9 +329,9 @@
 			</div>
 			<!-- End of Main Content -->
 			<script type="text/javascript">
-				function download(fname){
+				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fname="+fname
+						location.href="${path}/download?fno="+fno+"&fname="+fname
 					}
 				}
 			</script>

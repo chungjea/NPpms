@@ -25,7 +25,6 @@ public class DownloadViewer_cjw extends AbstractView {
 		String fileName = (String)model.get("downloadFile");
 		String realfile = (String)model.get("realFile");
 		// 2. File객체 만들기(경로와 파일명)
-		System.out.println("저장된 파일명:"+fileName);
 		File file = new File(path+fileName);
 		// 3. client에 이 파일을 전달해줄 response객체 속성 전달
 		// 		1) 파일전송용 contentType설정

@@ -46,13 +46,13 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO approveadmin_f values(apv_seq.currval, #{mempno}, NULL, null)")
 	int insertapv2(Approve_f ins);
 	
-	@Insert("INSERT INTO apvfile_f values(apv_seq.currval, #{fname}, #{path})")
+	@Insert("INSERT INTO apvfile_f values(apv_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertapvfile(Apvfile_f ins);
 	
 	Approve_f detailapv(int apvno);
 	
-	@Select("SELECT fname FROM apvfile_f WHERE apvno = #{apvno}")
-	List<String> getapvfile(int apvno);
+	@Select("SELECT fname, fno FROM apvfile_f WHERE apvno = #{apvno}")
+	List<Apvfile_f> getapvfile(int apvno);
 	
 	@Update("UPDATE APPROVEADMIN_F SET ckdte = sysdate, feedback = #{feedback} where apvno = #{apvno}")
 	int doapv(Approve_f apv);
@@ -87,13 +87,13 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO RISKADMIN_F VALUES(rsk_seq.currval,NULL,NULL,NULL,NULL,#{manager},#{probability},#{danger})")
 	int insertrsk2(Risk_f ins);
 	
-	@Insert("INSERT INTO rskfile_f values(rsk_seq.currval, #{fname}, #{path})")
+	@Insert("INSERT INTO rskfile_f values(rsk_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertrskfile(Rskfile_f ins);
 	
 	Risk_f detailrsk(int rskno);
 	
-	@Select("SELECT fname FROM rskfile_f WHERE rskno = #{rskno}")
-	List<String> getrskfile(int rskno);
+	@Select("SELECT fname, fno FROM rskfile_f WHERE rskno = #{rskno}")
+	List<Rskfile_f> getrskfile(int rskno);
 	
 	@Update("UPDATE RISK_F SET uptdte = sysdate, sts = '처리중' WHERE rskno = #{rskno}")
 	int dorsk(Risk_f rsk);
@@ -123,7 +123,7 @@ public interface A03_Dao_cjw {
 	List<Metfile_f> getmetfile(int metno);
 	
 	@Select("SELECT fno FROM metfile_f WHERE metno = #{metno}")
-	List<String> getfnobyname (int metno);
+	List<String> getfnobynamem (int metno);
 	
 	int updatemet(Meeting_f upt);
 	

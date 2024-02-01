@@ -4,6 +4,7 @@ public class Apvfile_f {
 	private int apvno;
 	private String fname;
 	private String path;
+	private String fno;
 	
 	public Apvfile_f() {
 	}
@@ -13,10 +14,23 @@ public class Apvfile_f {
 		this.path = path;
 	}
 
+	public Apvfile_f(String fname, String path, String fno) {
+		this.fname = fname;
+		this.path = path;
+		this.fno = fno;
+	}
+
 	public Apvfile_f(int apvno, String fname, String path) {
 		this.apvno = apvno;
 		this.fname = fname;
 		this.path = path;
+	}
+
+	public Apvfile_f(int apvno, String fname, String path, String fno) {
+		this.apvno = apvno;
+		this.fname = fname;
+		this.path = path;
+		this.fno = fno;
 	}
 
 	public int getApvno() {
@@ -41,6 +55,14 @@ public class Apvfile_f {
 
 	public void setPath(String path) {
 		this.path = path;
+	}
+
+	public String getFno() {
+		return fno;
+	}
+
+	public void setFno(String fno) {
+		this.fno = fno;
 	}
 	
 }
