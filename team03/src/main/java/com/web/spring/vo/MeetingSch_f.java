@@ -1,6 +1,7 @@
 package com.web.spring.vo;
 
 public class MeetingSch_f {
+	private String title;
 	private int deptno;
 	private String sts;
 	private int count;
@@ -16,8 +17,9 @@ public class MeetingSch_f {
 	public MeetingSch_f() {
 	}
 
-	public MeetingSch_f(int deptno, String sts, int count, int pageSize, int pageCount, int curPage, int start, int end,
+	public MeetingSch_f(String title, int deptno, String sts, int count, int pageSize, int pageCount, int curPage, int start, int end,
 			int blockSize, int startBlock, int endBlock) {
+		this.title = title;
 		this.deptno = deptno;
 		this.sts = sts;
 		this.count = count;
@@ -29,6 +31,14 @@ public class MeetingSch_f {
 		this.blockSize = blockSize;
 		this.startBlock = startBlock;
 		this.endBlock = endBlock;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public int getDeptno() {

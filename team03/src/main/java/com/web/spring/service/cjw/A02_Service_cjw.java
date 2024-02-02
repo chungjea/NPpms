@@ -26,6 +26,7 @@ public class A02_Service_cjw {
 	
 	// 결재 : 상신한 대기/반려/완료 문서 리스트
 	public List<Approve_f> myapv(ApproveSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.mycnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -48,6 +49,7 @@ public class A02_Service_cjw {
 	}	
 	// 결재 : 결재처리를 해야하는 문서 리스트
 	public List<Approve_f> ckapv(ApproveSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.toapvcnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -143,6 +145,7 @@ public class A02_Service_cjw {
 	
 	// 리스크 : 등록한 리스크 리스트
 	public List<Risk_f> myrsk(RiskSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.myrskcnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -165,6 +168,7 @@ public class A02_Service_cjw {
 	}
 	// 리스크 : 담당자를 지정해야 하는 리스크 리스트
 	public List<Risk_f> ckrsk(RiskSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.ckrskcnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -187,6 +191,7 @@ public class A02_Service_cjw {
 	}
 	// 리스크 : 처리할 리스크 리스트
 	public List<Risk_f> torsk(RiskSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.torskcnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -209,6 +214,7 @@ public class A02_Service_cjw {
 	}
 	// 리스크 : 완료된 (등록/처리했던)리스크 리스트
 	public List<Risk_f> finrsk(RiskSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.finrskcnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -315,6 +321,7 @@ public class A02_Service_cjw {
 	
 	// 회의록 : 리스트 출력
 	public List<Meeting_f> metlist(MeetingSch_f sch) {
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.totmet(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(10);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());

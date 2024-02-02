@@ -81,51 +81,61 @@
                     </div>
 					
                     <div class="row" style="align-self: center !important; display:flex;">
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	등록한</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${myrskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	처리할</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${ckrskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	담당중</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${torskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	완료된</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${finrskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    	<div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	등록한</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${myrskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+						<div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	처리할</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${ckrskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	담당중</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${torskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+                        
+						<div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	완료된</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${finrskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
                     </div>
 					<br>
 					<br>
