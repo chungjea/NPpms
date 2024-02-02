@@ -163,9 +163,22 @@
 						];
 					
 						gantt.init("gantt_here");
-					
-						gantt.load("${path}/Taskdata","json")
-					
+						gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
+						/* $.ajax({
+							url:"${path}/Taskdata",
+							data:"pcode="+${param.pcode},
+							dataType:"json",
+							success:function(datas){
+								$(datas).each(function(i,data){
+									alert(data.progress)	
+								})
+								
+							},
+							error:function(err){
+								
+							}
+							
+						}) */
 						
 					</script>
 

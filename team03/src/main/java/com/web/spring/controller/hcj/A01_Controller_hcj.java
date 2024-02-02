@@ -92,15 +92,15 @@ public class A01_Controller_hcj {
 	}
 
 	@RequestMapping("project")
-	public String project(Model d) {
+	public String project(@RequestParam("pcode")int pcode,Model d) {
 		return "hcj/z05_bootTmp/gantt";
 	}
 
 	@RequestMapping("Taskdata")
-	public ModelAndView taskdata() {
+	public ModelAndView taskdata(int pcode) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
-		modelAndView.addObject("data", service.getTaskdatas());
+		modelAndView.addObject("data", service.getTaskdatas(pcode));
 		return modelAndView;
 	}
 
