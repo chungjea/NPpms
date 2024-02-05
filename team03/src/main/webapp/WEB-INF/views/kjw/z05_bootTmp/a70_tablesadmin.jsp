@@ -156,7 +156,7 @@
 								</a>
 								
 				
-								<a href="${path}/registerFrm.do4"
+								<a href="${path}/registerFrm"
 									class="btn btn-success btn-icon-split"> <span
 									class="icon text-white-50"> <i class="fas fa-check"></i>
 								</span> <span class="text">사원등록</span>
@@ -330,7 +330,7 @@ $("#checking1").hide();
 	var sessId = "${emp.empno}"
 	if(sessId==""){
 		alert("로그인을 하여야 현재화면을 볼 수 있습니다\n로그인 페이지 이동")
-		location.href="${path}/login.do4"
+		location.href="${path}/login"
 	}
 	$(function (){
 		$("#chkAll").click(function(){
