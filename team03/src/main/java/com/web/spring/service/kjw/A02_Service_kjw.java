@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.web.spring.dao.kjw.A03_Dao_kjw;
 import com.web.spring.vo.Emp_master_f;
@@ -28,10 +29,14 @@ public class A02_Service_kjw {
 		return dao.register(ins);
 }
 
+	@Transactional
+	public void deleteEmps(List<Integer> empno) {
+		dao.deleteEmps(empno);
+	}
 	
 	public List<Emp_master_f> getEmpList(Emp_master_f sch){
 		if(sch.getEmpno()==0) sch.setEmpno(0);
-		dao.getCountEmp();
+		
 		
 		return dao.getEmpList(sch);
 	}
