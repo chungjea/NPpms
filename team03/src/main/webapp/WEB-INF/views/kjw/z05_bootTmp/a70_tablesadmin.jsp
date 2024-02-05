@@ -402,7 +402,7 @@ var dname= "${emp.dname}"
 				$("#checking1").hide();
 			})
 			
-			/* 1 */
+			/* 2 */
 			
 </script>
 </html>
