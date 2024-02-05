@@ -39,7 +39,8 @@
 
 
 </head>
-<body id="page-top"  onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
+<body id="page-top" onload="noBack();"
+	onpageshow="if(event.persisted) noBack();" onunload="">
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
@@ -104,7 +105,8 @@
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												총수익</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800" id="checking1">1,000,000,000원</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												id="checking1">1,000,000,000원</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -140,9 +142,9 @@
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
 							<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
-	<div class="row"/>
-	<div class="col"/>
-								<a href="#" class="btn btn-danger btn-icon-split" id="delBtn">
+								<div class="row" />
+								<div class="col" />
+								<a class="btn btn-danger btn-icon-split" id="delBtn">
 									<span class="icon text-white-50"> <i
 										class="fas fa-trash"></i>
 								</span> <span class="text">사원 삭제</span>
@@ -154,21 +156,21 @@
 
 								</span> <span class="text">사원정보수정</span>
 								</a>
-								
-				
+
+
 								<a href="${path}/registerFrm"
 									class="btn btn-success btn-icon-split"> <span
 									class="icon text-white-50"> <i class="fas fa-check"></i>
 								</span> <span class="text">사원등록</span>
 								</a>
 							</c:if>
-						
+
 							<c:if test='${emp.dname.equals("개발1팀")&&emp.auth.equals("관리자")}'>
 								<span class="text"> 개발1팀 관리자페이지입니다.</span>
 							</c:if>
-							</div>
+						</div>
 
-							<%--           포멧                            <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
+						<%--           포멧                            <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
                                          <a href="#" class="btn btn-warning btn-icon-split">
                                         <span class="icon text-white-50">
                            
@@ -179,11 +181,11 @@
                                         <span class="text">사원정보수정</span>
                                     </a>
                                     </c:if> --%>
-<div class="col-xl-7" >
-							<form 
+						<div class="col-xl-7">
+							<form
 								class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">
-								<div class="input-group align-items-end" >
+								<div class="input-group align-items-end">
 
 									<input class="form-control bg-light border-0 small"
 										placeholder="검색할 사원번호" aria-label="Search"
@@ -203,128 +205,130 @@
 
 								<div style="width: 100%; height: 200px; overflow: auto">
 									<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
-									
-									<table class="table table-bordered" id="dataTable" width="100%"
-										cellspacing="0">
-										<thead>
-											<tr>
-												<th>사원번호</th>
-												<th>사원명</th>
-												<th>부서명</th>
-												<th>입사일</th>
-												<th>급여</th>
-												<th>패널티횟수</th>
-												<th>마지막수정시각</th>
-												<th><input type="checkbox" id="chkAll"></th>
-											</tr>
-										</thead>
 
-										<tbody>
-											<c:forEach var="el" items="${empList}">
+										<table class="table table-bordered" id="dataTable"
+											width="100%" cellspacing="0">
+											<thead>
 												<tr>
-													<td>${el.empno}</td>
-													<td>${el.ename}</td>
-													<td>${el.dname}</td>
-													<td>${el.hiredate}</td>
-													<td>${el.salary}</td>
-													<td>${el.panaltytot}</td>
-													<td>${el.lastfix}</td>
-													<td><input type="checkbox" id="chk" class="chkGrp"
-														value="${el.empno}" name="checkboxModel"></td>
+													<th>사원번호</th>
+													<th>사원명</th>
+													<th>부서명</th>
+													<th>입사일</th>
+													<th>급여</th>
+													<th>패널티횟수</th>
+													<th>마지막수정시각</th>
+													<th><input type="checkbox" id="chkAll"></th>
 												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</c:if>
-						<div class="card-body">
-							<div class="table-responsive">
+											</thead>
 
-								
-									<c:if test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
-									
-									<table class="table table-bordered" id="dataTable" width="100%"
-										cellspacing="0">
-										<thead>
-											<tr>
-												<th>사원번호</th>
-												<th>사원명</th>
-												<th>부서명</th>
-												<th>입사일</th>
-												<th>급여</th>
-												<th>인센티브</th>
-												<th>마지막수정시각</th>
-												<th><input type="checkbox" id="chkAll"></th>
-											</tr>
-										</thead>
+											<tbody>
+												<c:forEach var="el" items="${empList}">
+													<tr>
+														<td>${el.empno}</td>
+														<td>${el.ename}</td>
+														<td>${el.dname}</td>
+														<td>${el.hiredate}</td>
+														<td>${el.salary}</td>
+														<td>${el.panaltytot}</td>
+														<td>${el.lastfix}</td>
+														<td><input type="checkbox" id="chk" class="chkGrp"
+															value="${el.empno}" name="checkboxModel"></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</c:if>
+									<div class="card-body">
+										<div class="table-responsive">
 
-										<tbody>
-											<c:forEach var="sl" items="${salList}">
-												<tr>
-													<td>${sl.empno}</td>
-													<td>${sl.ename}</td>
-													<td>${sl.dname}</td>
-													<td>${sl.egrade}</td>
-													<td>${sl.salary}</td>
-													<td>${sl.incentive}</td>
-													<td>${sl.lastfix}</td>
-													<td><input type="checkbox" id="chk" class="chkGrp"
-														value="${sl.empno}" name="checkboxModel"></td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</c:if>
+
+											<c:if
+												test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
+
+												<table class="table table-bordered" id="dataTable"
+													width="100%" cellspacing="0">
+													<thead>
+														<tr>
+															<th>사원번호</th>
+															<th>사원명</th>
+															<th>부서명</th>
+															<th>입사일</th>
+															<th>급여</th>
+															<th>인센티브</th>
+															<th>마지막수정시각</th>
+															<th><input type="checkbox" id="chkAll"></th>
+														</tr>
+													</thead>
+
+													<tbody>
+														<c:forEach var="sl" items="${salList}">
+															<tr>
+																<td>${sl.empno}</td>
+																<td>${sl.ename}</td>
+																<td>${sl.dname}</td>
+																<td>${sl.egrade}</td>
+																<td>${sl.salary}</td>
+																<td>${sl.incentive}</td>
+																<td>${sl.lastfix}</td>
+																<td><input type="checkbox" id="chk" class="chkGrp"
+																	value="${sl.empno}" name="checkboxModel"></td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</c:if>
+										</div>
+									</div>
+									<%@page buffer="8192kb" autoFlush="true"%>
 								</div>
+								<!-- /.container-fluid -->
+
+							</div>
+							<!-- End of Main Content -->
+
+							<!-- Footer -->
+							<footer class="sticky-footer bg-white">
+								<div class="container my-auto">
+									<div class="copyright text-center my-auto">
+										<span>Copyright &copy; Your Website 2021</span>
+									</div>
 								</div>
-					<%@page buffer="8192kb" autoFlush="true"%>
-				</div>
-				<!-- /.container-fluid -->
+							</footer>
+							<!-- End of Footer -->
 
-			</div>
-			<!-- End of Main Content -->
+						</div>
+						<!-- End of Content Wrapper -->
 
-			<!-- Footer -->
-			<footer class="sticky-footer bg-white">
-				<div class="container my-auto">
-					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2021</span>
 					</div>
-				</div>
-			</footer>
-			<!-- End of Footer -->
+					<!-- End of Page Wrapper -->
 
-		</div>
-		<!-- End of Content Wrapper -->
-
-	</div>
-	<!-- End of Page Wrapper -->
-
-	<!-- Scroll to Top Button-->
-	<!-- <a class="scroll-to-top rounded" href="#page-top"> <i
+					<!-- Scroll to Top Button-->
+					<!-- <a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fas fa-angle-up"></i>
 	</a> -->
-	<!-- Logout Modal-->
-	<%@ include file="a08_logout_modal.jsp"%>
+					<!-- Logout Modal-->
+					<%@ include file="a08_logout_modal.jsp"%>
 
-	<!-- Bootstrap core JavaScript-->
-	<script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
-	<script
-		src="${path}/a00_com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+					<!-- Bootstrap core JavaScript-->
+					<script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
+					<script
+						src="${path}/a00_com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-	<!-- Core plugin JavaScript-->
-	<script src="${path}/a00_com/vendor/jquery-easing/jquery.easing.min.js"></script>
+					<!-- Core plugin JavaScript-->
+					<script
+						src="${path}/a00_com/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-	<!-- Custom scripts for all pages-->
-	<script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+					<!-- Custom scripts for all pages-->
+					<script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
-	<%-- <!-- Page level plugins -->
+					<%-- <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
 <!-- Page level custom scripts -->
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 </body>
-<script type="text/javascript" defer>
+<script type="text/javascript">
 $("#checking").hide();
 $("#checking1").hide();
 	var sessId = "${emp.empno}"
@@ -352,11 +356,32 @@ $("#checking1").hide();
 	alert("삭제처리할 인원을 1명이상 선택하세요");
 	return;
 	}
-	
 	var confirming = confirm(" 삭제하시겠습니까?");
 	if(!confirming){
 	return;
 	}
+	
+	$.ajax({
+		url:'${path}/deleteEmps',
+		method:'POST',
+		contentType:'application/json; charset=utf-8',
+		data:JSON.stringify(checkedvals),
+		success:function(response){
+		if(response.status=="success"){
+		alert("선택된 인원정보가 삭제되었습니다");
+		console.log(response)
+		location.reload();
+		}else{
+		alert("실패:"+response.message);
+		}
+},
+error:function(xhr,status,err){
+alert("진행도중 문제발생");
+console.error("Error:",status,err);
+}
+		});
+	
+});
 
 var dname= "${emp.dname}"
 	var auth="${emp.auth}"
@@ -378,23 +403,6 @@ var dname= "${emp.dname}"
 			})
 			
 			
-			$.ajax({
-			url:'${path}/deleteEmps',
-			method:'POST',
-			contentType:'application/json',
-			data:json.stringify(checkedvals),
-			success:function(response){
-			if(response.status=="success"){
-			alert("선택된 인원정보가 삭제되었습니다");
-			location.reload();
-			}else{
-			alert("실패:"+response.message);
-			}
-	},
-	error:function(xhr,status,err){
-	alert("진행도중 문제발생");
-	console.error("Error:",status,err);
-	}
-			});
+			
 </script>
 </html>
