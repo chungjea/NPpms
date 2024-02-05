@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.web.spring.service.MailSenderService;
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
+import com.web.spring.vo.MailSender;
 import com.web.spring.vo.sal_f;
 
 import jakarta.servlet.http.HttpSession;
@@ -96,6 +98,13 @@ public String register(Emp_master_f ins,Model d) {
 	d.addAttribute("msg",service.register(ins)>0?"등록성공":"등록실패");
 
 	return "kjw/z05_bootTmp/a84_register";
+}
+@RequestMapping("mailSend.do")
+public String mailSend(MailSender mailVo, Model d) {
+	if(mailVo.getTitle()!=null) {
+		d.addAttribute("msg", service.sendMail(mailVo));
+	}
+	return "a19_mailSenderForm";
 }
 
 }
