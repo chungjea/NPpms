@@ -32,6 +32,7 @@
 	$(document).ready(function(){
 		location.href="${path}/login"
 	});
+	
 </script>
 </head>
 

@@ -27,7 +27,7 @@
  
  
 </head>
-<body class="bg-gradient-primary">
+<body class="bg-gradient-primary" onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
     <div class="container">
 
@@ -118,13 +118,14 @@ $("[name=passwd]").keyup(function() {
 if ("${param.empno}" != "") {
 			if (empno != "") {
 				alert("로그인 성공\n메인페이지로 이동")
-				location.href = "${path}/mainpage"
+				location.href = "${path}/mainpage.do2"
 			} else {
 				alert("로그인 실패2\n다시 로그인하세요")
 
 			}
 		}
-
+window.history.forward();
+function noBack(){window.history.forward();}
 </script>
 
 
