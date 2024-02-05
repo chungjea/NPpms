@@ -147,14 +147,15 @@
                     	<a class="page-link" id="tocheck" href="javascript:goPage2()">결재할 문서</a>
                     	<a class="page-link" id="finish" href="javascript:goPage1('완료')">완료된 문서</a>
                     	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-								id="frm" class="form" method="get">
+								id="frm01" class="form" method="post">
 							<div class="input-group align-items-end" >
 								<input class="form-control border-0 small" placeholder="제목" aria-label="Search"
-									aria-describedby="basic-addon2" name=""
+									aria-describedby="basic-addon2" name="title"
 									value="${sch.title}">
-								<!-- <input type="hidden" name="wempno" value="1000"/>
-                    			<input type="hidden" name="mempno" value="1000"/>
-                    			<input type="hidden" id="ssts" name="sts" value=""/> -->
+								<input type="hidden" name="curPage" value="${sch.curPage}"/>
+								<input type="hidden" name="wempno" value="1000"/>
+								<input type="hidden" name="mempno" value="1000"/>
+								<input type="hidden" id="sts" name="sts" value=""/>
 								<div class="input-group-append">
 									<button class="btn btn-primary" type="button" id="schBtn">
 										<i class="fas fa-search fa-sm"></i>
@@ -163,21 +164,16 @@
 							</div>
 						</form>
                     </div>
-                    <form method="post" id="frm01">
-                    	<input type="hidden" name="wempno" value="1000"/>
-                    	<input type="hidden" name="mempno" value="1000"/>
-                    	<input type="hidden" id="msts" name="sts" value="대기"/>
-                    </form>
                     <script type="text/javascript">
 	                    function goPage1(sts){
-	            			location.href="${path}/myapv?curPage=1&wempno=1000&mempno=1000&sts="+sts
+	                    	$("#sts").val(sts)
+							$("#frm01").attr("action","${path}/myapv")
+					    	$("#frm01").submit()
 	            		}
 	                    function goPage2(){
-	            			location.href="${path}/ckapv?curPage=1&wempno=1000&mempno=1000"//+empno
+							$("#frm01").attr("action","${path}/ckapv")
+					    	$("#frm01").submit()
 	            		}
-	                	function goDetail(apvno){
-	                		location.href="${path}/detailapv?apvno="+apvno
-	                	}
                     </script>
                     <br>
                     <table class="table table-hover table-striped">
@@ -210,13 +206,6 @@
 					    	$("#frm02").submit()
 					    }
 					</script>
- 					<form method="get" id="frm03">
-						<input type="hidden" name="curPage" value="${sch.curPage}"/>
-						<input type="hidden" name="wempno" value="1000"/>
-						<input type="hidden" name="mempno" value="1000"/>
-						<!-- <input type="hidden" name="title" value="${sch.title}"/> -->
-						<input type="hidden" id="sts" name="sts" value="대기"/>
-					</form>
 					<ul class="pagination  justify-content-center">
 						<li class="page-item">
 						<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
@@ -230,7 +219,7 @@
 						function goPage(pcnt){
 							$("#sts").val("${param.sts}")
 							$("[name=curPage]").val(pcnt)
-							$("#frm03").submit();
+							$("#frm01").submit();
 						}
 					</script>	
 				</div>

@@ -22,10 +22,12 @@ public class A01_Controller_cjw {
 	@Autowired
 	private A02_Service_cjw service;
 	// 결재
-	// http://localhost:3333/myapv?wempno=1000&mempno=1000&sts=대기
-	@GetMapping("myapv")
+	// http://localhost:3333/myapv
+	@PostMapping("myapv")
 	public String myapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
-		if(sch.getSts()==null) sch.setSts("대기");
+		System.out.println(sch.getWempno());
+		System.out.println(sch.getMempno());
+		System.out.println(sch.getSts());
 		d.addAttribute("apvList", service.myapv(sch));
 		d.addAttribute("myapvcnt", service.myapvcnt(sch));
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
@@ -34,7 +36,7 @@ public class A01_Controller_cjw {
 		return "cjw/z05_bootTmp/approval";
 	}
 	
-	@GetMapping("ckapv")
+	@PostMapping("ckapv")
 	public String ckapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
 		d.addAttribute("apvList", service.ckapv(sch));
 		d.addAttribute("myapvcnt", service.myapvcnt(sch));
