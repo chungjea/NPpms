@@ -2,11 +2,13 @@ package com.web.spring.dao.kjw;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.sal_f;
 
-
+@Mapper
 // springweb.a02_mvc.a03_dao.A04_MemberDao
 public interface A03_Dao_kjw {
 	

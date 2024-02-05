@@ -32,7 +32,7 @@ public class A02_Service_kjw {
 	public List<Emp_master_f> getEmpList(Emp_master_f sch){
 		if(sch.getEmpno()==0) sch.setEmpno(0);
 		dao.getCountEmp();
-		int count=dao.getCountEmp();
+		
 		return dao.getEmpList(sch);
 	}
 	public List<sal_f> getSalList(sal_f sch){
