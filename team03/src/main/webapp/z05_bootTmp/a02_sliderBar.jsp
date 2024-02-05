@@ -63,13 +63,13 @@
 					<span>재정관리</span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link"  href="mypagefilter">
+			<li class="nav-item"><a class="nav-link"   href="mypagefilter">
 					<span>마이페이지</span>
 			</a></li>
-<!--  <script>
+ <script>
  onclick="f_clickFunc()"
 	var auth = "${emp.auth}"
-		1234
+		
 		var sessAuth = "${emp.auth}"
 				function f_clickFunc(){	
 		if(sessAuth=="관리자") {
@@ -79,9 +79,9 @@
 		}else if(sessAuth=="직원"){
 			location.href="a70_tables.jsp" 
 		}else
-			alert("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
+			console.log("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
 		}
- </script> -->
+ </script>
 
 			
 			<!-- Divider -->
