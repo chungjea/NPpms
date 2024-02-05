@@ -25,8 +25,11 @@ public interface A03_Dao_cjw {
 	
 	List<Approve_f> ckapv(ApproveSch sch);
 	
-	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts=#{sts}")
+	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts=#{sts} and title like '%'||#{title}||'%'")
 	int mycnt(ApproveSch sch);
+	
+	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기' and af.title like '%'||#{title}||'%'")
+	int tocnt(ApproveSch sch);
 	
 	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='대기'")
 	int myapvcnt(ApproveSch sch);
