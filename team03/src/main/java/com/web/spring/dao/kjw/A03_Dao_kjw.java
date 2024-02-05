@@ -14,15 +14,17 @@ public interface A03_Dao_kjw {
 	
 
 	Emp_pinfo_f login(Emp_pinfo_f sch);
-
-	List<Emp_master_f> Emplist();
 	
 	 int register(Emp_master_f ins);
 	 
+	 int deleteEmps(List<Integer> empno);
+	 
 	List<Emp_master_f> getEmpList(Emp_master_f sch);
-		int getCountEmp();
+		
 
 		List<sal_f> getSalList(sal_f sch);
+
+		List<Emp_master_f> Emplist();
 }
 
 

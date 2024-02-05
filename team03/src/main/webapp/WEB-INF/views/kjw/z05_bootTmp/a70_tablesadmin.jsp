@@ -344,7 +344,19 @@ $("#checking1").hide();
 	window.history.forward();
 	 function noBack(){window.history.forward();}
 	
+	$("#delBtn").click(function(){
+	var checkedvals =$(".chkGrp:checked").map(function(){
+	return $(this).val();
+	}).get();
+	if(checkedvals.length==0){
+	alert("삭제처리할 인원을 1명이상 선택하세요");
+	return;
+	}
 	
+	var confirming = confirm(" 삭제하시겠습니까?");
+	if(!confirming){
+	return;
+	}
 
 var dname= "${emp.dname}"
 	var auth="${emp.auth}"
@@ -364,6 +376,25 @@ var dname= "${emp.dname}"
 			},function(){
 				$("#checking1").hide();
 			})
-	
+			
+			
+			$.ajax({
+			url:'${path}/deleteEmps',
+			method:'POST',
+			contentType:'application/json',
+			data:json.stringify(checkedvals),
+			success:function(response){
+			if(response.status=="success"){
+			alert("선택된 인원정보가 삭제되었습니다");
+			location.reload();
+			}else{
+			alert("실패:"+response.message);
+			}
+	},
+	error:function(xhr,status,err){
+	alert("진행도중 문제발생");
+	console.error("Error:",status,err);
+	}
+			});
 </script>
 </html>
