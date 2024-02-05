@@ -26,6 +26,9 @@ public class A02_Service_cjw {
 	
 	// 결재 : 상신한 대기/반려/완료 문서 리스트
 	public List<Approve_f> myapv(ApproveSch sch){
+		if(sch.getSts()==null) sch.setSts("대기");
+		if(sch.getWempno()==0) sch.setWempno(1000);
+		if(sch.getMempno()==0) sch.setMempno(1000);
 		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.mycnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
@@ -49,6 +52,8 @@ public class A02_Service_cjw {
 	}	
 	// 결재 : 결재처리를 해야하는 문서 리스트
 	public List<Approve_f> ckapv(ApproveSch sch){
+		if(sch.getWempno()==0) sch.setWempno(1000);
+		if(sch.getMempno()==0) sch.setMempno(1000);
 		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.toapvcnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);

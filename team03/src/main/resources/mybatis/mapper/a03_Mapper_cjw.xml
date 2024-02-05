@@ -98,7 +98,7 @@
 				(SELECT mf.METNO, mf.TITLE, mf.METDTE, mf.wempno, 
 					emf.ENAME||' / '||df.DNAME writer, mf.regdte 
 				FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df 
-				WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno} AND rf.title like '%'||#{title}||'%' 
+				WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno} AND mf.title like '%'||#{title}||'%' 
 				AND 1=1 ORDER BY mf.METNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
