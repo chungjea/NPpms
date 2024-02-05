@@ -69,12 +69,11 @@
 			}
 		})
 		$("#mainBtn").click(function(){
-			location.href="${path}/myapv?wempno=1000&mempno=1000"
+			$("#frmapv").submit()
 		})
 	});
 </script>
 <body id="page-top">
-
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 

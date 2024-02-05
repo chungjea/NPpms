@@ -142,19 +142,35 @@
 					<br>
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage1()">등록한 리스크</a>
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('1000')">등록한 리스크</a>
                     	<a class="page-link" id="myck" href="javascript:goPage2('1000')">처리할 리스크</a>
                     	<a class="page-link" id="tocheck" href="javascript:goPage3('1000')">담당중인 리스크</a>
                     	<a class="page-link" id="finish" href="javascript:goPage4('1000')">완료된 리스크</a>
-                    </div>
-                    <form id="frm01" method="post">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+								id="frm01" class="form" method="post">
+						<div class="input-group align-items-end" >
+							<input class="form-control border-0 small" placeholder="제목" aria-label="Search"
+									aria-describedby="basic-addon2" name="title"
+									value="${sch.title}">
+							<input type="hidden" name="curPage" value="${sch.curPage}"/>
                     	<input type="hidden" name="wempno" id="1"/>
                     	<input type="hidden" name="cempno" id="2"/>
                     	<input type="hidden" name="manager" id="3"/>
-                    </form>
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="button" id="schBtn">
+									<i class="fas fa-search fa-sm"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+                    </div>
                     <script type="text/javascript">
-	                    function goPage1(){
-	            			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+	                    function goPage1(no){
+					    	$("#1").val(no)
+					    	$("#2").val(no)
+					    	$("#3").val(no)
+							$("#frm01").attr("action","${path}/myrsk")
+					    	$("#frm01").submit()
 	            		}
 	                    function goPage2(no){
 					    	$("#1").val(no)
@@ -177,6 +193,22 @@
 							$("#frm01").attr("action","${path}/finrsk")
 					    	$("#frm01").submit()
 	            		}
+	                    $("#schBtn").click(function(){
+	                   		schapv()
+		                 })
+		                 $("[name=title").keyup(function(){
+								if(event.keyCode==13){
+									schapv()
+								}
+		                  })
+		                  function schrsk(){
+	                    		var empno = "${param.wempno}"
+	    					    $("#1").val(empno)
+	    					    $("#2").val(empno)
+	    					    $("#3").val(empno)
+	    						$("#frm01").attr("action","${path}/myrsk")
+	    					    $("#frm01").submit()
+		                  }
                     </script>
                     <br>
                     <table class="table table-hover table-striped">
@@ -209,12 +241,6 @@
 					    	$("#frm02").submit()
 					    }
 					</script>
- 					<form method="get" id="frm03">
-						<input type="hidden" name="curPage" value="${sch.curPage}"/>
-						<input type="hidden" name="wempno" value="1000"/>
-						<input type="hidden" name="cempno" value="1000"/>
-						<input type="hidden" name="manager" value="1000"/>
-					</form>
 					<ul class="pagination  justify-content-center">
 						<li class="page-item">
 						<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
@@ -226,8 +252,12 @@
 					</ul>
 					<script type="text/javascript">
 						function goPage(pcnt){
+							var empno = "${param.wempno}"
+					    	$("#1").val(empno)
+					    	$("#2").val(empno)
+					    	$("#3").val(empno)
 							$("[name=curPage]").val(pcnt)
-							$("#frm03").submit();
+							$("#frm01").submit();
 						}
 					</script>	
 				</div>

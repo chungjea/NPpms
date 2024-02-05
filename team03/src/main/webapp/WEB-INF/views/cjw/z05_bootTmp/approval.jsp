@@ -43,10 +43,7 @@
  
  
 </head>
-<script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
-</script>
+
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -155,7 +152,7 @@
 								<input type="hidden" name="curPage" value="${sch.curPage}"/>
 								<input type="hidden" name="wempno" value="1000"/>
 								<input type="hidden" name="mempno" value="1000"/>
-								<input type="hidden" id="sts" name="sts" value=""/>
+								<input type="hidden" id="sts" name="sts"/>
 								<div class="input-group-append">
 									<button class="btn btn-primary" type="button" id="schBtn">
 										<i class="fas fa-search fa-sm"></i>
@@ -167,13 +164,37 @@
                     <script type="text/javascript">
 	                    function goPage1(sts){
 	                    	$("#sts").val(sts)
+	                    	//$("[name=title]").val("")
+	                    	$("[name=curPage]").val(1)
 							$("#frm01").attr("action","${path}/myapv")
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage2(){
+	                    	//$("[name=title]").val("")
+	                    	$("[name=curPage]").val(1)
 							$("#frm01").attr("action","${path}/ckapv")
 					    	$("#frm01").submit()
 	            		}
+	                   $("#schBtn").click(function(){
+	                   		schapv()
+	                   })
+	                   $("[name=title").keyup(function(){
+							if(event.keyCode==13){
+								schapv()
+							}
+	                   })
+	                    function schapv(){
+	                    	var sts = $("#sts").val()
+	                    	if(sts==""){
+	                    		$("[name=curPage]").val(0)
+								$("#frm01").attr("action","${path}/ckapv")
+						    	$("#frm01").submit()
+	                    	}else{
+		                    	$("[name=curPage]").val(0)
+								$("#frm01").attr("action","${path}/myapv")
+						    	$("#frm01").submit()
+	                    	}
+	                    }
                     </script>
                     <br>
                     <table class="table table-hover table-striped">

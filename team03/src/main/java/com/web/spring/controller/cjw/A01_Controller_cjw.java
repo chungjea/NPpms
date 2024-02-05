@@ -25,9 +25,11 @@ public class A01_Controller_cjw {
 	// http://localhost:3333/myapv
 	@PostMapping("myapv")
 	public String myapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
-		System.out.println(sch.getWempno());
-		System.out.println(sch.getMempno());
-		System.out.println(sch.getSts());
+		//System.out.println(sch.getCurPage());
+		//System.out.println(sch.getTitle());
+		//System.out.println(sch.getSts());
+		//System.out.println(sch.getWempno());
+		//System.out.println(sch.getMempno());
 		d.addAttribute("apvList", service.myapv(sch));
 		d.addAttribute("myapvcnt", service.myapvcnt(sch));
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
@@ -71,8 +73,8 @@ public class A01_Controller_cjw {
 	}
 	
 	// 리스크 관리
-	// http://localhost:3333/myrsk?wempno=1000&cempno=1000&manager=1000
-	@GetMapping("myrsk")
+	// http://localhost:3333/myrsk
+	@PostMapping("myrsk")
 	public String myrsk(@ModelAttribute("sch") RiskSch sch, Model d) {
 		d.addAttribute("rskList", service.myrsk(sch));
 		d.addAttribute("myrskcnt", service.myrskcnt(sch));
