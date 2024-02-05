@@ -43,10 +43,7 @@
  
  
 </head>
-<script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
-</script>
+
 <body id="page-top">
 
 	<!-- Page Wrapper -->

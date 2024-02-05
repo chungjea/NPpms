@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<fmt:requestEncoding value="utf-8"/>     
+<fmt:requestEncoding value="utf-8"/>
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
@@ -105,7 +105,7 @@
 				 --%>	
 			</div>
 
-		</ul>
+		</ul>     
 		<form id="frmapv" method="post" action="${path}/myapv">
 			<input type="hidden" name="wempno" value="1000" />
 			<input type="hidden" name="mempno" value="1000" />
@@ -115,4 +115,5 @@
 			function goApv(){
 				$("#frmapv").submit()
 			}
+			$("#frmapv").hide()
 		</script>

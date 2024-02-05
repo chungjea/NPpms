@@ -25,9 +25,6 @@ public class A01_Controller_cjw {
 	// http://localhost:3333/myapv
 	@PostMapping("myapv")
 	public String myapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
-		System.out.println(sch.getWempno());
-		System.out.println(sch.getMempno());
-		System.out.println(sch.getSts());
 		d.addAttribute("apvList", service.myapv(sch));
 		d.addAttribute("myapvcnt", service.myapvcnt(sch));
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
