@@ -181,9 +181,9 @@ public interface A03_Dao_hcj {
 	
 	
 	// 프로젝트 간트차트
-	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'DD-MM-YYYY')\r\n "
-			+ "start_date, ENDDTE-STARTDTE duration, PROGRESS/100 PROGRESS,"
-			+ "REFNO parent, pcode \r\n"
+	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'DD-MM-YYYY') \r\n "
+			+ "start_date, CASE when ENDDTE-STARTDTE < 1 THEN 1 else ENDDTE-STARTDTE END  duration, PROGRESS/100 PROGRESS,"
+			+ "REFNO parent \r\n"
 			+ "FROM PROJECT_WORK_F pwf \r\n"
 			+ "where pcode = #{pcode}")
 	List<Data> getTaskdatas(int pcode);

@@ -25,8 +25,7 @@
 			overflow: hidden;
 		}
 		.main-content {
-			height: 600px;
-			height: calc(100vh - 50px);
+			height: calc(80vh - 50px);
 		}
 </style>
 
@@ -46,7 +45,6 @@
     <link href="${path}/a00_com/css/sb-admin-2.min.css" rel="stylesheet">
     <link rel="stylesheet" href="${path}/a00_com/gantt/codebase/skins/dhtmlxgantt_material.css?v=8.0.6">
 	<link rel="stylesheet" href="${path}/a00_com/gantt/common/controls_styles.css?v=8.0.6">
-	<script src="${path}/a00_com/gantt/common/testdata.js?v=8.0.6"></script>
  	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto:regular,medium,thin,bold">
 
  
@@ -89,7 +87,7 @@
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2021</span>
+						<span>Copyright &copy; Your Website 2024</span>
 					</div>
 				</div>
 			</footer>
@@ -122,7 +120,7 @@
 <!-- Page level plugins -->
 <script>
 						gantt.plugins({
-							quick_info: true,
+							quick_info: false,
 							tooltip: true,
 							critical_path: true
 						});
@@ -136,10 +134,10 @@
 						};
 					
 						gantt.config.columns = [
-							{name: "wbs", label: "WBS", width: 40, template: gantt.getWBSCode, resize: true},
-							{name: "text", label: "Task name", tree: true, width: 170, resize: true, min_width: 10},
-							{name: "start_date", align: "center", width: 90, resize: true},
-							{name: "duration", align: "center", width: 80, resize: true},
+							{name: "wbs", label: "번호", width: 40, template: gantt.getWBSCode, resize: true},
+							{name: "text", label: "작업명", tree: true, width: 170, resize: true, min_width: 10},
+							{name: "start_date",label:"시작일",align: "center", width: 90, resize: true},
+							{name: "duration",label:"작업일수" ,align: "center", width: 80, resize: true},
 							{name: "add", width: 40}
 						];
 					
@@ -149,36 +147,21 @@
 							return "";
 						};
 					
-						gantt.config.start_on_monday = false;
+						gantt.config.start_on_monday = true;
 					
 						gantt.config.scale_height = 36 * 3;
 						gantt.config.scales = [
-							{unit: "month", step: 1, format: "%F"},
+							{unit: "month", step: 1, format: "%m월"},
 							{unit: "week", step: 1, format: function (date) {
-								var dateToStr = gantt.date.date_to_str("%d %M");
-								var endDate = gantt.date.add(gantt.date.add(date, 1, "week"), -1, "day");
-								return dateToStr(date) + " - " + dateToStr(endDate);
+								var dateToStr = gantt.date.date_to_str("%d");
+								return parseInt(dateToStr(date)/7) + "주차 ";
 							}},
-							{unit: "day", step: 1, format: "%D"}
+							{unit: "day", step: 1, format: "%d일"}
 						];
-					
+			
 						gantt.init("gantt_here");
 						gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
-						/* $.ajax({
-							url:"${path}/Taskdata",
-							data:"pcode="+${param.pcode},
-							dataType:"json",
-							success:function(datas){
-								$(datas).each(function(i,data){
-									alert(data.progress)	
-								})
-								
-							},
-							error:function(err){
-								
-							}
-							
-						}) */
+				
 						
 					</script>
 
