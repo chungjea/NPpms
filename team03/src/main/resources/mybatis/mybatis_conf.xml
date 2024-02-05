@@ -15,6 +15,8 @@
 		<typeAlias alias="meeting" type="com.web.spring.vo.Meeting_f"/>
 		<typeAlias alias="metSch" type="com.web.spring.vo.MeetingSch_f"/>
 		<typeAlias alias="projectSch" type="com.web.spring.vo.ProjectSch"/>
+		<typeAlias alias="EmpSch_f" type="com.web.spring.vo.EmpSch_f"/>
+		<typeAlias alias="sallist" type="com.web.spring.vo.sal_f"/>
 	</typeAliases>
 
 </configuration>

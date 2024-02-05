@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.web.spring.dao.kjw.A03_Dao_kjw;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
+import com.web.spring.vo.sal_f;
 
 
 
@@ -26,7 +27,18 @@ public class A02_Service_kjw {
 	public int register(Emp_master_f ins) {
 		return dao.register(ins);
 }
-	public int empcnt(Emp_master_f cnt) {
-		return dao.empcnt(cnt);
+
+	
+	public List<Emp_master_f> getEmpList(Emp_master_f sch){
+		if(sch.getEmpno()==0) sch.setEmpno(0);
+		dao.getCountEmp();
+		int count=dao.getCountEmp();
+		return dao.getEmpList(sch);
 	}
+	public List<sal_f> getSalList(sal_f sch){
+		if(sch.getEmpno()==0) sch.setEmpno(0);
+		return dao.getSalList(sch);
+	}
+
 }
+

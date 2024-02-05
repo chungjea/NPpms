@@ -4,16 +4,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
+import com.web.spring.vo.sal_f;
 
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-//http://localhost:7080/team03/login.do4
+
+//http://localhost:7080/team03/mypagefilter
 @Controller
 public class A01_Controller_kwj {
 	@Autowired(required = false)
@@ -46,21 +48,21 @@ public String logout(HttpSession session) {
 
 
 @RequestMapping("mypagefilter")
-public String mypagefilter(Model d,HttpServletRequest request) {
-	HttpSession session = request.getSession();
-
+public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
+		 sal_f sch1,Model d,HttpSession session) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
-
+	int count;
 	if(emp.getAuth().equals("관리자")) {
-		d.addAttribute("emplist",service.Emplist());
+		d.addAttribute("empList", service.getEmpList(sch));
+		d.addAttribute("salList", service.getSalList(sch1));
+		
+			return "kjw/z05_bootTmp/a70_tablesadmin";
 
-		return "kjw/z05_bootTmp/a70_tablesadmin";
-
-	} else { /* if(emp.getAuth()=="직원") */
-		d.addAttribute("emplist",service.Emplist());
-	
-	return "kjw/z05_bootTmp/a70_tables";
-	}
+		} else { /* if(emp.getAuth()=="직원") */
+			d.addAttribute("empList", service.getEmpList(sch));
+			d.addAttribute("salList", service.getSalList(sch1));
+		return "kjw/z05_bootTmp/a70_tables";
+		}
 }
 
 @RequestMapping("test")
@@ -77,6 +79,7 @@ public String register(Emp_master_f ins,Model d) {
 
 	return "kjw/z05_bootTmp/a84_register";
 }
+
 }
 
 
