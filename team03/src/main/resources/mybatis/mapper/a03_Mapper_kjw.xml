@@ -36,7 +36,7 @@
 
 <select id="empcnt" parameterType="emplist">
 SELECT COUNT(*) FROM emp_master_f
-<!--1 --!>
+
 
 
 </select>
