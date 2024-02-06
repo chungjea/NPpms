@@ -55,19 +55,20 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 		<input readonly class="form-control" 
 			value="ssangyoung5555@gmail.com" />	
 	</div>
-	<div class="input-group mb-3">	
-		<div class="input-group-prepend " style="display:none;">
+	<div class="input-group mb-3" >	
+		<div class="input-group-prepend "  style="display:none;">
 			<span class="input-group-text  justify-content-center">
 				제목</span>
-		</div style="display:none;">
-		<input name="title"   class="form-control" value="현재 비밀번호를 보내드립니다." />	
+		</div>
+		<input name="title"   class="form-control" />	
 	</div>	
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                            <div class="col-lg-6">
+                          <form method="post">
+                            
                                 <div class="p-5">
                                     <div class="text-center">
                                        		<div class="input-group-prepend " style="display:none;">
@@ -78,20 +79,33 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 			<span class="input-group-text  justify-content-center">
 				메일내용</span>
 				<textarea id="chatArea" name="content"
-			 class="form-control"   value="${emp.passwd}"  ></textarea>	
+			 class="form-control"  >${emp.passwd}</textarea>	
 				
 		</div>
-                                    <form class="user">
+		<div class="input-group-prepend " style="display:none;">
+			<span class="input-group-text  justify-content-center">
+				사번</span>
+				<input name="title"  placeholder="사번" class="form-control" />	
+				
+		</div>
+	
+                                    
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
+                                            <input type="text" class="form-control form-control-user"
                                                name="receiver" aria-describedby="emailHelp"
                                                placeholder="메일 주소 입력" >
                                         </div>
-                                    </form>
+                                    
                                      <input type="submit" id="SendBtn" class="btn btn-primary btn-user btn-block">
                                            
                                         
-                                    
+			<script type="text/javascript">
+			var msg = "${msg}"
+			if(msg!=""){
+				alert(msg);
+			}
+		</script>
+                                    </form>
                                     <div class="text-center">
                                         <a class="small" href="${path}/login">계정이 있을시 클릭</a>
                                     </div>
@@ -108,15 +122,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 
             </div>
 
-        </div>
-
-    </div>
-			<script type="text/javascript">
-			var msg = "${msg}"
-			if(msg!=""){
-				alert(msg);
-			}
-		</script>
+       
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
 <script

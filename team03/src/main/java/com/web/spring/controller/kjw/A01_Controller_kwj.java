@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.web.spring.service.kjw.A02_ServiceM_kjw;
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
@@ -27,6 +28,7 @@ import jakarta.servlet.http.HttpSession;
 public class A01_Controller_kwj {
 	@Autowired(required = false)
 	private A02_Service_kjw service;
+
 @GetMapping("login")
 public String loginFrm() {
 	return "kjw/z05_bootTmp/a83_login";
@@ -45,6 +47,17 @@ System.out.println("test");
 	}
 	return "kjw/z05_bootTmp/a83_login";
 }
+
+@RequestMapping("findpassword")
+public String mailSend(MailSender mailVo,  Model d) {
+	if(mailVo.getTitle()!=null) {
+	}else {
+		System.out.println("등록되지않은 메시지입니다");
+	}
+	return "kjw/z05_bootTmp/a82_findpassword";
+}
+
+
 @GetMapping("logout")
 public String logout(HttpSession session) {
    session.removeAttribute("emp");
@@ -98,13 +111,7 @@ public String register(Emp_master_f ins,Model d) {
 
 	return "kjw/z05_bootTmp/a84_register";
 }
-@RequestMapping("findpassword")
-public String mailSend(MailSender mailVo, Model d) {
-	if(mailVo.getReceiver()!=null) {
-		d.addAttribute("msg", service.sendMail(mailVo));
-	}
-	return "kjw/z05_bootTmp/a82_findpassword";
-}
+
 
 }
 

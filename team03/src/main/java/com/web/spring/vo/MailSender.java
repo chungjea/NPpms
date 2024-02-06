@@ -5,14 +5,10 @@ public class MailSender {
 	private String sender;
 	private String title;
 	private String content;
+	private String empno;
 	public MailSender() {
+		super();
 		// TODO Auto-generated constructor stub
-	}
-	public MailSender(String receiver, String sender, String title, String content) {
-		this.receiver = receiver;
-		this.sender = sender;
-		this.title = title;
-		this.content = content;
 	}
 	public String getReceiver() {
 		return receiver;
@@ -38,5 +34,20 @@ public class MailSender {
 	public void setContent(String content) {
 		this.content = content;
 	}
+	public String getEmpno() {
+		return empno;
+	}
+	public void setEmpno(String empno) {
+		this.empno = empno;
+	}
+	public MailSender(String receiver, String sender, String title, String content, String empno) {
+		super();
+		this.receiver = receiver;
+		this.sender = sender;
+		this.title = title;
+		this.content = content;
+		this.empno = empno;
+	}
+
 
 }

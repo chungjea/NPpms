@@ -27,6 +27,7 @@ import jakarta.mail.internet.MimeMessage.RecipientType;
 @Service
 public class A02_Service_kjw {
 	@Autowired(required = false)
+	private JavaMailSender sender;
 	private A03_Dao_kjw dao;
 	
 	public Emp_pinfo_f login(Emp_pinfo_f sch) {
@@ -55,10 +56,12 @@ public class A02_Service_kjw {
 		if(sch.getEmpno()==0) sch.setEmpno(0);
 		return dao.getSalList(sch);
 	}
-	private JavaMailSender sender;
+
 
 	// 메일발송 메서드
 	public String sendMail(MailSender email) {
+		
+		
 		String msg="";
 		// 1. 메일 발송 데이터 전송을 위한 객체 생성.
 		MimeMessage mmsg = sender.createMimeMessage();
@@ -71,6 +74,8 @@ public class A02_Service_kjw {
 					new InternetAddress(email.getReceiver()));
 		//  3) 내용
 			mmsg.setText(email.getContent());
+		// 3-1) 사번
+			mmsg.setText(email.getEmpno());
 
 		//  4) 발송처리..	
 			sender.send(mmsg);
