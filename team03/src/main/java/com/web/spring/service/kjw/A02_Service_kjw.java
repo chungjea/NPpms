@@ -2,6 +2,8 @@ package com.web.spring.service.kjw;
 
 import java.util.List;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,9 @@ import com.web.spring.vo.sal_f;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
+import jakarta.mail.internet.MimeMessage.RecipientType;
+
+
 
 
 
@@ -59,20 +64,20 @@ public class A02_Service_kjw {
 		MimeMessage mmsg = sender.createMimeMessage();
 		// 2. 해당 객체로 화면단에 입력된 내용 할당
 		try {
-		//	1) 제목
+		//	1) 제목	
 			mmsg.setSubject(email.getTitle());
 		//  2) 수신자
-			mmsg.setRecipient(jakarta.mail.Message.RecipientType.TO,
+			mmsg.setRecipient(RecipientType.TO, 
 					new InternetAddress(email.getReceiver()));
 		//  3) 내용
 			mmsg.setText(email.getContent());
 
-		//  4) 발송처리..
+		//  4) 발송처리..	
 			sender.send(mmsg);
 			msg = "메일발송 성공";
 		/*
 		# 회사 인사시스템에서 아이디생성/임시비번 생성/메일 발송/인사기본 데이터 저장.
-		1. 인사담담자 : 메일:[    ] 이름:[   ] [클릭]
+		1. 인사담담자 : 메일:[    ] 이름:[   ] [클릭] 
 		2. 요청값을 받아서.
 			1) 회사사번생성(DB sequence + 부서코드 + 회사코드 + 입사일 조합)
 			2) 임시비번생성(숫자 + 알파벳 char 랜덤으로 자리수로 생성)
@@ -83,16 +88,16 @@ public class A02_Service_kjw {
 		# 아이디와 비번을 잊었을 때.
 		1. 등록한 메일 주소를 입력하세요.[    ]
 		2. 해당 메일 주소로 아이디와 비번을 메일로 발송 처리.
-
-
-		 *
-		 * */
+			
+			 
+		 * 
+		 * */	
 		} catch (MessagingException e) {
 			System.out.println("메시지 전송 에러 발송:"+e.getMessage());
 			msg = "메일 발송 에러 발생:"+e.getMessage();
 		} catch(Exception e) {
 			System.out.println("기타 에러 :"+e.getMessage());
-			msg = "기타 에러 발생:"+e.getMessage();
+			msg = "기타 에러 발생:"+e.getMessage();			
 		}
 		return msg;
 	}
