@@ -142,20 +142,25 @@
 					<br>
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('1000')">등록한 리스크</a>
-                    	<a class="page-link" id="myck" href="javascript:goPage2('1000')">처리할 리스크</a>
-                    	<a class="page-link" id="tocheck" href="javascript:goPage3('1000')">담당중인 리스크</a>
-                    	<a class="page-link" id="finish" href="javascript:goPage4('1000')">완료된 리스크</a>
+                    	<ul class="pagination  justify-content-center">
+                    	<li class="page-item ${sts=='1'?'active':''}">
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('1000')">등록한 리스크</a></li>
+                    	<li class="page-item ${sts=='2'?'active':''}">
+                    	<a class="page-link" id="myck" href="javascript:goPage2('1000')">처리할 리스크</a></li>
+                    	<li class="page-item ${sts=='3'?'active':''}">
+                    	<a class="page-link" id="tocheck" href="javascript:goPage3('1000')">담당중인 리스크</a></li>
+                    	<li class="page-item ${sts=='4'?'active':''}">
+                    	<a class="page-link" id="finish" href="javascript:goPage4('1000')">완료된 리스크</a></li>
+                    	</ul>
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">
 						<div class="input-group align-items-end" >
-							<input class="form-control border-0 small" placeholder="제목" aria-label="Search"
-									aria-describedby="basic-addon2" name="title"
+							<input class="form-control border-0 small" placeholder="제목" name="title"
 									value="${sch.title}">
 							<input type="hidden" name="curPage" value="${sch.curPage}"/>
-                    	<input type="hidden" name="wempno" id="1"/>
-                    	<input type="hidden" name="cempno" id="2"/>
-                    	<input type="hidden" name="manager" id="3"/>
+                    	<input type="hidden" name="wempno" id="1" value="${sch.wempno}"/>
+                    	<input type="hidden" name="cempno" id="2" value="${sch.cempno}"/>
+                    	<input type="hidden" name="manager" id="3" value="${sch.manager}"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
@@ -163,9 +168,11 @@
 							</div>
 						</div>
 					</form>
+					<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
                     <script type="text/javascript">
 	                    function goPage1(no){
+	                    	$("[name=title]").val("")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -173,6 +180,7 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage2(no){
+	                    	$("[name=title]").val("")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -180,6 +188,7 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage3(no){
+	                    	$("[name=title]").val("")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -187,6 +196,7 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage4(no){
+	                    	$("[name=title]").val("")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -194,20 +204,28 @@
 					    	$("#frm01").submit()
 	            		}
 	                    $("#schBtn").click(function(){
-	                   		schapv()
+	                   		schrsk()
 		                 })
 		                 $("[name=title").keyup(function(){
 								if(event.keyCode==13){
-									schapv()
+									schrsk()
 								}
 		                  })
 		                  function schrsk(){
-	                    		var empno = "${param.wempno}"
-	    					    $("#1").val(empno)
-	    					    $("#2").val(empno)
-	    					    $("#3").val(empno)
-	    						$("#frm01").attr("action","${path}/myrsk")
-	    					    $("#frm01").submit()
+	                    		var sts = "${sts}"
+	                    		if(sts=="1"){
+		    						$("#frm01").attr("action","${path}/myrsk")
+		    					    $("#frm01").submit()
+	                    		}else if(sts=="2"){
+	                    			$("#frm01").attr("action","${path}/ckrsk")
+		    					    $("#frm01").submit()
+	                    		}else if(sts=="3"){
+	                    			$("#frm01").attr("action","${path}/torsk")
+		    					    $("#frm01").submit()
+	                    		}else if(sts=="4"){
+	                    			$("#frm01").attr("action","${path}/finrsk")
+		    					    $("#frm01").submit()
+	                    		}
 		                  }
                     </script>
                     <br>

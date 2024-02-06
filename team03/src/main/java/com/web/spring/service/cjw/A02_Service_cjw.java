@@ -112,6 +112,8 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertapvfile(new Apvfile_f(fname,path,fno));
+							//dao.insertfileapv(new Apvfile_f(fname,path,fno,ins.getWempno()));
+							//dao.insertfileapv(new Apvfile_f(fname,path,fno,ins.getMempno()));
 						}
 					}
 				}
@@ -154,7 +156,7 @@ public class A02_Service_cjw {
 		if(sch.getCempno()==0) sch.setCempno(1000);
 		if(sch.getManager()==0) sch.setManager(1000);
 		if(sch.getTitle()==null) sch.setTitle("");
-		sch.setCount(dao.myrskcnt(sch));
+		sch.setCount(dao.myrskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
@@ -177,7 +179,7 @@ public class A02_Service_cjw {
 	// 리스크 : 담당자를 지정해야 하는 리스크 리스트
 	public List<Risk_f> ckrsk(RiskSch sch){
 		if(sch.getTitle()==null) sch.setTitle("");
-		sch.setCount(dao.ckrskcnt(sch));
+		sch.setCount(dao.ckrskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
@@ -200,7 +202,7 @@ public class A02_Service_cjw {
 	// 리스크 : 처리할 리스크 리스트
 	public List<Risk_f> torsk(RiskSch sch){
 		if(sch.getTitle()==null) sch.setTitle("");
-		sch.setCount(dao.torskcnt(sch));
+		sch.setCount(dao.torskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
@@ -223,7 +225,7 @@ public class A02_Service_cjw {
 	// 리스크 : 완료된 (등록/처리했던)리스크 리스트
 	public List<Risk_f> finrsk(RiskSch sch){
 		if(sch.getTitle()==null) sch.setTitle("");
-		sch.setCount(dao.finrskcnt(sch));
+		sch.setCount(dao.finrskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);

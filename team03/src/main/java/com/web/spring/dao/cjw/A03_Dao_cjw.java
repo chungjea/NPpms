@@ -52,6 +52,9 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO apvfile_f values(apv_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertapvfile(Apvfile_f ins);
 	
+	@Insert("Insert into file_f values(file_seq.nextval, '결재', apv_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	int insertfileapv(Apvfile_f ins);
+	
 	Approve_f detailapv(int apvno);
 	
 	@Select("SELECT fname, fno FROM apvfile_f WHERE apvno = #{apvno}")
@@ -71,6 +74,18 @@ public interface A03_Dao_cjw {
 	List<Risk_f> torsk(RiskSch sch);
 	
 	List<Risk_f> finrsk(RiskSch sch);
+	
+	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정' and title like '%'||#{title}||'%'")
+	int myrskcntp(RiskSch sch);
+	
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정' and rf.title like '%'||#{title}||'%'")
+	int ckrskcntp(RiskSch sch);
+	
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.title like '%'||#{title}||'%'")
+	int torskcntp(RiskSch sch);
+	
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' and rf.title like '%'||#{title}||'%'")
+	int finrskcntp(RiskSch sch);
 	
 	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정'")
 	int myrskcnt(RiskSch sch);
@@ -109,7 +124,8 @@ public interface A03_Dao_cjw {
 	
 	// 회의록
 	List<Meeting_f> metlist(MeetingSch_f sch);
-	@Select("SELECT count(mf.METNO) FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno}")
+	
+	@Select("SELECT count(mf.METNO) FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno} and mf.title like '%'||#{title}||'%'")
 	int totmet(MeetingSch_f sch);
 	
 	int insertmet(Meeting_f ins);

@@ -53,7 +53,7 @@
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/myapv?wempno=1000&mempno=1000"
+			$("#frmapv").submit()
 		}		
 		$("#regBtn").click(function(){
 			if($("[name=title]").val()==""){

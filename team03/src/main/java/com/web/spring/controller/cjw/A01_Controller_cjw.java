@@ -81,6 +81,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		d.addAttribute("sts","1");
 		return "cjw/z05_bootTmp/risk";
 	}
 	
@@ -91,6 +92,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		d.addAttribute("sts","2");
 		return "cjw/z05_bootTmp/risk";
 	}
 	
@@ -101,6 +103,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		d.addAttribute("sts","3");
 		return "cjw/z05_bootTmp/risk";
 	}
 	
@@ -111,6 +114,7 @@ public class A01_Controller_cjw {
 		d.addAttribute("ckrskcnt", service.ckrskcnt(sch));
 		d.addAttribute("torskcnt", service.torskcnt(sch));
 		d.addAttribute("finrskcnt", service.finrskcnt(sch));
+		d.addAttribute("sts","4");
 		return "cjw/z05_bootTmp/risk";
 	}
 	
@@ -147,7 +151,7 @@ public class A01_Controller_cjw {
 	// 회의록
 	// http://localhost:3333/meeting?deptno=10
 	@GetMapping("meeting")
-	public String meeting(@ModelAttribute("sch")MeetingSch_f sch, Model d) {
+	public String meeting(@ModelAttribute("sch") MeetingSch_f sch, Model d) {
 		d.addAttribute("metList", service.metlist(sch));
 		return "cjw/z05_bootTmp/meeting";
 	}
@@ -191,5 +195,12 @@ public class A01_Controller_cjw {
 	public String deletemet(int metno, Model d) {
 		d.addAttribute("msg", service.deletemet(metno));
 		return "cjw/z05_bootTmp/metdetail";
+	}
+	
+	// 문서관리
+	// http://localhost:3333/file
+	@GetMapping("file")
+	public String file() {
+		return "cjw/z05_bootTmp/file";
 	}
 }

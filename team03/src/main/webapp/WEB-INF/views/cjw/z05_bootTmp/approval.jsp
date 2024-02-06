@@ -139,20 +139,24 @@
 					<br>
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('대기')">상신한 문서</a>
-                    	<a class="page-link" id="return" href="javascript:goPage1('반려')">반려된 문서</a>
-                    	<a class="page-link" id="tocheck" href="javascript:goPage2()">결재할 문서</a>
-                    	<a class="page-link" id="finish" href="javascript:goPage1('완료')">완료된 문서</a>
+                    	<ul class="pagination  justify-content-center">
+                    	<li class="page-item ${sch.sts=='대기'?'active':''}">
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('대기')">상신한 문서</a></li>
+                    	<li class="page-item ${sch.sts=='반려'?'active':''}">
+                    	<a class="page-link" id="return" href="javascript:goPage1('반려')">반려된 문서</a></li>
+                    	<li class="page-item ${sch.sts=='결재'?'active':''}">
+                    	<a class="page-link" id="tocheck" href="javascript:goPage2('결재')">결재할 문서</a></li>
+                    	<li class="page-item ${sch.sts=='완료'?'active':''}">
+                    	<a class="page-link" id="finish" href="javascript:goPage1('완료')">완료된 문서</a></li>
+                    	</ul>
                     	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">
 							<div class="input-group align-items-end" >
-								<input class="form-control border-0 small" placeholder="제목" aria-label="Search"
-									aria-describedby="basic-addon2" name="title"
-									value="${sch.title}">
+								<input class="form-control border-0 small" placeholder="제목" name="title" value="${sch.title}">
 								<input type="hidden" name="curPage" value="${sch.curPage}"/>
 								<input type="hidden" name="wempno" value="1000"/>
 								<input type="hidden" name="mempno" value="1000"/>
-								<input type="hidden" id="sts" name="sts"/>
+								<input type="hidden" id="sts" name="sts" value="${sch.sts}"/>
 								<div class="input-group-append">
 									<button class="btn btn-primary" type="button" id="schBtn">
 										<i class="fas fa-search fa-sm"></i>
@@ -160,32 +164,42 @@
 								</div>
 							</div>
 						</form>
+						<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
                     <script type="text/javascript">
+                    	$(document).ready(function(){
+		                   $("#schBtn").click(function(){
+		                   		schapv()
+		                   })
+		                   $("[name=title").keyup(function(){
+								if(event.keyCode==13){
+									schapv()
+								}
+		                   })
+                    	})
 	                    function goPage1(sts){
 	                    	$("#sts").val(sts)
-	                    	//$("[name=title]").val("")
+	                    	$("[name=title]").val("")
 	                    	$("[name=curPage]").val(1)
 							$("#frm01").attr("action","${path}/myapv")
 					    	$("#frm01").submit()
 	            		}
-	                    function goPage2(){
-	                    	//$("[name=title]").val("")
+	                    function goPage2(sts){
+	                    	$("#sts").val(sts)
+	                    	$("[name=title]").val("")
 	                    	$("[name=curPage]").val(1)
 							$("#frm01").attr("action","${path}/ckapv")
 					    	$("#frm01").submit()
 	            		}
-	                   $("#schBtn").click(function(){
-	                   		schapv()
-	                   })
-	                   $("[name=title").keyup(function(){
-							if(event.keyCode==13){
-								schapv()
-							}
-	                   })
-	                    function schapv(){
+	                   var title = $("[name=title]").val()
+	                   if(title==""){
+	                	   $("#cnt").hide()
+	                   }else{
+	                	   $("#cnt").show()
+	                   }
+	                   function schapv(){
 	                    	var sts = $("#sts").val()
-	                    	if(sts==""){
+	                    	if(sts=="결재"){
 	                    		$("[name=curPage]").val(0)
 								$("#frm01").attr("action","${path}/ckapv")
 						    	$("#frm01").submit()
