@@ -138,6 +138,7 @@
 							{name: "text", label: "작업명", tree: true, width: 170, resize: true, min_width: 10},
 							{name: "start_date",label:"시작일",align: "center", width: 90, resize: true},
 							{name: "duration",label:"작업일수" ,align: "center", width: 80, resize: true},
+							{name:"writer",label:"담당자",resize: false},
 							{name: "add", width: 40}
 						];
 					
@@ -154,15 +155,16 @@
 							{unit: "month", step: 1, format: "%m월"},
 							{unit: "week", step: 1, format: function (date) {
 								var dateToStr = gantt.date.date_to_str("%d");
-								return parseInt(dateToStr(date)/7) + "주차 ";
+								return parseInt((dateToStr(date)/7)+1) + "주차 ";
 							}},
 							{unit: "day", step: 1, format: "%d일"}
 						];
-			
+						
 						gantt.init("gantt_here");
 						gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
-				
 						
+				
+				
 					</script>
 
 <!-- Page level custom scripts -->

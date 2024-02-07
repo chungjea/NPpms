@@ -17,12 +17,14 @@
     -webkit-user-select: none;
     -khtml-user-select: none;
     user-select: none;
-	
+	transition-duration: 0.2s;
 }
 
 .pjbox:hover {
 	outline: solid #A9BCF5;
 	background-color: #EFF5FB;
+	transform: scale(1.1, 1.1);
+	transition-duration: 0.3s;
 }
 
 .pjicon {
@@ -65,9 +67,10 @@
 	overflow-x:scroll;
 	overflow-y:hidden;
 	width:100px;
-	height: 300px; 
 	display:flex;
 	margin-bottom: 10px;
+
+	
 }
 .pjcontainer::-webkit-scrollbar {
     width: 1px;  /* 스크롤바의 너비 */
