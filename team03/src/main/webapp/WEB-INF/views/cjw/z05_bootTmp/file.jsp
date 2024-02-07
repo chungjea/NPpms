@@ -96,7 +96,7 @@
 								<option value="fname">파일명</option>
 								<option value="page">파일위치</option>
 							</select>
-							<input class="form-control border-0 small" style="width:400px;" placeholder="파일명" name="fname" id="sch" value="${sch.fname}">
+							<input class="form-control border-0 small" style="width:400px;" placeholder="파일명" name="fname" id="sch" value="">
 							<input type="hidden" name="empno" value="${sch.empno}"/>
 							<input type="hidden" name="deptno" value="${sch.deptno}"/>
 							<div class="input-group-append">
@@ -135,9 +135,32 @@
 							      </tr>
 							    </thead>	
 							    <tbody>
-							    	<tr><td>1</td><td>2</td></tr>
+							    	<c:forEach var="bf" items="${bfile}">
+							    		<tr ondblclick="download('${bf.fno}','${bf.fname}')"><td>${bf.fname}</td><td>${bf.page}</td></tr>
+							    	</c:forEach>
 							    </tbody>
 							</table>
+							<form id="bffrm">
+								<input type="hidden" name="curPage" value="${sch.curPage}"/>
+								<input type="hidden" name="empno" value="${sch.empno}"/>
+								<input type="hidden" name="deptno" value="${sch.deptno}"/>
+							</form>
+							<br>
+							<ul class="pagination  justify-content-center">
+								<li class="page-item">
+								<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
+								<c:forEach var="pcnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+									<li class="page-item ${sch.curPage==pcnt?'active':''}">
+									<a class="page-link" href="javascript:goPage(${pcnt})">${pcnt}</a></li>
+								</c:forEach>
+								<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.endBlock+1})">Next</a></li>
+							</ul>
+							<script type="text/javascript">
+								function goPage(pcnt){
+									$("[name=curPage]").val(pcnt)
+									$("#bffrm").submit();
+								}
+							</script>
 						</div>
 						<div style="width:33%; border-right: solid 1px;">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
@@ -173,6 +196,13 @@
 						</div>
                     </div>
 				</div>
+				<script type="text/javascript">
+					function download(fno, fname){
+						if(confirm(fname+" 다운로드 하시겠습니까?")){
+							location.href="${path}/download?fno="+fno
+						}
+					}
+				</script>
 				<!-- /.container-fluid -->
 
 			</div>
@@ -211,6 +241,8 @@
 
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+
+<script src="${path}/customjs/slidbar.js"></script>
 
 </body>
 </html>

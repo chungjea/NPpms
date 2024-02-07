@@ -22,10 +22,10 @@ public class Apvfile_f {
 	}
 
 	public Apvfile_f(String fname, String path, String fno, int empno) {
-		super();
 		this.fname = fname;
 		this.path = path;
 		this.fno = fno;
+		this.empno = empno;
 	}
 
 	public Apvfile_f(int apvno, String fname, String path) {

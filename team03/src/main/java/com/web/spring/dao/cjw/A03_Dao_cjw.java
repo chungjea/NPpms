@@ -11,6 +11,8 @@ import org.apache.ibatis.annotations.Update;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
+import com.web.spring.vo.FileSch;
+import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
 import com.web.spring.vo.Metfile_f;
@@ -108,6 +110,9 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO rskfile_f values(rsk_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertrskfile(Rskfile_f ins);
 	
+	@Insert("Insert into file_f values(file_seq.nextval, '리스크', rsk_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	int insertfilersk(Rskfile_f ins);
+	
 	Risk_f detailrsk(int rskno);
 	
 	@Select("SELECT fname, fno FROM rskfile_f WHERE rskno = #{rskno}")
@@ -118,6 +123,15 @@ public interface A03_Dao_cjw {
 	
 	@Update("UPDATE RISKADMIN_F SET priority = #{priority}, cempno = #{cempno}, finaldte = to_date(#{finaldteStr},'YYYY-MM-DD'), probability = #{probability}, danger = #{danger}, feedback = #{feedback} WHERE rskno = #{rskno}")
 	int dorsk2(Risk_f rsk);
+	
+	@Select("select fno from rskfile_f where rskno = #{rskno}")
+	List<String> getrskfno(Risk_f rsk);
+	
+	@Select("select * from rskfile_f where fno = #{fno}")
+	Rskfile_f getrskfileinfo(int fno);
+	
+	@Insert("Insert into file_f values(file_seq.nextval, '리스크', #{rskno}, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	int insertfilersk2(Rskfile_f ins);
 	
 	@Update("UPDATE RISK_F set sts = '완료' where rskno = #{rskno}")
 	int donersk(int rskno);
@@ -133,6 +147,12 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO metfile_f values(met_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertmetfile(Metfile_f ins);
 	
+	@Select("SELECT deptno FROM emp_master_f WHERE empno = #{wempno}")
+	int deptno(int wempno);
+	
+	@Insert("Insert into file_f values(file_seq.nextval, '회의록', met_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{deptno})")
+	int insertfilemet(Metfile_f ins);
+	
 	@Select("SELECT fno_seq.nextval FROM dual")
 	int getfno();
 	
@@ -144,6 +164,9 @@ public interface A03_Dao_cjw {
 	@Select("SELECT fno FROM metfile_f WHERE metno = #{metno}")
 	List<String> getfnobynamem (int metno);
 	
+	@Select("SELECT * FROM (select fname, fno from APVFILE_F UNION SELECT fname, fno FROM rskfile_f UNION SELECT fname, fno FROM METFILE_f) WHERE fno = #{fno}")
+	String getfnamebyfno(String fno);
+	
 	int updatemet(Meeting_f upt);
 	
 	@Delete("DELETE FROM meeting_f WHERE metno = #{metno}")
@@ -151,4 +174,11 @@ public interface A03_Dao_cjw {
 	
 	@Delete("DELETE FROM METFILE_F WHERE metno = #{metno}")
 	int deletemetfile(int metno);
+	
+	// 문서관리
+	List<File_f> boardfile(FileSch sch);
+	
+	@Select("SELECT count(*) FROM file_f WHERE auth = #{empno} OR auth = #{deptno} AND page != '채팅' AND page!='개인'")
+	int boardfilecnt(FileSch sch);
+	
 }

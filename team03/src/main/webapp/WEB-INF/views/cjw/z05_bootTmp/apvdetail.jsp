@@ -248,7 +248,7 @@
 			<script type="text/javascript">
 				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fno="+fno+"&fname="+fname
+						location.href="${path}/download?fno="+fno
 					}
 				}
 			</script>
@@ -289,8 +289,7 @@
 <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/customjs/slidbar.js"></script>
+
 </body>
 </html>

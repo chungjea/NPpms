@@ -64,7 +64,7 @@
 	var manager = "${drsk.manager}"
 	$(document).ready(function(){
 		$("#mainBtn").click(function(){
-			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+			$("#frmrsk").submit()
 		})
 		if(sts=="완료"){
 			$("#ckModal").hide();
@@ -96,9 +96,9 @@
 				success : function(data) {
 					$("#clsBtn").click()
 					if(confirm(data.msg+"리스크 관리 페이지로 돌아가시겠습니까?")){
-						location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+						$("#frmrsk").submit()
 					}else{
-						location.href="${path}/detailrsk?rskno="+rskno
+						$("frm01").submit()
 					}
 				},
 				error : function(err) {
@@ -114,9 +114,9 @@
 				dataType : "json",
 				success : function(data) {
 					if(confirm(data.msg+"리스크 관리 페이지로 돌아가시겠습니까?")){
-						location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+						$("#frmrsk").submit()
 					}else{
-						location.href="${path}/detailrsk?rskno="+rskno
+						$("frm01").submit()
 					}
 				},
 				error : function(err) {
@@ -157,7 +157,8 @@
                     </div>
 					<br>
 					<div align="center">
-                    	<form method="post" id="frm01" enctype="multipart/form-data">
+                    	<form method="post" id="frm01" enctype="multipart/form-data" action="${path}/detailrsk">
+                    	<input type="hidden" name="rskno" value="${drsk.rskno}" />
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">제목</span>
@@ -331,7 +332,7 @@
 			<script type="text/javascript">
 				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fno="+fno+"&fname="+fname
+						location.href="${path}/download?fno="+fno
 					}
 				}
 			</script>
@@ -372,8 +373,7 @@
 <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/customjs/slidbar.js"></script>
+	
 </body>
 </html>

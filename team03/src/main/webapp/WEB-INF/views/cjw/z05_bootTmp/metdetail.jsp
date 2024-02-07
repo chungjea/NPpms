@@ -184,7 +184,7 @@
 			<script type="text/javascript">
 				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fno="+fno+"&fname="+fname
+						location.href="${path}/download?fno="+fno
 					}
 				}
 			</script>
@@ -221,6 +221,8 @@
 
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+
+<script src="${path}/customjs/slidbar.js"></script>
 
 </body>
 </html>

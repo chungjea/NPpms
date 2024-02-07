@@ -12,6 +12,8 @@ import com.web.spring.dao.cjw.A03_Dao_cjw;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
+import com.web.spring.vo.FileSch;
+import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
 import com.web.spring.vo.Metfile_f;
@@ -23,6 +25,11 @@ import com.web.spring.vo.Rskfile_f;
 public class A02_Service_cjw {
 	@Autowired(required = false)
 	private A03_Dao_cjw dao;
+	
+	// 파일명 가져오기
+	public String getfnamebyfno(String fno) {
+		return dao.getfnamebyfno(fno);
+	}
 	
 	// 결재 : 상신한 대기/반려/완료 문서 리스트
 	public List<Approve_f> myapv(ApproveSch sch){
@@ -102,6 +109,8 @@ public class A02_Service_cjw {
 			msg = "결재 상신 실패\\n";
 		}
 		int ckf = 0;
+		int wempno = ins.getWempno();
+		int mempno = ins.getMempno();
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -112,8 +121,8 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertapvfile(new Apvfile_f(fname,path,fno));
-							//dao.insertfileapv(new Apvfile_f(fname,path,fno,ins.getWempno()));
-							//dao.insertfileapv(new Apvfile_f(fname,path,fno,ins.getMempno()));
+							dao.insertfileapv(new Apvfile_f(fname,path,fno,wempno));
+							dao.insertfileapv(new Apvfile_f(fname,path,fno,mempno));
 						}
 					}
 				}
@@ -272,6 +281,8 @@ public class A02_Service_cjw {
 			msg = "리스크 등록 실패\\n";
 		}
 		int ckf = 0;
+		int wempno = ins.getWempno();
+		int manager = ins.getManager();
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -282,6 +293,8 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertrskfile(new Rskfile_f(fname,path,fno));
+							dao.insertfilersk(new Rskfile_f(fname,path,fno,wempno));
+							dao.insertfilersk(new Rskfile_f(fname,path,fno,manager));
 						}
 					}
 				}
@@ -315,6 +328,15 @@ public class A02_Service_cjw {
 		String msg = "";
 		if(dao.dorsk(rsk)>0 && dao.dorsk2(rsk)>0) {
 			msg = "담당자 등록 완료\n";
+			List<String> fno = dao.getrskfno(rsk);
+			if(!fno.isEmpty()) {
+				for(String no:fno) {
+					int n = Integer.parseInt(no);
+					Rskfile_f rf = dao.getrskfileinfo(n);
+					rf.setEmpno(rsk.getCempno());
+					dao.insertfilersk2(rf);
+				}
+			}
 		}
 		return msg;
 	}
@@ -363,6 +385,7 @@ public class A02_Service_cjw {
 			msg = "회의록 등록 실패\\n";
 		}
 		int ckf = 0;
+		int deptno = dao.deptno(ins.getWempno());
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -373,6 +396,7 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertmetfile(new Metfile_f(fname,path,fno));
+							dao.insertfilemet(new Metfile_f(fname,path,fno,deptno));
 						}
 					}
 				}
@@ -429,4 +453,29 @@ public class A02_Service_cjw {
 		}
 		return msg;
 	}
+	
+	
+	// 문서관리 : 게시판 리스트 출력
+	public List<File_f> boardfile(FileSch sch) {
+		sch.setCount(dao.boardfilecnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(3);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
+		return dao.boardfile(sch);
+	}
+	
 }

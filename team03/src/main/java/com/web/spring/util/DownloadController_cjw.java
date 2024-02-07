@@ -14,9 +14,9 @@ public class DownloadController_cjw {
 	private A02_Service_cjw service;
 	
 	@RequestMapping("download")
-	public String download(@RequestParam("fno") String fno,@RequestParam("fname") String fname, Model d) {
+	public String download(@RequestParam("fno") String fno, Model d) {
 		d.addAttribute("downloadFile", fno);
-		d.addAttribute("realFile", fname);
+		d.addAttribute("realFile", service.getfnamebyfno(fno));
 		return "downloadViewer_cjw";
 	}
 }

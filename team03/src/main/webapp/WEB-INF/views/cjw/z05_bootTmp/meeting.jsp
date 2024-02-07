@@ -197,5 +197,7 @@
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
+<script src="${path}/customjs/slidbar.js"></script>
+
 </body>
 </html>

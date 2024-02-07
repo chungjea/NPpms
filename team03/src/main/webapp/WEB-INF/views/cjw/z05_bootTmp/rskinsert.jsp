@@ -53,7 +53,7 @@
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+			$("#frmrsk").submit()
 		}		
 		$("#regBtn").click(function(){
 			if($("[name=title]").val()==""){
@@ -69,7 +69,7 @@
 			}
 		})
 		$("#mainBtn").click(function(){
-			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+			$("#frmrsk").submit()
 		})
 	});
 </script>
@@ -203,8 +203,7 @@
 <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/customjs/slidbar.js"></script>
+
 </body>
 </html>
