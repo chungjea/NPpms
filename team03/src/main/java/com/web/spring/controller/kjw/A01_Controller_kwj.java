@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.web.spring.service.kjw.A02_ServiceM_kjw;
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;

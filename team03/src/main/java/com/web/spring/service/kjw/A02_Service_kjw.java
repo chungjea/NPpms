@@ -28,6 +28,7 @@ import jakarta.mail.internet.MimeMessage.RecipientType;
 public class A02_Service_kjw {
 	@Autowired(required = false)
 	private JavaMailSender sender;
+	@Autowired(required = false)
 	private A03_Dao_kjw dao;
 	
 	public Emp_pinfo_f login(Emp_pinfo_f sch) {
