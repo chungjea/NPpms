@@ -12,11 +12,17 @@
 	border-radius: 5%;
 	width: 250px;
 	height:250px;
+	-ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
 	
 }
 
 .pjbox:hover {
-	outline: solid gray;
+	outline: solid #A9BCF5;
+	background-color: #EFF5FB;
 }
 
 .pjicon {
@@ -35,11 +41,11 @@
 }
 .d_day{
 	position:relative;
-	border-radius: 8px;
+	border-radius: 100%;
 	background: #e23442;
 	color: white;
 	text-align: center;
-	padding: 5px 5px;
+	padding: 5px 13px;
 	top: -210px;
  	right: -50px;
  	font-size: 25px;
@@ -53,7 +59,31 @@
 	text-overflow:ellipsis;
 	margin-top : 10px ;
 	text-align: center;
+	margin-bottom: -10px;
 }
+.pjcontainer{
+	overflow-x:scroll;
+	overflow-y:hidden;
+	width:100px;
+	height: 300px; 
+	display:flex;
+	margin-bottom: 10px;
+}
+.pjcontainer::-webkit-scrollbar {
+    width: 1px;  /* 스크롤바의 너비 */
+}
+
+.pjcontainer::-webkit-scrollbar-thumb {
+
+    background: #A9BCF5; /* 스크롤바의 색상 */
+  
+    border-radius: 10px;
+}
+
+.pjcontainer::-webkit-scrollbar-track {
+    background: rgba(33, 122, 244, .1);  /*스크롤바 뒷 배경 색상*/
+}
+
 </style>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -63,22 +93,10 @@
 
 
 <!-- Content Column -->
-<div class="col-lg-12 mb-4">
-	<!-- Project Card Example -->
-	<div class="card shadow mb-4">
-		<div
-			class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary"
-				onclick="location.href='${path}/projectList'">프로젝트</h6>
-			<c:if test='${emp.auth =="관리자"}'>
-				<button type="button" data-toggle="modal"
-					data-target="#newprojectModal" class="btn btn-outline-secondary">+</button>
-			</c:if>
-		</div>
+<h2>진행중인 프로젝트</h2>
+<div class="pjcontainer"> 
 
-		<div class="card-body">
-
-		<c:forEach begin="1" end="7">
+		<c:forEach begin="1" end="100">
 			<div class="pjbox">
 			
 				<div class="pjicon">
@@ -87,20 +105,16 @@
 				</div>
 				
 				<div class="pjtitle">프로젝트sdsd</div>
+				<div style="font-size: 12px">마감일 2024-02-09 / PMS</div>
 				<div class="progress">
 					<div class="progress-bar" role="progressbar" style="width: 70%"
 						aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
 				</div>
-				<span class="d_day">D-7</span>
+				<span class="d_day">7</span>
 			</div>
 
 		</c:forEach>
-		
 
-
-		</div>
-
-
-	</div>
 </div>
+
 
