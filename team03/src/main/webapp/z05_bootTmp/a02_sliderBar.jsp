@@ -116,13 +116,4 @@
 			<input type="hidden" name="cempno" value="1000"/>
 			<input type="hidden" name="manager" value="1000"/>
 		</form>
-		<!-- <script type="text/javascript">
-			function goApv(){
-				$("#frmapv").submit()
-			}
-			function goRsk(){
-				$("#frmrsk").submit()
-			}
-			$("#frmapv").hide()
-			$("#frmrsk").hide()
-		</script> -->
+		
