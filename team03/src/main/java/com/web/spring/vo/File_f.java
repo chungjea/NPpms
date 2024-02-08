@@ -1,6 +1,9 @@
 package com.web.spring.vo;
 
 import java.util.Date;
+import java.util.List;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class File_f {
 	private int no;
@@ -13,8 +16,17 @@ public class File_f {
 	private int auth;
 	private int empno;
 	private int deptno;
+	private MultipartFile[] reports;
+	private List<String> fnames;
 	
 	public File_f() {
+	}
+
+	public File_f(String fname, String path, String fno, int empno) {
+		this.fname = fname;
+		this.path = path;
+		this.fno = fno;
+		this.empno = empno;
 	}
 
 	public File_f(int no, String page, int bno, String fname, String path, Date regdte, String fno, int auth) {
@@ -120,6 +132,22 @@ public class File_f {
 
 	public void setDeptno(int deptno) {
 		this.deptno = deptno;
+	}
+
+	public MultipartFile[] getReports() {
+		return reports;
+	}
+
+	public void setReports(MultipartFile[] reports) {
+		this.reports = reports;
+	}
+
+	public List<String> getFnames() {
+		return fnames;
+	}
+
+	public void setFnames(List<String> fnames) {
+		this.fnames = fnames;
 	}
 	
 }

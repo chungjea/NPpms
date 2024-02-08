@@ -43,7 +43,7 @@
  
  
 </head>
-
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -158,7 +158,7 @@
 								<input type="hidden" name="mempno" value="1000"/>
 								<input type="hidden" id="sts" name="sts" value="${sch.sts}"/>
 								<div class="input-group-append">
-									<button class="btn btn-primary" type="button" id="schBtn">
+									<button class="btn btn-primary" onclick="schapv()" type="button" id="schBtn">
 										<i class="fas fa-search fa-sm"></i>
 									</button>
 								</div>
@@ -167,31 +167,26 @@
 						<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
                     <script type="text/javascript">
-                    	$(document).ready(function(){
-		                   $("#schBtn").click(function(){
-		                   		schapv()
-		                   })
-		                   $("[name=title").keyup(function(){
-								if(event.keyCode==13){
-									schapv()
-								}
-		                   })
-                    	})
+		                $("[name=title").keyup(function(){
+							if(event.keyCode==13){
+								schapv()
+							}
+		                })
 	                    function goPage1(sts){
 	                    	$("#sts").val(sts)
 	                    	$("[name=title]").val("")
-	                    	$("[name=curPage]").val(1)
+	                    	$("[name=curPage]").val("0")
 							$("#frm01").attr("action","${path}/myapv")
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage2(sts){
 	                    	$("#sts").val(sts)
 	                    	$("[name=title]").val("")
-	                    	$("[name=curPage]").val(1)
+	                    	$("[name=curPage]").val("0")
 							$("#frm01").attr("action","${path}/ckapv")
 					    	$("#frm01").submit()
 	            		}
-	                   var title = $("[name=title]").val()
+	                   var title = "${sch.title}"
 	                   if(title==""){
 	                	   $("#cnt").hide()
 	                   }else{
@@ -200,11 +195,11 @@
 	                   function schapv(){
 	                    	var sts = $("#sts").val()
 	                    	if(sts=="결재"){
-	                    		$("[name=curPage]").val(0)
+		                    	$("[name=curPage]").val("0")
 								$("#frm01").attr("action","${path}/ckapv")
 						    	$("#frm01").submit()
 	                    	}else{
-		                    	$("[name=curPage]").val(0)
+		                    	$("[name=curPage]").val("0")
 								$("#frm01").attr("action","${path}/myapv")
 						    	$("#frm01").submit()
 	                    	}

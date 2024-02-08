@@ -478,4 +478,37 @@ public class A02_Service_cjw {
 		return dao.boardfile(sch);
 	}
 	
+	// 문서관리 : 개인 파일 업로드
+	public String insertfilemy(File_f ins) {
+		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+		String msg = "";
+		int ckf = 0;
+		MultipartFile[] mpfs = ins.getReports();
+		if(mpfs!=null && mpfs.length>0) {
+			try {
+				for(MultipartFile mpf:mpfs) {
+					if(mpf!=null) {
+						String fname = mpf.getOriginalFilename();
+						if(!fname.trim().equals("")) {
+							String fno = ""+dao.getfno();
+							mpf.transferTo(new File(path+fno));
+							ckf+=dao.insertfilemy(ins);
+						}
+					}
+				}
+			} catch (IllegalStateException e) {
+				System.out.println("#파일업로드 예외1:"+e.getMessage());
+				msg+="#파일업로드 예외1:"+e.getMessage()+"\\n";
+			} catch (IOException e) {
+				System.out.println("#파일업로드 예외2:"+e.getMessage());
+				msg+="#파일업로드 예외2:"+e.getMessage()+"\\n";
+			} catch(Exception e) {
+				System.out.println("#기타 예외3:"+e.getMessage());
+				msg+="#기타 예외3:"+e.getMessage()+"\\n";
+			}
+			msg+="파일 "+ckf+"건 등록 완료\\n";
+		}
+		return msg;
+	}
+	
 }
