@@ -43,6 +43,7 @@
  
  
 </head>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	//var empno = "${mem.empno}"
 	//var name = "${mem.ename} / ${mem.dname}"
@@ -90,7 +91,7 @@
 							<input type="hidden" name="curPage" value="${sch.curPage}"/>
 							<input type="hidden" name="deptno" value="10"/>
 							<div class="input-group-append">
-								<button class="btn btn-primary" type="button" id="schBtn">
+								<button class="btn btn-primary" onclick="schmet()" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
 								</button>
 							</div>
@@ -99,9 +100,6 @@
 					<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
                     <script type="text/javascript">
-	                    $("#schBtn").click(function(){
-	                   		schmet()
-		                 })
 		                 $("[name=title]").keyup(function(){
 								if(event.keyCode==13){
 									schmet()

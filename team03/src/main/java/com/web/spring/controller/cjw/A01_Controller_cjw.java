@@ -11,6 +11,7 @@ import com.web.spring.service.cjw.A02_Service_cjw;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.FileSch;
+import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
 import com.web.spring.vo.RiskSch;
@@ -201,6 +202,13 @@ public class A01_Controller_cjw {
 	@GetMapping("file")
 	public String file(@ModelAttribute("sch") FileSch sch, Model d) {
 		d.addAttribute("bfile", service.boardfile(sch));
+		return "cjw/z05_bootTmp/file";
+	}
+	
+	@GetMapping("upload")
+	public String upload(File_f ins, FileSch sch, Model d) {
+		d.addAttribute("bfile", service.boardfile(sch));
+		d.addAttribute("msg", service.insertfilemy(ins));
 		return "cjw/z05_bootTmp/file";
 	}
 }

@@ -181,4 +181,6 @@ public interface A03_Dao_cjw {
 	@Select("SELECT count(*) FROM file_f WHERE auth = #{empno} OR auth = #{deptno} AND page != '채팅' AND page!='개인'")
 	int boardfilecnt(FileSch sch);
 	
+	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.nextval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	int insertfilemy(File_f ins);
 }

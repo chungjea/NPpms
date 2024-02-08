@@ -49,6 +49,7 @@
  
  
 </head>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	//var empno = "${mem.empno}"
 	//var name = "${mem.ename} / ${mem.dname}"
@@ -78,13 +79,41 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">문서관리</h1>
-                        <a href="${path}/insertmetFrm" class="btn btn-secondary btn-icon-split">
+                        <a href="javascript:upload()" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
                         	<span class="text">파일 업로드</span>
                         </a>
                     </div>
+                    <form id="filefrm" method="get" action="${path}/upload">
+                    	<input type="file" name="reports" multiple="multiple" class="form-control"/>
+                    	<button type="submit">입력확인</button>
+                    </form>
+                    <script type="text/javascript">
+                    	$(document).ready(function() {
+                    		//$("#filefrm").hide()
+                    		var msg = "${msg}"
+                    		if(msg!=""){
+                    			alert(msg)
+                    			location.href="${path}/file?empno=1000&deptno=10";
+                    		}
+                    		insertfile();
+                    	});
+                    	function upload(){
+                    		$("[name=reports]").click();
+                    	}
+                    	function insertfile(){
+                    		var files = $("[name=reports]").val()
+                        	if(files.length>0){
+                        		alert("확인")
+                        		$("#filefrm").submit()
+                        	}else{
+                        		return;
+                        	}
+                    	}
+                    </script>
+					<br>
 					<br>
 					<br>
                     <div align="center">
@@ -100,7 +129,7 @@
 							<input type="hidden" name="empno" value="${sch.empno}"/>
 							<input type="hidden" name="deptno" value="${sch.deptno}"/>
 							<div class="input-group-append">
-								<button class="btn btn-primary" type="button" id="schBtn">
+								<button class="btn btn-primary" onclick="schfile()" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
 								</button>
 							</div>
@@ -108,35 +137,35 @@
 					</form>
                     </div>
                     <script type="text/javascript">
-	                    $("#schBtn").click(function(){
-	                   		schfile()
-		                 })
 		                 $("#sch").keyup(function(){
 								if(event.keyCode==13){
 									schfile()
 								}
 		                  })
-		                  function schmet(){
+		                  function schfile(){
 	                    		$("#frm01").attr("action","${path}/file")
 		    					$("#frm01").submit()
 		                  }
                     </script>
                     <br><br><br>
                     <div class="row" style="width:100%;">
-                    	<div style="width:33%; border-right: solid 1px;">
+                    	<div style="width:33%;">
 	                    	<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 	                    		<caption>게시판</caption>
-							   	<col width="50%">
-							   	<col width="50%">
+							   	<col width="60%">
+							   	<col width="25%">
+							   	<col width="15%">
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
 							        <th>파일위치</th>
+							        <th></th>
 							      </tr>
 							    </thead>	
 							    <tbody>
 							    	<c:forEach var="bf" items="${bfile}">
-							    		<tr ondblclick="download('${bf.fno}','${bf.fname}')"><td>${bf.fname}</td><td>${bf.page}</td></tr>
+							    		<tr ondblclick="goDetail(${bf.bno}, '${bf.page}')"><td>${bf.fname}</td><td>${bf.page}</td>
+							    		<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.jpg" alt="↓" width="30" height="30"></button></td></tr>
 							    	</c:forEach>
 							    </tbody>
 							</table>
@@ -144,6 +173,11 @@
 								<input type="hidden" name="curPage" value="${sch.curPage}"/>
 								<input type="hidden" name="empno" value="${sch.empno}"/>
 								<input type="hidden" name="deptno" value="${sch.deptno}"/>
+							</form>
+							<form id="dbfrm" method="post">
+								<input type="hidden" name="apvno" value=""/>
+								<input type="hidden" name="rskno" value=""/>
+								<input type="hidden" name="metno" value=""/>
 							</form>
 							<br>
 							<ul class="pagination  justify-content-center">
@@ -160,37 +194,64 @@
 									$("[name=curPage]").val(pcnt)
 									$("#bffrm").submit();
 								}
+								function goDetail(bno, page){
+									$("[name=apvno]").val(bno)
+									$("[name=rskno]").val(bno)
+									$("[name=metno]").val(bno)
+									switch(page){
+										case "결재":
+											$("#dbfrm").attr("action","${path}/detailapv")
+											$("#dbfrm").submit();
+											break;
+										case "리스크":
+											$("#dbfrm").attr("action","${path}/detailrsk")
+											$("#dbfrm").submit();
+											break;
+										case "회의록":
+											$("#dbfrm").attr("action","${path}/detailmet")
+											$("#dbfrm").submit();
+											break;
+										default:
+											 alert("존재하지 않는 페이지입니다.")
+									}
+								}
 							</script>
 						</div>
-						<div style="width:33%; border-right: solid 1px;">
+						<div style="width:33%; border-right: solid 1px; border-left: solid 1px; height:450px">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>채팅</caption>
-							   	<col width="50%">
-							   	<col width="50%">
+							   	<col width="60%">
+							   	<col width="25%">
+							   	<col width="15%">
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
 							        <th>파일위치</th>
+							        <th></th>
 							      </tr>
 							    </thead>	
 							    <tbody>
-							    	<tr><td>1</td><td>2</td></tr>
+							    	<tr><td>1</td><td>2</td>
+							    	<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.jpg" alt="↓" width="30" height="30"></button></td></tr>
 							    </tbody>
 							</table>
 						</div>
 						<div style="width:33%;">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>개인</caption>
-							   	<col width="50%">
-							   	<col width="50%">
+							   	<col width="60%">
+							   	<col width="25%">
+							   	<col width="15%">
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
 							        <th>파일위치</th>
+							        <th></th>
 							      </tr>
 							    </thead>	
 							    <tbody>
-							    	<tr><td>1</td><td>2</td></tr>
+							    	<tr><td>1</td><td>2</td>
+							    	<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.jpg" alt="↓" width="30" height="30"></button></td></tr>
 							    </tbody>
 							</table>
 						</div>

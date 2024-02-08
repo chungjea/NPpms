@@ -43,6 +43,7 @@
  
  
 </head>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
 	//var empno = "${mem.empno}"
 	//var name = "${mem.ename} / ${mem.dname}"
@@ -155,14 +156,13 @@
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">
 						<div class="input-group align-items-end" >
-							<input class="form-control border-0 small" placeholder="제목" name="title"
-									value="${sch.title}">
+							<input class="form-control border-0 small" placeholder="제목" name="title" value="${sch.title}">
 							<input type="hidden" name="curPage" value="${sch.curPage}"/>
                     	<input type="hidden" name="wempno" id="1" value="${sch.wempno}"/>
                     	<input type="hidden" name="cempno" id="2" value="${sch.cempno}"/>
                     	<input type="hidden" name="manager" id="3" value="${sch.manager}"/>
 							<div class="input-group-append">
-								<button class="btn btn-primary" type="button" id="schBtn">
+								<button class="btn btn-primary" onclick="schrsk()" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
 								</button>
 							</div>
@@ -173,6 +173,7 @@
                     <script type="text/javascript">
 	                    function goPage1(no){
 	                    	$("[name=title]").val("")
+							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -181,6 +182,7 @@
 	            		}
 	                    function goPage2(no){
 	                    	$("[name=title]").val("")
+							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -189,6 +191,7 @@
 	            		}
 	                    function goPage3(no){
 	                    	$("[name=title]").val("")
+							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -197,15 +200,13 @@
 	            		}
 	                    function goPage4(no){
 	                    	$("[name=title]").val("")
+							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
 							$("#frm01").attr("action","${path}/finrsk")
 					    	$("#frm01").submit()
 	            		}
-	                    $("#schBtn").click(function(){
-	                   		schrsk()
-		                 })
 		                 $("[name=title").keyup(function(){
 								if(event.keyCode==13){
 									schrsk()
