@@ -160,6 +160,25 @@
 							{unit: "day", step: 1, format: "%d일"}
 						];
 						
+						var tmem = [
+						    { key: 1001, label: '홍길동' },
+						    { key: 1002, label: '김길동' },
+						    { key: 1003, label: '한길동' }
+						];
+						
+						gantt.config.lightbox.sections = [
+						    {name:"description", height:50, map_to:"text", type:"textarea", focus:true},
+						    {name:"assignor", height:30, type:"select", options:tmem},
+						    {name:"time", height:40, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]}
+						];
+						 
+						
+						gantt.locale.labels.section_description = "작업명";
+						gantt.locale.labels.section_time = "기간";
+						gantt.locale.labels.section_assignor = "담당배정"
+					
+					
+						
 						gantt.init("gantt_here");
 						gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
 						
