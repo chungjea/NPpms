@@ -51,7 +51,7 @@
 							class="collapse-item" href="${path}/meeting?deptno=10">회의록</a>
 					</div>
 				</div></li>
-			<li class="nav-item"><a class="nav-link" href="${path}/z05_bootTmp/a60_chart.jsp">
+			<li class="nav-item"><a class="nav-link" href="${path}/file?empno=1000&deptno=10">
 					<span>문서관리</span>
 			</a></li>
 			
