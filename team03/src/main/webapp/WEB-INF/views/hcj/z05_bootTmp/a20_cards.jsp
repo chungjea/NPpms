@@ -75,8 +75,15 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Earnings (Monthly)</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                                근태관리</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">
+
+
+
+
+
+
+</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -93,7 +100,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                                     <div class="row no-gutters align-items-center">
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Earnings (Annual)</div>
+                                                근태관리</div>
                                             <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
                                         </div>
                                         <div class="col-auto">
@@ -159,11 +166,10 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                             <!-- Default Card Example -->
                             <div class="card mb-4">
                                 <div class="card-header">
-                                    Default Card Example
+                                   근태관리
                                 </div>
                                 <div class="card-body">
-                                    This card uses Bootstrap's default styling with no utility classes added. Global
-                                    styles are the only things modifying the look and feel of this default card example.
+                                    123
                                 </div>
                             </div>
 

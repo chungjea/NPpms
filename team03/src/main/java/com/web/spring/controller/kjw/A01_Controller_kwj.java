@@ -98,7 +98,7 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
 
 @RequestMapping("test")
 public String test() {
-	return "kjw/z05_bootTmp/a01_index";
+	return "kjw/z05_bootTmp/a20_cards";
 }
 @RequestMapping("registerFrm")
 public String registerFrm() {

@@ -203,7 +203,7 @@
 						<div class="card-body">
 							<div class="table-responsive">
 
-								<div style="width: 100%; height: 200px; overflow: auto">
+								<div style="width: 100%; height: 200px; ">
 									<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
 
 										<table class="table table-bordered" id="dataTable"
@@ -278,7 +278,7 @@
 												</table>
 											</c:if>
 										</div>
-									</div>
+									
 									<%@page buffer="8192kb" autoFlush="true"%>
 								</div>
 								<!-- /.container-fluid -->
@@ -287,21 +287,29 @@
 							<!-- End of Main Content -->
 
 							<!-- Footer -->
-
+							</div>
+							</div>
+							</div>
+							</div>
+							</div>
+							</div>
+							</div>
+<footer class="sticky-footer bg-white">
+								<div class="container my-auto">
+									<div class="copyright text-center my-auto">
+										<span>Copyright &copy; Your Website 2021</span>
+									</fotter>
+									</div>
+</div>
 							<!-- End of Footer -->
 
 						</div>
 						<!-- End of Content Wrapper -->
-							<footer class="sticky-footer bg-white">
-								<div class="container my-auto">
-									<div class="copyright text-center my-auto">
-										<span>Copyright &copy; Your Website 2021</span>
-									</div>
-								</div>
-							</footer>
-					</div>
+							
+					
 					<!-- End of Page Wrapper -->
 
+								
 					<!-- Scroll to Top Button-->
 					<!-- <a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fas fa-angle-up"></i>
@@ -327,6 +335,9 @@
 <!-- Page level custom scripts -->
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
+
+
+
 </body>
 <script type="text/javascript">
 $("#checking").hide();
