@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.web.spring.dao.kjw.A03_Dao_kjw;
+import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
@@ -41,6 +42,9 @@ public class A02_Service_kjw {
 	public int register(Emp_master_f ins) {
 		return dao.register(ins);
 }
+	public int commute_s(Commute_f ins) {
+		return dao.commute_s(ins);
+	}
 
 	@Transactional
 	public void deleteEmps(List<Integer> empno) {

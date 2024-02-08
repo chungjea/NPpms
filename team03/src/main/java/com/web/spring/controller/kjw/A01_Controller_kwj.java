@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.spring.service.kjw.A02_Service_kjw;
+import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
@@ -95,6 +96,12 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }
+@RequestMapping("SCommute")
+public String SCommute(Commute_f ins,Model d) {
+	d.addAttribute("msg",service.commute_s(ins)>0?"출근등록성공":"출근등록실패");
+	return "kjw/z05_bootTmp/a20_cards";
+	
+}
 
 @RequestMapping("test")
 public String test() {
@@ -110,10 +117,12 @@ public String register(Emp_master_f ins,Model d) {
 
 	return "kjw/z05_bootTmp/a84_register";
 }
-
-
+@RequestMapping("test1")
+public String test1() {
+	return "a20_cards";
 }
 
+}
 
 /*
  * 	@GetMapping("login.do")

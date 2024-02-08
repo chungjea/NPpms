@@ -18,7 +18,7 @@
 <%
 Date time1 = new Date();
 SimpleDateFormat formatter1 = new SimpleDateFormat(
-		"YYYY-MM-DD:HH:mm:ss"
+		"yyyy-mm-dd (E) hh:mm:ss",Locale.KOREA
 		);
 long lasttime1=session.getLastAccessedTime();
 long createdtime1=session.getCreationTime();
@@ -78,12 +78,23 @@ long createdtime1=session.getCreationTime();
                                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                                 근태관리</div>
                                             <div  class="card-body"><%=formatter1.format(time1)%></div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                                             <div class="h5 mb-0 font-weight-bold text-gray-800">0h0m</div>
+                                             <div class="progress progress-sm mr-2"></div>
+                                           
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">출근시간 &nbsp &nbsp &nbsp &nbsp ${commute.starttime}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">퇴근시간 &nbsp &nbsp &nbsp &nbsp ${commute.endtime}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">야근시간 &nbsp &nbsp &nbsp &nbsp ${commute.overtime}</div>
+                                             <hr style="border-width:1px 0 0 0; border-style:dotted; border-color:#bbb;">
+ <form method="post" id="send" action="${path}/SCommute">
+                                            <a href="#" id="StartBtn"class="btn btn-light btn-icon-split">
+                                     
+                                        <span class="text">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp출근&nbsp &nbsp &nbsp &nbsp</span>
+                                    </a>
+                                      </form>
+                                    <a href="#" id="EndBtn"class="btn btn-light btn-icon-split">
+                                      
+                                        <span class="text">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp퇴근&nbsp &nbsp &nbsp &nbsp </span>
+                                    </a>
                                         </div>
                                         
                                            
@@ -92,7 +103,17 @@ long createdtime1=session.getCreationTime();
                                 </div>
                             </div>
                         </div>
-
+<script type="text/javascript">
+				$("#StartBtn").click(function(){
+					
+					
+					if(confirm("등록하시겠습니까?")){
+						$("#send").submit()
+					}
+					else
+						return ("${path}/mainpage")
+					
+				})
                         
 
                     <div class="row">

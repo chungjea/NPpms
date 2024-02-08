@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
+import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.sal_f;
 
 @Mapper
@@ -25,6 +26,8 @@ public interface A03_Dao_kjw {
 		List<sal_f> getSalList(sal_f sch);
 
 		List<Emp_master_f> Emplist();
+		
+		int commute_s(Commute_f ins);
 }
 
 
