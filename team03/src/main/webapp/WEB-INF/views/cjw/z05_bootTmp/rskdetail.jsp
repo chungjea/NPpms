@@ -64,7 +64,7 @@
 	var manager = "${drsk.manager}"
 	$(document).ready(function(){
 		$("#mainBtn").click(function(){
-			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+			$("#frmrsk").submit()
 		})
 		if(sts=="완료"){
 			$("#ckModal").hide();
@@ -96,9 +96,9 @@
 				success : function(data) {
 					$("#clsBtn").click()
 					if(confirm(data.msg+"리스크 관리 페이지로 돌아가시겠습니까?")){
-						location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+						$("#frmrsk").submit()
 					}else{
-						location.href="${path}/detailrsk?rskno="+rskno
+						$("frm01").submit()
 					}
 				},
 				error : function(err) {
@@ -114,9 +114,9 @@
 				dataType : "json",
 				success : function(data) {
 					if(confirm(data.msg+"리스크 관리 페이지로 돌아가시겠습니까?")){
-						location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+						$("#frmrsk").submit()
 					}else{
-						location.href="${path}/detailrsk?rskno="+rskno
+						$("frm01").submit()
 					}
 				},
 				error : function(err) {
@@ -157,7 +157,8 @@
                     </div>
 					<br>
 					<div align="center">
-                    	<form method="post" id="frm01" enctype="multipart/form-data">
+                    	<form method="post" id="frm01" enctype="multipart/form-data" action="${path}/detailrsk">
+                    	<input type="hidden" name="rskno" value="${drsk.rskno}" />
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">제목</span>
@@ -172,7 +173,7 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">등록일자</span>
 							</div>
-							<span class="form-control"><fmt:formatDate value="${drsk.regdte}" pattern="YYYY-MM-DD" type="date"/></span>	
+							<span class="form-control"><fmt:formatDate value="${drsk.regdte}" pattern="yyyy-MM-dd" type="date"/></span>	
 						</div>		
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
@@ -208,14 +209,16 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">첨부파일</span>
 							</div>
-							<c:if test="${not empty drsk.fnames}">
-								<c:forEach var="fname" items="${drsk.fnames}">
-									<span ondblclick="download('${fname}')" class="form-control">${fname}</span>	
-								</c:forEach>
-							</c:if>
-							<c:if test="${empty drsk.fnames}">
-								<span class="form-control"></span>
-							</c:if>
+							<c:choose>
+								<c:when test="${not empty drskfile}">
+									<c:forEach var="rf" items="${drskfile}">
+										<span ondblclick="download('${rf.fno}','${rf.fname}')" class="form-control">${rf.fname}</span>	
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<span class="form-control"></span>
+								</c:otherwise>
+							</c:choose>
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
@@ -327,9 +330,9 @@
 			</div>
 			<!-- End of Main Content -->
 			<script type="text/javascript">
-				function download(fname){
+				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fname="+fname
+						location.href="${path}/download?fno="+fno
 					}
 				}
 			</script>
@@ -370,8 +373,7 @@
 <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/customjs/slidbar.js"></script>
+	
 </body>
 </html>

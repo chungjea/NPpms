@@ -1,7 +1,8 @@
 package com.web.spring.vo;
 
-public class RiskSch {
-	private String title;
+public class FileSch {
+	private int empno;
+	private int deptno;
 	private int wempno;
 	private int cempno;
 	private int manager;
@@ -15,12 +16,13 @@ public class RiskSch {
 	private int startBlock;
 	private int endBlock;
 	
-	public RiskSch() {
+	public FileSch() {
 	}
 
-	public RiskSch(String title, int wempno, int cempno, int manager, int count, int pageSize, int pageCount, int curPage,
-			int start, int end, int blockSize, int startBlock, int endBlock) {
-		this.title = title;
+	public FileSch(int empno, int deptno, int wempno, int cempno, int manager, int count, int pageSize, int pageCount,
+			int curPage, int start, int end, int blockSize, int startBlock, int endBlock) {
+		this.empno = empno;
+		this.deptno = deptno;
 		this.wempno = wempno;
 		this.cempno = cempno;
 		this.manager = manager;
@@ -35,12 +37,20 @@ public class RiskSch {
 		this.endBlock = endBlock;
 	}
 
-	public String getTitle() {
-		return title;
+	public int getEmpno() {
+		return empno;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setEmpno(int empno) {
+		this.empno = empno;
+	}
+
+	public int getDeptno() {
+		return deptno;
+	}
+
+	public void setDeptno(int deptno) {
+		this.deptno = deptno;
 	}
 
 	public int getWempno() {

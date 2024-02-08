@@ -5,7 +5,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<fmt:requestEncoding value="utf-8"/>     
+<fmt:requestEncoding value="utf-8"/>
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
@@ -46,13 +46,12 @@
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="${path}/noticePage">공지 게시판</a> 
 						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
-						<a class="collapse-item" href="${path}/myapv?wempno=1000&mempno=1000&sts=대기">결재</a>
-						<a class="collapse-item" href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000">리스크 관리</a> <a
+						<a class="collapse-item" href="javascript:goApv()">결재</a>
+						<a class="collapse-item" href="javascript:goRsk()">리스크 관리</a> <a
 							class="collapse-item" href="${path}/meeting?deptno=10">회의록</a>
 					</div>
 				</div></li>
-
-			<li class="nav-item"><a class="nav-link" href="${path}/z05_bootTmp/a60_chart.jsp">
+			<li class="nav-item"><a class="nav-link" href="${path}/file?empno=1000&deptno=10">
 					<span>문서관리</span>
 			</a></li>
 			
@@ -64,13 +63,13 @@
 					<span>재정관리</span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link"  href="mypagefilter">
+			<li class="nav-item"><a class="nav-link"   href="mypagefilter">
 					<span>마이페이지</span>
 			</a></li>
-<!--  <script>
+ <script>
  onclick="f_clickFunc()"
 	var auth = "${emp.auth}"
-		1234
+		
 		var sessAuth = "${emp.auth}"
 				function f_clickFunc(){	
 		if(sessAuth=="관리자") {
@@ -80,9 +79,9 @@
 		}else if(sessAuth=="직원"){
 			location.href="a70_tables.jsp" 
 		}else
-			alert("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
+			console.log("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
 		}
- </script> -->
+ </script>
 
 			
 			<!-- Divider -->
@@ -106,4 +105,15 @@
 				 --%>	
 			</div>
 
-		</ul>
+		</ul>     
+		<form id="frmapv" method="post" action="${path}/myapv">
+			<input type="hidden" name="wempno" value="1000" />
+			<input type="hidden" name="mempno" value="1000" />
+			<input type="hidden" name="sts" value="대기"/>
+		</form>
+		<form id="frmrsk" method="post" action="${path}/myrsk">
+			<input type="hidden" name="wempno" value="1000"/>
+			<input type="hidden" name="cempno" value="1000"/>
+			<input type="hidden" name="manager" value="1000"/>
+		</form>
+		

@@ -21,6 +21,24 @@
 					SB Admin <sup>2</sup>
 				</div>
 			</a>
+			
+			 <script>
+			 onclick="f_clickFunc()"
+				var auth = "${emp.auth}"
+					1234
+					var sessAuth = "${emp.auth}"
+							function f_clickFunc(){	
+					if(sessAuth=="관리자") {
+						location.href="a70_tablesadmin.jsp" 
+						
+						
+					}else if(sessAuth=="직원"){
+						location.href="a70_tables.jsp" 
+					}else
+						console.log("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
+					}
+			
+			</script>
 
 			<!-- Divider -->
 			<hr class="sidebar-divider my-0">

@@ -12,6 +12,8 @@ import com.web.spring.dao.cjw.A03_Dao_cjw;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
+import com.web.spring.vo.FileSch;
+import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
 import com.web.spring.vo.Metfile_f;
@@ -24,8 +26,17 @@ public class A02_Service_cjw {
 	@Autowired(required = false)
 	private A03_Dao_cjw dao;
 	
+	// 파일명 가져오기
+	public String getfnamebyfno(String fno) {
+		return dao.getfnamebyfno(fno);
+	}
+	
 	// 결재 : 상신한 대기/반려/완료 문서 리스트
 	public List<Approve_f> myapv(ApproveSch sch){
+		if(sch.getSts()==null) sch.setSts("대기");
+		if(sch.getWempno()==0) sch.setWempno(1000);
+		if(sch.getMempno()==0) sch.setMempno(1000);
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.mycnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -48,6 +59,9 @@ public class A02_Service_cjw {
 	}	
 	// 결재 : 결재처리를 해야하는 문서 리스트
 	public List<Approve_f> ckapv(ApproveSch sch){
+		if(sch.getWempno()==0) sch.setWempno(1000);
+		if(sch.getMempno()==0) sch.setMempno(1000);
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.toapvcnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -95,6 +109,8 @@ public class A02_Service_cjw {
 			msg = "결재 상신 실패\\n";
 		}
 		int ckf = 0;
+		int wempno = ins.getWempno();
+		int mempno = ins.getMempno();
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -102,8 +118,11 @@ public class A02_Service_cjw {
 					if(mpf!=null) {
 						String fname = mpf.getOriginalFilename();
 						if(!fname.trim().equals("")) {
-							mpf.transferTo(new File(path+fname));
-							ckf+=dao.insertapvfile(new Apvfile_f(fname,path));
+							String fno = ""+dao.getfno();
+							mpf.transferTo(new File(path+fno));
+							ckf+=dao.insertapvfile(new Apvfile_f(fname,path,fno));
+							dao.insertfileapv(new Apvfile_f(fname,path,fno,wempno));
+							dao.insertfileapv(new Apvfile_f(fname,path,fno,mempno));
 						}
 					}
 				}
@@ -124,9 +143,10 @@ public class A02_Service_cjw {
 	
 	// 결재 : 결재 상세
 	public Approve_f detailapv(int apvno) {
-		Approve_f apv = dao.detailapv(apvno);
-		apv.setFnames(dao.getapvfile(apvno));
-		return apv;
+		return dao.detailapv(apvno);
+	}
+	public List<Apvfile_f> getapvfile(int apvno) {
+		return dao.getapvfile(apvno);
 	}
 	
 	// 결재 : 결재 처리
@@ -141,7 +161,11 @@ public class A02_Service_cjw {
 	
 	// 리스크 : 등록한 리스크 리스트
 	public List<Risk_f> myrsk(RiskSch sch){
-		sch.setCount(dao.myrskcnt(sch));
+		if(sch.getWempno()==0) sch.setWempno(1000);
+		if(sch.getCempno()==0) sch.setCempno(1000);
+		if(sch.getManager()==0) sch.setManager(1000);
+		if(sch.getTitle()==null) sch.setTitle("");
+		sch.setCount(dao.myrskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
@@ -163,7 +187,8 @@ public class A02_Service_cjw {
 	}
 	// 리스크 : 담당자를 지정해야 하는 리스크 리스트
 	public List<Risk_f> ckrsk(RiskSch sch){
-		sch.setCount(dao.ckrskcnt(sch));
+		if(sch.getTitle()==null) sch.setTitle("");
+		sch.setCount(dao.ckrskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
@@ -185,7 +210,8 @@ public class A02_Service_cjw {
 	}
 	// 리스크 : 처리할 리스크 리스트
 	public List<Risk_f> torsk(RiskSch sch){
-		sch.setCount(dao.torskcnt(sch));
+		if(sch.getTitle()==null) sch.setTitle("");
+		sch.setCount(dao.torskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
@@ -207,7 +233,8 @@ public class A02_Service_cjw {
 	}
 	// 리스크 : 완료된 (등록/처리했던)리스크 리스트
 	public List<Risk_f> finrsk(RiskSch sch){
-		sch.setCount(dao.finrskcnt(sch));
+		if(sch.getTitle()==null) sch.setTitle("");
+		sch.setCount(dao.finrskcntp(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
@@ -254,6 +281,8 @@ public class A02_Service_cjw {
 			msg = "리스크 등록 실패\\n";
 		}
 		int ckf = 0;
+		int wempno = ins.getWempno();
+		int manager = ins.getManager();
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -261,8 +290,11 @@ public class A02_Service_cjw {
 					if(mpf!=null) {
 						String fname = mpf.getOriginalFilename();
 						if(!fname.trim().equals("")) {
-							mpf.transferTo(new File(path+fname));
-							ckf+=dao.insertrskfile(new Rskfile_f(fname,path));
+							String fno = ""+dao.getfno();
+							mpf.transferTo(new File(path+fno));
+							ckf+=dao.insertrskfile(new Rskfile_f(fname,path,fno));
+							dao.insertfilersk(new Rskfile_f(fname,path,fno,wempno));
+							dao.insertfilersk(new Rskfile_f(fname,path,fno,manager));
 						}
 					}
 				}
@@ -285,8 +317,10 @@ public class A02_Service_cjw {
 	public Risk_f detailrsk(int rskno) {
 		Risk_f rsk = dao.detailrsk(rskno);
 		if(rsk.getCharge().equals(" / ")) rsk.setCharge("");
-		rsk.setFnames(dao.getrskfile(rskno));
 		return rsk;
+	}
+	public List<Rskfile_f> getrskfile(int rskno) {
+		return dao.getrskfile(rskno);
 	}
 	
 	// 리스크 : 담당자 지정
@@ -294,6 +328,15 @@ public class A02_Service_cjw {
 		String msg = "";
 		if(dao.dorsk(rsk)>0 && dao.dorsk2(rsk)>0) {
 			msg = "담당자 등록 완료\n";
+			List<String> fno = dao.getrskfno(rsk);
+			if(!fno.isEmpty()) {
+				for(String no:fno) {
+					int n = Integer.parseInt(no);
+					Rskfile_f rf = dao.getrskfileinfo(n);
+					rf.setEmpno(rsk.getCempno());
+					dao.insertfilersk2(rf);
+				}
+			}
 		}
 		return msg;
 	}
@@ -310,6 +353,7 @@ public class A02_Service_cjw {
 	
 	// 회의록 : 리스트 출력
 	public List<Meeting_f> metlist(MeetingSch_f sch) {
+		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.totmet(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(10);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -341,6 +385,7 @@ public class A02_Service_cjw {
 			msg = "회의록 등록 실패\\n";
 		}
 		int ckf = 0;
+		int deptno = dao.deptno(ins.getWempno());
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -351,6 +396,7 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertmetfile(new Metfile_f(fname,path,fno));
+							dao.insertfilemet(new Metfile_f(fname,path,fno,deptno));
 						}
 					}
 				}
@@ -376,9 +422,6 @@ public class A02_Service_cjw {
 	public List<Metfile_f> getmetfile(int metno) {
 		return dao.getmetfile(metno);
 	}
-	public String getmetfname(String fno) {
-		return dao.getmetfname(fno);
-	}
 	
 	// 회의록 : 회의록 수정
 	public String updatemet(Meeting_f upt) {
@@ -393,7 +436,7 @@ public class A02_Service_cjw {
 	
 	// 회의록 : 회의록 삭제
 	public String deletemet(int metno) {
-		List<String> delFnames = dao.getfnobyname(metno);
+		List<String> delFnames = dao.getfnobynamem(metno);
 		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
 		for(String fname:delFnames) {
 			File fileToDelete = new File(path+fname);
@@ -410,4 +453,29 @@ public class A02_Service_cjw {
 		}
 		return msg;
 	}
+	
+	
+	// 문서관리 : 게시판 리스트 출력
+	public List<File_f> boardfile(FileSch sch) {
+		sch.setCount(dao.boardfilecnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(3);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
+		return dao.boardfile(sch);
+	}
+	
 }

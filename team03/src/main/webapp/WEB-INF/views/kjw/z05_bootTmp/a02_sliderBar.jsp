@@ -14,11 +14,11 @@
 			<br>
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="kjw/z05_bootTmp/a01_index.jsp">
+				href="${path}/z05_bootTmp/a01_index.jsp">
 				<div class="sidebar-brand-icon rotate-n-15">
 				</div>
 					<img class="sidebar-card-illustration mb-2"
-					src="/a00_com/img/logo.png" alt="늘품 PMS" width="100" height="90">
+					src="${path}/a00_com/img/logo.png" alt="늘품 PMS" width="100" height="90">
 			</a>
 			<br>
 			<!-- Divider -->
@@ -26,7 +26,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active"><a class="nav-link"
-				href="kjw/z05_bootTmp/a01_index.jsp"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>대시보드 Dashboard</span></a>
+				href="${path}/z05_bootTmp/a01_index.jsp"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>대시보드 Dashboard</span></a>
 			</li>
 
 			<!-- Divider -->
@@ -44,7 +44,7 @@
 				<div id="collapsePages" class="collapse"
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="http://localhost:5080/team03/getnoticeboard.do">공지 게시판</a> 
+						<a class="collapse-item" href="http://localhost:5080/team03/getnoticeboard">공지 게시판</a> 
 						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
 						<a class="collapse-item" href="${path}/z05_bootTmp/a82_forgot-password.jsp">결재</a>
 						<a class="collapse-item" href="${path}/z05_bootTmp/a50_404.jsp">리스크 관리</a> <a
@@ -67,7 +67,7 @@
 			<li class="nav-item"><a class="nav-link"  href="${path}/mypagefilter">
 					<span>마이페이지</span>
 			</a></li>
-<!--  <script>
+ <script>
  onclick="f_clickFunc()"
 	var auth = "${emp.auth}"
 		1234
@@ -80,9 +80,9 @@
 		}else if(sessAuth=="직원"){
 			location.href="a70_tables.jsp" 
 		}else
-			alert("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
+			console.log("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
 		}
- </script> -->
+ </script>
 
 			
 			<!-- Divider -->

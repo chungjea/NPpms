@@ -86,7 +86,6 @@
 					<!-- Content Row -->
 					<div class="row">
 						<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a04_main_row01.jsp" %>
-
 					</div>
 					<%-- <!-- Content Row -->
 					<div class="row">
@@ -97,8 +96,11 @@
 					<!-- Content Row -->
 					
 					<c:choose> 
-					
+						
 						<c:when test="${allprojectCnt>0}">
+						<div class="row">
+							<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a12_main_row2.jsp" %>
+						</div>
 						<div class="row">
 							<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a06_main_row03.jsp" %>
 						</div>
@@ -151,7 +153,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 	<!-- Logout Modal-->
-	<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a08_logout_modal.jsp" %>
+	<%@ include file="/z05_bootTmp/a08_logout_modal.jsp" %>
 	
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
@@ -163,6 +165,9 @@
 
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+
+<script src="${path}/customjs/slidbar.js"></script>
+
 <script type="text/javascript">
 	$("#regBtn").click(function(){
 		//### 유효성 검사 ###
@@ -305,6 +310,10 @@
 			alert("삭제완료")
 		}
 	}
+	
+	
+	
+	
 </script>
 <!-- Page level plugins -->
 

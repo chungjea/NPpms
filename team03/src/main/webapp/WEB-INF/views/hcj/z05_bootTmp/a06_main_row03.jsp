@@ -11,7 +11,7 @@
 		<div class="card shadow mb-4">
 			<!-- Card Header - Dropdown -->
 			<div class="card-header py-3">
-				<h6 class="m-0 font-weight-bold text-primary">담당 프로젝트</h6>
+				<h6 class="m-0 font-weight-bold text-primary">${emp.auth=='관리자'?'담당':'참여'} 프로젝트</h6>
 			</div>
             <!-- Card Body -->
 			<div class="card-body">
@@ -27,7 +27,7 @@
 	<!-- Project Card Example -->
 	<div class="card shadow mb-4">
 		<div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-			<h6 class="m-0 font-weight-bold text-primary" onclick="location.href='${path}/projectList.do2'">프로젝트</h6>
+			<h6 class="m-0 font-weight-bold text-primary" onclick="location.href='${path}/projectList'">프로젝트</h6>
 			<c:if test='${emp.auth =="관리자"}'>
 			<button type="button" data-toggle="modal" data-target="#newprojectModal" class="btn btn-outline-secondary">+</button>
 			</c:if>
@@ -45,7 +45,7 @@
             		<th>진행도</th>
             		</tr>
             	<c:forEach var="pj" items="${projects}">
-            		<tr>
+            		<tr ondblclick="location.href='${path}/project?pcode=${pj.pcode}'">
             		<td>${pj.tname}</td>
             		<td>${pj.pname}</td>
             		<td>${pj.ptype}</td>

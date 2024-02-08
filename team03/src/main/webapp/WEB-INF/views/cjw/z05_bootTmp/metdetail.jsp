@@ -122,7 +122,7 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">등록 날짜</span>
 							</div>
-							<span class="form-control"><fmt:formatDate value="${dmet.regdte}" pattern="YYYY-MM-DD" type="date"/></span>	
+							<span class="form-control"><fmt:formatDate value="${dmet.regdte}" pattern="yyyy-MM-dd" type="date"/></span>	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">작성자</span>
 							</div>
@@ -147,7 +147,7 @@
 							<c:choose>
 								<c:when test="${not empty dmetfile}">
 									<c:forEach var="mf" items="${dmetfile}">
-										<span ondblclick="download('${mf.fno}')" class="form-control">${mf.fname}</span>	
+										<span ondblclick="download('${mf.fno}','${mf.fname}')" class="form-control">${mf.fname}</span>	
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
@@ -182,9 +182,9 @@
 			</div>
 			<!-- End of Main Content -->
 			<script type="text/javascript">
-				function download(fname){
+				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fname="+fname
+						location.href="${path}/download?fno="+fno
 					}
 				}
 			</script>
@@ -221,6 +221,8 @@
 
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+
+<script src="${path}/customjs/slidbar.js"></script>
 
 </body>
 </html>

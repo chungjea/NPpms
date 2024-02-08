@@ -6129,7 +6129,8 @@ return /******/ (function(modules) { // webpackBootstrap
         markAsOriginatingFromRejection: markAsOriginatingFromRejection,
         classString: classString,
         copyDescriptors: copyDescriptors,
-        hasDevTools: typeof chrome !== "undefined" && chrome && typeof chrome.loadTimes === "function",
+        hasDevTools: typeof chrome !== "undefined" && chrome && typeof chrome.
+Times === "function",
         isNode: isNode,
         hasEnvVariables: hasEnvVariables,
         env: env,

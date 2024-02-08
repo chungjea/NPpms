@@ -16,6 +16,10 @@
 		<typeAlias alias="metSch" type="com.web.spring.vo.MeetingSch_f"/>
 		<typeAlias alias="projectSch" type="com.web.spring.vo.ProjectSch"/>
 		<typeAlias alias="calendar_f" type="com.web.spring.vo.Calendar_f"/>
+		<typeAlias alias="EmpSch_f" type="com.web.spring.vo.EmpSch_f"/>
+		<typeAlias alias="sallist" type="com.web.spring.vo.sal_f"/>
+		<typeAlias alias="file" type="com.web.spring.vo.File_f"/>
+		<typeAlias alias="fileSch" type="com.web.spring.vo.FileSch"/>
 	</typeAliases>
 
 </configuration>

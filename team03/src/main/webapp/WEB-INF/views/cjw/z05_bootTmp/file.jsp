@@ -29,6 +29,12 @@
 
 <style>
 	td{text-align:center;}
+	table caption {
+	    caption-side: top;
+	    text-align: center;
+	    font-size: x-large;
+	    padding: 10px;
+	}
 </style> 
  
      <!-- Custom fonts for this template-->
@@ -71,24 +77,28 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">회의록</h1>
+                        <h1 class="h3 mb-0 text-gray-800">문서관리</h1>
                         <a href="${path}/insertmetFrm" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
-                        	<span class="text">회의록 작성하기</span>
+                        	<span class="text">파일 업로드</span>
                         </a>
                     </div>
 					<br>
 					<br>
-                    <div class="row">
+                    <div align="center">
                     	&nbsp;&nbsp;&nbsp;
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="get">
 						<div class="input-group align-items-end" >
-							<input class="form-control border-0 small" placeholder="회의 목적" name="title" value="${sch.title}">
-							<input type="hidden" name="curPage" value="${sch.curPage}"/>
-							<input type="hidden" name="deptno" value="10"/>
+							<select class="form-control border-0 small" style="width:120px;" name="type">
+								<option value="fname">파일명</option>
+								<option value="page">파일위치</option>
+							</select>
+							<input class="form-control border-0 small" style="width:400px;" placeholder="파일명" name="fname" id="sch" value="">
+							<input type="hidden" name="empno" value="${sch.empno}"/>
+							<input type="hidden" name="deptno" value="${sch.deptno}"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
@@ -96,68 +106,103 @@
 							</div>
 						</div>
 					</form>
-					<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
                     <script type="text/javascript">
 	                    $("#schBtn").click(function(){
-	                   		schmet()
+	                   		schfile()
 		                 })
-		                 $("[name=title]").keyup(function(){
+		                 $("#sch").keyup(function(){
 								if(event.keyCode==13){
-									schmet()
+									schfile()
 								}
 		                  })
 		                  function schmet(){
-	                    		$("#frm01").attr("action","${path}/meeting")
+	                    		$("#frm01").attr("action","${path}/file")
 		    					$("#frm01").submit()
 		                  }
                     </script>
-                    <table class="table table-hover table-striped">
-					   	<col width="15%">
-					   	<col width="22%">
-					   	<col width="21%">
-					   	<col width="20%">
-					   	<col width="22%">
-					    <thead>
-					      <tr class="text-center" style="background-color:skyblue;">
-					        <th>No</th>
-					        <th>회의 날짜</th>
-					        <th>회의 목적</th>
-					        <th>작성자</th>
-					        <th>등록 날짜</th>
-					      </tr>
-					    </thead>	
-					    <tbody>
-					    	<c:forEach var="met" items="${metList}">
-					    		<tr ondblclick="goDetail(${met.metno})"><td>${met.cnt}</td><td><fmt:formatDate value="${met.metdte}"/></td><td>${met.title}</td><td>${met.writer}</td><td><fmt:formatDate value="${met.regdte}"/></td></tr>
-					    	</c:forEach>
-					    </tbody>
-					</table>
-					<form method="post" id="frm02" action="${path}/detailmet">
-						<input id="test" name="metno" type="hidden">
-					</form>
-					<script type="text/javascript">
-					    function goDetail(no){
-					    	$("#test").val(no)
-					    	$("#frm02").submit()
-					    }
-					</script>
-					<ul class="pagination  justify-content-center">
-						<li class="page-item">
-						<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
-						<c:forEach var="pcnt" begin="${sch.startBlock}" end="${sch.endBlock}">
-							<li class="page-item ${sch.curPage==pcnt?'active':''}">
-							<a class="page-link" href="javascript:goPage(${pcnt})">${pcnt}</a></li>
-						</c:forEach>
-						<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.endBlock+1})">Next</a></li>
-					</ul>
-					<script type="text/javascript">
-						function goPage(pcnt){
-							$("[name=curPage]").val(pcnt)
-							$("#frm01").submit();
-						}
-					</script>	
+                    <br><br><br>
+                    <div class="row" style="width:100%;">
+                    	<div style="width:33%; border-right: solid 1px;">
+	                    	<table class="table table-hover table-striped" style="width:80%; margin: auto;">
+	                    		<caption>게시판</caption>
+							   	<col width="50%">
+							   	<col width="50%">
+							    <thead>
+							      <tr class="text-center" style="background-color:skyblue;">
+							        <th>파일명</th>
+							        <th>파일위치</th>
+							      </tr>
+							    </thead>	
+							    <tbody>
+							    	<c:forEach var="bf" items="${bfile}">
+							    		<tr ondblclick="download('${bf.fno}','${bf.fname}')"><td>${bf.fname}</td><td>${bf.page}</td></tr>
+							    	</c:forEach>
+							    </tbody>
+							</table>
+							<form id="bffrm">
+								<input type="hidden" name="curPage" value="${sch.curPage}"/>
+								<input type="hidden" name="empno" value="${sch.empno}"/>
+								<input type="hidden" name="deptno" value="${sch.deptno}"/>
+							</form>
+							<br>
+							<ul class="pagination  justify-content-center">
+								<li class="page-item">
+								<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
+								<c:forEach var="pcnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+									<li class="page-item ${sch.curPage==pcnt?'active':''}">
+									<a class="page-link" href="javascript:goPage(${pcnt})">${pcnt}</a></li>
+								</c:forEach>
+								<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.endBlock+1})">Next</a></li>
+							</ul>
+							<script type="text/javascript">
+								function goPage(pcnt){
+									$("[name=curPage]").val(pcnt)
+									$("#bffrm").submit();
+								}
+							</script>
+						</div>
+						<div style="width:33%; border-right: solid 1px;">
+							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
+								<caption>채팅</caption>
+							   	<col width="50%">
+							   	<col width="50%">
+							    <thead>
+							      <tr class="text-center" style="background-color:skyblue;">
+							        <th>파일명</th>
+							        <th>파일위치</th>
+							      </tr>
+							    </thead>	
+							    <tbody>
+							    	<tr><td>1</td><td>2</td></tr>
+							    </tbody>
+							</table>
+						</div>
+						<div style="width:33%;">
+							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
+								<caption>개인</caption>
+							   	<col width="50%">
+							   	<col width="50%">
+							    <thead>
+							      <tr class="text-center" style="background-color:skyblue;">
+							        <th>파일명</th>
+							        <th>파일위치</th>
+							      </tr>
+							    </thead>	
+							    <tbody>
+							    	<tr><td>1</td><td>2</td></tr>
+							    </tbody>
+							</table>
+						</div>
+                    </div>
 				</div>
+				<script type="text/javascript">
+					function download(fno, fname){
+						if(confirm(fname+" 다운로드 하시겠습니까?")){
+							location.href="${path}/download?fno="+fno
+						}
+					}
+				</script>
 				<!-- /.container-fluid -->
 
 			</div>

@@ -64,7 +64,7 @@
 	var sts = "${dapv.sts}"
 	$(document).ready(function(){
 		$("#mainBtn").click(function(){
-			location.href="${path}/myapv?wempno=1000&mempno=1000&sts="+sts
+			$("#frmapv").submit()
 		})
 		$("#okModal").click(function(){
 			$("#modalTitle").text("승인 피드백")
@@ -103,9 +103,9 @@
 			success : function(data) {
 				$("#clsBtn").click()
 				if(confirm(data.msg+"결재 홈으로 돌아가시겠습니까?")){
-					location.href="${path}/myapv?wempno=1000&mempno=1000&sts="+sts
+					$("#frmapv").submit()
 				}else{
-					location.href="${path}/detailapv?apvno="+apvno
+					$("#frm01").submit()
 				}
 				
 			},
@@ -144,7 +144,8 @@
                     </div>
 					<br><br>
 					<div align="center">
-                    	<form method="post" enctype="multipart/form-data" action="${path}/insertapv">
+                    	<form id="frm01" method="post" enctype="multipart/form-data" action="${path}/detailapv">
+                    	<input type="hidden" name="apvno" value="${dapv.title}"/>
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">제목</span>
@@ -159,13 +160,13 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">등록일자</span>
 							</div>
-							<span class="form-control"><fmt:formatDate value="${dapv.regdte}" pattern="YYYY-MM-DD" type="date"/></span>	
+							<span class="form-control"><fmt:formatDate value="${dapv.regdte}" pattern="yyyy-MM-dd" type="date"/></span>	
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">확인일자</span>
 							</div>
-							<span class="form-control"><fmt:formatDate value="${dapv.ckdte}" pattern="YYYY-MM-DD" type="date"/></span>
+							<span class="form-control"><fmt:formatDate value="${dapv.ckdte}" pattern="yyyy-MM-dd" type="date"/></span>
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">결재여부</span>
 							</div>
@@ -175,14 +176,16 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">첨부파일</span>
 							</div>
-							<c:if test="${not empty dapv.fnames}">
-								<c:forEach var="fname" items="${dapv.fnames}">
-									<span ondblclick="download('${fname}')" class="form-control">${fname}</span>	
-								</c:forEach>
-							</c:if>
-							<c:if test="${empty dapv.fnames}">
-								<span class="form-control"></span>
-							</c:if>
+							<c:choose>
+								<c:when test="${not empty dapvfile}">
+									<c:forEach var="af" items="${dapvfile}">
+										<span ondblclick="download('${af.fno}','${af.fname}')" class="form-control">${af.fname}</span>	
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									<span class="form-control"></span>
+								</c:otherwise>
+							</c:choose>
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
@@ -243,9 +246,9 @@
 			</div>
 			<!-- End of Main Content -->
 			<script type="text/javascript">
-				function download(fname){
+				function download(fno, fname){
 					if(confirm(fname+" 다운로드 하시겠습니까?")){
-						location.href="${path}/download?fname="+fname
+						location.href="${path}/download?fno="+fno
 					}
 				}
 			</script>
@@ -286,8 +289,7 @@
 <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/customjs/slidbar.js"></script>
+
 </body>
 </html>

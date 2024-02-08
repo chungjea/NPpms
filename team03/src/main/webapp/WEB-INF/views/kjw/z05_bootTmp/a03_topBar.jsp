@@ -37,18 +37,22 @@
 	 <%
 Date time = new Date();
 SimpleDateFormat formatter = new SimpleDateFormat(
-		"yyyy-MM-dd HH:mm:ss"
+		"HH:mm:ss"
 		);
 long lasttime=session.getLastAccessedTime();
 long createdtime=session.getCreationTime();
-long time_used=(lasttime-createdtime)/60000;
+
 %>
 
 	<div class="text-truncate">
-	${emp.ename}님 로그인 시각:<%=formatter.format(time)%> 접속 후 지난시간:<%=time_used%></div>
+	<% time.setTime(session.getCreationTime()); %>
+	${emp.ename}님 로그인 시각:<%=formatter.format(time)%>
+	<% time.setTime(session.getLastAccessedTime()); %>
+	${emp.ename}님 마지막 접속 시각:<%=formatter.format(time)%>
+	남은시간: <div id=timer></div></div>
 						
 
-<!-- abc -->
+
 	<!-- Topbar Navbar -->
 	<ul class="navbar-nav ml-auto">
 

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
+import com.web.spring.vo.Data;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Error_f;
 import com.web.spring.vo.ProjectSch;
@@ -177,4 +178,13 @@ public interface A03_Dao_hcj {
 	List<Emp_pinfo_f> getemplistByLike(Emp_pinfo_f sch);
 	@Select("select * from emp_pinfo_f where empno = #{empno} or dname = #{dname}")
 	List<Emp_pinfo_f> getemplist(Emp_pinfo_f sch);
+	
+	
+	// 프로젝트 간트차트
+	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'DD-MM-YYYY') \r\n "
+			+ "start_date, CASE when ENDDTE-STARTDTE < 1 THEN 1 else ENDDTE-STARTDTE END  duration, PROGRESS/100 PROGRESS,"
+			+ "REFNO parent \r\n"
+			+ "FROM PROJECT_WORK_F pwf \r\n"
+			+ "where pcode = #{pcode}")
+	List<Data> getTaskdatas(int pcode);
 }

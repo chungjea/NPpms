@@ -47,35 +47,67 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
         <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
-
+	<div class="input-group mb-3" style="display:none;">	
+		<div class="input-group-prepend ">
+			<span class="input-group-text  justify-content-center">
+				발신자</span>
+		</div>
+		<input readonly class="form-control" 
+			value="ssangyoung5555@gmail.com" />	
+	</div>
+	<div class="input-group mb-3" >	
+		<div class="input-group-prepend "  style="display:none;">
+			<span class="input-group-text  justify-content-center">
+				제목</span>
+		</div>
+		<input name="title"   class="form-control" />	
+	</div>	
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                            <div class="col-lg-6">
+                          <form method="post">
+                            
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                                        <p class="mb-4">We get it, stuff happens. Just enter your email address below
-                                            and we'll send you a link to reset your password!</p>
+                                       		<div class="input-group-prepend " style="display:none;">
+			<a>하단에 이메일을 적고 전송버튼을 누르시면 현재 비밀번호가 이메일로 전송됩니다.</a>
+		</div>
                                     </div>
-                                    <form class="user">
+                                    <div class="input-group-prepend " style="display:none;">
+			<span class="input-group-text  justify-content-center">
+				메일내용</span>
+				<textarea id="chatArea" name="content"
+			 class="form-control"  >${emp.passwd}</textarea>	
+				
+		</div>
+		<div class="input-group-prepend " style="display:none;">
+			<span class="input-group-text  justify-content-center">
+				사번</span>
+				<input name="title"  placeholder="사번" class="form-control" />	
+				
+		</div>
+	
+                                    
                                         <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="text" class="form-control form-control-user"
+                                               name="receiver" aria-describedby="emailHelp"
+                                               placeholder="메일 주소 입력" >
                                         </div>
-                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
-                                            Reset Password
-                                        </a>
+                                    
+                                     <input type="submit" id="SendBtn" class="btn btn-primary btn-user btn-block">
+                                           
+                                        
+			<script type="text/javascript">
+			var msg = "${msg}"
+			if(msg!=""){
+				alert(msg);
+			}
+		</script>
                                     </form>
-                                    <hr>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
-                                    </div>
-                                    <div class="text-center">
-                                        <a class="small" href="login.html">Already have an account? Login!</a>
+                                        <a class="small" href="${path}/login">계정이 있을시 클릭</a>
                                     </div>
                                     
                                 </div>
@@ -90,10 +122,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 
             </div>
 
-        </div>
-
-    </div>
-	
+       
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
 <script
@@ -105,11 +134,6 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
-<script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
-
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+	
 </body>
 </html>

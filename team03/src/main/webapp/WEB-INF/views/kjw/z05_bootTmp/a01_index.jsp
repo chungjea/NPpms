@@ -9,7 +9,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Good day!!</title>
-
+<style>
+	
+</style>
 
 
 
@@ -25,7 +27,16 @@
 	});
 </script>
  --%>
- 
+ <script type="text/javascript">
+ 	
+ 	if("${emp}"==""){
+ 		alert("로그인후 이용해주세요")
+ 		location.href="${path}/login"
+ 	}
+ 	
+
+ 	
+ </script>
  
      <!-- Custom fonts for this template-->
     <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -39,14 +50,13 @@
  
  
 </head>
-<body id="page-top">
+<body id="page-top"  onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@ include file="a01_index.jsp" %>
-		<%@ include file="a02_sliderBar.jsp" %>
+		<%@ include file="/pmsprj_makerplace/kjw/z05_bootTmp/a02_sliderBar.jsp" %>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -54,12 +64,12 @@
 
 			<!-- Main Content -->
 			<div id="content">
-				<%-- <%@ include file="${path}/pmsprj_makerplace/kjw/z05_bootTmp/a03_topBar.jsp" %>   
-				     <jsp:include page="${path}/z05_bootTmp/a03_topBar.jsp"/>
-				--%>
+				 <%-- <%@ include file="backendweb/z05_bootTmp/a03_topBar.jsp" %>   
+				     <jsp:include page="${path}/z05_bootTmp/a03_topBar.jsp"/> --%>
+				
 				<!-- Topbar   %>  
 				-->
-				<%@ include file="a03_topBar.jsp" %>  
+				<%@ include file="/pmsprj_makerplace/kjw/z05_bootTmp/a03_topBar.jsp" %> 
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
@@ -75,23 +85,46 @@
 
 					<!-- Content Row -->
 					<div class="row">
-						<%@ include file="/z05_bootTmp/a04_main_row01.jsp" %>
+						<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/a04_main_row01.jsp" %>
 
 					</div>
+					<%-- <!-- Content Row -->
+					<div class="row">
+						<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/main_row_chart.jsp" %>
+					</div> --%>
+
 
 					<!-- Content Row -->
-
-					<div class="row">
-						<%@ include file="/z05_bootTmp/a05_main_row02.jsp" %>
+					
+					<c:choose> 
+					
+						<c:when test="${allprojectCnt>0}">
+						<div class="row">
+							<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/a06_main_row03.jsp" %>
+						</div>
+						<div class="row">
+						<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/a05_main_row02.jsp" %>
 					</div>
+						</c:when> 
+						<c:otherwise>
+							<h1>진행한 프로젝트가 없습니다</h1>
+							<c:if test="${emp.auth == '관리자'}">
+							<Button type="button" data-toggle="modal" data-target="#newprojectModal" class="btn btn-primary btn-block"> 프로젝트 생성</Button>
+							</c:if>
+						</c:otherwise> 
+					</c:choose> 
+					
+					<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/newprojectModal.jsp" %>	
 
+				
 					<!-- Content Row -->
-					<div class="row">
-						<%@ include file="/z05_bootTmp/a06_main_row03.jsp" %>
 
-					</div>
+					
+
+					
 
 				</div>
+				<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/empsch.jsp" %>
 				<!-- /.container-fluid -->
 
 			</div>
@@ -130,12 +163,156 @@
 
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+<script type="text/javascript">
+	$("#regBtn").click(function(){
+		//### 유효성 검사 ###
+		if($("[name=pname]").val()==""){
+			alert("프로젝트명을 입력해주세요")
+			$("[name=pname]").focus()
+			return;
+		}
+		if($("[name=ptype]").val()==0){
+			alert("프로젝트유형을 선택해주세요")
+			$("[name=ptype]").focus()
+			return;
+		}
+	
+		if($("[name=startdte]").val()==""||$("[name=enddte]").val()==""){
+			alert("프로젝트 기간을 입력해주세요")
+			
+			if($("[name=startdte]").val()==""){
+				$("[name=startdte]").focus()
+			}else {
+				$("[name=enddte]").focus()
+			}
+			return;
+		}
+		
+		if($("[name=status]").val()==0){
+			alert("프로젝트상태를 선택해주세요")
+			$("[name=status]").focus()
+			return;
+		}
 
+		
+		if($("#teams").val()==""){
+			if(!confirm("팀원이 존재하지 않습니다\n그대로 진행하시겠습니까? "))return;
+			
+		}
+		// 프로젝트 생성
+		 $.ajax({
+			type:"post",
+			url:"${path}/insertProject",
+			data:$("#frm02").serialize(),
+			dataType:"json",
+			success:function(data){
+				if(data.msg!=""){
+					alert(data.msg)
+					location.href="${path}/mainpage"
+					
+				}
+					
+			},
+			error:function(err){
+				console.log(err)
+			}
+			
+		}) 
+		
+	})
+	
+
+	// 사원 조회 모달 - 검색버튼 클릭
+	$("#schBtn").click(function(){
+		
+		 $.ajax({
+			type:"post",
+			url:"${path}/empsearch",
+			data:$("#frmEmpSch").serialize(),
+			dataType:"json",
+			success:function(data){
+				
+				var emphtml = ""
+				
+				$.each(data.elist,function(idx, emp){
+					
+					emphtml += "<tr>"
+					emphtml += "<td>"+emp.empno+"</td>"
+					emphtml += "<td>"+emp.ename+"</td>"
+					emphtml += "<td>"+emp.dname+"</td>"
+					emphtml += "<td><a href='#' onclick='addemp(\" "+emp.ename+"\","+emp.empno+")' class='btn btn-success btn-circle btn-sm'> "
+					emphtml += '<i class="fas fa-check"></i></a></td>'
+					emphtml += "</tr>"
+				})
+			
+				// 조회된 내용으로 tbody 변경
+				$("#empSchTbody").html(emphtml)
+				
+				
+					
+				
+			},
+			error:function(err){
+				console.log(err)
+			}
+		}) 
+	})
+	
+	// 조회된 팀원을 프로젝트 팀에 추가
+	function addemp(ename,empno){
+		var team = $("#teams").val()
+		var teams_name = $("#teams_name").text()
+		if(team ==""||team == null){ 
+			team = empno; 
+
+		}
+		else{
+			let emps = team.split(",")
+			let empck = false;
+			emps.forEach(function(emp){
+				if(empno == parseInt(emp)){
+					alert("이미 추가된 사원입니다.")
+					empck = true;
+					return;				
+				}
+			})
+			if(empck==true)return;
+			else{
+				team += ","+empno;
+				
+			}
+		}
+	
+		$("#teams").val(team)
+		
+		$("#teams_name").append('<button type="button" id="'+empno+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+ename+'</button>')
+		alert("팀원이 추가되었습니다")
+		$("#echclsBtn").click()
+  	}
+	
+
+	function deleteTeams(obj){
+		if(confirm($(obj).text()+"사원을 팀에서 제외하시겠습니까?")){
+			var teamemp = $("#teams").val().split(",")
+			var retval = ""
+			teamemp.forEach(function(emp){
+				if($(obj).prop("id")!=emp){
+					retval += emp+","
+				}
+			})
+			$("#teams").val(retval.slice(0,retval.length-1))
+			obj.remove()
+			alert("삭제완료")
+		}
+	}
+	window.history.forward();
+	 function noBack(){window.history.forward();}
+</script>
 <!-- Page level plugins -->
-<script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
+
 
 <!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
+<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script> --%>
 </body>
 </html>

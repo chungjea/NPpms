@@ -43,10 +43,7 @@
  
  
 </head>
-<script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
-</script>
+
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -81,79 +78,137 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	상신한</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${myapvcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+	                    <div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	상신한</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${myapvcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
                         
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	반려된</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${badapvcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	완료된</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${goodapvcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	결제할</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${toapvcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	반려된</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${badapvcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	완료된</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${goodapvcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	결제할</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${toapvcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
                     </div>
 					<br>
 					<br>
 					<br>
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('대기')">상신한 문서</a>
-                    	<a class="page-link" id="return" href="javascript:goPage1('반려')">반려된 문서</a>
-                    	<a class="page-link" id="tocheck" href="javascript:goPage2()">결재할 문서</a>
-                    	<a class="page-link" id="finish" href="javascript:goPage1('완료')">완료된 문서</a>
+                    	<ul class="pagination  justify-content-center">
+                    	<li class="page-item ${sch.sts=='대기'?'active':''}">
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('대기')">상신한 문서</a></li>
+                    	<li class="page-item ${sch.sts=='반려'?'active':''}">
+                    	<a class="page-link" id="return" href="javascript:goPage1('반려')">반려된 문서</a></li>
+                    	<li class="page-item ${sch.sts=='결재'?'active':''}">
+                    	<a class="page-link" id="tocheck" href="javascript:goPage2('결재')">결재할 문서</a></li>
+                    	<li class="page-item ${sch.sts=='완료'?'active':''}">
+                    	<a class="page-link" id="finish" href="javascript:goPage1('완료')">완료된 문서</a></li>
+                    	</ul>
+                    	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+								id="frm01" class="form" method="post">
+							<div class="input-group align-items-end" >
+								<input class="form-control border-0 small" placeholder="제목" name="title" value="${sch.title}">
+								<input type="hidden" name="curPage" value="${sch.curPage}"/>
+								<input type="hidden" name="wempno" value="1000"/>
+								<input type="hidden" name="mempno" value="1000"/>
+								<input type="hidden" id="sts" name="sts" value="${sch.sts}"/>
+								<div class="input-group-append">
+									<button class="btn btn-primary" type="button" id="schBtn">
+										<i class="fas fa-search fa-sm"></i>
+									</button>
+								</div>
+							</div>
+						</form>
+						<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
-                    <form method="post" id="frm01">
-                    	<input type="hidden" name="wempno" value="1000"/>
-                    	<input type="hidden" name="mempno" value="1000"/>
-                    	<input type="hidden" id="msts" name="sts" value="${param.sts}"/>
-                    </form>
                     <script type="text/javascript">
+                    	$(document).ready(function(){
+		                   $("#schBtn").click(function(){
+		                   		schapv()
+		                   })
+		                   $("[name=title").keyup(function(){
+								if(event.keyCode==13){
+									schapv()
+								}
+		                   })
+                    	})
 	                    function goPage1(sts){
-	            			location.href="${path}/myapv?curPage=1&wempno=1000&mempno=1000&sts="+sts
+	                    	$("#sts").val(sts)
+	                    	$("[name=title]").val("")
+	                    	$("[name=curPage]").val(1)
+							$("#frm01").attr("action","${path}/myapv")
+					    	$("#frm01").submit()
 	            		}
-	                    function goPage2(){
-	            			location.href="${path}/ckapv?curPage=1&wempno=1000&mempno=1000"//+empno
+	                    function goPage2(sts){
+	                    	$("#sts").val(sts)
+	                    	$("[name=title]").val("")
+	                    	$("[name=curPage]").val(1)
+							$("#frm01").attr("action","${path}/ckapv")
+					    	$("#frm01").submit()
 	            		}
-	                	function goDetail(apvno){
-	                		location.href="${path}/detailapv?apvno="+apvno
-	                	}
+	                   var title = $("[name=title]").val()
+	                   if(title==""){
+	                	   $("#cnt").hide()
+	                   }else{
+	                	   $("#cnt").show()
+	                   }
+	                   function schapv(){
+	                    	var sts = $("#sts").val()
+	                    	if(sts=="결재"){
+	                    		$("[name=curPage]").val(0)
+								$("#frm01").attr("action","${path}/ckapv")
+						    	$("#frm01").submit()
+	                    	}else{
+		                    	$("[name=curPage]").val(0)
+								$("#frm01").attr("action","${path}/myapv")
+						    	$("#frm01").submit()
+	                    	}
+	                    }
                     </script>
                     <br>
                     <table class="table table-hover table-striped">
@@ -186,12 +241,6 @@
 					    	$("#frm02").submit()
 					    }
 					</script>
- 					<form method="get" id="frm03">
-						<input type="hidden" name="curPage" value="${sch.curPage}"/>
-						<input type="hidden" name="wempno" value="1000"/>
-						<input type="hidden" name="mempno" value="1000"/>
-						<input type="hidden" id="sts" name="sts" value="대기"/>
-					</form>
 					<ul class="pagination  justify-content-center">
 						<li class="page-item">
 						<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
@@ -205,7 +254,7 @@
 						function goPage(pcnt){
 							$("#sts").val("${param.sts}")
 							$("[name=curPage]").val(pcnt)
-							$("#frm03").submit();
+							$("#frm01").submit();
 						}
 					</script>	
 				</div>
@@ -247,6 +296,8 @@
 
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+
+<script src="${path}/customjs/slidbar.js"></script>
 
 </body>
 </html>

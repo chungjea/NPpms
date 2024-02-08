@@ -81,72 +81,106 @@
                     </div>
 					
                     <div class="row" style="align-self: center !important; display:flex;">
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	등록한</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${myrskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	처리할</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${ckrskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	담당중</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${torskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="col-xl-3 col-md-6 mb-4" style="background-color:white; border:1px solid black;">
-                        	<div class="card-body">
-                            	<div class="row no-gutters align-items-center">
-                                	<div class="col mr-2">
-                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
-                                        	완료된</div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${finrskcnt}건</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    	<div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	등록한</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${myrskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+						<div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	처리할</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${ckrskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+	                    
+	                    <div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	담당중</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${torskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
+                        
+						<div class="col-xl-3 col-md-6 mb-4">
+	                    	<div class="card border-left-primary shadow h-100 py-2">
+	                        	<div class="card-body">
+	                            	<div class="row no-gutters align-items-center">
+	                                	<div class="col mr-2">
+	                                    	<div class="text-xs font-weight-bold text-uppercase mb-1">
+	                                        	완료된</div>
+	                                        <div class="h5 mb-0 font-weight-bold text-gray-800 text-center">${finrskcnt}건</div>
+	                                    </div>
+	                                </div>
+	                            </div>
+	                        </div>
+	                    </div>
                     </div>
 					<br>
 					<br>
 					<br>
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage1()">등록한 리스크</a>
-                    	<a class="page-link" id="myck" href="javascript:goPage2('1000')">처리할 리스크</a>
-                    	<a class="page-link" id="tocheck" href="javascript:goPage3('1000')">담당중인 리스크</a>
-                    	<a class="page-link" id="finish" href="javascript:goPage4('1000')">완료된 리스크</a>
+                    	<ul class="pagination  justify-content-center">
+                    	<li class="page-item ${sts=='1'?'active':''}">
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('1000')">등록한 리스크</a></li>
+                    	<li class="page-item ${sts=='2'?'active':''}">
+                    	<a class="page-link" id="myck" href="javascript:goPage2('1000')">처리할 리스크</a></li>
+                    	<li class="page-item ${sts=='3'?'active':''}">
+                    	<a class="page-link" id="tocheck" href="javascript:goPage3('1000')">담당중인 리스크</a></li>
+                    	<li class="page-item ${sts=='4'?'active':''}">
+                    	<a class="page-link" id="finish" href="javascript:goPage4('1000')">완료된 리스크</a></li>
+                    	</ul>
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+								id="frm01" class="form" method="post">
+						<div class="input-group align-items-end" >
+							<input class="form-control border-0 small" placeholder="제목" name="title"
+									value="${sch.title}">
+							<input type="hidden" name="curPage" value="${sch.curPage}"/>
+                    	<input type="hidden" name="wempno" id="1" value="${sch.wempno}"/>
+                    	<input type="hidden" name="cempno" id="2" value="${sch.cempno}"/>
+                    	<input type="hidden" name="manager" id="3" value="${sch.manager}"/>
+							<div class="input-group-append">
+								<button class="btn btn-primary" type="button" id="schBtn">
+									<i class="fas fa-search fa-sm"></i>
+								</button>
+							</div>
+						</div>
+					</form>
+					<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
-                    <form id="frm01" method="post">
-                    	<input type="hidden" name="wempno" id="1"/>
-                    	<input type="hidden" name="cempno" id="2"/>
-                    	<input type="hidden" name="manager" id="3"/>
-                    </form>
                     <script type="text/javascript">
-	                    function goPage1(){
-	            			location.href="${path}/myrsk?wempno=1000&cempno=1000&manager=1000"
+	                    function goPage1(no){
+	                    	$("[name=title]").val("")
+					    	$("#1").val(no)
+					    	$("#2").val(no)
+					    	$("#3").val(no)
+							$("#frm01").attr("action","${path}/myrsk")
+					    	$("#frm01").submit()
 	            		}
 	                    function goPage2(no){
+	                    	$("[name=title]").val("")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -154,6 +188,7 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage3(no){
+	                    	$("[name=title]").val("")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
@@ -161,12 +196,37 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage4(no){
+	                    	$("[name=title]").val("")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
 					    	$("#3").val(no)
 							$("#frm01").attr("action","${path}/finrsk")
 					    	$("#frm01").submit()
 	            		}
+	                    $("#schBtn").click(function(){
+	                   		schrsk()
+		                 })
+		                 $("[name=title").keyup(function(){
+								if(event.keyCode==13){
+									schrsk()
+								}
+		                  })
+		                  function schrsk(){
+	                    		var sts = "${sts}"
+	                    		if(sts=="1"){
+		    						$("#frm01").attr("action","${path}/myrsk")
+		    					    $("#frm01").submit()
+	                    		}else if(sts=="2"){
+	                    			$("#frm01").attr("action","${path}/ckrsk")
+		    					    $("#frm01").submit()
+	                    		}else if(sts=="3"){
+	                    			$("#frm01").attr("action","${path}/torsk")
+		    					    $("#frm01").submit()
+	                    		}else if(sts=="4"){
+	                    			$("#frm01").attr("action","${path}/finrsk")
+		    					    $("#frm01").submit()
+	                    		}
+		                  }
                     </script>
                     <br>
                     <table class="table table-hover table-striped">
@@ -199,12 +259,6 @@
 					    	$("#frm02").submit()
 					    }
 					</script>
- 					<form method="get" id="frm03">
-						<input type="hidden" name="curPage" value="${sch.curPage}"/>
-						<input type="hidden" name="wempno" value="1000"/>
-						<input type="hidden" name="cempno" value="1000"/>
-						<input type="hidden" name="manager" value="1000"/>
-					</form>
 					<ul class="pagination  justify-content-center">
 						<li class="page-item">
 						<a class="page-link" href="javascript:goPage(${sch.startBlock-1})">Previous</a></li>
@@ -216,8 +270,12 @@
 					</ul>
 					<script type="text/javascript">
 						function goPage(pcnt){
+							var empno = "${param.wempno}"
+					    	$("#1").val(empno)
+					    	$("#2").val(empno)
+					    	$("#3").val(empno)
 							$("[name=curPage]").val(pcnt)
-							$("#frm03").submit();
+							$("#frm01").submit();
 						}
 					</script>	
 				</div>
@@ -263,8 +321,7 @@
 <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/customjs/slidbar.js"></script>
+
 </body>
 </html>

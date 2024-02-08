@@ -53,7 +53,7 @@
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/myapv?wempno=1000&mempno=1000"
+			$("#frmapv").submit()
 		}		
 		$("#regBtn").click(function(){
 			if($("[name=title]").val()==""){
@@ -69,12 +69,11 @@
 			}
 		})
 		$("#mainBtn").click(function(){
-			location.href="${path}/myapv?wempno=1000&mempno=1000"
+			$("#frmapv").submit()
 		})
 	});
 </script>
 <body id="page-top">
-
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
@@ -191,8 +190,7 @@
 <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
-<!-- Page level custom scripts -->
-<script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/customjs/slidbar.js"></script>
+	
 </body>
 </html>

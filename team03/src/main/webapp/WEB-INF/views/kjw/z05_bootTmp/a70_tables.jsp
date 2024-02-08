@@ -41,13 +41,13 @@
 	var sessId = "${emp.empno}"
 	if(sessId==""){
 		alert("로그인을 하여야 현재화면을 볼 수 있습니다\n로그인 페이지 이동")
-		location.href="${path}/login.do"
+		location.href="${path}/login"
 	}
 	$(document).ready(function(){
 		
 	});
 	function goDetail(no){
-		location.href="${path}/board.do?no="+no
+		location.href="${path}/board?no="+no
 	}	
 </script> -->
  
@@ -113,10 +113,10 @@
                                             <td>${el.ename}</td>
                                           
                                             <td>${el.dname}</td>
-                                            <td>${el.hiredate}</td>
+<%--                                             <td>${el.hiredate}</td>
                                             <td>${el.salary}</td>
                                             <td>${el.lastfix}</td>
-                                            <td>${el.panaltytot}</td>
+                                            <td>${el.panaltytot}</td> --%>
                                         </tr>
                                      </c:forEach>
                                     </tbody>

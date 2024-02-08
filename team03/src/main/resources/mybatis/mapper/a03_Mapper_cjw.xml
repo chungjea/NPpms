@@ -10,7 +10,7 @@
 						emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, af.REGDTE, af.sts 
 					FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
 					WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
-					AND af.wempno = #{wempno} AND af.sts = #{sts} 
+					AND af.wempno = #{wempno} AND af.sts = #{sts} AND af.title like '%'||#{title}||'%'
 					ORDER BY APVNO DESC) a
 			) 
 		WHERE cnt BETWEEN #{start} AND #{end}
@@ -22,7 +22,7 @@
 					emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, af.REGDTE, af.sts 
 				FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
 				WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
-				AND aaf.mempno = #{mempno} AND af.sts = '대기' ORDER BY APVNO DESC) a
+				AND aaf.mempno = #{mempno} AND af.sts = '대기' AND af.title like '%'||#{title}||'%' ORDER BY APVNO DESC) a
 			) 
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
@@ -42,7 +42,7 @@
 				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
 						FROM RISK_F rf, RISKADMIN_F rf2 
 						WHERE rf.rskno = rf2.rskno 
-						AND rf.wempno = #{wempno} AND rf.sts = '발생예정' 
+						AND rf.wempno = #{wempno} AND rf.sts = '발생예정' AND rf.title like '%'||#{title}||'%' 
 						ORDER BY rskNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
@@ -53,7 +53,7 @@
 				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
 					FROM RISK_F rf, RISKADMIN_F rf2 
 					WHERE rf.rskno = rf2.rskno 
-					AND rf2.manager = #{manager} AND rf.sts = '발생예정' 
+					AND rf2.manager = #{manager} AND rf.sts = '발생예정' AND rf.title like '%'||#{title}||'%' 
 					ORDER BY rskNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
@@ -65,7 +65,7 @@
 					emf.ENAME||' / '||df.DNAME charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
 				FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
 				WHERE rf.rskno = rf2.rskno AND rf2.cempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
-				AND rf2.cempno = #{cempno} AND rf.sts = '처리중' 
+				AND rf2.cempno = #{cempno} AND rf.sts = '처리중' AND rf.title like '%'||#{title}||'%' 
 				ORDER BY rskNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
@@ -77,7 +77,7 @@
 					emf.ENAME||' / '||df.DNAME charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
 				FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
 				WHERE rf.rskno = rf2.rskno AND rf2.cempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
-				AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' 
+				AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' AND rf.title like '%'||#{title}||'%' 
 				ORDER BY rskNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
@@ -98,7 +98,7 @@
 				(SELECT mf.METNO, mf.TITLE, mf.METDTE, mf.wempno, 
 					emf.ENAME||' / '||df.DNAME writer, mf.regdte 
 				FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df 
-				WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno} 
+				WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno} AND mf.title like '%'||#{title}||'%' 
 				AND 1=1 ORDER BY mf.METNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
@@ -126,4 +126,11 @@
 				participant = #{participant}, content = #{content}, conclusion = #{conclusion} 
 		WHERE metno = #{metno}
 	</update>
+	<select id="boardfile" parameterType="fileSch" resultType="file">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT * FROM file_f WHERE auth = #{empno} OR auth = #{deptno} AND page != '채팅' AND page!='개인' ORDER BY NO DESC) a
+			) 
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
 </mapper>
