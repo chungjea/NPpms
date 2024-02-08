@@ -15,6 +15,7 @@
 		<typeAlias alias="meeting" type="com.web.spring.vo.Meeting_f"/>
 		<typeAlias alias="metSch" type="com.web.spring.vo.MeetingSch_f"/>
 		<typeAlias alias="projectSch" type="com.web.spring.vo.ProjectSch"/>
+		<typeAlias alias="calendar_f" type="com.web.spring.vo.Calendar_f"/>
 	</typeAliases>
 
 </configuration>

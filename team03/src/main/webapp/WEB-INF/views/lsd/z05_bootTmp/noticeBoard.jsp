@@ -67,7 +67,21 @@
 			<div id="content">
 
 				<!-- Topbar    -->
-				<%@ include file="/WEB-INF/views/lsd/z05_bootTmp/a03_topBar.jsp"%>
+				<form
+		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+				method="post">
+		<div class="input-group">
+			<input type="text" class="form-control bg-light border-0 small"
+				placeholder="공지검색" name="title" value ="${noticeboard_f.title}" aria-label="Search"
+				aria-describedby="basic-addon2">
+			<div class="input-group-append">
+				<button class="btn btn-primary" type="submit">
+					<i class="fas fa-search fa-sm"></i>
+				</button>
+			</div>
+		</div>
+	</form>
+				<!-- <//%@ include file="/WEB-INF/views/lsd/z05_bootTmp/a03_topBar.jsp"%>-->
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
