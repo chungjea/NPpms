@@ -45,7 +45,7 @@
 					aria-labelledby="headingPages" data-parent="#accordionSidebar">
 					<div class="bg-white py-2 collapse-inner rounded">
 						<a class="collapse-item" href="${path}/noticePage">공지 게시판</a> 
-						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
+						<a class="collapse-item" href="${path}/calendar_f">캘린더</a> 
 						<a class="collapse-item" href="javascript:goApv()">결재</a>
 						<a class="collapse-item" href="javascript:goRsk()">리스크 관리</a> <a
 							class="collapse-item" href="${path}/meeting?deptno=10">회의록</a>

@@ -218,11 +218,27 @@ body {
 					// d.addAttribute("callist", service.getCalList());									
 					console.log(data.msg);
 					console.log(data.cal_fList);
-					if(data.msg === '등록성공') {
-						alert("등록성공"); // 등록성공/등록실패
+					console.log(data.crud);
+					if(data.crud === 'insert') {
+						if(data.msg === '등록성공') {
+							alert("등록성공"); // 등록성공/등록실패
+						} else {
+							alert("등록실패");
+						}
+					} else if(data.crud === 'update') {
+						if(data.msg === '등록성공') {
+							alert("수정성공"); // 등록성공/등록실패
+						} else {
+							alert("수정실패");
+						}
 					} else {
-						alert("등록실패");
+						if(data.msg === '등록성공') {
+							alert("삭제성공"); // 등록성공/등록실패
+						} else {
+							alert("삭제실패");
+						}
 					}
+					
 					$("#clsBtn").click() // 등록 모달창 닫기..
 					// 기존일정 삭제(full api에 등록된 데이터 삭제 js) 
 					

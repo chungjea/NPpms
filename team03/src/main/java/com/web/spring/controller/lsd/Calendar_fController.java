@@ -33,6 +33,7 @@ public class Calendar_fController {
 	public String insCal_f(Calendar_f ins, Model d) {
 		System.out.println("start:" +ins.getStart());
 		d.addAttribute("msg", service.insertCalendar(ins));
+		d.addAttribute("crud", "insert");
 		d.addAttribute("cal_fList", service.getCalList());
 		return "pageJsonReport";
 	}// insCal_f()
@@ -40,6 +41,7 @@ public class Calendar_fController {
 	@PostMapping("uptCal_f")
 	public String uptCal_f(Calendar_f upt, Model d) {
 		d.addAttribute("msg", service.updateCalendar(upt));
+		d.addAttribute("crud", "update");
 		d.addAttribute("cal_fList", service.getCalList());
 		return "pageJsonReport";
 	}// uptCal_f
@@ -47,6 +49,7 @@ public class Calendar_fController {
 	@PostMapping("delCal_f")
 	public String delCal_f(@RequestParam("id") int id, Model d) {
 		d.addAttribute("msg", service.deleteCalendar(id));
+		d.addAttribute("crud", "delete");
 		d.addAttribute("cal_fList", service.getCalList());
 		return "pageJsonReport";
 	}// delCal_f()

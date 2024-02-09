@@ -67,20 +67,20 @@
 			<div id="content">
 
 				<!-- Topbar    -->
-				<form
-		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-				method="post">
-		<div class="input-group">
-			<input type="text" class="form-control bg-light border-0 small"
-				placeholder="공지검색" name="title" value ="${noticeboard_f.title}" aria-label="Search"
-				aria-describedby="basic-addon2">
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="submit">
-					<i class="fas fa-search fa-sm"></i>
-				</button>
-			</div>
-		</div>
-	</form>
+				<!--  <form
+					class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+					method="post">
+					<div class="input-group">
+						<input type="text" class="form-control bg-light border-0 small"
+							placeholder="공지검색" name="title" value="${noticeboard_f.title}"
+							aria-label="Search" aria-describedby="basic-addon2">
+						<div class="input-group-append">
+							<button class="btn btn-primary" type="submit">
+								<i class="fas fa-search fa-sm"></i>
+							</button>
+						</div>
+					</div>
+				</form>-->
 				<!-- <//%@ include file="/WEB-INF/views/lsd/z05_bootTmp/a03_topBar.jsp"%>-->
 				<!-- End of Topbar -->
 
@@ -95,8 +95,28 @@
 					</form>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
-						<div class="card-header py-3">
-							<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
+						<div class="card-header py-3 d-flex justify-content-between">
+							<div>
+								<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
+							</div>
+							<div>
+								<form
+									class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
+									method="post">
+									<div class="input-group">
+										<input type="text"
+											class="form-control bg-light border-0 small"
+											placeholder="공지검색" name="title"
+											value="${noticeboard_f.title}" aria-label="Search"
+											aria-describedby="basic-addon2">
+										<div class="input-group-append">
+											<button class="btn btn-primary" type="submit">
+												<i class="fas fa-search fa-sm"></i>
+											</button>
+										</div>
+									</div>
+								</form>
+							</div>
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
@@ -149,12 +169,11 @@
 				</div>
 				<!-- /.container-fluid -->
 				<div style="text-align: right;">
-					<c:if
-						test="${emp.auth eq '관리자'}">
+					<c:if test="${emp.auth eq '관리자'}">
 						<input type="button" class="btn btn-success" value="등록"
 							id="insBtn" />
 					</c:if>
-					
+
 				</div>
 			</div>
 			<!-- End of Main Content -->
