@@ -162,14 +162,15 @@ body {
 			dayMaxEvents : true, // allow "more" link when too many events
 			events : function(info, successCallback, failureCallBack) {
 				$.ajax({
-					url : "${path}/calList.do",
+					url : "${path}/cal_fList",
 					dataType : "json",
 					success : function(data) {
-						console.log(data.callist)
+						console.log(data.cal_fList)
 						//alert(data.callist.length+"건!!")
 						// 서버단에서 받은 json데이터를 
 						// calendar api에 할당 처리..
-						successCallback(data.callist)
+						
+						successCallback(data.cal_fList)
 					},
 					error : function(err) {
 						console.log(err)
@@ -183,16 +184,16 @@ body {
 		calendar.render();
 
 		$("#regBtn").click(function() {
-			ajaxFunc("insertCalendar.do", "post")
+			ajaxFunc("insCal_f", "post")
 		})
 		$("#uptBtn").click(function(){
 			if(confirm("수정하시겠습니까?")){
-				ajaxFunc("updateCalendar.do", "post")
+				ajaxFunc("uptCal_f", "post")
 			}
 		})
 		$("#delBtn").click(function(){
 			if(confirm("삭제하시겠습니까?")){
-				ajaxFunc("deleteCalendar.do", "post")
+				ajaxFunc("delCal_f", "post")
 			}
 		})		
 		// 링크된 페이지로 창을 로딩하여 이동하게 처리..
@@ -215,17 +216,24 @@ body {
 					// d.addAttribute("msg", service.insertCalendar(ins));
 					// 등록 후, 전체 데이터 json데이터로 가지고 있음..
 					// d.addAttribute("callist", service.getCalList());									
-					console.log(data)
-					alert(data.msg) // 등록성공/등록실패
+					console.log(data.msg);
+					console.log(data.cal_fList);
+					if(data.msg === '등록성공') {
+						alert("등록성공"); // 등록성공/등록실패
+					} else {
+						alert("등록실패");
+					}
 					$("#clsBtn").click() // 등록 모달창 닫기..
 					// 기존일정 삭제(full api에 등록된 데이터 삭제 js) 
+					
 					calendar.removeAllEvents();
 					calendar.render();
-					
-					console.log(data.callist)
+					console.log(data.cal_fList)
 					// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
 					// 다시 추가 처리..
-					calendar.addEventSource(data.callist)
+					calendar.addEventSource(data.cal_fList)
+					window.location.reload();
+
 				},
 				error : function(err) {
 					console.log(err)
@@ -259,7 +267,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>캘린더</h2>
+		<h2>일정</h2>
 	</div>
 	<%-- 
 		
@@ -328,7 +336,7 @@ body {
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
-									배경색상</span>
+									배경색</span>
 							</div>
 							<input type="color" name="backgroundColor" class="form-control"
 								value="#0099cc" />
@@ -336,7 +344,7 @@ body {
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
-									글자색상</span>
+									글자색</span>
 							</div>
 							<input type="color" name="textColor" class="form-control"
 								value="#ccffff" />

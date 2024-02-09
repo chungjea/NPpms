@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.spring.service.lsd.Calendar_fService;
@@ -27,8 +28,10 @@ public class Calendar_fController {
 		return "pageJsonReport";
 	}// cal_fList()
 
-	@PostMapping("insCal_f")
+	// http://localhost:3333/insCal_f
+	@RequestMapping("insCal_f")
 	public String insCal_f(Calendar_f ins, Model d) {
+		System.out.println("start:" +ins.getStart());
 		d.addAttribute("msg", service.insertCalendar(ins));
 		d.addAttribute("cal_fList", service.getCalList());
 		return "pageJsonReport";

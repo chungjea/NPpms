@@ -2,19 +2,39 @@
 <!DOCTYPE mapper
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.web.spring.dao.lsd.CalendarDao_f">
+<mapper namespace="com.web.spring.dao.lsd.Calendar_fDao">
 	<resultMap type="calendar_f" id="calRst">
-		<result column="start1" property="start"/>
-		<result column="end1" property="end"/>
-		<result column="url" property="urlLink"/>
+		<result column="startdate" property="start"/>
+		<result column="enddate" property="end"/>
+		<result column="urllink" property="urlLink"/>
 	</resultMap>
 	
 	<select id="getCalList" resultMap="calRst">
+		select *
+		from calendar_f
+	</select>
+	
+	<!--  <select id="getCalList" resultMap="calRst">
 		select id, title, writer,
 			to_char(start1,'YYYY-MM-DD"T"HH24:MI:SS"+09:00"') start1,
 			to_char(end1,'YYYY-MM-DD"T"HH24:MI:SS"+09:00"') end1,
 			content, backgroundcolor, textcolor, allday, url
-		from calendar
-	</select>
+		from calendar_f
+	</select>-->
 	
+	<insert id="insertCalendar" parameterType="calendar_f">
+	INSERT INTO Calendar_f values(cal_seq.nextval, #{title},
+				#{start},
+				#{end},
+				#{writer},#{content},#{backgroundColor},
+				#{textColor},#{allDay},#{urlLink})
+	 </insert>
+	
+	<!-- <insert id="insertCalendar" parameterType="calendar_f">
+	INSERT INTO Calendar_f values(cal_seq.nextval, #{title},
+				to_date(#{start},'YYYY-MM-DD"T"HH24:MI:SS"+09:00"'),
+				to_date(#{end},'YYYY-MM-DD"T"HH24:MI:SS"+09:00"'),
+				#{writer},#{content},#{backgroundColor},
+				#{textColor},#{allDay},#{urlLink})
+	 </insert> -->
 </mapper>

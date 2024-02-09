@@ -9,7 +9,7 @@ public class Calendar_f {
 	private String content;
 	private String backgroundColor;
 	private String textColor;
-	private boolean allDay;
+	private String allDay;
 	private String urlLink;
 
 	public Calendar_f() {
@@ -17,7 +17,7 @@ public class Calendar_f {
 	}
 
 	public Calendar_f(int id, String title, String start, String end, String writer, String content,
-			String backgroundColor, String textColor, boolean allDay, String urlLink) {
+			String backgroundColor, String textColor, String allDay, String urlLink) {
 		this.id = id;
 		this.title = title;
 		this.start = start;
@@ -94,11 +94,11 @@ public class Calendar_f {
 		this.textColor = textColor;
 	}
 
-	public boolean isAllDay() {
+	public String getAllDay() {
 		return allDay;
 	}
 
-	public void setAllDay(boolean allDay) {
+	public void setAllDay(String allDay) {
 		this.allDay = allDay;
 	}
 
