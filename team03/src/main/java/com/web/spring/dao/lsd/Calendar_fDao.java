@@ -13,7 +13,7 @@ import com.web.spring.vo.Calendar_f;
 @Mapper
 public interface Calendar_fDao {
 	// 전체조회
-	List<Calendar_f> getCalList();
+	List<Calendar_f> getCalList(String dName);
 
 	// 등록
 	/*

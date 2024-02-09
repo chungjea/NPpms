@@ -14,8 +14,8 @@ public class Calendar_fService {
 	private Calendar_fDao dao;
 
 	// 전체조회
-	public List<Calendar_f> getCalList() {
-		return dao.getCalList();
+	public List<Calendar_f> getCalList(String dName) {
+		return dao.getCalList(dName);
 	}// getCalList()
 
 	// 등록

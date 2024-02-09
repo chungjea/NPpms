@@ -12,6 +12,7 @@
 	<select id="getCalList" resultMap="calRst">
 		select *
 		from calendar_f
+		where dname = #{dName}
 	</select>
 	
 	<!--  <select id="getCalList" resultMap="calRst">
@@ -27,7 +28,7 @@
 				#{start},
 				#{end},
 				#{writer},#{content},#{backgroundColor},
-				#{textColor},#{allDay},#{urlLink})
+				#{textColor},#{allDay},#{urlLink},#{dName})
 	 </insert>
 	
 	<!-- <insert id="insertCalendar" parameterType="calendar_f">

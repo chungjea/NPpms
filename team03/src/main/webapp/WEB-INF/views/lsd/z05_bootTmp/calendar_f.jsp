@@ -283,7 +283,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>일정</h2>
+		<h2>Calendar</h2>
 	</div>
 	<%-- 
 		

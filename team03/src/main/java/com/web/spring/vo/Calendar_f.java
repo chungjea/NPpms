@@ -11,13 +11,14 @@ public class Calendar_f {
 	private String textColor;
 	private String allDay;
 	private String urlLink;
+	private String dName;
 
 	public Calendar_f() {
 
 	}
 
 	public Calendar_f(int id, String title, String start, String end, String writer, String content,
-			String backgroundColor, String textColor, String allDay, String urlLink) {
+			String backgroundColor, String textColor, String allDay, String urlLink, String dName) {
 		this.id = id;
 		this.title = title;
 		this.start = start;
@@ -28,6 +29,7 @@ public class Calendar_f {
 		this.textColor = textColor;
 		this.allDay = allDay;
 		this.urlLink = urlLink;
+		this.dName = dName;
 	}
 
 	public int getId() {
@@ -110,4 +112,11 @@ public class Calendar_f {
 		this.urlLink = urlLink;
 	}
 
+	public String getDName() {
+		return dName;
+	}
+
+	public void setDName(String dName) {
+		this.dName = dName;
+	}
 }// Calendar_f
