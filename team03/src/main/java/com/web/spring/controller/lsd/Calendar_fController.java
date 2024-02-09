@@ -37,8 +37,10 @@ public class Calendar_fController {
 	@RequestMapping("insCal_f")
 	public String insCal_f(Calendar_f ins, Model d, HttpSession session) {
 		System.out.println("start:" +ins.getStart());
+		// 게시물 구분 - 로그인한 사람 dname을 가져옴
 		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
 		String dName = emp.getDname();
+		// Calendar_f dname에 사번을 저장
 		ins.setDName(dName);
 		d.addAttribute("msg", service.insertCalendar(ins));
 		d.addAttribute("crud", "insert");
