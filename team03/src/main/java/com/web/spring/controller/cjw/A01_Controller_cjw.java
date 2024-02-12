@@ -206,8 +206,7 @@ public class A01_Controller_cjw {
 	}
 	
 	@GetMapping("upload")
-	public String upload(File_f ins, FileSch sch, Model d) {
-		d.addAttribute("bfile", service.boardfile(sch));
+	public String upload(File_f ins, Model d) {
 		d.addAttribute("msg", service.insertfilemy(ins));
 		return "cjw/z05_bootTmp/file";
 	}

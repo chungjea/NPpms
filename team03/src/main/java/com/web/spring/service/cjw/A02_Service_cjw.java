@@ -437,7 +437,7 @@ public class A02_Service_cjw {
 	// 회의록 : 회의록 삭제
 	public String deletemet(int metno) {
 		List<String> delFnames = dao.getfnobynamem(metno);
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		for(String fname:delFnames) {
 			File fileToDelete = new File(path+fname);
 			if(fileToDelete.exists()) fileToDelete.delete();
@@ -480,7 +480,8 @@ public class A02_Service_cjw {
 	
 	// 문서관리 : 개인 파일 업로드
 	public String insertfilemy(File_f ins) {
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		String path = "C:\\Users\\Administrator\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		String msg = "";
 		int ckf = 0;
 		MultipartFile[] mpfs = ins.getReports();
@@ -492,7 +493,7 @@ public class A02_Service_cjw {
 						if(!fname.trim().equals("")) {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
-							ckf+=dao.insertfilemy(ins);
+							ckf+=dao.insertfilemy(fname, path, fno, ins.getEmpno());
 						}
 					}
 				}

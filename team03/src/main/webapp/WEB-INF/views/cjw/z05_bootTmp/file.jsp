@@ -87,7 +87,8 @@
                         </a>
                     </div>
                     <form id="filefrm" method="get" action="${path}/upload">
-                    	<input type="file" name="reports" multiple="multiple" class="form-control"/>
+                    	<input type="file" name="reports" multiple="multiple" value="" />
+                    	<input type="text" name="empno" value="1000" />
                     	<button type="submit">입력확인</button>
                     </form>
                     <script type="text/javascript">

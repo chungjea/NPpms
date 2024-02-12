@@ -182,5 +182,5 @@ public interface A03_Dao_cjw {
 	int boardfilecnt(FileSch sch);
 	
 	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.nextval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
-	int insertfilemy(File_f ins);
+	int insertfilemy(String fname, String path, String fno, int empno);
 }
