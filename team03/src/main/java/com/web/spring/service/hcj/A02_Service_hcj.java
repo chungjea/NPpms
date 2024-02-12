@@ -1,17 +1,22 @@
 package com.web.spring.service.hcj;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.dao.hcj.A03_Dao_hcj;
 import com.web.spring.vo.Data;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Error_f;
+import com.web.spring.vo.IconRep_f;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
+import com.web.spring.vo.Task_f;
 
 @Service
 public class A02_Service_hcj {
@@ -53,7 +58,34 @@ public class A02_Service_hcj {
 	
 	// 프로젝트 생성
 	public String insertProject(Project_f ins,String teams) {
+		System.out.println("프로젝트 생성 시작!!!");
 		String msg = dao.insertProject(ins)>0?"프로젝트 생성성공!":"프로젝트 생성 실패";
+		System.out.println(ins.getReports());
+		if(ins.getReports()!= null) {	
+			System.out.println("아이콘이미지 생성 시도!!!");
+			String path = "C:\\a01_springbt\\workspace\\maven.1706639790004\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+			try {
+						
+					// 1. 파일 업로드
+					// 파일명을 가져오기..
+					String fname = ins.getReports().getOriginalFilename();
+					String savename = dao.getIconNum();
+					// client에서 network을 전달된 것을 받는 객체(MultipartFile)
+					// 물리적으로 특정위치에 저장할 수 있는 객체(File)
+					// MultipartFile ==> File : 실제 물리적으로 특정 위치에 파일명으로 저장
+					ins.getReports().transferTo(new File(path+savename));
+					
+					// 2. 업로드된 파일정보를 DB저장..(추후에 활용할 목적)(
+					dao.insertIconfile(new IconRep_f(fname,path));
+					// FileRep(int no, String fname, String path, String etc) 
+					System.out.println("아이콘이미지 생성 성공");		
+			} catch (IllegalStateException e) {
+				System.out.println("파일업로드 예외1:"+e.getMessage());
+			} catch (IOException e) {
+				System.out.println("파일업로드 예외2:"+e.getMessage());
+			}
+		
+		}
 		if(!teams.equals("")) {
 			String[] tmems = teams.split(",");
 			int cnt = 0;
@@ -63,6 +95,7 @@ public class A02_Service_hcj {
 			}
 			msg += cnt+"명의 팀 추가 완료";
 		}
+		System.out.println("프로젝트 생성 완료");
 		return msg;
 	}
 	// 사원 검색
@@ -140,6 +173,10 @@ public class A02_Service_hcj {
 	// 프로젝트 테스크 출력
 	public List<Data> getTaskdatas(int pcode) {
 		return dao.getTaskdatas(pcode);
+	}
+	
+	public String insertTask(Task_f task) {
+		return dao.insertTask(task)>0?"등록성공":"등록실패";
 	}
 	
 }

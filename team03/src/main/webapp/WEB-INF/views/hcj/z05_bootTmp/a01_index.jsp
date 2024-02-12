@@ -207,7 +207,7 @@
 		// 프로젝트 생성
 		 $.ajax({
 			type:"post",
-			url:"${path}/insertProject.do2",
+			url:"${path}/insertProject",
 			data:$("#frm02").serialize(),
 			dataType:"json",
 			success:function(data){
