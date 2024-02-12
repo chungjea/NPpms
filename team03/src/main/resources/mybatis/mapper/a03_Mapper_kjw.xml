@@ -37,8 +37,10 @@
 <select id="empcnt" parameterType="emplist">
 SELECT COUNT(*) FROM emp_master_f
 </select>
-<insert id="commute_s" parameterType="commute_s">
-INSERT INTO Commute_f values(#{${emp.empno}},#{${emp.ename}},0,0,0,sysdate,,)
+<insert id="commute_s"  parameterType="commute_s">
+INSERT INTO Commute_f values(#{empno},#{ename},0,0,0,sysdate,#{endtime,jdbcType=DATE},#{overtime,jdbcType=DATE})
 </insert>
+
+
 
 </mapper>

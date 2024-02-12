@@ -137,8 +137,8 @@ else{
 
 if ("${param.empno}" != "") {
 	if (empno != "") {
-		alert("로그인 성공\n메인페이지로 이동")
 		location.href = "${path}/mainpage"
+		
 	} else {
 		alert("로그인 실패2\n다시 로그인하세요")
 

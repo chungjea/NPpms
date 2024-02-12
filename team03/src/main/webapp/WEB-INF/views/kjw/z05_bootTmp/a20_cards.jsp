@@ -18,10 +18,12 @@
 <%
 Date time1 = new Date();
 SimpleDateFormat formatter1 = new SimpleDateFormat(
-		"yyyy-mm-dd (E) hh:mm:ss",Locale.KOREA
+		"YYYY-MM-DD: (E) hh:mm:ss",Locale.KOREA
 		);
 long lasttime1=session.getLastAccessedTime();
 long createdtime1=session.getCreationTime();
+var empno = "${emp.empno}";
+var ename = "${emp.ename}";
 
 %>
 
@@ -81,40 +83,36 @@ long createdtime1=session.getCreationTime();
                                              <div class="h5 mb-0 font-weight-bold text-gray-800">0h0m</div>
                                              <div class="progress progress-sm mr-2"></div>
                                            
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">출근시간 &nbsp &nbsp &nbsp &nbsp ${commute.starttime}</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">퇴근시간 &nbsp &nbsp &nbsp &nbsp ${commute.endtime}</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">야근시간 &nbsp &nbsp &nbsp &nbsp ${commute.overtime}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">출근시간 &nbsp &nbsp &nbsp &nbsp :${commute.starttime}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">퇴근시간 &nbsp &nbsp &nbsp &nbsp :${commute.endtime}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">야근시간 &nbsp &nbsp &nbsp &nbsp :${commute.overtime}</div>
                                              <hr style="border-width:1px 0 0 0; border-style:dotted; border-color:#bbb;">
- <form method="post" id="send" action="${path}/SCommute">
-                                            <a href="#" id="StartBtn"class="btn btn-light btn-icon-split">
-                                     
-                                        <span class="text">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp출근&nbsp &nbsp &nbsp &nbsp</span>
+ <form method="post" id="send" action="${path}/commute_s" class="btn btn-light btn-icon-split">
+                                            <a href="${path}/commute_s" id="StartBtn"class="btn btn-light btn-icon-split">
+                                            
+                                   
+                                      
+                                        <span class="text">&nbsp &nbsp &nbsp &nbsp출근&nbsp &nbsp &nbsp &nbsp</span>
                                     </a>
-                                      </form>
+                                    <input type="hidden" name="empno" value="${emp.empno}">
+                                    <input type="hidden" name="ename" value="${emp.ename}">
+                                   
+                                    
+                                     </form>
+<form method="post" id="send" action="${path}/ECommute" class="btn btn-light btn-icon-split">
                                     <a href="#" id="EndBtn"class="btn btn-light btn-icon-split">
                                       
-                                        <span class="text">&nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp퇴근&nbsp &nbsp &nbsp &nbsp </span>
+                                        <span class="text">&nbsp &nbsp &nbsp &nbsp퇴근&nbsp &nbsp &nbsp &nbsp </span>
                                     </a>
+                                     </form>
                                         </div>
-                                        
+                                         
                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-<script type="text/javascript">
-				$("#StartBtn").click(function(){
-					
-					
-					if(confirm("등록하시겠습니까?")){
-						$("#send").submit()
-					}
-					else
-						return ("${path}/mainpage")
-					
-				})
-                        
 
                     <div class="row">
 
@@ -237,11 +235,14 @@ long createdtime1=session.getCreationTime();
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
-<!-- Page level plugins -->
+<%-- <!-- Page level plugins -->
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 
 <!-- Page level custom scripts -->
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
+<script>
+console.log(${emp.empno})
+</script>
 </body>
 </html>
