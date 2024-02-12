@@ -105,7 +105,7 @@ public String commute_s(Commute_f ins,Model d) {
 
 @RequestMapping("test")
 public String test() {
-	return "kjw/z05_bootTmp/a10_buttons";
+	return "kjw/z05_bootTmp/a20_cards";
 }
 @RequestMapping("registerFrm")
 public String registerFrm() {

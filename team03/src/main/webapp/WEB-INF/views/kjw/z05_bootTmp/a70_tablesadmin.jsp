@@ -25,6 +25,7 @@
 	});
 </script>
  --%>
+<script type="text/javascript" src="/team03/src/main/webapp/a00_com/js/tablesorter-master/dist/js/jquery.tablesorter.js"></script>
 
 
 <!-- Custom fonts for this template-->
@@ -163,7 +164,7 @@
 									class="icon text-white-50"> <i class="fas fa-check"></i>
 								</span> <span class="text">사원등록</span>
 								</a>
-								<a href="#" class="btn btn-warning btn-circle">
+								<a href="#" class="btn btn-warning btn-circle" id="excelDownload" onclick='exportExcel'>
                                         <img src="${path}/a00_com/images/downloadicon.png">
                                     </a>
 							</c:if>
@@ -208,9 +209,10 @@
 
 								<div style="width: 100%; height: 200px; ">
 									<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
-
-										<table class="table table-bordered" id="dataTable"
+<table class="tablesorter">
+										<table class="table table-bordered"  id="dataTable"
 											width="100%" cellspacing="0">
+											
 											<thead>
 												<tr>
 													<th>사원번호</th>
@@ -240,6 +242,7 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										</table>
 									</c:if>
 									<div class="card-body">
 										<div class="table-responsive">
@@ -248,11 +251,11 @@
 											<c:if
 												test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
 
-												<table class="table table-bordered" id="dataTable"
+												<table class="table table-bordered" id="dataTable1"
 													width="100%" cellspacing="0">
 													<thead>
 														<tr>
-															<th>사원번호</th>
+															<th >사원번호</th>
 															<th>사원명</th>
 															<th>부서명</th>
 															<th>입사일</th>
@@ -344,8 +347,22 @@
 <!--FileSaver savaAs 이용 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
 
+
+
+
+
+
+
 </body>
+
 <script type="text/javascript">
+
+$(function(){
+	      $("#dataTable").tablesorter();
+	   });
+
+
+
 $("#checking").hide();
 $("#checking1").hide();
 	var sessId = "${emp.empno}"
@@ -399,7 +416,7 @@ console.error("Error:",status,err);
 		});
 	
 });
-
+	var count=0;
 var dname= "${emp.dname}"
 	var auth="${emp.auth}"
 
@@ -419,6 +436,7 @@ var dname= "${emp.dname}"
 				$("#checking1").hide();
 			})
 			
+			//엑셀 외부 js 사용할진 미지수
 			const excelDownload = document.querySelector('#excelDownload');
 
 document.addEventListener('DOMContentLoaded', ()=>{
@@ -426,6 +444,7 @@ document.addEventListener('DOMContentLoaded', ()=>{
 });
 
 function exportExcel(){ 
+	count=count+1;
   // step 1. workbook 생성
   var wb = XLSX.utils.book_new();
 
@@ -444,13 +463,13 @@ function exportExcel(){
 
 var excelHandler = {
     getExcelFileName : function(){
-        return 'table-test.xlsx';	//파일명
+        return '${emp.dname}'+'인원리스트'+count+'.xlsx';	//파일명
     },
     getSheetName : function(){
-        return 'Table Test Sheet';	//시트명
+        return '${emp.dname}'+'인원리스트';	//시트명
     },
     getExcelData : function(){
-        return document.getElementById('tableData'); 	//TABLE id
+        return document.getElementById('dataTable'); 	//TABLE id
     },
     getWorksheet : function(){
         return XLSX.utils.table_to_sheet(this.getExcelData());
@@ -463,6 +482,8 @@ function s2ab(s) {
   for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
   return buf;    
 }
+
+
 			
 </script>
 </html>
