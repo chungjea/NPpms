@@ -115,15 +115,36 @@ $("[name=passwd]").keyup(function() {
 	}
 	}
 	})
-if ("${param.empno}" != "") {
-			if (empno != "") {
-				alert("로그인 성공\n메인페이지로 이동")
+/* if ($("[name=passwd]").val()!= "") {
+	//db저장 사번과 현재 넘겨진 사번이 일치할시
+			if (empno != ""&&"$("[name=empno]").val()"==empno) {
+				alert("로그인 성공(성공시나리오1)\n메인페이지로 이동")
 				location.href = "${path}/mainpage"
-			} else {
-				alert("로그인 실패2\n다시 로그인하세요")
+				//db사번과 입력된 사번이 불일치.(잘못입력시)
+			} else if(empno != ""&&"$("[name=empno]").val()"!=empno){
+				alert("아이디가 불일치합니다.")
 
-			}
+			} else if(passwd != ""&& $("[name=passwd]").val()!= ""){
+				alert("비밀번호가 불일치합니다.")
 		}
+			else if("$("[name=empno]").val()"==""||"${param.passwd}"==""){
+				alert("입력된 아이디 혹은 비밀번호가 공백입니다. 다시확인해주세요.")
+		} 
+}
+else{
+	alert("사번과 비밀번호를 동시에 공백입력.")
+} */
+
+if ("${param.empno}" != "") {
+	if (empno != "") {
+		alert("로그인 성공\n메인페이지로 이동")
+		location.href = "${path}/mainpage"
+	} else {
+		alert("로그인 실패2\n다시 로그인하세요")
+
+	}
+}
+
 window.history.forward();
 function noBack(){window.history.forward();}
 </script>
