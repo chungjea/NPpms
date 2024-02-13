@@ -181,7 +181,7 @@ public class A02_Service_hcj {
 	public String insertTask(Task_f task) {
 		System.out.println("--insertTask 서비스 접근--");
 
-		//String sd=task.getStart_date().substring(0,task.getStart_date().indexOf("T"));
+		//String sd=task.getStart_date().substring(0,task.getStart_date().indexOf("T"));;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		System.out.println(dateFormat.format(task.getStart_date()));
 

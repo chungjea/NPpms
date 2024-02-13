@@ -218,7 +218,7 @@
 				if(data.msg!=""){
 					alert(data.msg)
 					location.href="${path}/mainpage"
-					
+					//
 				}
 					
 			},

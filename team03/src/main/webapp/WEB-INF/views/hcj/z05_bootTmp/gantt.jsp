@@ -175,7 +175,7 @@ html, body {
 						    {name:"description", height:50, map_to:"text", type:"textarea", focus:true},
 						    {name:"assignor", height:30, type:"select", options:tmem,map_to:"assignor"},
 						    {name:"time", height:40, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]},
-						   /*  {name:"pcode",map_to:"pcode",type:"textarea",default_value:"${param.pcode}"} */
+						  
 						    
 						];
 					
