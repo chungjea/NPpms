@@ -205,7 +205,7 @@ public class A01_Controller_cjw {
 		return "cjw/z05_bootTmp/file";
 	}
 	
-	@GetMapping("upload")
+	@PostMapping("upload")
 	public String upload(File_f ins, Model d) {
 		d.addAttribute("msg", service.insertfilemy(ins));
 		return "cjw/z05_bootTmp/file";

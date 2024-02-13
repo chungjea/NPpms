@@ -86,20 +86,20 @@
                         	<span class="text">파일 업로드</span>
                         </a>
                     </div>
-                    <form id="filefrm" method="get" action="${path}/upload">
+                    <form id="filefrm" method="post" action="${path}/upload" enctype="multipart/form-data">
                     	<input type="file" name="reports" multiple="multiple" value="" />
                     	<input type="text" name="empno" value="1000" />
                     	<button type="submit">입력확인</button>
                     </form>
                     <script type="text/javascript">
                     	$(document).ready(function() {
-                    		//$("#filefrm").hide()
+                    		insertfile();
+                    		$("#filefrm").hide()
                     		var msg = "${msg}"
                     		if(msg!=""){
                     			alert(msg)
                     			location.href="${path}/file?empno=1000&deptno=10";
                     		}
-                    		insertfile();
                     	});
                     	function upload(){
                     		$("[name=reports]").click();
