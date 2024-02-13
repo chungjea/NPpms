@@ -65,6 +65,11 @@
                                          
                                         </a>
                                         <hr>
+                                         <select class="form-control" id="selectLan">
+					<option value=""><spring:message code="chlange" /></option>
+					<option value="ko"><spring:message code="ko" /></option>
+					<option value="en"><spring:message code="en" /></option>
+				</select>
                                         
                                     </form>
                                     <hr>
@@ -100,6 +105,7 @@
 <!-- Page level custom scripts -->
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
+
 <script>
 
 
@@ -147,8 +153,16 @@ if ("${param.empno}" != "") {
 
 window.history.forward();
 function noBack(){window.history.forward();}
+$(document).ready(function() {
+	// 이전화면에서 요청된 내용을 선택하게 하게, 선택할 때, 서버에 언어 선택 내용 전달.
+	$("#selectLan").val("${param.lang}").change(function() {
+		var chVal = $(this).val()
+		if (chVal != '') {
+			location.href = "${path}/multiLang?lang=" + chVal
+		}
+	})
+});
 </script>
-
 
 </body>
 </html>
