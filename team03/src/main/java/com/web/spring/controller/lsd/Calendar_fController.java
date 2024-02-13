@@ -29,6 +29,7 @@ public class Calendar_fController {
 	public String cal_fList(Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
 		String dName = emp.getDname();
+		//String ename = emp.getEname();
 		d.addAttribute("cal_fList", service.getCalList(dName));
 		return "pageJsonReport";
 	}// cal_fList()
@@ -40,6 +41,7 @@ public class Calendar_fController {
 		// 게시물 구분 - 로그인한 사람 dname을 가져옴
 		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
 		String dName = emp.getDname();
+		//String eName = emp.getEname();
 		// Calendar_f dname에 사번을 저장
 		ins.setDName(dName);
 		d.addAttribute("msg", service.insertCalendar(ins));
@@ -52,6 +54,7 @@ public class Calendar_fController {
 	public String uptCal_f(Calendar_f upt, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
 		String dName = emp.getDname();
+		//String eName = emp.getEname();
 		d.addAttribute("msg", service.updateCalendar(upt));
 		d.addAttribute("crud", "update");
 		d.addAttribute("cal_fList", service.getCalList(dName));
@@ -62,6 +65,7 @@ public class Calendar_fController {
 	public String delCal_f(@RequestParam("id") int id, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
 		String dName = emp.getDname();
+		//String eName = emp.getEname();
 		d.addAttribute("msg", service.deleteCalendar(id));
 		d.addAttribute("crud", "delete");
 		d.addAttribute("cal_fList", service.getCalList(dName));
