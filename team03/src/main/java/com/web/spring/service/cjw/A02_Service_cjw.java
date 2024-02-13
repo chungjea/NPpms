@@ -480,11 +480,11 @@ public class A02_Service_cjw {
 	
 	// 문서관리 : 개인 파일 업로드
 	public String insertfilemy(File_f ins) {
-		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
-		String path = "C:\\Users\\Administrator\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		String msg = "";
 		int ckf = 0;
 		MultipartFile[] mpfs = ins.getReports();
+		int empno = ins.getEmpno();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
 				for(MultipartFile mpf:mpfs) {
@@ -493,7 +493,7 @@ public class A02_Service_cjw {
 						if(!fname.trim().equals("")) {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
-							ckf+=dao.insertfilemy(fname, path, fno, ins.getEmpno());
+							ckf+=dao.insertfilemy(fname, path, fno, empno);
 						}
 					}
 				}
