@@ -175,7 +175,7 @@ html, body {
 						    {name:"description", height:50, map_to:"text", type:"textarea", focus:true},
 						    {name:"assignor", height:30, type:"select", options:tmem,map_to:"assignor"},
 						    {name:"time", height:40, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]},
-						    {name:"pcode",map_to:"pcode",type:"textarea",default_value:"${param.pcode}"}
+						   /*  {name:"pcode",map_to:"pcode",type:"textarea",default_value:"${param.pcode}"} */
 						    
 						];
 					
@@ -210,24 +210,18 @@ html, body {
 						});
 						
 						gantt.attachEvent("onAfterTaskAdd", function(id,item){
-							console.log("onAfterTaskAdd:테스크 생성시 쓰면 될듯")
+							console.log("onAfterTaskAdd:테스크 생성시 사용")
 							var newdata = gantt.getLightboxValues();
-	
-							 var testdata = {"source":[],"text":"fsddsffsdfsd"}
-							var taskdata = JSON.stringify(testdata);
-							var taskdata2 = JSON.stringify(newdata)
-							var testtaskdata = newdata.id 
-							/* var datas = "id="+newdata.id +"&text="+newdata.text+"&start_date="+newdata.start_date
-							+"end_date="+newdata.end_date+"&progress="+newdata.progress+"&assignor="+newdata.assignor+"&parent="+newdata.parent
-							+"&pcode=${param.pcode}" */ ;
-
-							//alert(datas)
+							var curpcode = {"pcode":"${param.pcode}"}
+							var taskdata = Object.assign(newdata,curpcode);
+							console.log(newdata.start_date)
+						
 							 $.ajax({
 								url:"${path}/insertTask",
 								type:"post",
 								contentType: "application/json",
 								dataType:"json",
-								data :taskdata2,
+								data :JSON.stringify(taskdata),
 								success:function(data){
 									alert(data.msg)
 								},

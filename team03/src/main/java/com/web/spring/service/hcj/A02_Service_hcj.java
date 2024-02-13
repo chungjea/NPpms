@@ -2,11 +2,12 @@ package com.web.spring.service.hcj;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.dao.hcj.A03_Dao_hcj;
 import com.web.spring.vo.Data;
@@ -63,17 +64,19 @@ public class A02_Service_hcj {
 		System.out.println(ins.getReports());
 		if(ins.getReports()!= null) {	
 			System.out.println("아이콘이미지 생성 시도!!!");
-			String path = "C:\\a01_springbt\\workspace\\maven.1706639790004\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload";
+			String path = "C:\\a01_springbt\\workspace\\maven.1707094358148\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 			try {
 						
 					// 1. 파일 업로드
 					// 파일명을 가져오기..
 					String fname = ins.getReports().getOriginalFilename();
 					String savename = dao.getIconNum();
+					String ext = fname.substring(fname.lastIndexOf("."));
 					// client에서 network을 전달된 것을 받는 객체(MultipartFile)
 					// 물리적으로 특정위치에 저장할 수 있는 객체(File)
 					// MultipartFile ==> File : 실제 물리적으로 특정 위치에 파일명으로 저장
-					ins.getReports().transferTo(new File(path+savename));
+					System.out.println(path+savename+ext);
+					ins.getReports().transferTo(new File(path+savename+ext));
 					
 					// 2. 업로드된 파일정보를 DB저장..(추후에 활용할 목적)(
 					dao.insertIconfile(new IconRep_f(fname,path));
@@ -176,7 +179,17 @@ public class A02_Service_hcj {
 	}
 	
 	public String insertTask(Task_f task) {
-		return dao.insertTask(task)>0?"등록성공":"등록실패";
+		System.out.println("--insertTask 서비스 접근--");
+
+		//String sd=task.getStart_date().substring(0,task.getStart_date().indexOf("T"));
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		System.out.println(dateFormat.format(task.getStart_date()));
+
+		
+		
+		
+		 
+		return "";//dao.insertTask(task)>0?"등록성공":"등록실패";
 	}
 	
 }

@@ -205,10 +205,14 @@
 			
 		}
 		// 프로젝트 생성
+		var formdata = new FormData($("#frm02")[0]);
 		 $.ajax({
 			type:"post",
+			enctype: 'multipart/form-data',
 			url:"${path}/insertProject",
-			data:$("#frm02").serialize(),
+			data:formdata,
+			processData: false,	
+			contentType: false,
 			dataType:"json",
 			success:function(data){
 				if(data.msg!=""){
