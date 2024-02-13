@@ -2,6 +2,10 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+
+
+
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
@@ -12,7 +16,7 @@
 
 
 
-
+ 
 
  
      <!-- Custom fonts for this template1-->
@@ -46,22 +50,26 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">로그인</h1>
+                                        <h1 class="h4 text-gray-900 mb-4"><spring:message
+							code="login" /></h1>
                                     </div>
                                     <form class="user" method="post" >
                                         <div class="form-group">
                                             <input type="text" name="empno" class="form-control form-control-user"
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="사번을 입력하세요">
+                                                placeholder='<spring:message
+							code="empno" />' />
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="passwd"class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="exampleInputPassword" placeholder='<spring:message
+							code="passwd" />' />
                                         </div>
                                         <div class="form-group">
                                         </div>
-                                        <a href='javascript:$(".user").submit()' class="btn btn-primary btn-user btn-block">
-                                            Login
+                                        <a href='javascript:$(".user").submit()' type="button" class="btn btn-primary btn-user btn-block">
+                                            <spring:message
+							code="login" />
                                          
                                         </a>
                                         <hr>
@@ -70,7 +78,7 @@
 					<option value="ko"><spring:message code="ko" /></option>
 					<option value="en"><spring:message code="en" /></option>
 				</select>
-                                        
+                                       
                                     </form>
                                     <hr>
                                     <div class="text-center">
@@ -107,7 +115,15 @@
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 
 <script>
-
+$(document).ready(function() {
+	// 이전화면에서 요청된 내용을 선택하게 하게, 선택할 때, 서버에 언어 선택 내용 전달.
+	$("#selectLan").val("${param.lang}").change(function() {
+		var chVal = $(this).val()
+		if (chVal != '') {
+			location.href = "${path}/multiLang?lang=" + chVal
+		}
+	})
+});
 
 var empno = "${emp.empno}"
 var sessEmpno = "${emp.empno}"
@@ -153,15 +169,8 @@ if ("${param.empno}" != "") {
 
 window.history.forward();
 function noBack(){window.history.forward();}
-$(document).ready(function() {
-	// 이전화면에서 요청된 내용을 선택하게 하게, 선택할 때, 서버에 언어 선택 내용 전달.
-	$("#selectLan").val("${param.lang}").change(function() {
-		var chVal = $(this).val()
-		if (chVal != '') {
-			location.href = "${path}/multiLang?lang=" + chVal
-		}
-	})
-});
+
+
 </script>
 
 </body>

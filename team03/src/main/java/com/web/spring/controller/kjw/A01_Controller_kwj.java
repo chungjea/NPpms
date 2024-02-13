@@ -39,9 +39,11 @@ public String loginFrm() {
 	return "kjw/z05_bootTmp/a83_login";
 }
 @PostMapping("login")
+
 public String login(Emp_pinfo_f emplogin, HttpSession session) {
 System.out.println("test");
 	Emp_pinfo_f emp = service.login(emplogin);
+	
 	System.out.println("데이터 check:");
 	System.out.println(emp); // null or 주소값
 	if(emp!=null) {
