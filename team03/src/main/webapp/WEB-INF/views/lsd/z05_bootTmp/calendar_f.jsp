@@ -9,6 +9,7 @@
 
 
  --%>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -340,7 +341,7 @@ body {
 								<span class="input-group-text  justify-content-center">
 									작성자</span>
 							</div>
-							<input name="writer" class="form-control" value="" />
+							<input name="writer" class="form-control" value="${emp.ename}" readonly />
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
