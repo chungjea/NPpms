@@ -2,6 +2,7 @@ package com.web.spring.service.hcj;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -181,15 +182,22 @@ public class A02_Service_hcj {
 	public String insertTask(Task_f task) {
 		System.out.println("--insertTask 서비스 접근--");
 
-		//String sd=task.getStart_date().substring(0,task.getStart_date().indexOf("T"));;
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		System.out.println(dateFormat.format(task.getStart_date()));
+		/*
+		 * //String
+		 * sd=task.getStart_date().substring(0,task.getStart_date().indexOf("T"));; try
+		 * { SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); Date date
+		 * = dateFormat.parse(task.getStart_date()); String strtdte
+		 * =dateFormat.format(date); task.setStart_date(strtdte); date =
+		 * dateFormat.parse(task.getStart_date()); System.out.println(); } catch
+		 * (ParseException e) { // TODO Auto-generated catch block e.printStackTrace();
+		 * }
+		 */
+		String startdte = task.getStart_date().split("T")[0];
+		String enddte = task.getEnd_date().split("T")[0];
+		task.setStart_date(startdte);
+		task.setEnd_date(enddte);
 
-		
-		
-		
-		 
-		return "";//dao.insertTask(task)>0?"등록성공":"등록실패";
+		return dao.insertTask(task)>0?"등록성공":"등록실패";
 	}
 	
 }
