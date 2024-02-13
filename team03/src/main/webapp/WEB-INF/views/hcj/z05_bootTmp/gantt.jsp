@@ -224,6 +224,7 @@ html, body {
 								data :JSON.stringify(taskdata),
 								success:function(data){
 									alert(data.msg)
+									gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
 								},
 								error:function(err){
 									console.log(err)
