@@ -30,7 +30,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 
-//http://localhost:7080/team03/mypagefilter
+//http://localhost:3333/team03/mypagefilter
 @Controller
 public class A01_Controller_kwj {
 	@Autowired(required = false)
@@ -124,7 +124,7 @@ public String register(Emp_master_f ins,Model d) {
 }
 @RequestMapping("test1")
 public String test1() {
-	return "a20_cards";
+	return "kjw/z05_bootTmp/a20_cards";
 }
 //컨테이너에 선언한 지역 언어선택 객체 호출
 	@Autowired(required=false)

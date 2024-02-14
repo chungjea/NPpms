@@ -59,7 +59,7 @@ var ename = "${emp.ename}";
 			<div id="content">
 
 				<!-- Topbar    -->
-				<%@ include file="/z05_bootTmp/a03_topBar.jsp"%>
+				<%@ include file="z05_bootTmp/a03_topBar.jsp"%>
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
