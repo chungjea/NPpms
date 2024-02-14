@@ -13,6 +13,7 @@ import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
 import com.web.spring.vo.FileSch;
+import com.web.spring.vo.FileSch3;
 import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
@@ -512,4 +513,26 @@ public class A02_Service_cjw {
 		return msg;
 	}
 	
+	// 문서관리 : 개인 리스트 출력 (팀으로 바꿀 예정)
+	public List<File_f> myfile(FileSch3 sch) {
+		sch.setCount3(dao.myfilecnt(sch));
+		if(sch.getPageSize3()==0) sch.setPageSize3(5);
+		int totPage3 = (int)Math.ceil(sch.getCount3()/(double)sch.getPageSize3());
+		sch.setPageCount3(totPage3);
+		if(sch.getCurPage3()>sch.getPageCount3()) sch.setCurPage3(sch.getPageCount3());
+		if(sch.getCurPage3()==0) sch.setCurPage3(1);
+		sch.setEnd3(sch.getCurPage3()*sch.getPageSize3());
+		if(sch.getCurPage3()*sch.getPageSize3()>sch.getCount3()) {
+			sch.setEnd3(sch.getCount3());
+		}
+		sch.setStart3((sch.getCurPage3()-1)*sch.getPageSize3()+1);
+		sch.setBlockSize3(3);
+		int blockNum3 = (int)Math.ceil(sch.getCurPage3()/(double)sch.getBlockSize3());
+		sch.setEndBlock3(blockNum3*sch.getBlockSize3());
+		if(sch.getEndBlock3()>sch.getPageCount3()) {
+			sch.setEndBlock3(sch.getPageCount3());
+		}
+		sch.setStartBlock3((blockNum3-1)*sch.getBlockSize3()+1);
+		return dao.myfile(sch);
+	}
 }

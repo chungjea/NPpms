@@ -86,32 +86,25 @@
                         	<span class="text">파일 업로드</span>
                         </a>
                     </div>
-                    <form id="filefrm" method="post" action="${path}/upload" enctype="multipart/form-data">
-                    	<input type="file" name="reports" multiple="multiple" value="" />
-                    	<input type="text" name="empno" value="1000" />
-                    	<button type="submit">입력확인</button>
-                    </form>
                     <script type="text/javascript">
                     	$(document).ready(function() {
-                    		insertfile();
                     		$("#filefrm").hide()
                     		var msg = "${msg}"
                     		if(msg!=""){
                     			alert(msg)
                     			location.href="${path}/file?empno=1000&deptno=10";
                     		}
+                    		$("[name=reports]").change(function(){
+                    			if(confirm("파일을 업로드하시겠습니까?")){
+                    				$("#filefrm").submit()
+                    			}else{
+                    				$("[name=reports]").val("")
+                    				return
+                    			}
+                    		})
                     	});
                     	function upload(){
                     		$("[name=reports]").click();
-                    	}
-                    	function insertfile(){
-                    		var files = $("[name=reports]").val()
-                        	if(files.length>0){
-                        		alert("확인")
-                        		$("#filefrm").submit()
-                        	}else{
-                        		return;
-                        	}
                     	}
                     </script>
 					<br>
@@ -170,11 +163,6 @@
 							    	</c:forEach>
 							    </tbody>
 							</table>
-							<form id="bffrm">
-								<input type="hidden" name="curPage" value="${sch.curPage}"/>
-								<input type="hidden" name="empno" value="${sch.empno}"/>
-								<input type="hidden" name="deptno" value="${sch.deptno}"/>
-							</form>
 							<form id="dbfrm" method="post">
 								<input type="hidden" name="apvno" value=""/>
 								<input type="hidden" name="rskno" value=""/>
@@ -191,10 +179,6 @@
 								<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.endBlock+1})">Next</a></li>
 							</ul>
 							<script type="text/javascript">
-								function goPage(pcnt){
-									$("[name=curPage]").val(pcnt)
-									$("#bffrm").submit();
-								}
 								function goDetail(bno, page){
 									$("[name=apvno]").val(bno)
 									$("[name=rskno]").val(bno)
@@ -240,25 +224,54 @@
 						<div style="width:33%;">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>개인</caption>
-							   	<col width="60%">
-							   	<col width="25%">
-							   	<col width="15%">
+							   	<col width="55%">
+							   	<col width="27%">
+							   	<col width="9%">
+							   	<col width="9%">
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
-							        <th>파일위치</th>
+							        <th>파일 위치</th>
+							        <th></th>
 							        <th></th>
 							      </tr>
 							    </thead>	
 							    <tbody>
-							    	<tr><td>1</td><td>2</td>
-							    	<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.jpg" alt="↓" width="30" height="30"></button></td></tr>
+							    	<c:forEach var="mf" items="${mfile}">
+								    	<tr><td>${mf.fname}</td><td>${mf.page}</td>
+								    	<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${mf.fno}','${mf.fname}')"><img src="${path}/a00_com/img/down_icon.jpg" alt="↓" width="30" height="30"></button></td>
+								    	<td><button type="button" style="border: none; background-color: transparent;" onclick=""><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="30" height="30"></button></td></tr>
+							    	</c:forEach>
 							    </tbody>
 							</table>
+							<br>
+							<ul class="pagination  justify-content-center">
+								<li class="page-item">
+								<a class="page-link" href="javascript:goPage3(${sch.startBlock3-1})">Previous</a></li>
+								<c:forEach var="pcnt3" begin="${sch.startBlock3}" end="${sch.endBlock3}">
+									<li class="page-item ${sch.curPage3==pcnt3?'active':''}">
+									<a class="page-link" href="javascript:goPage3(${pcnt3})">${pcnt3}</a></li>
+								</c:forEach>
+								<li class="page-item"><a class="page-link" href="javascript:goPage3(${sch.endBlock3+1})">Next</a></li>
+							</ul>
 						</div>
                     </div>
 				</div>
+				<form id="ffrm">
+					<input type="hidden" name="curPage" value="${sch.curPage}"/>
+					<input type="hidden" name="curPage3" value="${sch.curPage3}"/>
+					<input type="hidden" name="empno" value="${sch.empno}"/>
+					<input type="hidden" name="deptno" value="${sch.deptno}"/>
+				</form>
 				<script type="text/javascript">
+					function goPage(pcnt){
+						$("[name=curPage]").val(pcnt)
+						$("#ffrm").submit();
+					}
+					function goPage3(pcnt3){
+						$("[name=curPage3]").val(pcnt3)
+						$("#ffrm").submit();
+					}
 					function download(fno, fname){
 						if(confirm(fname+" 다운로드 하시겠습니까?")){
 							location.href="${path}/download?fno="+fno
@@ -266,7 +279,10 @@
 					}
 				</script>
 				<!-- /.container-fluid -->
-
+                    <form id="filefrm" method="post" action="${path}/upload" enctype="multipart/form-data">
+                    	<input type="file" name="reports" multiple="multiple" value="" />
+                    	<input type="text" name="empno" value="1000" />
+                    </form>
 			</div>
 			<!-- End of Main Content -->
 

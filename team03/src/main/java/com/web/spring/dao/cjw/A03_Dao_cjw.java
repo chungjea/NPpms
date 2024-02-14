@@ -12,6 +12,7 @@ import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
 import com.web.spring.vo.FileSch;
+import com.web.spring.vo.FileSch3;
 import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
@@ -164,7 +165,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT fno FROM metfile_f WHERE metno = #{metno}")
 	List<String> getfnobynamem (int metno);
 	
-	@Select("SELECT * FROM (select fname, fno from APVFILE_F UNION SELECT fname, fno FROM rskfile_f UNION SELECT fname, fno FROM METFILE_f) WHERE fno = #{fno}")
+	@Select("SELECT DISTINCT fname FROM file_f WHERE fno = #{fno}")
 	String getfnamebyfno(String fno);
 	
 	int updatemet(Meeting_f upt);
@@ -178,9 +179,14 @@ public interface A03_Dao_cjw {
 	// 문서관리
 	List<File_f> boardfile(FileSch sch);
 	
-	@Select("SELECT count(*) FROM file_f WHERE  page NOT IN ('채팅','개인') AND auth = 1000 OR auth = 10")
+	@Select("SELECT count(*) FROM file_f WHERE  page NOT IN ('채팅','개인') AND auth = #{empno} OR auth = #{deptno}")
 	int boardfilecnt(FileSch sch);
 	
 	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
 	int insertfilemy(String fname, String path, String fno, int empno);
+	
+	List<File_f> myfile(FileSch3 sch);
+	
+	@Select("SELECT count(*) FROM file_f WHERE  page = '개인' AND auth = #{empno}")
+	int myfilecnt(FileSch3 sch);
 }

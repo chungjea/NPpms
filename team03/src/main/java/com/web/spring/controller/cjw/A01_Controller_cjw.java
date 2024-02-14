@@ -11,6 +11,8 @@ import com.web.spring.service.cjw.A02_Service_cjw;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.FileSch;
+import com.web.spring.vo.FileSch2;
+import com.web.spring.vo.FileSch3;
 import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
@@ -200,8 +202,9 @@ public class A01_Controller_cjw {
 	// 문서관리
 	// http://localhost:3333/file?empno=1000&deptno=10
 	@GetMapping("file")
-	public String file(@ModelAttribute("sch") FileSch sch, Model d) {
+	public String file(@ModelAttribute("sch") FileSch sch, @ModelAttribute("sch2") FileSch2 sch2, @ModelAttribute("sch3") FileSch3 sch3, Model d) {
 		d.addAttribute("bfile", service.boardfile(sch));
+		d.addAttribute("mfile", service.myfile(sch3));
 		return "cjw/z05_bootTmp/file";
 	}
 	
