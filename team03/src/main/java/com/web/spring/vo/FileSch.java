@@ -1,6 +1,9 @@
 package com.web.spring.vo;
 
 public class FileSch {
+	private String type; 
+	private String fname;
+	private String page;
 	private int empno;
 	private int deptno;
 	private int wempno;
@@ -37,8 +40,11 @@ public class FileSch {
 	public FileSch() {
 	}
 
-	public FileSch(int empno, int deptno, int wempno, int cempno, int manager, int count, int pageSize, int pageCount,
+	public FileSch(String type, String fname, String page, int empno, int deptno, int wempno, int cempno, int manager, int count, int pageSize, int pageCount,
 			int curPage, int start, int end, int blockSize, int startBlock, int endBlock) {
+		this.type = type;
+		this.fname = fname;
+		this.page = page;
 		this.empno = empno;
 		this.deptno = deptno;
 		this.wempno = wempno;
@@ -53,6 +59,30 @@ public class FileSch {
 		this.blockSize = blockSize;
 		this.startBlock = startBlock;
 		this.endBlock = endBlock;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getFname() {
+		return fname;
+	}
+
+	public void setFname(String fname) {
+		this.fname = fname;
+	}
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
 	}
 
 	public int getEmpno() {

@@ -129,14 +129,14 @@
 	<select id="boardfile" parameterType="fileSch" resultType="file">
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
-				(SELECT * FROM file_f WHERE page NOT IN ('채팅','개인') AND auth = #{empno} OR auth = #{deptno} ORDER BY NO DESC) a
+				(SELECT * FROM file_f WHERE page NOT IN ('채팅','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND (auth = #{empno} OR auth = #{deptno}) ORDER BY NO DESC) a
 			) 
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
 	<select id="myfile" parameterType="fileSch" resultType="file">
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
-				(SELECT * FROM file_f WHERE page = '개인' AND auth = #{empno} ORDER BY NO DESC) a
+				(SELECT * FROM file_f WHERE page = '개인' AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND auth = #{empno} ORDER BY NO DESC) a
 			) 
 		WHERE cnt BETWEEN #{start3} AND #{end3}
 	</select>

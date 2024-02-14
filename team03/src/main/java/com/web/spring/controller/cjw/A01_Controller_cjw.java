@@ -211,4 +211,10 @@ public class A01_Controller_cjw {
 		d.addAttribute("msg", service.insertfilemy(ins));
 		return "cjw/z05_bootTmp/file";
 	}
+	
+	@GetMapping("deletefile")
+	public String deletefile(String fno, Model d) {
+		d.addAttribute("msg", service.deletefile(fno));
+		return "cjw/z05_bootTmp/file";
+	}
 }

@@ -33,7 +33,7 @@
 	    caption-side: top;
 	    text-align: center;
 	    font-size: x-large;
-	    padding: 10px;
+	    padding: 2px;
 	}
 </style> 
  
@@ -102,12 +102,41 @@
                     				return
                     			}
                     		})
+                    		var type = "${param.type}"
+                    		$("[name=type]").val(type)
+                    		if(type == null || type ==""){
+                    			$("[name=type]").val("fname")
+                    			$('#sch').attr("name", "")
+                    			$("#sch").attr("placeholder", "파일명")
+                    		}else{
+                    			$('#sch').attr("name", type)
+                    			if(type=="fname"){
+                    				$("#sch").attr("placeholder", "파일명")
+                    			}else if(type=="page"){
+                    				$("#sch").attr("placeholder", "파일위치")
+                    			}
+                    		}
+                    		var fname = "${sch.fname}"
+                    		var page = "${sch.page}"
+                    		if(type == "fname"){
+                    			$("#sch").val(fname)
+                    		}else if(type == "page"){
+                    			$("#sch").val(page)
+                    		}
+                    		$("[name=type]").change(function(){
+                    			var type = $("[name=type]").val()
+                    			$('#sch').attr("name", type)
+                    			if(type=="fname"){
+                    				$("#sch").attr("placeholder", "파일명")
+                    			}else if(type=="page"){
+                    				$("#sch").attr("placeholder", "파일위치")
+                    			}
+                    		})
                     	});
                     	function upload(){
                     		$("[name=reports]").click();
                     	}
                     </script>
-					<br>
 					<br>
 					<br>
                     <div align="center">
@@ -119,9 +148,11 @@
 								<option value="fname">파일명</option>
 								<option value="page">파일위치</option>
 							</select>
-							<input class="form-control border-0 small" style="width:400px;" placeholder="파일명" name="fname" id="sch" value="">
+							<input class="form-control border-0 small" style="width:400px;" name="fname" id="sch" value="">
 							<input type="hidden" name="empno" value="${sch.empno}"/>
 							<input type="hidden" name="deptno" value="${sch.deptno}"/>
+							<input type="hidden" name="curPage" value="0"/>
+							<input type="hidden" name="curPage3" value="0"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary" onclick="schfile()" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
@@ -146,6 +177,7 @@
                     	<div style="width:33%;">
 	                    	<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 	                    		<caption>게시판</caption>
+	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count}건</caption>
 							   	<col width="60%">
 							   	<col width="25%">
 							   	<col width="15%">
@@ -158,8 +190,8 @@
 							    </thead>	
 							    <tbody>
 							    	<c:forEach var="bf" items="${bfile}">
-							    		<tr ondblclick="goDetail(${bf.bno}, '${bf.page}')"><td>${bf.fname}</td><td>${bf.page}</td>
-							    		<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td></tr>
+							    		<tr title="게시글 이동" ondblclick="goDetail(${bf.bno}, '${bf.page}')"><td>${bf.fname}</td><td>${bf.page}</td>
+							    		<td><button type="button" title="다운로드" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td></tr>
 							    	</c:forEach>
 							    </tbody>
 							</table>
@@ -205,6 +237,7 @@
 						<div style="width:33%; border-right: solid 1px; border-left: solid 1px; height:450px">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>채팅</caption>
+	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count2}건</caption>
 							   	<col width="60%">
 							   	<col width="25%">
 							   	<col width="15%">
@@ -217,13 +250,14 @@
 							    </thead>	
 							    <tbody>
 							    	<tr><td>1</td><td>2</td>
-							    	<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td></tr>
+							    	<td><button type="button" title="다운로드" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td></tr>
 							    </tbody>
 							</table>
 						</div>
 						<div style="width:33%;">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>개인</caption>
+	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count3}건</caption>
 							   	<col width="55%">
 							   	<col width="27%">
 							   	<col width="9%">
@@ -239,8 +273,8 @@
 							    <tbody>
 							    	<c:forEach var="mf" items="${mfile}">
 								    	<tr><td>${mf.fname}</td><td>${mf.page}</td>
-								    	<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${mf.fno}','${mf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td>
-								    	<td><button type="button" style="border: none; background-color: transparent;" onclick=""><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="20" height="20"></button></td></tr>
+								    	<td><button type="button" title="다운로드" style="border: none; background-color: transparent;" onclick="download('${mf.fno}','${mf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td>
+								    	<td><button type="button" title="삭제" style="border: none; background-color: transparent;" onclick="deletefile('${mf.fno}','${mf.fname}')""><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="20" height="20"></button></td></tr>
 							    	</c:forEach>
 							    </tbody>
 							</table>
@@ -258,6 +292,9 @@
                     </div>
 				</div>
 				<form id="ffrm">
+					<input type="hidden" name="type" value="${sch.type}"/>
+					<input type="hidden" name="fname" value="${sch.fname}"/>
+					<input type="hidden" name="page" value="${sch.page}"/>
 					<input type="hidden" name="curPage" value="${sch.curPage}"/>
 					<input type="hidden" name="curPage3" value="${sch.curPage3}"/>
 					<input type="hidden" name="empno" value="${sch.empno}"/>
@@ -275,6 +312,11 @@
 					function download(fno, fname){
 						if(confirm(fname+" 다운로드 하시겠습니까?")){
 							location.href="${path}/download?fno="+fno
+						}
+					}
+					function deletefile(fno, fname){
+						if(confirm(fname+" 삭제하시겠습니까?")){
+							location.href="${path}/deletefile?fno="+fno
 						}
 					}
 				</script>

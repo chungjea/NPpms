@@ -212,6 +212,12 @@
 									schrsk()
 								}
 		                  })
+		                   var title = "${sch.title}"
+		                   if(title==""){
+		                	   $("#cnt").hide()
+		                   }else{
+		                	   $("#cnt").show()
+		                   }
 		                  function schrsk(){
 	                    		var sts = "${sts}"
 	                    		if(sts=="1"){

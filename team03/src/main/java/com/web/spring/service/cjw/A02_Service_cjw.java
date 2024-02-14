@@ -449,6 +449,7 @@ public class A02_Service_cjw {
 			msg = "회의록 삭제 실패\\n";
 		}
 		if(dao.deletemetfile(metno)>0) {
+			dao.deletefilemet(metno);
 			msg += "파일 삭제 완료";
 		}
 		return msg;
@@ -457,6 +458,9 @@ public class A02_Service_cjw {
 	
 	// 문서관리 : 게시판 리스트 출력
 	public List<File_f> boardfile(FileSch sch) {
+		if(sch.getType()==null) sch.setType("fname");
+		if(sch.getFname()==null) sch.setFname("");
+		if(sch.getPage()==null) sch.setPage("");
 		sch.setCount(dao.boardfilecnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
@@ -514,6 +518,9 @@ public class A02_Service_cjw {
 	
 	// 문서관리 : 개인 리스트 출력 (팀으로 바꿀 예정)
 	public List<File_f> myfile(FileSch sch) {
+		if(sch.getType()==null) sch.setType("fname");
+		if(sch.getFname()==null) sch.setFname("");
+		if(sch.getPage()==null) sch.setPage("");
 		sch.setCount3(dao.myfilecnt(sch));
 		if(sch.getPageSize3()==0) sch.setPageSize3(5);
 		int totPage3 = (int)Math.ceil(sch.getCount3()/(double)sch.getPageSize3());
@@ -534,4 +541,18 @@ public class A02_Service_cjw {
 		sch.setStartBlock3((blockNum3-1)*sch.getBlockSize3()+1);
 		return dao.myfile(sch);
 	}
+	
+	// 문서관리 : 개인 파일 삭제
+	public String deletefile(String fno) {
+		String fname = dao.getfnamebyfno(fno);
+		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		File fileToDelete = new File(path+fname);
+		if(fileToDelete.exists()) fileToDelete.delete();
+		String msg = "";
+		if(dao.deletefile(fno)>0) {
+			msg += fname+" 삭제 완료";
+		}
+		return msg;
+	}
+	
 }
