@@ -129,8 +129,7 @@ public String test1() {
 //컨테이너에 선언한 지역 언어선택 객체 호출
 	@Autowired(required=false)
 	private SessionLocaleResolver localeResolver;
-	// 화면호출
-	// http://localhost:3333/multiLangs
+
 	@RequestMapping(value = "multiLang", method = {RequestMethod.POST,RequestMethod.GET})
 
 	public String multiLang(@RequestParam(value="lang", defaultValue = "ko")

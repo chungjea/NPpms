@@ -71,7 +71,7 @@
 							<h6 id="emptypwd">※비밀번호를 입력해주세요</h6>
 										</div>
 										<div class="form-group"></div>
-										<a href='javascript:$(".user").submit()' type="button"
+										<a href='javascript:$(".user").submit()' type="button" onclick="check";)
 											class="btn btn-primary btn-user btn-block"> <spring:message
 												code="login" />
 										</a>
@@ -119,6 +119,35 @@
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 
 	<script>
+	document.getElementById("emptyempno").style.color = "red";
+	document.getElementById("emptypwd").style.color = "red";
+	var empno = "${emp.empno}"
+	var sessEmpno = "${emp.empno}"
+	var emptyempno;
+	var emptypwd;
+	function check(){
+			if ($("[name=passwd]").val() != "") {
+				if ($("[name=empno]").val() != "") {
+					$("#emptyempno").hide();
+					$("#emptypwd").hide();
+					$(".user").submit();
+				} else {
+					alert("아이디를 입력해주세요")
+					$("#emptyempno").show();
+				}
+			} else if ($("[name=empno]").val() == "") {
+				alert("아이디와 비밀번호를 입력해주세요")
+				$("#emptyempno").show();
+				$("#emptypwd").show();
+			} else {
+				alert("비밀번호를 입력해주세요")
+				$("#emptypwd").show();
+			}
+		
+			
+	}
+	
+	
 $(document).ready(function() {
 	// 이전화면에서 요청된 내용을 선택하게 하게, 선택할 때, 서버에 언어 선택 내용 전달.
 	$("#selectLan").val("${param.lang}").change(function() {
@@ -129,55 +158,29 @@ $(document).ready(function() {
 	})
 	$("#emptyempno").hide();
 	$("#emptypwd").hide();
-});
-document.getElementById("emptyempno").style.color = "red";
-document.getElementById("emptypwd").style.color = "red";
-var empno = "${emp.empno}"
-var sessEmpno = "${emp.empno}"
-var emptyempno;
-var emptypwd;
+})
 
-/* 		$("[name=passwd]").keyup(function() {
-		if (event.keyCode == 13) {
-				if ($("[name=passwd]").val() != "") {
-					if ($("[name=empno]").val() != "") {
-						$("#emptyempno").hide();
-						$("#emptypwd").hide();
-						$(".user").submit();
-					} else {
-						alert("아이디를 입력해주세요")
-						$("#emptyempno").show();
-					}
-				} else if ($("[name=empno]").val() == "") {
-					alert("아이디와 비밀번호를 입력해주세요")
-					$("#emptyempno").show();
-					$("#emptypwd").show();
-				} else {
-					alert("비밀번호를 입력해주세요")
-					$("#emptypwd").show();
-				}
-			}
-		})
- */
- $("[name=passwd]").keyup(function() {
-		if (event.keyCode == 13) {
-			if ($("[name=passwd]").val()!= "") {
-				if($("[name=empno]").val()!=""){
-				$(".user").submit();
-				}
-			}
-		}
- })
- 
- if ("${param.empno}" != "") {
+if ("${param.empno}" != "") {
 	if (empno != "") {
 		location.href = "${path}/mainpage"
 		
 	} else {
 		alert("로그인 실패2\n다시 로그인하세요")
+		console.log(${param.empno})
 
 	}
 }
+
+
+		$("[name=passwd]").keyup(function() {
+		if (event.keyCode == 13) {
+				 check();
+			}
+		})
+ 
+
+ 
+
 				
 		window.history.forward();
 		function noBack() {

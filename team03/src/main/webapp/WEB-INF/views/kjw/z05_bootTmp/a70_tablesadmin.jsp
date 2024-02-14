@@ -25,8 +25,6 @@
 	});
 </script>
  --%>
-<script type="text/javascript" src="/team03/src/main/webapp/a00_com/js/tablesorter-master/dist/js/jquery.tablesorter.js"></script>
-
 
 <!-- Custom fonts for this template-->
 <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css"
@@ -359,9 +357,7 @@
 
 <script type="text/javascript">
 
-$(function(){
-	      $("#dataTable").tablesorter();
-	   });
+
 
 
 
