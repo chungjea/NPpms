@@ -58,6 +58,7 @@
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
                             <form method="post" id="send" action="${path}/register">
+                                
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input name="ename" class="form-control form-control-user"   placeholder="사원명" />	
@@ -65,16 +66,32 @@
                                     <div class="col-sm-6">
  										<input name="egrade" class="form-control form-control-user"   placeholder="직급" />	
                                     </div>
+                               
                                 </div>
-                                <div class="form-group">
-                                    <input name="dname" class="form-control form-control-user"   placeholder="부서명" />	
+                                <div class="form-group row">
+                                <div class="col-sm-6 ">
+                                    <select name="dname">
+                                    <option value="선택">부서선택	</option>
+                                    <option value="디자인팀">디자인팀</option>
+                                    <option value="인사팀">인사팀	</option>
+                                    <option value="재무팀">재무팀	</option>
+                                    <option value="기획팀">기획팀	</option>
+                                    <option value="개발1팀">개발1팀</option>
+                                    <option value="개발2팀">개발2팀</option>
+                                    <option value="개발3팀">개발3팀</option>
+                                    </select>
                                 </div>
+                                <div class="col-sm-6 mb-3 mb-sm-0">
+                                        <input type="date" name="hiredate" class="form-control form-control-user"   placeholder="입사일" />	
+                                    </div>
+                                    </div>
+                                    
                                 <div class="form-group row">
 
                                     <div class="col-sm-6">
-                                        <input name="hiredate" class="form-control form-control-user"   placeholder="입사일" />	
+                                        <input type="email" name="email" class="form-control form-control-user"   placeholder="이메일주소" />	
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input name="passwd" class="form-control form-control-user" type="password"  placeholder="비밀번호" />	
                                     </div>
                                 </div>
