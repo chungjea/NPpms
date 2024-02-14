@@ -1,9 +1,9 @@
 package com.web.spring.vo;
 
 public class Task_f {
-	private String id;
-	private String start_date;
-	private String end_date;
+	private long id;
+	private String startdte;
+	private String enddte;
 	private String text;
 	private double progress;
 	private int assignor;
@@ -12,31 +12,35 @@ public class Task_f {
 	public Task_f() {
 
 	}
-	public Task_f(String id, String start_date, String end_date, String text, double progress, int assignor,
-			String parent, String pcode) {
+	public Task_f(long id, String startdte, String enddte, String text, double progress, int assignor, String parent,
+			String pcode) {
+		super();
 		this.id = id;
-		this.start_date = start_date;
-		this.end_date = end_date;
+		this.startdte = startdte;
+		this.enddte = enddte;
 		this.text = text;
 		this.progress = progress;
 		this.assignor = assignor;
 		this.parent = parent;
 		this.pcode = pcode;
 	}
-	
 
-
-
-
-
-
-
-
-
-	public String getId() {
+	public String getEnddte() {
+		return enddte;
+	}
+	public void setEnddte(String enddte) {
+		this.enddte = enddte;
+	}
+	public String getStartdte() {
+		return startdte;
+	}
+	public void setStartdte(String startdte) {
+		this.startdte = startdte;
+	}
+	public long getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getParent() {
@@ -67,18 +71,7 @@ public class Task_f {
 
 
 
-	public String getStart_date() {
-		return start_date;
-	}
-	public void setStart_date(String start_date) {
-		this.start_date = start_date;
-	}
-	public String getEnd_date() {
-		return end_date;
-	}
-	public void setEnd_date(String end_date) {
-		this.end_date = end_date;
-	}
+	
 	public String getText() {
 		return text;
 	}

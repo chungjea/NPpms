@@ -144,9 +144,13 @@ html, body {
 							{name: "duration",label:"작업일수" ,align: "center", width: 80, resize: true},
 							{name:"writer",label:"담당자",resize: false},
 							{name: "add", width: 40},
-							{name: "del", width: 40}
+							{name: "del", width: 40,resize: true, align: "center",template: function () {
+					            return `<img src="${path}/a00_com/gantt/common/sample_images/close.gif" onclick="delTask()"`
+							}}
 						];
 					
+						
+						
 						gantt.templates.rightside_text = function (start, end, task) {
 							if (task.type == gantt.config.types.milestone)
 								return task.text + " / ID: #" + task.id;
@@ -192,6 +196,9 @@ html, body {
 							gantt.attachEvent("onLightbox", function (task_id){
 							   console.log("작업생성 모달 열림")
 							   console.log(gantt.getLightboxValues());
+							   console.log("date:"+gantt.getLightboxValues().start_date.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }))
+							   console.log("date:"+gantt.getLightboxValues().start_date.toLocaleDateString())
+							  
 							});
 						gantt.attachEvent("onLightboxCancel", function(id){
 							console.log("취소버튼 클릭")
@@ -199,50 +206,80 @@ html, body {
 						// 업데이트시 활용하면 됨
 						gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
 							console.log("테스크 드래그 후 놓기 완료")
+							
 						});
 						// 테스크의 인덱스 위치를 바꿨을때로 추측
 						gantt.attachEvent("onAfterTaskMove", function(id, parent, tindex){
 							console.log("onmove:움직임이 있을때")
+						
 						});
 						
 						gantt.attachEvent("onAfterTaskUpdate", function(id,item){
 							console.log("taskUpdate:테스크에변화가 있을때")
+							console.log(item)
+							funcTask("updateTask",item)	
 						});
 						
 						gantt.attachEvent("onAfterTaskAdd", function(id,item){
 							console.log("onAfterTaskAdd:테스크 생성시 사용")
-							var newdata = gantt.getLightboxValues();
-							var curpcode = {"pcode":"${param.pcode}"}
-							var taskdata = Object.assign(newdata,curpcode);
-							console.log(newdata.start_date)
-						
-							 $.ajax({
-								url:"${path}/insertTask",
-								type:"post",
-								contentType: "application/json",
-								dataType:"json",
-								data :JSON.stringify(taskdata),
-								success:function(data){
-									alert(data.msg)
-									gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
-								},
-								error:function(err){
-									console.log(err)
-								}
-							}) 
-						
-							
+							funcTask("insertTask",item)			
 						});
 						
 						gantt.attachEvent("onAfterTaskDelete", function(id,item){
-							console.log("onAfterTaskDelete:테스크 섹제시 쓰면 될듯")
+							console.log("onAfterTaskDelete:테스크 삭제시 쓰면 될듯")
+							
+							funcTask("deleteTask",item)
 						});
 						
 						gantt.init("gantt_here");
 						gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
+								
+				function funcTask(type,item){
+						var datas = item
+						const start = {startdte:transferDateformat(item.start_date)};
+						const end = {enddte:transferDateformat(item.end_date)};
+						const pcode = {"pcode":"${param.pcode}"}
+
+						var data = {...datas,...start,...end,...pcode}
 						
+						 $.ajax({
+								url:"${path}/"+type,
+								type:"post",
+								contentType: "application/json",
+								dataType:"json",
+								data :JSON.stringify(data),
+								success:function(data){
+									//alert(data.msg)
+									gantt.message(data.msg);
+									
+								},
+								error:function(err){
+									console.log(err)
+								}
+							})
+				}
 				
-				
+				function transferDateformat(date){
+					const year = date.getFullYear()
+					const month = (date.getMonth()+1)
+					const day = date.getDate()
+					return year+"-"+month+"-"+day;
+				}
+			
+				function delTask(){
+				gantt.confirm({
+				    text: "정말 삭제하시겠습니까??",
+				    ok:"네", 
+				    cancel:"아니요",
+				    callback: function(result){
+				        if(result){
+				            gantt.message("삭제되었습니다");
+				        }else{
+				            gantt.message("삭제에 실패했습니다.");
+				        }
+				    }
+				});
+				}
 					</script>
 
 	<!-- Page level custom scripts -->

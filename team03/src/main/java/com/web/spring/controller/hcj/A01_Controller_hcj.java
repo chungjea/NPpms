@@ -108,6 +108,7 @@ public class A01_Controller_hcj {
 		return modelAndView;
 	}
 	
+	
 	@ResponseBody
     @RequestMapping(value = "insertTask", method = RequestMethod.POST)
 	public ModelAndView insertTask(@RequestBody Task_f ins) {
@@ -117,6 +118,26 @@ public class A01_Controller_hcj {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("msg", service.insertTask(ins));
+		return modelAndView;
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "updateTask", method = RequestMethod.POST)
+	public ModelAndView updateTask(@RequestBody Task_f upt) {
+		System.out.println("일단 들어옴 -update-");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("msg", service.updateTask(upt));
+		return modelAndView;
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "deleteTask", method = RequestMethod.POST)
+	public ModelAndView deleteTask(@RequestBody Task_f del) {
+		System.out.println("일단 들어옴 -update-");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("msg", service.deleteTask(del));
 		return modelAndView;
 	}
 
