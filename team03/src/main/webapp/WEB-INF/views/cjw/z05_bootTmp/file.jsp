@@ -240,7 +240,7 @@
 							    	<c:forEach var="mf" items="${mfile}">
 								    	<tr><td>${mf.fname}</td><td>${mf.page}</td>
 								    	<td><button type="button" style="border: none; background-color: transparent;" onclick="download('${mf.fno}','${mf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td>
-								    	<td><button type="button" style="border: none; background-color: transparent;" onclick=""><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="30" height="30"></button></td></tr>
+								    	<td><button type="button" style="border: none; background-color: transparent;" onclick=""><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="20" height="20"></button></td></tr>
 							    	</c:forEach>
 							    </tbody>
 							</table>

@@ -20,8 +20,6 @@
 		<typeAlias alias="sallist" type="com.web.spring.vo.sal_f"/>
 		<typeAlias alias="file" type="com.web.spring.vo.File_f"/>
 		<typeAlias alias="fileSch" type="com.web.spring.vo.FileSch"/>
-		<typeAlias alias="fileSch2" type="com.web.spring.vo.FileSch2"/>
-		<typeAlias alias="fileSch3" type="com.web.spring.vo.FileSch3"/>
 		<typeAlias alias="commute_s" type="com.web.spring.vo.Commute_f"/>
 	</typeAliases>
 
