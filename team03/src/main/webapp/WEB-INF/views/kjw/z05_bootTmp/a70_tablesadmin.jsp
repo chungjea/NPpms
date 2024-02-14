@@ -164,9 +164,11 @@
 									class="icon text-white-50"> <i class="fas fa-check"></i>
 								</span> <span class="text">사원등록</span>
 								</a>
-								<a href="#" class="btn btn-warning btn-circle" id="excelDownload" onclick='exportExcel'>
-                                        <img src="${path}/a00_com/images/downloadicon.png">
-                                    </a>
+								
+								
+								<button type="button" class="btn btn-warning btn-circle" id="excelDownload" onclick='exportExcel'>
+                                       <img src="${path}/a00_com/img/down_icon.png" width="15" height="15">
+                                    </button>
 							</c:if>
 
 							<c:if test='${emp.dname.equals("개발1팀")&&emp.auth.equals("관리자")}'>
@@ -209,7 +211,7 @@
 
 								<div style="width: 100%; height: 200px; ">
 									<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
-<table class="tablesorter">
+
 										<table class="table table-bordered"  id="dataTable"
 											width="100%" cellspacing="0">
 											

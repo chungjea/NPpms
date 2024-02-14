@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
@@ -110,10 +111,7 @@ public String commute_s(Commute_f ins,Model d) {
 	
 }
 
-@RequestMapping("test")
-public String test() {
-	return "kjw/z05_bootTmp/a83_login";
-}
+
 @RequestMapping("registerFrm")
 public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
@@ -132,8 +130,9 @@ public String test1() {
 	@Autowired(required=false)
 	private SessionLocaleResolver localeResolver;
 	// 화면호출
-	// http://localhost:3333/multiLang
-	@GetMapping("multiLang")
+	// http://localhost:3333/multiLangs
+	@RequestMapping(value = "multiLang", method = {RequestMethod.POST,RequestMethod.GET})
+
 	public String multiLang(@RequestParam(value="lang", defaultValue = "ko")
 							String lang,
 							HttpServletRequest request,

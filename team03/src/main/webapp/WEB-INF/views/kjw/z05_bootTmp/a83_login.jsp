@@ -137,8 +137,8 @@ var sessEmpno = "${emp.empno}"
 var emptyempno;
 var emptypwd;
 
-		$("[name=passwd]").keyup(function() {
-			if (event.keyCode == 13) {
+/* 		$("[name=passwd]").keyup(function() {
+		if (event.keyCode == 13) {
 				if ($("[name=passwd]").val() != "") {
 					if ($("[name=empno]").val() != "") {
 						$("#emptyempno").hide();
@@ -158,17 +158,27 @@ var emptypwd;
 				}
 			}
 		})
-
-		if ("${param.empno}" != "") {
-			if (empno != "") {
-				location.href = "${path}/mainpage"
-
-			} else {
-				alert("계정정보를 다시 확인해주세요")
-
+ */
+ $("[name=passwd]").keyup(function() {
+		if (event.keyCode == 13) {
+			if ($("[name=passwd]").val()!= "") {
+				if($("[name=empno]").val()!=""){
+				$(".user").submit();
+				}
 			}
 		}
+ })
+ 
+ if ("${param.empno}" != "") {
+	if (empno != "") {
+		location.href = "${path}/mainpage"
+		
+	} else {
+		alert("로그인 실패2\n다시 로그인하세요")
 
+	}
+}
+				
 		window.history.forward();
 		function noBack() {
 			window.history.forward();
