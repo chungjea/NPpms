@@ -217,4 +217,12 @@ public class A01_Controller_cjw {
 		d.addAttribute("msg", service.deletefile(fno));
 		return "cjw/z05_bootTmp/file";
 	}
+	
+	// 채팅
+	// http://localhost:3333/chatting
+	@GetMapping("chatting")
+	public String chatting() {
+		
+		return "cjw/z05_bootTmp/chatting";
+	}
 }
