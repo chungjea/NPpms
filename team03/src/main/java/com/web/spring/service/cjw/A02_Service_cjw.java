@@ -13,7 +13,6 @@ import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
 import com.web.spring.vo.FileSch;
-import com.web.spring.vo.FileSch3;
 import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
 import com.web.spring.vo.Meeting_f;
@@ -514,7 +513,7 @@ public class A02_Service_cjw {
 	}
 	
 	// 문서관리 : 개인 리스트 출력 (팀으로 바꿀 예정)
-	public List<File_f> myfile(FileSch3 sch) {
+	public List<File_f> myfile(FileSch sch) {
 		sch.setCount3(dao.myfilecnt(sch));
 		if(sch.getPageSize3()==0) sch.setPageSize3(5);
 		int totPage3 = (int)Math.ceil(sch.getCount3()/(double)sch.getPageSize3());

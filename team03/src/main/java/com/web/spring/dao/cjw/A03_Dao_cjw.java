@@ -185,8 +185,8 @@ public interface A03_Dao_cjw {
 	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
 	int insertfilemy(String fname, String path, String fno, int empno);
 	
-	List<File_f> myfile(FileSch3 sch);
+	List<File_f> myfile(FileSch sch);
 	
 	@Select("SELECT count(*) FROM file_f WHERE  page = '개인' AND auth = #{empno}")
-	int myfilecnt(FileSch3 sch);
+	int myfilecnt(FileSch sch);
 }

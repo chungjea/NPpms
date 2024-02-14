@@ -133,11 +133,11 @@
 			) 
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
-	<select id="myfile" parameterType="fileSch3" resultType="file">
+	<select id="myfile" parameterType="fileSch" resultType="file">
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
 				(SELECT * FROM file_f WHERE page = '개인' AND auth = #{empno} ORDER BY NO DESC) a
 			) 
-		WHERE cnt BETWEEN #{start} AND #{end}
+		WHERE cnt BETWEEN #{start3} AND #{end3}
 	</select>
 </mapper>
