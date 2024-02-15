@@ -1,5 +1,7 @@
 package com.web.spring.controller.kjw;
 
+import java.security.SecureRandom;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -64,7 +66,6 @@ public String mailSend(MailSender mailVo,  Model d) {
 	}
 	return "kjw/z05_bootTmp/a82_findpassword";
 }
-
 
 @GetMapping("logout")
 public String logout(HttpSession session) {
@@ -144,7 +145,11 @@ public String test1() {
 		
 		return "kjw/z05_bootTmp/a83_login";
 	}
+
+
+
 }
+
 
 /*
  * 	@GetMapping("login.do")

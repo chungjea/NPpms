@@ -64,13 +64,20 @@
                                         <input name="ename" class="form-control form-control-user"   placeholder="사원명" />	
                                     </div>
                                     <div class="col-sm-6">
- 										<input name="egrade" class="form-control form-control-user"   placeholder="직급" />	
+ 										 <select name="egrade" class="form-control form-control-user">
+                                    <option value="선택">직급	</option>
+                                    <option value="사원">사원</option>
+                                    <option value="팀장">팀장	</option>
+                                    <option value="전무">전무	</option>
+                                    <option value="사장">사장	</option>
+
+                                    </select>
                                     </div>
                                
                                 </div>
                                 <div class="form-group row">
                                 <div class="col-sm-6 ">
-                                    <select name="dname">
+                                    <select name="dname" class="form-control form-control-user">
                                     <option value="선택">부서선택	</option>
                                     <option value="디자인팀">디자인팀</option>
                                     <option value="인사팀">인사팀	</option>
@@ -88,13 +95,20 @@
                                     
                                 <div class="form-group row">
 
-                                    <div class="col-sm-6">
-                                        <input type="email" name="email" class="form-control form-control-user"   placeholder="이메일주소" />	
-                                    </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input name="passwd" class="form-control form-control-user" type="password"  placeholder="비밀번호" />	
+                                        <input type="emailH" name="emailH" id="emailH" class="form-control form-control-user"   placeholder="이메일주소" />	
+                                    </div>
+                                    <h6>@</h6>
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                         <select name="emailE" id="emailE" class="form-control">
+                                    <option value="@naver.com">naver.com</option>
+                                    <option value="@daum.net">daum.net</option>
+                                    <option value="@google.com">google.com</option>
+                                    </select>
+                                    <input type="hidden" id="passwd" name="passwd" value="javascript:temp_pw_issuance()">
                                     </div>
                                 </div>
+                                
                                 <a class="btn btn-primary btn-user btn-block" id="regBtn">
                                     Register Account
                                 </a>
@@ -102,6 +116,7 @@
 
 
                             </form>
+                            
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.jsp">Forgot Password?</a>
@@ -153,8 +168,16 @@
 <%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
             <script type="text/javascript">
+
+            
 				$("#regBtn").click(function(){
+					var emailE = document.getElementById('emailE').value;
+					var emailH = document.getElementById('emailH').value;
+					var email = emailH+emailE;
 					
+document.getElementById('email').value= email;
+console.log(email);
+console.log(passwd);
 					
 					if(confirm("등록하시겠습니까?")){
 						if($("[name=ename]").val()==""){
@@ -170,6 +193,24 @@
 				if(!confirm(msg+"\n계속 등록하시겠습니까?")){
 					location.href="${path}/mainpage"
 				}
+			}
+			
+			function temp_pw_issuance() {
+				let ranValue1 = ['1','2','3','4','5','6','7','8','9','0'];
+				let ranValue2 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
+				let ranValue3 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
+				let ranValue4 = ['!','@','#','$','%','^','&','*','(',')'];
+				
+				var temp_pw = "";
+				
+				for(i=0 ; i<2; i++) {
+					let ranPick1 = Math.floor(Math.random() * ranValue1.length);
+					let ranPick2 = Math.floor(Math.random() * ranValue2.length);
+					let ranPick3 = Math.floor(Math.random() * ranValue3.length);
+					let ranPick4 = Math.floor(Math.random() * ranValue4.length);
+					temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2] + ranValue3[ranPick3] + ranValue4[ranPick4];
+				}
+return temp_pw;
 			}
 			</script>
 </body>
