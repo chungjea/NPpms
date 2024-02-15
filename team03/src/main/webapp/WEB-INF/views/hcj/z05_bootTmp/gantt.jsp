@@ -52,6 +52,8 @@ html, body {
 
 
 
+
+
 </head>
 <body id="page-top">
 
@@ -76,7 +78,20 @@ html, body {
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
+					<div class=" text-center">
+						<h2 style="border-radius: 10px;background: #a1b6f2;color:white;padding:10px 0px">${pinfo.pname}</h2>
+						<ul class="nav nav-tabs nav-justified">
+							<li class="nav-item"><a class="nav-link active" href="#">간트차트</a>
+							</li>
+							<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+							<li class="nav-item"><a class="nav-link disabled" href="#"></a>
+							</li>
+						</ul>
+					</div>
+
 					<div class="main-content">
+
 						<div id="gantt_here"
 							style='width: 100%; height: 100%; padding: 0px;'></div>
 					</div>
@@ -142,7 +157,7 @@ html, body {
 							{name: "text", label: "작업명", tree: true, width: 170, resize: true, min_width: 10},
 							{name: "start_date",label:"시작일",align: "center", width: 90, resize: true},
 							{name: "duration",label:"작업일수" ,align: "center", width: 80, resize: true},
-							{name:"writer",label:"담당자",resize: false},
+							{name:"writer",label:"담당자",resize: true},
 							{name: "add", width: 40},
 							{name: "del", width: 40,resize: true, align: "center",template: function () {
 					            return `<img src="${path}/a00_com/gantt/common/sample_images/close.gif" onclick="delTask()"`
@@ -174,10 +189,13 @@ html, body {
 							$.ajax({
 								url:"${path}/Tmem",
 								type:"post",
+								async:false,
 								data:"pcode=${pcode}",
 								dataType:"json",
 								success:function(data){
 									tmem = data.mem;
+									
+									
 								},
 								error:function(err){
 									
@@ -186,7 +204,6 @@ html, body {
 							})
 					
 						
-						console.log("---------------")
 						console.log(tmem)
 						/* var tmem = [
 						    { key: 199001001, label: '홍길동' },

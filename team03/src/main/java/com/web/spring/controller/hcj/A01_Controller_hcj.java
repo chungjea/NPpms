@@ -100,10 +100,7 @@ public class A01_Controller_hcj {
 
 	@RequestMapping("project")
 	public String project(@ModelAttribute("pcode") int pcode,Model d) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setView(new MappingJackson2JsonView());
-		modelAndView.addObject("mem", service.getTeamMemeber(pcode));
-	//	d.addAttribute("mem",service.getTeamMemeber(pcode));
+		d.addAttribute("pinfo", service.getProjectInfo(pcode));
 		return "hcj/z05_bootTmp/gantt";
 	}
 

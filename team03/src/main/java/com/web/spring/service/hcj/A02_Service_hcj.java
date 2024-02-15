@@ -17,6 +17,7 @@ import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
 
 @Service
 public class A02_Service_hcj {
@@ -172,7 +173,7 @@ public class A02_Service_hcj {
 		return auth.equals("관리자")?dao.getprojectListAdmim(sch):dao.getprojectListNormal(sch);
 	}
 	///--------------프로젝트----------------------
-	public Map<Integer,String> getTeamMemeber(int pcode){
+	public List<Tmem_f> getTeamMemeber(int pcode){
 		return dao.getTeamMemeber(pcode);
 	}
 	// 프로젝트 테스크 출력
@@ -194,6 +195,9 @@ public class A02_Service_hcj {
 	public String deleteTask(Task_f del) {
 		System.out.println("--deleteTask 서비스 접근--");
 		return dao.deleteTask(del)>0?"삭제성공":"삭제실패";
+	}
+	public Project_f getProjectInfo(int pcode) {
+		return dao.getProjectInfo(pcode);
 	}
 	
 }

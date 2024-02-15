@@ -17,6 +17,7 @@ import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
 
 
 @Mapper
@@ -206,5 +207,9 @@ public interface A03_Dao_hcj {
 	@Delete("DELETE FROM PROJECT_WORK_F WHERE wno = #{id}")
 	int deleteTask(Task_f del);
 	
-	Map<Integer,String> getTeamMemeber(int pcode);
+	
+	List<Tmem_f> getTeamMemeber(int pcode);
+	
+	@Select("select * from project_f where pcode = #{pcode}")
+	Project_f getProjectInfo(int pcode);
 }
