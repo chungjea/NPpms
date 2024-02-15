@@ -140,6 +140,11 @@
 	</select>
 	
 	
-	
+	<select id="getTeamMemeber" parameterType="int" resultType="tmem_f">
+		SELECT tf.*, epf.ENAME  
+		FROM TMEM_F tf  , EMP_PINFO_F epf
+		WHERE tf.EMPNO = epf.EMPNO
+		and pcode = #{pcode}
+	</select>
 	
 </mapper>

@@ -1,5 +1,7 @@
 package com.web.spring.controller.hcj;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,6 +20,7 @@ import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -96,17 +99,30 @@ public class A01_Controller_hcj {
 	}
 
 	@RequestMapping("project")
-	public String project(int pcode,Model d) {
+	public String project(@ModelAttribute("pcode") int pcode,Model d) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("mem", service.getTeamMemeber(pcode));
+	//	d.addAttribute("mem",service.getTeamMemeber(pcode));
 		return "hcj/z05_bootTmp/gantt";
 	}
 
+	@PostMapping("Tmem")
+	public ModelAndView  getTeamMember(int pcode) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("mem",service.getTeamMemeber(pcode));
+		return modelAndView;
+	}
+	
 	@RequestMapping("Taskdata")
-	public ModelAndView taskdata(int pcode) {
+	public ModelAndView taskdata( int pcode) {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("data", service.getTaskdatas(pcode));
 		return modelAndView;
 	}
+	
 	
 	@ResponseBody
     @RequestMapping(value = "insertTask", method = RequestMethod.POST)
@@ -117,6 +133,26 @@ public class A01_Controller_hcj {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("msg", service.insertTask(ins));
+		return modelAndView;
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "updateTask", method = RequestMethod.POST)
+	public ModelAndView updateTask(@RequestBody Task_f upt) {
+		System.out.println("일단 들어옴 -update-");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("msg", service.updateTask(upt));
+		return modelAndView;
+	}
+	
+	@ResponseBody
+    @RequestMapping(value = "deleteTask", method = RequestMethod.POST)
+	public ModelAndView deleteTask(@RequestBody Task_f del) {
+		System.out.println("일단 들어옴 -update-");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("msg", service.deleteTask(del));
 		return modelAndView;
 	}
 

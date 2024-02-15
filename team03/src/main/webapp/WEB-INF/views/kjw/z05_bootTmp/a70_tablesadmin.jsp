@@ -358,8 +358,11 @@
 <script type="text/javascript">
 
 
-
-
+$('input:checkbox[name=checkboxModel]').each(function (index) {
+	if($(this).is(":checked")==true){
+    	console.log($(this).val());
+    }
+})
 
 $("#checking").hide();
 $("#checking1").hide();
@@ -383,6 +386,7 @@ $("#checking1").hide();
 	$("#delBtn").click(function(){
 	var checkedvals =$(".chkGrp:checked").map(function(){
 	return $(this).val();
+	console.log($(this).val());
 	}).get();
 	if(checkedvals.length==0){
 	alert("삭제처리할 인원을 1명이상 선택하세요");

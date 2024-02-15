@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.web.spring.dao.hcj.A03_Dao_hcj;
@@ -19,6 +20,7 @@ import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
 
 @Service
 public class A02_Service_hcj {
@@ -173,31 +175,29 @@ public class A02_Service_hcj {
 		
 		return auth.equals("관리자")?dao.getprojectListAdmim(sch):dao.getprojectListNormal(sch);
 	}
-	
+	///--------------프로젝트----------------------
+	public List<Tmem_f> getTeamMemeber(int pcode){
+		return dao.getTeamMemeber(pcode);
+	}
 	// 프로젝트 테스크 출력
 	public List<Data> getTaskdatas(int pcode) {
 		return dao.getTaskdatas(pcode);
 	}
 	
-	public String insertTask(Task_f task) {
+	public String insertTask(Task_f ins) {
 		System.out.println("--insertTask 서비스 접근--");
+		
+		return dao.insertTask(ins)>0?"등록성공":"등록실패";
+	}
 
-		/*
-		 * //String
-		 * sd=task.getStart_date().substring(0,task.getStart_date().indexOf("T"));; try
-		 * { SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); Date date
-		 * = dateFormat.parse(task.getStart_date()); String strtdte
-		 * =dateFormat.format(date); task.setStart_date(strtdte); date =
-		 * dateFormat.parse(task.getStart_date()); System.out.println(); } catch
-		 * (ParseException e) { // TODO Auto-generated catch block e.printStackTrace();
-		 * }
-		 */
-		String startdte = task.getStart_date().split("T")[0];
-		String enddte = task.getEnd_date().split("T")[0];
-		task.setStart_date(startdte);
-		task.setEnd_date(enddte);
-
-		return dao.insertTask(task)>0?"등록성공":"등록실패";
+	public String updateTask(Task_f upt) {
+		System.out.println("--UpdateTask 서비스 접근--");
+		
+		return dao.updateTask(upt)>0?"수정성공":"수정실패";
+	}
+	public String deleteTask(Task_f del) {
+		System.out.println("--deleteTask 서비스 접근--");
+		return dao.deleteTask(del)>0?"삭제성공":"삭제실패";
 	}
 	
 }
