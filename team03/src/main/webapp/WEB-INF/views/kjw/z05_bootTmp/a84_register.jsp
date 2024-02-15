@@ -65,11 +65,11 @@
                                     </div>
                                     <div class="col-sm-6">
  										 <select name="egrade" class="form-control form-control-user">
-                                    <option value="선택">직급	</option>
+                                    <option value="선택">직급</option>
                                     <option value="사원">사원</option>
-                                    <option value="팀장">팀장	</option>
-                                    <option value="전무">전무	</option>
-                                    <option value="사장">사장	</option>
+                                    <option value="팀장">팀장</option>
+                                    <option value="전무">전무</option>
+                                    <option value="사장">사장</option>
 
                                     </select>
                                     </div>
@@ -105,7 +105,8 @@
                                     <option value="@daum.net">daum.net</option>
                                     <option value="@google.com">google.com</option>
                                     </select>
-                                    <input type="hidden" id="passwd" name="passwd" value="javascript:temp_pw_issuance()">
+                                    <input type="hidden" id="passwd" name="passwd" value="">
+                                    <input type="hidden" id="email" name="email" value="">
                                     </div>
                                 </div>
                                 
@@ -174,7 +175,7 @@
 					var emailE = document.getElementById('emailE').value;
 					var emailH = document.getElementById('emailH').value;
 					var email = emailH+emailE;
-					
+					  temp_pw_issuance(); 
 document.getElementById('email').value= email;
 console.log(email);
 console.log(passwd);
@@ -210,7 +211,7 @@ console.log(passwd);
 					let ranPick4 = Math.floor(Math.random() * ranValue4.length);
 					temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2] + ranValue3[ranPick3] + ranValue4[ranPick4];
 				}
-return temp_pw;
+ $('#passwd').val()==temp_pw; 
 			}
 			</script>
 </body>
