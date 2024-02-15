@@ -140,8 +140,8 @@
 	</select>
 	
 	
-	<select id="getTeamMemeber" parameterType="int" resultType="tmem_f">
-		SELECT tf.*, epf.ENAME  
+	<select id="getTeamMemeber" parameterType="int" resultType="Map">
+		SELECT tf.empno, epf.ENAME  
 		FROM TMEM_F tf  , EMP_PINFO_F epf
 		WHERE tf.EMPNO = epf.EMPNO
 		and pcode = #{pcode}

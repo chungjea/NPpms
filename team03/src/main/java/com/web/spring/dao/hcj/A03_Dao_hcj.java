@@ -1,6 +1,7 @@
 package com.web.spring.dao.hcj;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -16,7 +17,7 @@ import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
-import com.web.spring.vo.Tmem_f;
+
 
 @Mapper
 public interface A03_Dao_hcj {
@@ -205,5 +206,5 @@ public interface A03_Dao_hcj {
 	@Delete("DELETE FROM PROJECT_WORK_F WHERE wno = #{id}")
 	int deleteTask(Task_f del);
 	
-	List<Tmem_f> getTeamMemeber(int pcode);
+	Map<Integer,String> getTeamMemeber(int pcode);
 }

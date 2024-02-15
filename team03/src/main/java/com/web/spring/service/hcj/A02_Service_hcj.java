@@ -2,13 +2,10 @@ package com.web.spring.service.hcj;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.web.spring.dao.hcj.A03_Dao_hcj;
@@ -20,7 +17,6 @@ import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
-import com.web.spring.vo.Tmem_f;
 
 @Service
 public class A02_Service_hcj {
@@ -176,7 +172,7 @@ public class A02_Service_hcj {
 		return auth.equals("관리자")?dao.getprojectListAdmim(sch):dao.getprojectListNormal(sch);
 	}
 	///--------------프로젝트----------------------
-	public List<Tmem_f> getTeamMemeber(int pcode){
+	public Map<Integer,String> getTeamMemeber(int pcode){
 		return dao.getTeamMemeber(pcode);
 	}
 	// 프로젝트 테스크 출력
