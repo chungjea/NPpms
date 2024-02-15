@@ -95,10 +95,10 @@
                                     
                                 <div class="form-group row">
 
-                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div class="col-sm-5 mb-3 mb-sm-0">
                                         <input type="emailH" name="emailH" id="emailH" class="form-control form-control-user"   placeholder="이메일주소" />	
                                     </div>
-                                    <h6>@</h6>
+                                    <span class="col-sm-0 mb-3 mb-sm-0">@</span>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                          <select name="emailE" id="emailE" class="form-control">
                                     <option value="@naver.com">naver.com</option>
