@@ -136,7 +136,7 @@ html, body {
 								gantt.config.highlight_critical_path = true;
 							gantt.render();
 						};
-					
+						
 						gantt.config.columns = [
 							{name: "wbs", label: "번호", width: 40, template: gantt.getWBSCode, resize: true},
 							{name: "text", label: "작업명", tree: true, width: 170, resize: true, min_width: 10},
@@ -149,7 +149,7 @@ html, body {
 							}}
 						];
 					
-						
+						gantt.config.date_format = "%Y-%m-%d";
 						
 						gantt.templates.rightside_text = function (start, end, task) {
 							if (task.type == gantt.config.types.milestone)
@@ -169,22 +169,41 @@ html, body {
 							{unit: "day", step: 1, format: "%d일"}
 						];
 						
-						var tmem = [
+		
+						var tmem;
+							$.ajax({
+								url:"${path}/Tmem",
+								type:"post",
+								data:"pcode=${pcode}",
+								dataType:"json",
+								success:function(data){
+									tmem = data.mem;
+								},
+								error:function(err){
+									
+								}
+								
+							})
+					
+						
+						console.log("---------------")
+						console.log(tmem)
+						/* var tmem = [
 						    { key: 199001001, label: '홍길동' },
 						    { key: 199001001, label: '김길동' },
 						    { key: 199001001, label: '한길동' }
-						];
+						]; */
 						
 						gantt.config.lightbox.sections = [
 						    {name:"description", height:50, map_to:"text", type:"textarea", focus:true},
 						    {name:"assignor", height:30, type:"select", options:tmem,map_to:"assignor"},
-						    {name:"time", height:40, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]},
-						  
+						    {name:"time", height:40, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]}
+						  	//{name:"progress",height:50,type}
 						    
 						];
 					
 						
-						
+						console.log(gantt.config.date_format)
 						
 						gantt.locale.labels.section_description = "작업명";
 						gantt.locale.labels.section_time = "기간";
@@ -216,8 +235,26 @@ html, body {
 						
 						gantt.attachEvent("onAfterTaskUpdate", function(id,item){
 							console.log("taskUpdate:테스크에변화가 있을때")
-							console.log(item)
+							//console.log(item)
 							funcTask("updateTask",item)	
+							if(item.parent !=0){
+								const parent = item.parent
+								const child = gantt.getChildren(item.parent)
+								console.log(child)
+								var tot = 0;
+								child.forEach(function(id){
+									tot +=gantt.getTask(id).progress;
+									console.log(gantt.getTask(id).progress)
+								})
+								var progress = tot/child.length
+								gantt.getTask(parent).progress = Math.round(progress * 10)/10
+								funcTask("updateTask",gantt.getTask(item.parent))	
+								
+								gantt.render()
+							
+							}
+							
+							
 						});
 						
 						gantt.attachEvent("onAfterTaskAdd", function(id,item){
@@ -238,8 +275,7 @@ html, body {
 						var datas = item
 						const start = {startdte:transferDateformat(item.start_date)};
 						const end = {enddte:transferDateformat(item.end_date)};
-						const pcode = {"pcode":"${param.pcode}"}
-
+						const pcode = {"pcode":"${pcode}"}
 						var data = {...datas,...start,...end,...pcode}
 						
 						 $.ajax({
@@ -259,6 +295,8 @@ html, body {
 							})
 				}
 				
+				
+						
 				function transferDateformat(date){
 					const year = date.getFullYear()
 					const month = (date.getMonth()+1)

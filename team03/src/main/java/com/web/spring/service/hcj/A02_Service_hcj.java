@@ -20,6 +20,7 @@ import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
 
 @Service
 public class A02_Service_hcj {
@@ -174,7 +175,10 @@ public class A02_Service_hcj {
 		
 		return auth.equals("관리자")?dao.getprojectListAdmim(sch):dao.getprojectListNormal(sch);
 	}
-	
+	///--------------프로젝트----------------------
+	public List<Tmem_f> getTeamMemeber(int pcode){
+		return dao.getTeamMemeber(pcode);
+	}
 	// 프로젝트 테스크 출력
 	public List<Data> getTaskdatas(int pcode) {
 		return dao.getTaskdatas(pcode);
@@ -188,9 +192,7 @@ public class A02_Service_hcj {
 
 	public String updateTask(Task_f upt) {
 		System.out.println("--UpdateTask 서비스 접근--");
-		System.out.println("parent:"+upt.getParent());
-		System.out.println("담당자:"+upt.getAssignor());
-		System.out.println("id:"+upt.getId());
+		
 		return dao.updateTask(upt)>0?"수정성공":"수정실패";
 	}
 	public String deleteTask(Task_f del) {

@@ -16,6 +16,7 @@ import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
 
 @Mapper
 public interface A03_Dao_hcj {
@@ -190,8 +191,8 @@ public interface A03_Dao_hcj {
 	
 	
 	// 프로젝트 간트차트
-	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'DD-MM-YYYY') \r\n "
-			+ "start_date, CASE when ENDDTE-STARTDTE < 1 THEN 1 else ENDDTE-STARTDTE END  duration, PROGRESS/100 PROGRESS,"
+	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'YYYY-MM-DD') \r\n "
+			+ "start_date, CASE when ENDDTE-STARTDTE < 1 THEN 1 else ENDDTE-STARTDTE END  duration, PROGRESS,"
 			+ "REFNO parent \r\n"
 			+ "FROM PROJECT_WORK_F pwf \r\n"
 			+ "where pcode = #{pcode}")
@@ -204,4 +205,5 @@ public interface A03_Dao_hcj {
 	@Delete("DELETE FROM PROJECT_WORK_F WHERE wno = #{id}")
 	int deleteTask(Task_f del);
 	
+	List<Tmem_f> getTeamMemeber(int pcode);
 }
