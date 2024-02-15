@@ -28,15 +28,104 @@
 
 
 <style>
-	td{text-align:center;}
-	.jumbotron{padding:2%;}
-	.input-group-text{width:100%;
-		color:black;font-weight:bolder;}
-	.input-group-prepend{width:20%;}
-	#chatArea{
-		width:80%;height:200px;overflow-y:scroll;text-align:left;
-		border:1px solid green;
-		padding-right: 15px;
+	table{
+		 width:70%;
+		 cellspacing:0;
+	}
+	td{
+		text-align:center;
+		background-color:whitesmoke;
+		height:40px;
+		line-height: 40px;
+		font-size:20px;
+	}
+	td:hover{
+		background-color:gainsboro;
+	}
+	th{
+		text-align:center !important;
+		background-color:white;
+		
+	}
+	table caption {
+	    caption-side: top;
+	    text-align: center;
+	    font-size: x-large;
+	    padding: 2px;
+	    margin-bottom:5px;
+	}
+	.jumbotron{
+		padding:2%;
+	}
+	.input-group-text{
+		width:100%;
+		color:black;
+		font-weight:bolder;
+	}
+	.input-group-prepend{
+		width:20%;
+	}
+	#chatroom-container::-webkit-scrollbar {
+  		display: none;
+	}
+	#chatroom-container{
+		width:50%;
+	    height: 70vh;
+	    overflow-y: auto;
+	}
+	#scroll{
+		width:70%;
+	    margin: 0 auto;
+	}
+	#chat-container {
+		width:50%;
+    	align-items: center;
+	    height: 70vh;
+	}
+	#chatArea {
+	    width: 420px;
+	    height: 600px;
+	    background: white;
+	    border-radius: 5px;
+	    display: flex;
+	    margin: 0 auto;
+	    justify-content: center;
+	    align-items: center;
+	    flex-direction: column;
+	}
+	#chatName{
+		width:100%;
+		background-color:skyblue;
+	}
+	#chatGroup{
+		width:100%;
+		padding: 10px;
+		text-align:center;
+		color:white;
+	}
+	#chatMessageArea {
+	    flex: 1;
+	    padding: 10px;
+	    overflow-y: auto;
+	    text-align:left;
+	    padding-right: 13px;
+	    padding-left: 15px;
+	}
+	#msg {
+	    border: light;
+	    padding: 10px;
+	    width: calc(100% - 80px);
+	    margin-left: 10px;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	}
+	#sndBtn {
+	    width: 60px;
+	    height: 38px;
+	    margin-right: 10px;
+	    margin-top: 10px;
+	    margin-bottom: 10px;
+	    text-align: center;
 	}
 </style> 
  
@@ -53,8 +142,6 @@
  
 </head>
 <script src="${path}/a00_com/popper.min.js"></script>
-<script src="${path}/a00_com/bootstrap.min.js"></script>
-<script src="${path}/a00_com/jquery-ui.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -71,7 +158,7 @@
 		$("#enterBtn").click(function(){
 			var idVal = $("#id").val()
 			wsocket = new WebSocket(
-				"ws:localhost:5050/chat"	
+				"ws:localhost:3333/chat"	
 			)
 			// 주의: localhost:로 현재 pc로 완료가 되었으면 서버(공유아이피주소설정)
 			// 업로드 후, 서버에서 잘 작동되는지 확인..
@@ -108,7 +195,7 @@
 			//    스크롤 기능 메서드로 스크롤되게 처리한다. scrollTop()
 			var height = parseInt($("#chatMessageArea").height())
 			mx += height+20
-			$("#chatArea").scrollTop(mx)
+			$("#chatMessageArea ").scrollTop(mx)
 
 		}
 		var mx = 0;
@@ -155,55 +242,70 @@
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">채팅방</h1>
+                        <h1 class="h3 mb-0 text-gray-800">채팅</h1>
+                        <a href="${path}/chatting" class="btn btn-secondary btn-icon-split">
+                                <span class="icon text-white-50">
+                                	<i class="fas fa-arrow-right"></i>
+                            	</span>
+                        	<span class="text">채팅방 생성</span>
+                        </a>
                     </div>
                     <br>
-                    <div class="input-group mb-3">	
-						<div class="input-group-prepend ">
-							<span class="input-group-text  justify-content-center">아이디</span>
+                    <div class="row">
+	                    <div id="chatroom-container">
+	                    	<div id="scroll">
+		                    	<table class="table table-bordered" id="roominfo">
+		                            <caption>채팅방</caption>
+		                            <tbody>
+		                                <tr><td>Bruno Nash</td></tr>
+		                                <tr><td>Sakura Yamamoto</td></tr>
+		                                <tr><td>Thor Walton</td></tr>
+		                                <tr><td>Finn Camacho</td></tr>
+		                                <tr><td>Serge Baldwin</td></tr>
+		                                <tr><td>Zenaida Frank</td></tr>
+		                                <tr><td>Zorita Serrano</td></tr>
+		                                <tr><td>Jennifer Acosta</td></tr>
+		                                <tr><td>Cara Stevens</td></tr>
+		                                <tr><td>Hermione Butler</td></tr>
+		                                <tr><td>Lael Greer</td></tr>
+		                               	<tr><td>Jonas Alexander</td></tr>
+		                                <tr><td>Shad Decker</td></tr>
+		                                <tr><td>Michael Bruce</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                                <tr><td>Donna Snider</td></tr>
+		                        	</tbody>
+		                    	</table>
+		                    </div>
+	                    </div>
+	                    <div id="chat-container">
+							<div id="chatArea" style="overflow-x:hidden" class="input-group-append">
+								<div class="input-group-append" id="chatName">
+									<div id="chatGroup">dd</div>
+								</div>			
+								<div id="chatMessageArea"></div>
+								<div class="input-group align-items-end" >
+									<input type="text" id="msg" class="form-control" placeholder="전송할 메시지 입력"/>
+									<div class="input-group-append">
+										<button type="button" id="sndBtn" class="btn btn-success">전송</button>
+									</div>
+								</div>
+							</div>
 						</div>
-						<input type="text" id="id" class="form-control" placeholder="접속할 아이디 입력" />
-						<input id="enterBtn" type="button" class="btn btn-info" value="채팅방입장" />
-						<input id="exitBtn" type="button" class="btn btn-danger" value="채팅방나가기" />
-					</div>	
-					<div class="input-group mb-3">	
-						<div class="input-group-prepend ">
-							<span class="input-group-text  justify-content-center">접속자</span>
-						</div>
-						<div class="input-group-append" id="chatM">
-							<div id="chatGroup"></div>
-						</div>			
 					</div>
-					<div class="input-group mb-3">	
-						<div class="input-group-prepend ">
-							<span class="input-group-text  justify-content-center">메시지</span>
-						</div>
-						<div id="chatArea" style="overflow-x:hidden" class="input-group-append">
-							<div id="chatMessageArea"></div>
-						</div>
-					</div>		
-					<div class="input-group mb-3">	
-						<div class="input-group-prepend ">
-							<span class="input-group-text  justify-content-center">메시지</span>
-						</div>
-						<input type="text" id="msg" class="form-control" placeholder="전송할 메시지 입력"/>
-						<input type="button" id="sndBtn" class="btn btn-success" value="메시지전송" />	
-					</div>		
-					<%--
-					<div class="input-group mb-3">
-						<div class="input-group-prepend ">
-							<span class="input-group-text  justify-content-center">기타기능</span>
-						</div>
-						<input type="button" class="btn btn-info" value="수정" id="uptBtn"/>
-						<input type="button" class="btn btn-danger" value="삭제" id="delBtn"/>
-						<input type="button" class="btn btn-success" value="조회리스트" id="mainBtn"/>
-					</div>
-					 --%>	
 					<script type="text/javascript">
 						$("#mainBtn").click(function(){
-							location.href="${path}/deptList02.do"
+							location.href=""
 						})
-					</script>
+					</script> 
 				</div>
 				<!-- /.container-fluid -->
 			</div>

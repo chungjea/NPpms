@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.spring.service.cjw.A02_Service_cjw;
 import com.web.spring.vo.ApproveSch;
@@ -225,4 +226,5 @@ public class A01_Controller_cjw {
 		
 		return "cjw/z05_bootTmp/chatting";
 	}
+	
 }
