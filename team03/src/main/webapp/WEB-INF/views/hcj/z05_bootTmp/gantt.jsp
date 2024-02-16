@@ -143,7 +143,7 @@ html, body {
 							tooltip: true,
 							critical_path: true
 						});
-					
+						gantt.config.min_duration = 24*60*60*1000;
 						var toggleCritical = function () {
 							if (gantt.config.highlight_critical_path)
 								gantt.config.highlight_critical_path = !true;
@@ -249,30 +249,68 @@ html, body {
 							console.log("onmove:움직임이 있을때")
 						
 						});
-						
+						var beforestartdte;
+						/* gantt.attachEvent("onBeforeTaskUpdate", function(id,new_item){
+							if(gantt.getChildren(id) !=0){
+								
+								
+								
+								
+								console.log("하위존재")
+							
+								
+								
+							}
+							
+						}); */
+						gantt.attachEvent("onBeforeTaskChanged", function(id, mode, task){
+							if(gantt.getChildren(id) !=0){	
+								beforestartdte = task.start_date;
+							}
+						    return true;
+						});
 						gantt.attachEvent("onAfterTaskUpdate", function(id,item){
 							console.log("taskUpdate:테스크에변화가 있을때")
-							//console.log(item)
+
+							const parent = item.parent
+							const child = gantt.getChildren(id)
+							
 							funcTask("updateTask",item)	
-							if(item.parent !=0){
-								const parent = item.parent
-								const child = gantt.getChildren(item.parent)
-								console.log(child)
+							// 상위 작업이 있을경우 할 일
+							if(parent !=0){
+								const Siblings = gantt.getChildren(item.parent)
+								const parentdata = gantt.getTask(parent)
 								var tot = 0;
-								child.forEach(function(id){
-									tot +=gantt.getTask(id).progress;
-									console.log(gantt.getTask(id).progress)
-								})
-								var progress = tot/child.length
-								gantt.getTask(parent).progress = Math.round(progress * 10)/10
-								funcTask("updateTask",gantt.getTask(item.parent))	
+								var parent_startdte = parentdata.start_date;
+								var parent_enddate = parentdata.end_date;
 								
+								Siblings.forEach(function(id){
+									var Sibling = gantt.getTask(id)
+									tot +=Sibling.progress;
+									if(parent_startdte>Sibling.start_date) parent_startdte = Sibling.start_date
+									if(parent_enddate<Sibling.end_date) parent_enddate = Sibling.end_date
+								})
+								var progress = tot/Siblings.length
+								parentdata.progress = Math.round(progress * 10)/10
+								parentdata.start_date = parent_startdte
+								parentdata.end_date = parent_enddate
+								// 업데이트 후 랜더
+								funcTask("updateTask",parentdata)	
 								gantt.render()
+							}
+						// 하위 작업이 있을경우 할일
+							if(child !=0){	
+							var daycnt = item.start_date.getDate()-beforestartdte.getDate()
+							child.forEach
 							
 							}
 							
 							
+							
+							
 						});
+						
+						
 						
 						gantt.attachEvent("onAfterTaskAdd", function(id,item){
 							console.log("onAfterTaskAdd:테스크 생성시 사용")
