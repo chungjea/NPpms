@@ -79,12 +79,12 @@ html, body {
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<div class=" text-center">
-						<h2 style="border-radius: 10px;background: #a1b6f2;color:white;padding:10px 0px">${pinfo.pname}</h2>
+						<h2
+							style="border-radius: 10px; background: #a1b6f2; color: white; padding: 10px 0px">${pinfo.pname}</h2>
 						<ul class="nav nav-tabs nav-justified">
-							<li class="nav-item"><a class="nav-link active" href="#">간트차트</a>
-							</li>
-							<li class="nav-item"><a class="nav-link" href="#">게시판</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">Link</a></li>
+							<li class="nav-item"><a class="nav-link active" href="#">간트차트</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">회의록</a></li>
+							<li class="nav-item"><a class="nav-link" href="#">결제</a></li>
 							<li class="nav-item"><a class="nav-link disabled" href="#"></a>
 							</li>
 						</ul>
@@ -249,7 +249,7 @@ html, body {
 							console.log("onmove:움직임이 있을때")
 						
 						});
-						var beforestartdte;
+						
 						/* gantt.attachEvent("onBeforeTaskUpdate", function(id,new_item){
 							if(gantt.getChildren(id) !=0){
 								
@@ -263,15 +263,45 @@ html, body {
 							}
 							
 						}); */
-						gantt.attachEvent("onBeforeTaskChanged", function(id, mode, task){
-							if(gantt.getChildren(id) !=0){	
-								beforestartdte = task.start_date;
+						var bdforeMoveDate;
+						var beforeResizeStart;
+						gantt.attachEvent("onBeforeTaskDrag", function(id, mode, e){
+							const Task = gantt.getTask(id)
+						    //any custom logic here
+						    if(mode === "move"){
+						    	bdforeMoveDate = Task.start_date
+						    }
+							if(mode === "resize"){
+								
 							}
+						    
 						    return true;
 						});
+						
+						gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
+						    //any custom logic here
+						    const Task = gantt.getTask(id)
+						    if(mode === "move"){
+						    	if(gantt.getChildren(id) !=0){
+							    	console.log("이동 후")
+							    	var moveStep =  Task.start_date.getDate() - bdforeMoveDate.getDate()  
+							    	gantt.getChildren(id).forEach(function(childid){
+							    		var childTask = gantt.getTask(childid)
+							    		console.log(childTask.start_date.getDate())
+							    		childTask.start_date.setDate(childTask.start_date.getDate()+moveStep)
+							    		childTask.end_date.setDate(childTask.end_date.getDate()+moveStep)
+							    		funcTask("updateTask",childTask)
+							    	})
+							    	console.log(moveStep)
+							    	gantt.render()
+						    	}
+						    }
+						    return true;
+						});
+						
+						
 						gantt.attachEvent("onAfterTaskUpdate", function(id,item){
 							console.log("taskUpdate:테스크에변화가 있을때")
-
 							const parent = item.parent
 							const child = gantt.getChildren(id)
 							
@@ -284,8 +314,8 @@ html, body {
 								var parent_startdte = parentdata.start_date;
 								var parent_enddate = parentdata.end_date;
 								
-								Siblings.forEach(function(id){
-									var Sibling = gantt.getTask(id)
+								Siblings.forEach(function(Siblingid){
+									var Sibling = gantt.getTask(Siblingid)
 									tot +=Sibling.progress;
 									if(parent_startdte>Sibling.start_date) parent_startdte = Sibling.start_date
 									if(parent_enddate<Sibling.end_date) parent_enddate = Sibling.end_date
@@ -295,18 +325,13 @@ html, body {
 								parentdata.start_date = parent_startdte
 								parentdata.end_date = parent_enddate
 								// 업데이트 후 랜더
-								funcTask("updateTask",parentdata)	
 								gantt.render()
+								funcTask("updateTask",parentdata)	
+								
 							}
-						// 하위 작업이 있을경우 할일
-							if(child !=0){	
-							var daycnt = item.start_date.getDate()-beforestartdte.getDate()
-							child.forEach
+						
 							
-							}
-							
-							
-							
+					
 							
 						});
 						
@@ -341,8 +366,7 @@ html, body {
 								data :JSON.stringify(data),
 								success:function(data){
 									//alert(data.msg)
-									gantt.message(data.msg);
-									
+									gantt.message(data.msg);	
 								},
 								error:function(err){
 									console.log(err)
