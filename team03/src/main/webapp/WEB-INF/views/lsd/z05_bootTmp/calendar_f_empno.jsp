@@ -160,15 +160,15 @@ body {
 			dayMaxEvents : true, // allow "more" link when too many events
 			events : function(info, successCallback, failureCallBack) {
 				$.ajax({
-					url : "${path}/cal_fList",
+					url : "${path}/cal_fList_empno",
 					dataType : "json",
 					success : function(data) {
-						console.log(data.cal_fList)
+						console.log(data.cal_fList_empno)
 						//alert(data.callist.length+"건!!")
 						// 서버단에서 받은 json데이터를 
 						// calendar api에 할당 처리..
 
-						successCallback(data.cal_fList)
+						successCallback(data.cal_fList_empno)
 					},
 					error : function(err) {
 						console.log(err)
@@ -182,16 +182,17 @@ body {
 		calendar.render();
 
 		$("#regBtn").click(function() {
-			ajaxFunc("insCal_f", "post")
+			alert("등록")
+			ajaxFunc("insCal_f_empno", "post")
 		})
 		$("#uptBtn").click(function() {
 			if (confirm("수정하시겠습니까?")) {
-				ajaxFunc("uptCal_f", "post")
+				ajaxFunc("uptCal_f_empno", "post")
 			}
 		})
 		$("#delBtn").click(function() {
 			if (confirm("삭제하시겠습니까?")) {
-				ajaxFunc("delCal_f", "post")
+				ajaxFunc("delCal_f_empno", "post")
 			}
 		})
 		// 링크된 페이지로 창을 로딩하여 이동하게 처리..
@@ -200,33 +201,15 @@ body {
 				window.open($(this).val(), "", "")
 			}
 		})
-		
-		$("#empnoBtn").click(function() {
-			if (confirm("개인페이지로 넘어가시겠습니까?")) {
-				location.href="${path}/calendar_f_empno"
-				/*
-				$.ajax({
-					url : "${path}/cal_fList_empno",
-					dataType : "json",
-					success : function(data) {
-						console.log("# 사원별 #")
-						console.log(data.cal_fList_empno)
-						//alert(data.callist.length+"건!!")
-						// 서버단에서 받은 json데이터를 
-						// calendar api에 할당 처리..
-						calendar.removeAllEvents();
-						calendar.render();
-						console.log(data.cal_fList)
-						// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
-						// 다시 추가 처리..
-						calendar.addEventSource(data.cal_fList_empno)
-						//window.location.reload();
-					},
-					error : function(err) {
-						console.log(err)
-					}
-				})
-				*/
+		$("#deptBtn").click(function(){
+			if (confirm("부서페이지로 넘어가시겠습니까?")) {
+				location.href="${path}/calendar_f"
+			}
+		})
+			
+		$("#allBtn").click(function(){
+			if (confirm("전체페이지로 넘어가시겠습니까?")) {
+				location.href="${path}/calendar_f_all"
 			}
 		})
 		
@@ -272,10 +255,10 @@ body {
 
 					calendar.removeAllEvents();
 					calendar.render();
-					console.log(data.cal_fList)
+					console.log(data.cal_fList_empno)
 					// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
 					// 다시 추가 처리..
-					calendar.addEventSource(data.cal_fList)
+					calendar.addEventSource(data.cal_fList_empno)
 					window.location.reload();
 
 				},
@@ -306,6 +289,7 @@ body {
 
 	});
 </script>
+
 </head>
 
 <body>
@@ -326,6 +310,7 @@ body {
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
+
 				<div class="modal-header">
 					<h5 class="modal-title" id="calTitle">일정등록</h5>
 					<button type="button" class="close" data-dismiss="modal"
@@ -335,9 +320,8 @@ body {
 				</div>
 				<div class="modal-body">
 					<form id="frm01" class="form" method="post">
-						<input type="hidden" name="id" value="0" />
-						<input type="hidden" name="dname" value="" />
-						<input type="hidden" name="auth" value="" />
+						<input type="hidden" name="id" value="0" /> <input type="hidden"
+							name="empno" value="${emp.empno}" />
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
@@ -412,12 +396,15 @@ body {
 						</div>
 					</form>
 				</div>
+
 				<div class="modal-footer">
-				<c:if test="${emp.auth eq '관리자'}">
+					<!-- <c:if test="${emp.auth eq '관리자'}">
+						<input type="button" class="btn btn-success" value="등록"
+							id="insBtn" />
+					</c:if>-->
 					<button type="button" id="regBtn" class="btn btn-primary">일정등록</button>
 					<button type="button" id="uptBtn" class="btn btn-info">일정수정</button>
 					<button type="button" id="delBtn" class="btn btn-warning">일정삭제</button>
-				</c:if>
 					<button type="button" id="clsBtn" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
@@ -426,14 +413,12 @@ body {
 				</script>
 			</div>
 		</div>
-		
 	</div>
 	<form>
 	<div style="text-align: right;">
-		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
+		<button type="button" class="btn btn-warning" id="deptBtn">부서</button>
 		<button type="button" class="btn btn-danger" id="allBtn">전체</button>
 	</div>
 	</form>
-
 </body>
 </html>

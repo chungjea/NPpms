@@ -310,7 +310,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>Calendar</h2>
+		<h2>전체 전체</h2>
 	</div>
 	<%-- 
 		
