@@ -160,15 +160,15 @@ body {
 			dayMaxEvents : true, // allow "more" link when too many events
 			events : function(info, successCallback, failureCallBack) {
 				$.ajax({
-					url : "${path}/cal_fList",
+					url : "${path}/Cal_fList_all",
 					dataType : "json",
 					success : function(data) {
-						console.log(data.cal_fList)
+						console.log(data.cal_fList_all)
 						//alert(data.callist.length+"건!!")
 						// 서버단에서 받은 json데이터를 
 						// calendar api에 할당 처리..
 
-						successCallback(data.cal_fList)
+						successCallback(data.cal_fList_all)
 					},
 					error : function(err) {
 						console.log(err)
@@ -204,29 +204,12 @@ body {
 		$("#empnoBtn").click(function() {
 			if (confirm("개인페이지로 넘어가시겠습니까?")) {
 				location.href="${path}/calendar_f_empno"
-				/*
-				$.ajax({
-					url : "${path}/cal_fList_empno",
-					dataType : "json",
-					success : function(data) {
-						console.log("# 사원별 #")
-						console.log(data.cal_fList_empno)
-						//alert(data.callist.length+"건!!")
-						// 서버단에서 받은 json데이터를 
-						// calendar api에 할당 처리..
-						calendar.removeAllEvents();
-						calendar.render();
-						console.log(data.cal_fList)
-						// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
-						// 다시 추가 처리..
-						calendar.addEventSource(data.cal_fList_empno)
-						//window.location.reload();
-					},
-					error : function(err) {
-						console.log(err)
-					}
-				})
-				*/
+			}
+		})
+		
+		$("#deptBtn").click(function() {
+			if (confirm("부서페이지로 넘어가시겠습니까?")) {
+				location.href="${path}/calendar_f"
 			}
 		})
 		
@@ -275,7 +258,7 @@ body {
 					console.log(data.cal_fList)
 					// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
 					// 다시 추가 처리..
-					calendar.addEventSource(data.cal_fList)
+					calendar.addEventSource(data.cal_fList_all)
 					window.location.reload();
 
 				},
@@ -336,14 +319,14 @@ body {
 				<div class="modal-body">
 					<form id="frm01" class="form" method="post">
 						<input type="hidden" name="id" value="0" />
-						<input type="hidden" name="dname" value="" />
-						<input type="hidden" name="auth" value="" />
+						<input type="hidden" name="dname" value="${emp.dname}" />
+						<input type="hidden" name="auth" value="${emp.auth}" />
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									제목</span>
 							</div>
-							<input type="text" name="title" class="form-control" value="" />
+							<input type="text" name="title" class="form-control" value="" readonly/>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
@@ -351,7 +334,7 @@ body {
 									시작일</span>
 							</div>
 							<input type="text" id="start" readonly class="form-control" /> <input
-								type="hidden" name="start" />
+								type="hidden" name="start" readonly/>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
@@ -359,7 +342,7 @@ body {
 									종료일</span>
 							</div>
 							<input type="text" id="end" readonly class="form-control" /> <input
-								type="hidden" name="end" />
+								type="hidden" name="end" readonly/>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
@@ -413,11 +396,11 @@ body {
 					</form>
 				</div>
 				<div class="modal-footer">
-				<c:if test="${emp.auth eq '관리자'}">
+				<!--<c:if test="${emp.auth eq '관리자' and emp.auth eq '직원'}">-->
 					<button type="button" id="regBtn" class="btn btn-primary">일정등록</button>
 					<button type="button" id="uptBtn" class="btn btn-info">일정수정</button>
 					<button type="button" id="delBtn" class="btn btn-warning">일정삭제</button>
-				</c:if>
+				<!--</c:if>-->
 					<button type="button" id="clsBtn" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
@@ -431,7 +414,7 @@ body {
 	<form>
 	<div style="text-align: right;">
 		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
-		<button type="button" class="btn btn-danger" id="allBtn">전체</button>
+		<button type="button" class="btn btn-danger" id="deptBtn">부서</button>
 	</div>
 	</form>
 

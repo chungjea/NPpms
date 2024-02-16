@@ -9,6 +9,12 @@
 		<result column="urllink" property="urlLink"/>
 	</resultMap>
 	
+	<select id="getCalList_all" resultMap="calRst">
+		select *
+		from calendar_f
+		where dName = #{dName}
+	</select>
+	
 	<select id="getCalList" resultMap="calRst">
 		select *
 		from calendar_f

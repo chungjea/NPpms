@@ -13,6 +13,11 @@ public class Calendar_fService {
 	@Autowired(required = false)
 	private Calendar_fDao dao;
 
+	// 전체조회(부서+개인)
+	public List<Calendar_f> getCalList_all(String dName) {
+		return dao.getCalList_all(dName);
+	}// getCalList_all()
+
 	// 전체조회(부서별)
 	public List<Calendar_f> getCalList(String dName) {
 		return dao.getCalList(dName);
@@ -22,7 +27,7 @@ public class Calendar_fService {
 	public List<Calendar_f> getCalList_empno(int empno) {
 		return dao.getCalList_empno(empno);
 	}// getCalList_empno()
-	
+
 	// 등록
 	public String insertCalendar(Calendar_f ins) {
 		return dao.insertCalendar(ins) > 0 ? "등록성공" : "등록실패";

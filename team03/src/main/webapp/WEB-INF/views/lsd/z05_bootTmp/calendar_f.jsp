@@ -204,29 +204,12 @@ body {
 		$("#empnoBtn").click(function() {
 			if (confirm("개인페이지로 넘어가시겠습니까?")) {
 				location.href="${path}/calendar_f_empno"
-				/*
-				$.ajax({
-					url : "${path}/cal_fList_empno",
-					dataType : "json",
-					success : function(data) {
-						console.log("# 사원별 #")
-						console.log(data.cal_fList_empno)
-						//alert(data.callist.length+"건!!")
-						// 서버단에서 받은 json데이터를 
-						// calendar api에 할당 처리..
-						calendar.removeAllEvents();
-						calendar.render();
-						console.log(data.cal_fList)
-						// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
-						// 다시 추가 처리..
-						calendar.addEventSource(data.cal_fList_empno)
-						//window.location.reload();
-					},
-					error : function(err) {
-						console.log(err)
-					}
-				})
-				*/
+			}
+		})
+		
+		$("#allBtn").click(function() {
+			if (confirm("전체페이지로 넘어가시겠습니까?")) {
+				location.href="${path}/calendar_f_all"
 			}
 		})
 		

@@ -19,11 +19,21 @@ public class Calendar_fController {
 	@Autowired(required = false)
 	private Calendar_fService service;
 
-	//전체조회
+	//전체조회(부서+개인)
 	@GetMapping("calendar_f_all")
 	public String calendar_f_all() {
 		return "lsd/z05_bootTmp/calendar_f_all";
 	}//calendar_f_all()
+	
+	@GetMapping("Cal_fList_all")
+	public String Cal_fList_all(Model d, HttpSession session) {
+		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
+		String dName = emp.getDname();
+		System.out.println("부서 나오나?"+dName);
+		d.addAttribute("Cal_fList_all", service.getCalList_all(dName));
+		return "pageJsonReport";
+	}// getCalList_all()
+	
 	
 	// 전체조회(부서)
 	@GetMapping("calendar_f")
