@@ -24,12 +24,13 @@ public class DownloadViewer_lsd extends AbstractView {
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 		String path="C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
-		String fileName = (String)model.get("downloadNotice");
+		String fileName = (String)model.get("downloadFile");
+		String realfile = (String)model.get("realFile");
 		File file = new File(path+fileName);
 		res.setContentType("application/download;charset=utf-8");
 		res.setContentLengthLong(file.length());
-		fileName = URLEncoder.encode(fileName, "utf-8").replaceAll("\\+", " ");
-		res.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\"");
+		realfile = URLEncoder.encode(realfile, "utf-8").replaceAll("\\+", " ");
+		res.setHeader("Content-Disposition", "attachment;filename=\""+realfile+"\"");
 		res.setHeader("Content-Transfer-Encoding", "binary");
 		FileInputStream fis = new FileInputStream(file);
 		OutputStream out = res.getOutputStream();

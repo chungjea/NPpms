@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.dao.lsd.A03_Dao_lsd;
+import com.web.spring.vo.Metfile_f;
 import com.web.spring.vo.NoticeFile_f;
 import com.web.spring.vo.NoticeSch_f;
 import com.web.spring.vo.Noticeboard_f;
@@ -62,10 +63,15 @@ public class A02_Service_lsd {
 		// 안되면 detail로 위아래 세부사항 전부
 		public Noticeboard_f noticeDetail(int notice_num) {
 			Noticeboard_f noticeboard = dao.noticeboardDetail(notice_num);
-			noticeboard.setFname(dao.getNoticeFile(notice_num));
+			//noticeboard.setFname(dao.getNoticeFile(notice_num));
 			return noticeboard;
 		}// noticeDetail() 공지 세부
 
+
+		public List<NoticeFile_f> getNoticeFile(int notice_num) {
+			return dao.getNoticeFile(notice_num);
+		}
+		
 	/*public int insertNotice(Noticeboard_f ins) {
 		return dao.insertNotice(ins);
 	}// insertNotice() 공지 등록*/
@@ -89,13 +95,15 @@ public class A02_Service_lsd {
 				for(MultipartFile mpf:mpfs) {
 				//  1) 파일업로드 처리
 					String fname = mpf.getOriginalFilename();
-					
+					String fno = ""+dao.getfnoNF();
 					// MultipartFile ==> File 변환해서 저장.
-					mpf.transferTo(new File(path+fname));
+					// fname(실제 파일명)대신 sequence number로 파일 저장
+					mpf.transferTo(new File(path+fno));
 				//  2) db파일업로드 정보 입력	
 				//  등록되는 갯수만큼 numbering 처리..
 					ck02+=dao.insertNoticeFile(
-							new NoticeFile_f(fname,path,ins.getTitle()));
+							new NoticeFile_f(fname,path,ins.getTitle(),fno));
+					dao.insertfileNF(fname, path, fno);
 					
 				}
 			} catch (IllegalStateException e) {
@@ -114,11 +122,24 @@ public class A02_Service_lsd {
 		return msg;
 	}
 
+	public String getfnamebyfnoNF(String fno) {
+		return dao.getfnamebyfnoNF(fno);
+	}
+	
 	public String updateNotice(Noticeboard_f upt) {
 		return dao.updateNotice(upt) > 0 ? "수정성공" : "수정실패";
 	}// updateNotice() 공지 수정
 
 	public String deleteNotice(int notice_num) {
+		List<String> delFnames = dao.getfnobynameNF(notice_num);
+		String path = "C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		for(String fname:delFnames) {
+			File fileToDelete = new File(path+fname);
+			if(fileToDelete.exists()) fileToDelete.delete();
+		}
+		if(dao.deleteNoticeFile(notice_num)>0) {
+			dao.deletefileNF(notice_num);
+		}
 		return dao.deleteNotice(notice_num) > 0 ? "삭제성공" : "삭제실패";
 	}// deleteNotice() 공지 삭제
 

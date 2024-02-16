@@ -60,6 +60,7 @@ public class A01_Controller_lsd {
 	@RequestMapping("noticeboardDetail")
 	public String noticeboardDetail(@RequestParam("notice_num") int notice_num, Model d) {
 		d.addAttribute("notice", service.noticeboardDetail(notice_num));
+		d.addAttribute("noticeFile",service.getNoticeFile(notice_num));
 		return "lsd/z05_bootTmp/noticeDetail";
 	}// getNoticeboard()
 

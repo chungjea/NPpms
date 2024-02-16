@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.web.spring.vo.Metfile_f;
 import com.web.spring.vo.NoticeFile_f;
 import com.web.spring.vo.NoticeSch_f;
 import com.web.spring.vo.Noticeboard_f;
@@ -71,13 +72,33 @@ public interface A03_Dao_lsd {
 	int deleteNotice(@Param("notice_num") int notice_num);
 
 	// 공지 파일 전체
-	@Select("SELECT fname FROM NoticeFile_f WHERE NO = #{no}")
-	List<String> getNoticeFile(int no);
+	@Select("SELECT fname, fno FROM NoticeFile_f WHERE NO = #{no}")
+	List<NoticeFile_f> getNoticeFile(int no);
 
+	// 공지 파일 저장번호
+	@Select("SELECT fno_seq.nextval FROM dual")
+	int getfnoNF();
+	
 	// 공지 파일 등록
-	@Insert("INSERT INTO NoticeFile_f values(board_seq.currval,\r\n" + "#{fname},#{path},sysdate,sysdate,#{etc})")
+	@Insert("INSERT INTO NoticeFile_f values(board_seq.currval,\r\n" + "#{fname},#{path},sysdate,sysdate,#{etc}, #{fno})")
 	int insertNoticeFile(NoticeFile_f ins);
+	
+	// 공지 파일 문서관리 DB에 저장
+	@Insert("Insert into file_f values(file_seq.nextval, '공지', board_seq.currval, #{fname}, #{path}, sysdate, #{fno}, 0)")
+	int insertfileNF(String fname, String path, String fno);
 
+	// 저장된 파일 이름 불러오기
+	@Select("SELECT fno FROM NoticeFile_f WHERE no = #{no}")
+	List<String> getfnobynameNF (int no);
+	
+	// 저장된 파일 이름으로 실제 파일명 불러오기
+	@Select("SELECT DISTINCT fname FROM NoticeFile_f WHERE fno = #{fno}")
+	String getfnamebyfnoNF(String fno);
+	
+	// 문서관리 DB에서 공지 파일 정보 삭제
+	@Delete("DELETE FROM file_f WHERE bno = #{notice_num}")
+	int deletefileNF(int notice_num);
+	
 	// 공지 파일 삭제
 	@Delete("delete from NoticeFile_f where no=#{no}")
 	int deleteNoticeFile(int no);

@@ -126,6 +126,7 @@
 				participant = #{participant}, content = #{content}, conclusion = #{conclusion} 
 		WHERE metno = #{metno}
 	</update>
+	
 	<select id="boardfile" parameterType="fileSch" resultType="file">
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 

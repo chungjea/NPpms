@@ -56,13 +56,22 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
+	//var empno = "${mem.empno}""
+	//var name = "${mem.ename} / ${mem.dname}"
+	var empno = "1000"
+	var wempno = "${dmet.wempno}"
 	$(document).ready(function(){
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
 			location.href="${path}/meeting?deptno=10"
+		}
+		if(empno!=wempno){
+			$("#uptBtn").hide();
+			$("#delBtn").hide();
+		}else{
+			$("#uptBtn").show();
+			$("#delBtn").show();
 		}
 		$("#mainBtn").click(function(){
 			location.href="${path}/meeting?deptno=10"
