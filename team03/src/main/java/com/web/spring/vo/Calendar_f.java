@@ -12,13 +12,16 @@ public class Calendar_f {
 	private String allDay;
 	private String urlLink;
 	private String dName;
+	private int empno;
+	private String auth;
 
 	public Calendar_f() {
 
 	}
 
 	public Calendar_f(int id, String title, String start, String end, String writer, String content,
-			String backgroundColor, String textColor, String allDay, String urlLink, String dName) {
+			String backgroundColor, String textColor, String allDay, String urlLink, String dName, int empno,
+			String auth) {
 		this.id = id;
 		this.title = title;
 		this.start = start;
@@ -30,6 +33,8 @@ public class Calendar_f {
 		this.allDay = allDay;
 		this.urlLink = urlLink;
 		this.dName = dName;
+		this.empno = empno;
+		this.auth = auth;
 	}
 
 	public int getId() {
@@ -112,11 +117,28 @@ public class Calendar_f {
 		this.urlLink = urlLink;
 	}
 
-	public String getDName() {
+	public String getdName() {
 		return dName;
 	}
 
-	public void setDName(String dName) {
+	public void setdName(String dName) {
 		this.dName = dName;
 	}
+
+	public int getEmpno() {
+		return empno;
+	}
+
+	public void setEmpno(int empno) {
+		this.empno = empno;
+	}
+
+	public String getAuth() {
+		return auth;
+	}
+
+	public void setAuth(String auth) {
+		this.auth = auth;
+	}
+
 }// Calendar_f

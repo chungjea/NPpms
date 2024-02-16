@@ -6,16 +6,20 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.web.spring.vo.Calendar_f;
 
 @Mapper
 public interface Calendar_fDao {
-	// 전체조회
+	// 전체조회(부서별)
 	List<Calendar_f> getCalList(String dName);
 
+	// 전체조회(개인)
+	List<Calendar_f> getCalList_empno(int empno);
 	
+	// 등록
 	int insertCalendar(Calendar_f ins);
 
 	// 수정
@@ -29,4 +33,6 @@ public interface Calendar_fDao {
 	// 삭제
 	@Delete("delete from Calendar_f where id=#{id}")
 	int deleteCalendar(@Param("id") int id);
+	
+	
 }// Calendar_fDao{}

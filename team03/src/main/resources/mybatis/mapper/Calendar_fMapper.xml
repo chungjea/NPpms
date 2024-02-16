@@ -12,9 +12,14 @@
 	<select id="getCalList" resultMap="calRst">
 		select *
 		from calendar_f
-		where dname = #{dName}
+		where dName = #{dName} and auth='관리자'
 	</select>
 	
+	<select id="getCalList_empno" resultMap="calRst">
+		select *
+		from calendar_f
+		where empno = #{empno}
+	</select>
 	<!--  <select id="getCalList" resultMap="calRst">
 		select id, title, writer,
 			to_char(start1,'YYYY-MM-DD"T"HH24:MI:SS"+09:00"') start1,
@@ -28,7 +33,7 @@
 				#{start},
 				#{end},
 				#{writer},#{content},#{backgroundColor},
-				#{textColor},#{allDay},#{urlLink},#{dName})
+				#{textColor},#{allDay},#{urlLink},#{dName},#{empno},#{auth})
 	 </insert>
 	
 	<!-- <insert id="insertCalendar" parameterType="calendar_f">
