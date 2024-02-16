@@ -2,6 +2,8 @@ package com.web.spring.vo;
 
 import java.util.Date;
 
+
+
 //empno,birth_date,email,pnumber,passwd,email,dname,ename,deptno,auth
 //로그인 및 게시판외 페이지정보 공유용
 public class Emp_pinfo_f {

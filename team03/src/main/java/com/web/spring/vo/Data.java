@@ -11,7 +11,7 @@ import java.util.Date;
 	parent NUMBER NOT NULL
  * */
 public class Data {
-	private int id;
+	private long id;
 	private String text;
 	private String start_date;
 	private int duration;
@@ -22,7 +22,9 @@ public class Data {
 	}
 	
 	
-	public Data(int id, String text, String start_date, int duration, double progress, int parent) {
+	
+	public Data(long id, String text, String start_date, int duration, double progress, int parent) {
+		super();
 		this.id = id;
 		this.text = text;
 		this.start_date = start_date;
@@ -30,20 +32,18 @@ public class Data {
 		this.progress = progress;
 		this.parent = parent;
 	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getText() {
 		return text;
 	}
 	public void setText(String text) {
 		this.text = text;
-	}
-
-
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+	}	
 	public String getStart_date() {
 		return start_date;
 	}

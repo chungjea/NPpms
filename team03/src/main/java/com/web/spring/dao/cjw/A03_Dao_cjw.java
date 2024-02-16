@@ -164,7 +164,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT fno FROM metfile_f WHERE metno = #{metno}")
 	List<String> getfnobynamem (int metno);
 	
-	@Select("SELECT * FROM (select fname, fno from APVFILE_F UNION SELECT fname, fno FROM rskfile_f UNION SELECT fname, fno FROM METFILE_f) WHERE fno = #{fno}")
+	@Select("SELECT DISTINCT fname FROM file_f WHERE fno = #{fno}")
 	String getfnamebyfno(String fno);
 	
 	int updatemet(Meeting_f upt);
@@ -175,12 +175,23 @@ public interface A03_Dao_cjw {
 	@Delete("DELETE FROM METFILE_F WHERE metno = #{metno}")
 	int deletemetfile(int metno);
 	
+	@Delete("DELETE FROM file_f WHERE bno = #{metno}")
+	int deletefilemet(int metno);
+	
 	// 문서관리
 	List<File_f> boardfile(FileSch sch);
 	
-	@Select("SELECT count(*) FROM file_f WHERE auth = #{empno} OR auth = #{deptno} AND page != '채팅' AND page!='개인'")
+	@Select("SELECT count(*) FROM file_f WHERE  page NOT IN ('채팅','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND (auth = #{empno} OR auth = #{deptno})")
 	int boardfilecnt(FileSch sch);
 	
-	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.nextval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
-	int insertfilemy(File_f ins);
+	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	int insertfilemy(String fname, String path, String fno, int empno);
+	
+	List<File_f> myfile(FileSch sch);
+	
+	@Select("SELECT count(*) FROM file_f WHERE  page = '개인' AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND auth = #{empno}")
+	int myfilecnt(FileSch sch);
+	
+	@Delete("DELETE FROM file_f WHERE fno = #{fno}")
+	int deletefile(String fno);
 }

@@ -1,6 +1,6 @@
 package com.web.spring.vo;
 
-import java.util.Date;
+import org.springframework.web.multipart.MultipartFile;
 
 /*
 projectcode  NUMBER PRIMARY KEY,
@@ -26,14 +26,17 @@ public class Project_f {
 	private String ptype;
 	private String ttype;
 	private String content;
-	
+	private MultipartFile reports;
 
 	public Project_f() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Project_f(int pcode, String pname, String startdte, String enddte, int empno, String tname, int progress,
-			String status, String ptype) {
+	
+	
+	public Project_f(int rownum, int pcode, String pname, String startdte, String enddte, int empno, String tname,
+			int progress, String status, String ptype, String ttype, String content, MultipartFile reports) {
+		this.rownum = rownum;
 		this.pcode = pcode;
 		this.pname = pname;
 		this.startdte = startdte;
@@ -43,20 +46,25 @@ public class Project_f {
 		this.progress = progress;
 		this.status = status;
 		this.ptype = ptype;
+		this.ttype = ttype;
+		this.content = content;
+		this.reports = reports;
 	}
 
-	public Project_f(int pcode, String pname, String startdte, String enddte, int empno, String tname, String status,
-			String ptype) {
-		this.pcode = pcode;
-		this.pname = pname;
-		this.startdte = startdte;
-		this.enddte = enddte;
-		this.empno = empno;
-		this.tname = tname;
-		this.status = status;
-		this.ptype = ptype;
+
+
+	public MultipartFile getReports() {
+		return reports;
 	}
-	
+
+
+
+	public void setReports(MultipartFile reports) {
+		this.reports = reports;
+	}
+
+
+
 	public String getContent() {
 		return content;
 	}

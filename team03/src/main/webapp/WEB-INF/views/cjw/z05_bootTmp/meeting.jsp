@@ -99,12 +99,19 @@
 					</form>
 					<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
+                    <br>
                     <script type="text/javascript">
 		                 $("[name=title]").keyup(function(){
 								if(event.keyCode==13){
 									schmet()
 								}
 		                  })
+		                   var title = "${sch.title}"
+		                   if(title==""){
+		                	   $("#cnt").hide()
+		                   }else{
+		                	   $("#cnt").show()
+		                   }
 		                  function schmet(){
 	                    		$("#frm01").attr("action","${path}/meeting")
 		    					$("#frm01").submit()

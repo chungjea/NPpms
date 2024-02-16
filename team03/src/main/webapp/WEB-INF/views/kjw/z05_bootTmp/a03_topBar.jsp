@@ -48,8 +48,8 @@ long createdtime=session.getCreationTime();
 	<% time.setTime(session.getCreationTime()); %>
 	${emp.ename}님 로그인 시각:<%=formatter.format(time)%>
 	<% time.setTime(session.getLastAccessedTime()); %>
-	${emp.ename}님 마지막 접속 시각:<%=formatter.format(time)%>
-	남은시간: <div id=timer></div></div>
+
+	
 						
 
 

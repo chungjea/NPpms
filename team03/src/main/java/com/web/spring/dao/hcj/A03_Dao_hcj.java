@@ -1,17 +1,24 @@
 package com.web.spring.dao.hcj;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.web.spring.vo.Data;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Error_f;
+import com.web.spring.vo.IconRep_f;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
+import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
+
 
 @Mapper
 public interface A03_Dao_hcj {
@@ -82,12 +89,17 @@ public interface A03_Dao_hcj {
 	int getprojectListCntNormal(ProjectSch sch);
 	List<Project_f> getprojectListNormal(ProjectSch sch);
 	
-	
+	//------------------------------------프로젝트 생성----------------------------
 	
 	// project 생성
 	@Insert("INSERT INTO PROJECT_F values(project_seq.nextval,#{pname},\r\n"
 			+ "	to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),#{status},#{empno},#{tname},#{ptype},#{ttype},#{content})")
 	int insertProject(Project_f ins);
+	//아이콘 파일 정보 저장
+	@Insert("insert into iconrep_f values(seq_icon.currval,#{fname},#{path},project_seq.currval)")
+	int insertIconfile(IconRep_f ins);
+	@Select("select 'icon'||seq_icon.nextval from dual")
+	String getIconNum();
 	// 팀 멤버 추가
 	@Insert("insert into TMEM_F values(#{empno},project_seq.currval)")
 	int insertTMemInNewProject(int empno);
@@ -181,10 +193,23 @@ public interface A03_Dao_hcj {
 	
 	
 	// 프로젝트 간트차트
-	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'DD-MM-YYYY') \r\n "
-			+ "start_date, CASE when ENDDTE-STARTDTE < 1 THEN 1 else ENDDTE-STARTDTE END  duration, PROGRESS/100 PROGRESS,"
+	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'YYYY-MM-DD') \r\n "
+			+ "start_date, CASE when ENDDTE-STARTDTE < 1 THEN 1 else ENDDTE-STARTDTE END  duration, PROGRESS,"
 			+ "REFNO parent \r\n"
 			+ "FROM PROJECT_WORK_F pwf \r\n"
 			+ "where pcode = #{pcode}")
 	List<Data> getTaskdatas(int pcode);
+	
+	@Insert("INSERT INTO PROJECT_WORK_F pwf values(#{id},#{parent},'',to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),#{progress},#{pcode},#{assignor},'중요',#{text})")
+	int insertTask(Task_f ins);
+	@Update("update PROJECT_WORK_F set refno = #{parent}, startdte = to_date(#{startdte},'YYYY-MM-DD'), enddte = to_date(#{enddte},'YYYY-MM-DD'), progress = #{progress},empno = #{assignor},wname = #{text} where wno = #{id}")
+	int updateTask(Task_f upt);
+	@Delete("DELETE FROM PROJECT_WORK_F WHERE wno = #{id}")
+	int deleteTask(Task_f del);
+	
+	
+	List<Tmem_f> getTeamMemeber(int pcode);
+	
+	@Select("select * from project_f where pcode = #{pcode}")
+	Project_f getProjectInfo(int pcode);
 }

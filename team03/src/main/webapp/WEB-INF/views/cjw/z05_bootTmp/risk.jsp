@@ -158,9 +158,9 @@
 						<div class="input-group align-items-end" >
 							<input class="form-control border-0 small" placeholder="제목" name="title" value="${sch.title}">
 							<input type="hidden" name="curPage" value="${sch.curPage}"/>
-                    	<input type="hidden" name="wempno" id="1" value="${sch.wempno}"/>
-                    	<input type="hidden" name="cempno" id="2" value="${sch.cempno}"/>
-                    	<input type="hidden" name="manager" id="3" value="${sch.manager}"/>
+	                    	<input type="hidden" name="wempno" id="1" value="${sch.wempno}"/>
+	                    	<input type="hidden" name="cempno" id="2" value="${sch.cempno}"/>
+	                    	<input type="hidden" name="manager" id="3" value="${sch.manager}"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary" onclick="schrsk()" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
@@ -212,6 +212,12 @@
 									schrsk()
 								}
 		                  })
+		                   var title = "${sch.title}"
+		                   if(title==""){
+		                	   $("#cnt").hide()
+		                   }else{
+		                	   $("#cnt").show()
+		                   }
 		                  function schrsk(){
 	                    		var sts = "${sts}"
 	                    		if(sts=="1"){

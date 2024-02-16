@@ -6,6 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.spring.service.cjw.A02_Service_cjw;
 import com.web.spring.vo.ApproveSch;
@@ -202,13 +203,28 @@ public class A01_Controller_cjw {
 	@GetMapping("file")
 	public String file(@ModelAttribute("sch") FileSch sch, Model d) {
 		d.addAttribute("bfile", service.boardfile(sch));
+		d.addAttribute("mfile", service.myfile(sch));
 		return "cjw/z05_bootTmp/file";
 	}
 	
-	@GetMapping("upload")
-	public String upload(File_f ins, FileSch sch, Model d) {
-		d.addAttribute("bfile", service.boardfile(sch));
+	@PostMapping("upload")
+	public String upload(File_f ins, Model d) {
 		d.addAttribute("msg", service.insertfilemy(ins));
 		return "cjw/z05_bootTmp/file";
 	}
+	
+	@GetMapping("deletefile")
+	public String deletefile(String fno, Model d) {
+		d.addAttribute("msg", service.deletefile(fno));
+		return "cjw/z05_bootTmp/file";
+	}
+	
+	// 채팅
+	// http://localhost:3333/chatting
+	@GetMapping("chatting")
+	public String chatting() {
+		
+		return "cjw/z05_bootTmp/chatting";
+	}
+	
 }

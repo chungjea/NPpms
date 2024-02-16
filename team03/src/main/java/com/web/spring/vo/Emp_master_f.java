@@ -1,37 +1,14 @@
 package com.web.spring.vo;
 
-import java.sql.Timestamp;
+import java.util.Date;
+
+
 
 
 public class Emp_master_f {
-	private int empno;
-	private String ename;
-	private String egrade;
-	private int deptno;
-	private String dname;
-	private String hiredate;
-	private int salary;
-	private int incentive;
-	private Timestamp lastfix;
-	private int panaltytot;
-	private String passwd;
 	public Emp_master_f() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-	public Emp_master_f(int empno, String ename, String egrade, int deptno, String dname, String hiredate, int salary,
-			int incentive, Timestamp lastfix, int panaltytot, String passwd) {
-		this.empno = empno;
-		this.ename = ename;
-		this.egrade = egrade;
-		this.deptno = deptno;
-		this.dname = dname;
-		this.hiredate = hiredate;
-		this.salary = salary;
-		this.incentive = incentive;
-		this.lastfix = lastfix;
-		this.panaltytot = panaltytot;
-		this.passwd = passwd;
 	}
 	public int getEmpno() {
 		return empno;
@@ -81,12 +58,6 @@ public class Emp_master_f {
 	public void setIncentive(int incentive) {
 		this.incentive = incentive;
 	}
-	public Timestamp getLastfix() {
-		return lastfix;
-	}
-	public void setLastfix(Timestamp lastfix) {
-		this.lastfix = lastfix;
-	}
 	public int getPanaltytot() {
 		return panaltytot;
 	}
@@ -99,7 +70,46 @@ public class Emp_master_f {
 	public void setPasswd(String passwd) {
 		this.passwd = passwd;
 	}
-	
+	public Date getLastfix() {
+		return lastfix;
+	}
+	public void setLastfix(Date lastfix) {
+		this.lastfix = lastfix;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public Emp_master_f(int empno, String ename, String egrade, int deptno, String dname, String hiredate, int salary,
+			int incentive, int panaltytot, String passwd, Date lastfix, String email) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.egrade = egrade;
+		this.deptno = deptno;
+		this.dname = dname;
+		this.hiredate = hiredate;
+		this.salary = salary;
+		this.incentive = incentive;
+		this.panaltytot = panaltytot;
+		this.passwd = passwd;
+		this.lastfix = lastfix;
+		this.email = email;
+	}
+	private int empno;
+	private String ename;
+	private String egrade;
+	private int deptno;
+	private String dname;
+	private String hiredate;
+	private int salary;
+	private int incentive;
+	private int panaltytot;
+	private String passwd;
+	private Date lastfix;
+	private String email;
 	
 	
 }

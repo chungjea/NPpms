@@ -205,16 +205,20 @@
 			
 		}
 		// 프로젝트 생성
+		var formdata = new FormData($("#frm02")[0]);
 		 $.ajax({
 			type:"post",
-			url:"${path}/insertProject.do2",
-			data:$("#frm02").serialize(),
+			enctype: 'multipart/form-data',
+			url:"${path}/insertProject",
+			data:formdata,
+			processData: false,	
+			contentType: false,
 			dataType:"json",
 			success:function(data){
 				if(data.msg!=""){
 					alert(data.msg)
 					location.href="${path}/mainpage"
-					
+					//
 				}
 					
 			},

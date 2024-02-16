@@ -26,7 +26,6 @@
 </script>
  --%>
 
-
 <!-- Custom fonts for this template-->
 <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
@@ -163,6 +162,11 @@
 									class="icon text-white-50"> <i class="fas fa-check"></i>
 								</span> <span class="text">사원등록</span>
 								</a>
+								
+								
+								<button type="button" class="btn btn-warning btn-circle" id="excelDownload" onclick='exportExcel'>
+                                       <img src="${path}/a00_com/img/down_icon.png" width="15" height="15">
+                                    </button>
 							</c:if>
 
 							<c:if test='${emp.dname.equals("개발1팀")&&emp.auth.equals("관리자")}'>
@@ -206,8 +210,9 @@
 								<div style="width: 100%; height: 200px; ">
 									<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
 
-										<table class="table table-bordered" id="dataTable"
+										<table class="table table-bordered"  id="dataTable"
 											width="100%" cellspacing="0">
+											
 											<thead>
 												<tr>
 													<th>사원번호</th>
@@ -237,6 +242,7 @@
 												</c:forEach>
 											</tbody>
 										</table>
+										</table>
 									</c:if>
 									<div class="card-body">
 										<div class="table-responsive">
@@ -245,11 +251,11 @@
 											<c:if
 												test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
 
-												<table class="table table-bordered" id="dataTable"
+												<table class="table table-bordered" id="dataTable1"
 													width="100%" cellspacing="0">
 													<thead>
 														<tr>
-															<th>사원번호</th>
+															<th >사원번호</th>
 															<th>사원명</th>
 															<th>부서명</th>
 															<th>입사일</th>
@@ -336,10 +342,28 @@
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 
+<!-- Sheet JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
+<!--FileSaver savaAs 이용 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
+
+
+
+
+
 
 
 </body>
+
 <script type="text/javascript">
+
+
+$('input:checkbox[name=checkboxModel]').each(function (index) {
+	if($(this).is(":checked")==true){
+    	console.log($(this).val());
+    }
+})
+
 $("#checking").hide();
 $("#checking1").hide();
 	var sessId = "${emp.empno}"
@@ -362,6 +386,7 @@ $("#checking1").hide();
 	$("#delBtn").click(function(){
 	var checkedvals =$(".chkGrp:checked").map(function(){
 	return $(this).val();
+	console.log($(this).val());
 	}).get();
 	if(checkedvals.length==0){
 	alert("삭제처리할 인원을 1명이상 선택하세요");
@@ -393,7 +418,7 @@ console.error("Error:",status,err);
 		});
 	
 });
-
+	var count=0;
 var dname= "${emp.dname}"
 	var auth="${emp.auth}"
 
@@ -413,7 +438,54 @@ var dname= "${emp.dname}"
 				$("#checking1").hide();
 			})
 			
-			/* 213 */
+			//엑셀 외부 js 사용할진 미지수
+			const excelDownload = document.querySelector('#excelDownload');
+
+document.addEventListener('DOMContentLoaded', ()=>{
+    excelDownload.addEventListener('click', exportExcel);
+});
+
+function exportExcel(){ 
+	count=count+1;
+  // step 1. workbook 생성
+  var wb = XLSX.utils.book_new();
+
+  // step 2. 시트 만들기 
+  var newWorksheet = excelHandler.getWorksheet();
+
+  // step 3. workbook에 새로만든 워크시트에 이름을 주고 붙인다.  
+  XLSX.utils.book_append_sheet(wb, newWorksheet, excelHandler.getSheetName());
+
+  // step 4. 엑셀 파일 만들기 
+  var wbout = XLSX.write(wb, {bookType:'xlsx',  type: 'binary'});
+
+  // step 5. 엑셀 파일 내보내기 
+  saveAs(new Blob([s2ab(wbout)],{type:"application/octet-stream"}), excelHandler.getExcelFileName());
+}
+
+var excelHandler = {
+    getExcelFileName : function(){
+        return '${emp.dname}'+'인원리스트'+count+'.xlsx';	//파일명
+    },
+    getSheetName : function(){
+        return '${emp.dname}'+'인원리스트';	//시트명
+    },
+    getExcelData : function(){
+        return document.getElementById('dataTable'); 	//TABLE id
+    },
+    getWorksheet : function(){
+        return XLSX.utils.table_to_sheet(this.getExcelData());
+    }
+}
+
+function s2ab(s) { 
+  var buf = new ArrayBuffer(s.length); //convert s to arrayBuffer
+  var view = new Uint8Array(buf);  //create uint8array as viewer
+  for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
+  return buf;    
+}
+
+
 			
 </script>
 </html>

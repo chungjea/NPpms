@@ -141,5 +141,12 @@
 	
 	
 	
+	<select id="getTeamMemeber" parameterType="int" resultType="tmem">
+		SELECT tf.empno key, epf.ENAME label  
+		FROM TMEM_F tf  , EMP_PINFO_F epf
+		WHERE tf.EMPNO = epf.EMPNO
+		and pcode = #{pcode}
+	</select>
+	
 	
 </mapper>

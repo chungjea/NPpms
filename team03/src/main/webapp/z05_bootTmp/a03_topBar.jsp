@@ -21,19 +21,7 @@
  
 
 	<!-- Topbar Search1 -->
-	<form
-		class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-		<div class="input-group">
-			<input type="text" class="form-control bg-light border-0 small"
-				placeholder="Search for..." aria-label="Search"
-				aria-describedby="basic-addon2">
-			<div class="input-group-append">
-				<button class="btn btn-primary" type="button">
-					<i class="fas fa-search fa-sm"></i>
-				</button>
-			</div>
-		</div>
-	</form>
+
 	 <%
 Date time = new Date();
 SimpleDateFormat formatter = new SimpleDateFormat(
@@ -45,7 +33,7 @@ long time_used=(lasttime-createdtime)/60000;
 %>
 
 	<div class="text-truncate">
-	${emp.ename}님 로그인 시각:<%=formatter.format(time)%> 접속 후 지난시간:<%=time_used%></div>
+	${emp.ename}님 로그인 시각:<%=formatter.format(time)%></div>
 						
 
 <!-- abc -->
