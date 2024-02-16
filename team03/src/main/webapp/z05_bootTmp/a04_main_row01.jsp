@@ -4,7 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
-<!-- Earnings (Monthly) Card Example -->
+<!-- Earnings (Monthly) Card Example .-->
 <div class="col-xl-3 col-md-6 mb-4">
 	<div class="card border-left-primary shadow h-100 py-2">
 		<div class="card-body">
