@@ -100,7 +100,7 @@ body {
 				// 초기화..
 				// 등록하기 위해서 모달창을 로딩/모달창에 form name값에
 				// 해당 기본데이터를 설정..
-				$("#frm01")[0].reset() 
+				$("#frm01")[0].reset()
 				//상세화면 로딩 후, 클릭시에는 상세화면내용을 가지고 있거나
 				// 이전 입력 form내용을 가지고 있기에 초기화 처리
 				$("#calTitle").text("일정등록")
@@ -118,11 +118,10 @@ body {
 				// 출력하는 것이 다르기에 SHOW/HIDE로 설정..
 				$("#regBtn").show()
 				$("#uptBtn").hide()
-				$("#delBtn").hide() 
+				$("#delBtn").hide()
 				// 강제 클릭..모당창 로딩을 위한 이벤트..
-				$("#calModal").click()				
-				
-				
+				$("#calModal").click()
+
 				/*
 				var title = prompt('Event Title:');
 				if (title) {
@@ -142,20 +141,18 @@ body {
 				console.log("#일정 클릭시#")
 				console.log(arg.event)
 				addForm(arg.event)
-				
-				
-				
-				$("#calTitle").text("일정상세")	
+
+				$("#calTitle").text("일정상세")
 				$("#regBtn").hide()
 				$("#uptBtn").show()
-				$("#delBtn").show() 
-				$("#calModal").click()					
+				$("#delBtn").show()
+				$("#calModal").click()
 			},
-			eventDrop:function(arg){
+			eventDrop : function(arg) {
 				addForm(arg.event)
 				ajaxFunc("updateCalendar.do", "post")
 			},
-			eventResize:function(arg){
+			eventResize : function(arg) {
 				addForm(arg.event)
 				ajaxFunc("updateCalendar.do", "post")
 			},
@@ -170,7 +167,7 @@ body {
 						//alert(data.callist.length+"건!!")
 						// 서버단에서 받은 json데이터를 
 						// calendar api에 할당 처리..
-						
+
 						successCallback(data.cal_fList)
 					},
 					error : function(err) {
@@ -187,31 +184,61 @@ body {
 		$("#regBtn").click(function() {
 			ajaxFunc("insCal_f", "post")
 		})
-		$("#uptBtn").click(function(){
-			if(confirm("수정하시겠습니까?")){
+		$("#uptBtn").click(function() {
+			if (confirm("수정하시겠습니까?")) {
 				ajaxFunc("uptCal_f", "post")
 			}
 		})
-		$("#delBtn").click(function(){
-			if(confirm("삭제하시겠습니까?")){
+		$("#delBtn").click(function() {
+			if (confirm("삭제하시겠습니까?")) {
 				ajaxFunc("delCal_f", "post")
 			}
-		})		
+		})
 		// 링크된 페이지로 창을 로딩하여 이동하게 처리..
-		$("[name=urlLink]").dblclick(function(){
-			if(confirm("해당페이지로 이동하시겠습니까?")){
-				window.open($(this).val(),"","")
+		$("[name=urlLink]").dblclick(function() {
+			if (confirm("해당페이지로 이동하시겠습니까?")) {
+				window.open($(this).val(), "", "")
 			}
 		})
-		function ajaxFunc(url, type){
+		
+		$("#empnoBtn").click(function() {
+			if (confirm("개인페이지로 넘어가시겠습니까?")) {
+				location.href="${path}/calendar_f_empno"
+				/*
+				$.ajax({
+					url : "${path}/cal_fList_empno",
+					dataType : "json",
+					success : function(data) {
+						console.log("# 사원별 #")
+						console.log(data.cal_fList_empno)
+						//alert(data.callist.length+"건!!")
+						// 서버단에서 받은 json데이터를 
+						// calendar api에 할당 처리..
+						calendar.removeAllEvents();
+						calendar.render();
+						console.log(data.cal_fList)
+						// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
+						// 다시 추가 처리..
+						calendar.addEventSource(data.cal_fList_empno)
+						//window.location.reload();
+					},
+					error : function(err) {
+						console.log(err)
+					}
+				})
+				*/
+			}
+		})
+		
+		function ajaxFunc(url, type) {
 			$.ajax({
 				type : type,
-				url : "${path}/"+url,
+				url : "${path}/" + url,
 				data : $("#frm01").serialize(),
-				
+
 				// 데이터를 입력하고 요청데이터 서버에 전송
 				dataType : "json",
-				
+
 				success : function(data) {
 					// 해당 controller에서 다시 모델데이터로 넘겨준 데이터
 					// d.addAttribute("msg", service.insertCalendar(ins));
@@ -220,29 +247,29 @@ body {
 					console.log(data.msg);
 					console.log(data.cal_fList);
 					console.log(data.crud);
-					if(data.crud === 'insert') {
-						if(data.msg === '등록성공') {
+					if (data.crud === 'insert') {
+						if (data.msg === '등록성공') {
 							alert("등록성공"); // 등록성공/등록실패
 						} else {
 							alert("등록실패");
 						}
-					} else if(data.crud === 'update') {
-						if(data.msg === '등록성공') {
+					} else if (data.crud === 'update') {
+						if (data.msg === '등록성공') {
 							alert("수정성공"); // 등록성공/등록실패
 						} else {
 							alert("수정실패");
 						}
 					} else {
-						if(data.msg === '등록성공') {
+						if (data.msg === '등록성공') {
 							alert("삭제성공"); // 등록성공/등록실패
 						} else {
 							alert("삭제실패");
 						}
 					}
-					
+
 					$("#clsBtn").click() // 등록 모달창 닫기..
 					// 기존일정 삭제(full api에 등록된 데이터 삭제 js) 
-					
+
 					calendar.removeAllEvents();
 					calendar.render();
 					console.log(data.cal_fList)
@@ -255,10 +282,10 @@ body {
 				error : function(err) {
 					console.log(err)
 				}
-			})			
-			
+			})
+
 		}
-		function addForm(evt){
+		function addForm(evt) {
 			// evt.속성 : 기본적으로 fullcalendar에서 사용하는 속성 
 			// evt.extendedProps.속성 : 기본속성이 아닌 추가적으로 
 			//		상세화면에 출력시 사용되는 속성
@@ -269,17 +296,16 @@ body {
 			$("[name=start]").val(evt.startStr)
 			$("#end").val(evt.end.toLocaleString())
 			$("[name=end]").val(evt.endStr)
-			
+
 			$("[name=backgroundColor]").val(evt.backgroundColor)
 			$("[name=textColor]").val(evt.textColor)
 			$("[name=content]").val(evt.extendedProps.content)
 			$("[name=urlLink]").val(evt.extendedProps.urlLink)
-			$("[name=allDay]").val(evt.allDay?1:0)
+			$("[name=allDay]").val(evt.allDay ? 1 : 0)
 		}
 
 	});
 </script>
-
 </head>
 
 <body>
@@ -300,10 +326,7 @@ body {
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
-				<div class="modal-header"><!-- 
-
-				
-				 -->
+				<div class="modal-header">
 					<h5 class="modal-title" id="calTitle">일정등록</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
@@ -312,7 +335,9 @@ body {
 				</div>
 				<div class="modal-body">
 					<form id="frm01" class="form" method="post">
-						<input type="hidden" name="id" value="0"/>
+						<input type="hidden" name="id" value="0" />
+						<input type="hidden" name="dname" value="" />
+						<input type="hidden" name="auth" value="" />
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
@@ -341,7 +366,8 @@ body {
 								<span class="input-group-text  justify-content-center">
 									작성자</span>
 							</div>
-							<input name="writer" class="form-control" value="${emp.ename}" readonly />
+							<input name="writer" class="form-control" value="${emp.ename}"
+								readonly />
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
@@ -386,10 +412,12 @@ body {
 						</div>
 					</form>
 				</div>
-				<div class="modal-footer"><!-- -->
+				<div class="modal-footer">
+				<c:if test="${emp.auth eq '관리자'}">
 					<button type="button" id="regBtn" class="btn btn-primary">일정등록</button>
 					<button type="button" id="uptBtn" class="btn btn-info">일정수정</button>
 					<button type="button" id="delBtn" class="btn btn-warning">일정삭제</button>
+				</c:if>
 					<button type="button" id="clsBtn" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
@@ -398,6 +426,14 @@ body {
 				</script>
 			</div>
 		</div>
+		
 	</div>
+	<form>
+	<div style="text-align: right;">
+		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
+		<button type="button" class="btn btn-danger" id="allBtn">전체</button>
+	</div>
+	</form>
+
 </body>
 </html>
