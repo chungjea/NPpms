@@ -357,7 +357,7 @@ body {
 								<span class="input-group-text  justify-content-center">
 									내용</span>
 							</div>
-							<textarea name="content" id="chatArea" class="form-control"></textarea>
+							<textarea name="content" id="chatArea" class="form-control" readonly></textarea>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
@@ -365,7 +365,7 @@ body {
 									배경색</span>
 							</div>
 							<input type="color" name="backgroundColor" class="form-control"
-								value="#0099cc" />
+								value="#0099cc" readonly/>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
@@ -373,25 +373,26 @@ body {
 									글자색</span>
 							</div>
 							<input type="color" name="textColor" class="form-control"
-								value="#ccffff" />
+								value="#ccffff" readonly/>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
-								<span class="input-group-text  justify-content-center">
+								<span class="input-group-text  justify-content-center" >
 									종일여부</span>
 							</div>
-
-							<select name="allDay" class="form-control">
-								<option value="1">종일</option>
+						
+							<select name="allDay" class="form-control" disabled>
+								<option value="1" >종일</option>
 								<option value="0">시간</option>
 							</select>
+							
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									참고 link</span>
 							</div>
-							<input type="text" name="urlLink" class="form-control" value="" />
+							<input type="text" name="urlLink" class="form-control" value="" readonly/>
 						</div>
 					</form>
 				</div>
