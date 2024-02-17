@@ -228,6 +228,9 @@
 											$("#dbfrm").attr("action","${path}/detailmet")
 											$("#dbfrm").submit();
 											break;
+										case "공지":
+											location.href = "${path}/noticeboardDetail?notice_num=" + bno;
+											break;
 										default:
 											 alert("존재하지 않는 페이지입니다.")
 									}
