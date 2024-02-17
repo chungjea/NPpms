@@ -168,7 +168,7 @@ body {
 						// 서버단에서 받은 json데이터를 
 						// calendar api에 할당 처리..
 
-						successCallback(data.cal_fList_all)
+						successCallback(data.Cal_fList_all)
 					},
 					error : function(err) {
 						console.log(err)
@@ -258,7 +258,7 @@ body {
 					console.log(data.cal_fList)
 					// 새로운 일정 추가..(서버에서 controller로 넘겨오 데이터)
 					// 다시 추가 처리..
-					calendar.addEventSource(data.cal_fList_all)
+					calendar.addEventSource(data.Cal_fList_all)
 					window.location.reload();
 
 				},

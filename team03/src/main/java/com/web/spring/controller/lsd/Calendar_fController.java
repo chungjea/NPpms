@@ -29,7 +29,10 @@ public class Calendar_fController {
 	public String Cal_fList_all(Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
 		String dName = emp.getDname();
+		//String auth = emp.getAuth();
+		//int empno = emp.getEmpno();
 		System.out.println("부서 나오나?"+dName);
+		service.getCalList_all(dName).stream().forEach(it -> System.out.println(it.getTitle()));
 		d.addAttribute("Cal_fList_all", service.getCalList_all(dName));
 		return "pageJsonReport";
 	}// getCalList_all()
