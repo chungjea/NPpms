@@ -170,17 +170,16 @@ private Date updateDate;
 				<div class="input-group-prepend ">
 					<span class="input-group-text  justify-content-center"> 첨부파일</span>
 				</div>
-				<c:forEach var="fname" items="${notice.fname}">
-		        <input ondblclick="download('${fname}')" type="text"  class="form-control" 
-			 value="${fname}" />	
-		</c:forEach>
+				<c:forEach var="nf" items="${noticeFile}">
+					<span ondblclick="download('${nf.fno}','${nf.fname}')" class="form-control">${nf.fname}</span>	
+				</c:forEach>
 			</div>	
 		
 	</div>
 	<script type="text/javascript">
-		function download(fname){
+		function download(fno, fname){
 			if( confirm(fname+" 다운로드 하시겠습니까?")){
-				location.href="${path}/downloadNotice?fname="+fname
+				location.href="${path}/downloadNotice?fno="+fno
 			}
 		}
 	</script>	

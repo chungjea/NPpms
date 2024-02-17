@@ -70,6 +70,7 @@
 	}
 	#chatroom-container{
 		width:50%;
+		max-height: 70vh;
 	    height: 70vh;
 	    overflow-y: auto;
 	}
@@ -84,7 +85,7 @@
 	}
 	#chatArea {
 	    width: 420px;
-	    height: 600px;
+	    height: 550px;
 	    background: white;
 	    border-radius: 5px;
 	    display: flex;

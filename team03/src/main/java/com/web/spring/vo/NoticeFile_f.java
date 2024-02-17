@@ -9,6 +9,7 @@ public class NoticeFile_f {
 	private Date regdte;
 	private Date uptdte;
 	private String etc;
+	private String fno;
 
 	public NoticeFile_f() {
 		// TODO Auto-generated constructor stub
@@ -20,13 +21,21 @@ public class NoticeFile_f {
 		this.etc = etc;
 	}
 
-	public NoticeFile_f(int no, String fname, String path, Date regdte, Date uptdte, String etc) {
+	public NoticeFile_f(String fname, String path, String etc, String fno) {
+		this.fname = fname;
+		this.path = path;
+		this.etc = etc;
+		this.fno = fno;
+	}
+
+	public NoticeFile_f(int no, String fname, String path, Date regdte, Date uptdte, String etc, String fno) {
 		this.no = no;
 		this.fname = fname;
 		this.path = path;
 		this.regdte = regdte;
 		this.uptdte = uptdte;
 		this.etc = etc;
+		this.fno = fno;
 	}
 
 	public int getNo() {
@@ -75,6 +84,14 @@ public class NoticeFile_f {
 
 	public void setEtc(String etc) {
 		this.etc = etc;
+	}
+
+	public String getFno() {
+		return fno;
+	}
+
+	public void setFno(String fno) {
+		this.fno = fno;
 	}
 
 }// NoticeFile_f{}
