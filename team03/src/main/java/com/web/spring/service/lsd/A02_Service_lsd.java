@@ -20,6 +20,11 @@ public class A02_Service_lsd {
 	@Autowired(required = false)
 	private A03_Dao_lsd dao;
 
+	// 부서별 조회
+	public List<Noticeboard_f> deptSearch(String dname){
+		return dao.deptSearch(dname);
+	}//deptSearch()
+	
 	public List<Noticeboard_f> noticeSch(Noticeboard_f sch) {
 		if (sch.getTitle() == null)
 			sch.setTitle("");

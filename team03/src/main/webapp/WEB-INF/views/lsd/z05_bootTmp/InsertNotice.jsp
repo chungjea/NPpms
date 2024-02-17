@@ -66,6 +66,7 @@
 		</div>
 		<input name="notice_num" class="form-control" value=board_seq/>	
 	</div>--%>
+			<input type="hidden" name="dname" value="${emp.dname}" />
 			<div class="input-group mb-0">
 				<div class="input-group-prepend ">
 					<span class="input-group-text  justify-content-center"> 글제목</span>

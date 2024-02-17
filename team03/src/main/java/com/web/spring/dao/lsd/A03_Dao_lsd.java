@@ -38,7 +38,10 @@ public interface A03_Dao_lsd {
 	 * @Select("select * from Noticeboard_f") List<Noticeboard_f>
 	 * noticePage(NoticeSch_f sch);
 	 */
-
+	// 부서별 조회
+	@Select("select * from Noticeboard_f where dname=#{dname}")
+	List<Noticeboard_f> deptSearch(String dname);
+	
 	// 검색
 	@Select(" select * from Noticeboard_f where title like '%'||#{title}||'%' ")
 	List<Noticeboard_f> noticeSch(Noticeboard_f sch);
@@ -58,7 +61,7 @@ public interface A03_Dao_lsd {
 	Noticeboard_f noticeboardDetail(@Param("notice_num") int notice_num);
 
 	// 공지 등록
-	@Insert("insert into Noticeboard_f values(board_seq.nextval,#{writer},#{content},sysdate,sysdate,#{title},0)")
+	@Insert("insert into Noticeboard_f values(board_seq.nextval,#{writer},#{content},sysdate,sysdate,#{title},0,#{dname})")
 	int insertNotice(Noticeboard_f ins);
 
 	// 공지 수정

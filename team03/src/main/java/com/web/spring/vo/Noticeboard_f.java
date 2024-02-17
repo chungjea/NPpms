@@ -17,14 +17,14 @@ public class Noticeboard_f {
 	private MultipartFile[] reports;
 	private List<String> fname;
 	private int readcnt;
+	private String dname;
 
 	public Noticeboard_f() {
 
 	}
 
 	public Noticeboard_f(int cnt, int notice_num, String writer, String content, Date regDate, Date updateDate,
-			String title, MultipartFile[] reports, List<String> fname, int readcnt) {
-		super();
+			String title, MultipartFile[] reports, List<String> fname, int readcnt, String dname) {
 		this.cnt = cnt;
 		this.notice_num = notice_num;
 		this.writer = writer;
@@ -35,6 +35,7 @@ public class Noticeboard_f {
 		this.reports = reports;
 		this.fname = fname;
 		this.readcnt = readcnt;
+		this.dname = dname;
 	}
 
 	public int getCnt() {
@@ -115,6 +116,14 @@ public class Noticeboard_f {
 
 	public void setReadcnt(int readcnt) {
 		this.readcnt = readcnt;
+	}
+
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
 	}
 
 }// Noticeboard_f

@@ -2,7 +2,6 @@ package com.web.spring.controller.lsd;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -16,8 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.service.lsd.A02_Service_lsd;
+import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.NoticeSch_f;
 import com.web.spring.vo.Noticeboard_f;
+
+import jakarta.servlet.http.HttpSession;
+
 /*
 Noticeboard_f 
 private int notice_num;
@@ -40,14 +43,26 @@ public class A01_Controller_lsd {
 	@Autowired
 	private A02_Service_lsd service;
 
-	//검색
+	
+	
+	// 부서별 조회 deptSearch
+	@GetMapping("noticePage")
+	public String deptSearch(Model d, HttpSession session) {
+		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
+		String dname = emp.getDname();
+		System.out.println("?dname?"+dname);
+		d.addAttribute("deptSearch", service.deptSearch(dname));
+		return "lsd/z05_bootTmp/noticeBoard";
+	}//deptSearch()
+
+	// 검색
 	@RequestMapping("noticeSch")
 	public String noticeSch(Noticeboard_f sch, Model d) {
 		d.addAttribute("noticeSch", service.noticeSch(sch));
 		return "lsd/z05_bootTmp/noticeBoard";
 	}
-	
-	// 공지 전체 + 페이지
+
+	// 공지 전체 + 페이지 + 부서별
 	// http://localhost:3333/noticePage
 	@RequestMapping("noticePage")
 	public String getNoticeboard(@ModelAttribute("sch") NoticeSch_f sch, Model d) {
@@ -72,8 +87,9 @@ public class A01_Controller_lsd {
 
 	// 공지 등록
 	@RequestMapping("insertNotice")
-	public String insertNotice(Noticeboard_f ins, Model d) {
-		System.out.println(ins.getContent());
+	public String insertNotice(Noticeboard_f ins, Model d, HttpSession session) {
+		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
+		String dname = emp.getDname();
 		d.addAttribute("msg", service.insertNotice(ins));
 		return "lsd/z05_bootTmp/InsertNotice";
 	}// insertNotice()
@@ -108,11 +124,11 @@ public class A01_Controller_lsd {
 	public String noticeFileuploadFrm() {
 		return "lsd/z05_bootTmp/noticefileupload";
 	}
-	
+
 	// 파일 업로드 경로
 	@Value("${file.upload}")
 	private String path;
-	
+
 	@PostMapping("noticefileupload")
 	public String noticefileupload(@RequestParam("report") MultipartFile[] report, Model d) {
 		if (report != null && report.length > 0) {
@@ -122,7 +138,7 @@ public class A01_Controller_lsd {
 					if (fname != null && !fname.equals("")) {
 						mf.transferTo(new File(path + fname));
 						d.addAttribute("msg", "파일등록 성공");
-					}else {
+					} else {
 						d.addAttribute("msg", "파일등록 실패");
 					}
 				}
@@ -135,9 +151,9 @@ public class A01_Controller_lsd {
 			d.addAttribute("msg", "파일등록 실패");
 		}
 		return "lsd/z05_bootTmp/noticefileupload";
-	}//noticefileupload()
-	
+	}// noticefileupload()
+
 	// 클라이언트에서 요청 처리
 	// location.href="${path}/downloadNotice?fname=1.pdf"
-	
+
 }// A01_Controller_lsd{}
