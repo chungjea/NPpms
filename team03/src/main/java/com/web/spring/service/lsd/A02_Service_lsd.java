@@ -33,14 +33,15 @@ public class A02_Service_lsd {
 	}//noticeSch 검색
 
 	// 공지 전체조회 및 페이징처리
-	public List<Noticeboard_f> noticePage(NoticeSch_f sch){
+	public List<Noticeboard_f> noticePage(NoticeSch_f sch, String dname){
 		if(sch.getTitle()==null) sch.setTitle("");
 		if(sch.getWriter()==null) sch.setWriter("");
-		sch.setCount(dao.totNotice(sch));
+		sch.setCount(dao.totNotice(dname));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
 		if(sch.getCurPage()==0) sch.setCurPage(1);
+		if(sch.getCurPage()> sch.getPageCount()) sch.setCurPage(sch.getPageCount());
 		sch.setEnd(sch.getCurPage()*sch.getPageSize());
 		if(sch.getEnd()>sch.getCount()) {
 			sch.setEnd(sch.getCount() );
@@ -53,7 +54,7 @@ public class A02_Service_lsd {
 			sch.setEndBlock(sch.getPageCount());
 		}
 		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
-		return dao.noticePage(sch);
+		return dao.noticePage(dname, sch.getStart(), sch.getEnd());
 	}//noticePage() 공지전체+페이징처리	
 	
 	//@RequestParam(value = "notice_num", defaultValue = "0") 안되면 껴넣을것 ▽

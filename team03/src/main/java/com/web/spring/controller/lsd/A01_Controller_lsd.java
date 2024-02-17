@@ -46,14 +46,14 @@ public class A01_Controller_lsd {
 	
 	
 	// 부서별 조회 deptSearch
-	@GetMapping("noticePage")
-	public String deptSearch(Model d, HttpSession session) {
-		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
-		String dname = emp.getDname();
-		System.out.println("?dname?"+dname);
-		d.addAttribute("deptSearch", service.deptSearch(dname));
-		return "lsd/z05_bootTmp/noticeBoard";
-	}//deptSearch()
+//	@GetMapping("noticePage")
+//	public String deptSearch(Model d, HttpSession session) {
+//		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
+//		String dname = emp.getDname();
+//		System.out.println("?dname?"+dname);
+//		d.addAttribute("deptSearch", service.deptSearch(dname));
+//		return "lsd/z05_bootTmp/noticeBoard";
+//	}//deptSearch()
 
 	// 검색
 	@RequestMapping("noticeSch")
@@ -62,11 +62,14 @@ public class A01_Controller_lsd {
 		return "lsd/z05_bootTmp/noticeBoard";
 	}
 
-	// 공지 전체 + 페이지 + 부서별
+	// 공지 전체 + 페이지 
 	// http://localhost:3333/noticePage
 	@RequestMapping("noticePage")
-	public String getNoticeboard(@ModelAttribute("sch") NoticeSch_f sch, Model d) {
-		d.addAttribute("noticeboard", service.noticePage(sch));
+	public String getNoticeboard(@ModelAttribute("sch") NoticeSch_f sch, Model d, HttpSession session) {
+		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
+		String dname = emp.getDname();
+		service.noticePage(sch, dname).stream().forEach(it -> System.out.println(it.getTitle()));
+		d.addAttribute("noticeboard", service.noticePage(sch, dname));
 		return "lsd/z05_bootTmp/noticeBoard";
 	}// getNoticeboard()
 
@@ -132,6 +135,7 @@ public class A01_Controller_lsd {
 
 	@PostMapping("noticefileupload")
 	public String noticefileupload(@RequestParam("report") MultipartFile[] report, Model d) {
+		System.out.println("경로???" + path);
 		if (report != null && report.length > 0) {
 			try {
 				for (MultipartFile mf : report) {
