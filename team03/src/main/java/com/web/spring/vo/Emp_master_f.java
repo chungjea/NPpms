@@ -6,10 +6,8 @@ import java.util.Date;
 
 
 public class Emp_master_f {
-	public Emp_master_f() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+
+	private int empno;
 	public int getEmpno() {
 		return empno;
 	}
@@ -82,8 +80,14 @@ public class Emp_master_f {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public int getLastone() {
+		return lastone;
+	}
+	public void setLastone(int lastone) {
+		this.lastone = lastone;
+	}
 	public Emp_master_f(int empno, String ename, String egrade, int deptno, String dname, String hiredate, int salary,
-			int incentive, int panaltytot, String passwd, Date lastfix, String email) {
+			int incentive, int panaltytot, String passwd, Date lastfix, String email, int lastone) {
 		super();
 		this.empno = empno;
 		this.ename = ename;
@@ -97,8 +101,12 @@ public class Emp_master_f {
 		this.passwd = passwd;
 		this.lastfix = lastfix;
 		this.email = email;
+		this.lastone = lastone;
 	}
-	private int empno;
+	public Emp_master_f() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	private String ename;
 	private String egrade;
 	private int deptno;
@@ -110,6 +118,7 @@ public class Emp_master_f {
 	private String passwd;
 	private Date lastfix;
 	private String email;
+	private int lastone;
 	
 	
 }

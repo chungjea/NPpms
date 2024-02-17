@@ -92,7 +92,7 @@
                                         <input type="date" name="hiredate" class="form-control form-control-user"   placeholder="입사일" />	
                                     </div>
                                     </div>
-                                    
+                                    <input type="hidden" name="lastone" value="${emp.empno}">
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 mb-3 mb-sm-0">

@@ -1,7 +1,6 @@
 package com.web.spring.controller.kjw;
 
-import java.security.SecureRandom;
-import java.util.Date;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -37,6 +36,7 @@ import jakarta.servlet.http.HttpSession;
 public class A01_Controller_kwj {
 	@Autowired(required = false)
 	private A02_Service_kjw service;
+
 
 @GetMapping("login")
 public String loginFrm() {
@@ -118,18 +118,20 @@ public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping("register")
-public String register(Emp_master_f ins,Model d) {
+public String register(Emp_master_f ins,Model d,HttpSession session) {
+	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",service.register(ins)>0?"등록성공":"등록실패");
 
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping("test1")
 public String test1() {
-	return "kjw/z05_bootTmp/a20_cards";
+	return "kjw/z05_bootTmp/detailpage";
 }
+
 //컨테이너에 선언한 지역 언어선택 객체 호출
-	@Autowired(required=false)
-	private SessionLocaleResolver localeResolver;
+private SessionLocaleResolver localeResolver;
+	
 
 	@RequestMapping(value = "multiLang", method = {RequestMethod.POST,RequestMethod.GET})
 
@@ -138,21 +140,23 @@ public String test1() {
 							HttpServletRequest request,
 							HttpServletResponse response
 							) {
+
 		System.out.println("선택한 언어:"+lang);
-		// 화면에 지역에 따른 언어선택을 전송 처리..
+
 		Locale locale = new Locale(lang);
 		localeResolver.setLocale(request, response, locale);
-		
+
+		 
+
 		return "kjw/z05_bootTmp/a83_login";
+
 	}
-
-
 
 }
 
 
 /*
- * 	@GetMapping("login.do")
+ * 	@GetMapping("login.do")1
 	public String loginFrm() {
 		return "a04_login";
 	}
