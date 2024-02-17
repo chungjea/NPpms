@@ -88,7 +88,8 @@ public class A02_Service_lsd {
 		
 		// 기본데이터 등록 처리
 		int ck01 = dao.insertNotice(ins);
-		String path = "C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		String path="C:\\Users\\Administrator\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		String msg=ck01>0?"기본정보 등록성공":"등록 실패"; msg+="\\n";
 		int ck02 = 0;
 		// 파일업로드 정보 등록 처리.
