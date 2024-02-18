@@ -291,8 +291,7 @@ body {
 			$("[name=urlLink]").val(evt.extendedProps.urlLink)
 			$("[name=allDay]").val(evt.allDay ? 1 : 0)
 		}
-
-	});
+});
 </script>
 </head>
 
@@ -418,9 +417,9 @@ body {
 	</div>
 	<form>
 	<div style="text-align: right;">
-	<button type="button" class="btn btn-info" id="mainBtn">메인페이지(파)</button>
+	<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
 	<c:if test="${emp.auth eq '직원'}">
-		<button type="button" class="btn btn-warning" id="empnoBtn">개인(노)</button>
+		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
 	</c:if>
 	<button type="button" class="btn btn-warning" id="allBtn">전체</button>
 	</div>
