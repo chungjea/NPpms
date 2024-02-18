@@ -16,15 +16,17 @@ public class Data {
 	private String start_date;
 	private int duration;
 	private double progress;
-	private int parent;
+	private long parent;
 	public Data() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	
-	
-	public Data(long id, String text, String start_date, int duration, double progress, int parent) {
-		super();
+
+
+
+
+	public Data(long id, String text, String start_date, int duration, double progress, long parent) {
 		this.id = id;
 		this.text = text;
 		this.start_date = start_date;
@@ -32,6 +34,12 @@ public class Data {
 		this.progress = progress;
 		this.parent = parent;
 	}
+
+
+
+
+
+
 	public long getId() {
 		return id;
 	}
@@ -62,12 +70,19 @@ public class Data {
 	public void setProgress(double progress) {
 		this.progress = progress;
 	}
-	public int getParent() {
+
+
+	public long getParent() {
 		return parent;
 	}
-	public void setParent(int parent) {
+
+
+
+
+	public void setParent(long parent) {
 		this.parent = parent;
 	}
+	
 	
 	
 }

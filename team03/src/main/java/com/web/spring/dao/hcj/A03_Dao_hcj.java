@@ -200,7 +200,7 @@ public interface A03_Dao_hcj {
 			+ "where pcode = #{pcode}")
 	List<Data> getTaskdatas(int pcode);
 	
-	@Insert("INSERT INTO PROJECT_WORK_F pwf values(#{id},#{parent},'',to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),#{progress},#{pcode},#{assignor},'중요',#{text})")
+	@Insert("INSERT INTO PROJECT_WORK_F pwf values(#{id},#{parent},to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),#{progress},#{pcode},#{assignor},1,#{text})")
 	int insertTask(Task_f ins);
 	@Update("update PROJECT_WORK_F set refno = #{parent}, startdte = to_date(#{startdte},'YYYY-MM-DD'), enddte = to_date(#{enddte},'YYYY-MM-DD'), progress = #{progress},empno = #{assignor},wname = #{text} where wno = #{id}")
 	int updateTask(Task_f upt);

@@ -7,14 +7,18 @@ public class Task_f {
 	private String text;
 	private double progress;
 	private int assignor;
-	private String parent;
+	private long parent;
 	private String pcode;
 	public Task_f() {
 
 	}
-	public Task_f(long id, String startdte, String enddte, String text, double progress, int assignor, String parent,
+
+
+
+
+
+	public Task_f(long id, String startdte, String enddte, String text, double progress, int assignor, long parent,
 			String pcode) {
-		super();
 		this.id = id;
 		this.startdte = startdte;
 		this.enddte = enddte;
@@ -24,6 +28,10 @@ public class Task_f {
 		this.parent = parent;
 		this.pcode = pcode;
 	}
+
+
+
+
 
 	public String getEnddte() {
 		return enddte;
@@ -43,18 +51,19 @@ public class Task_f {
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getParent() {
+
+
+
+
+
+	public long getParent() {
 		return parent;
 	}
 
 
-
-
-	public void setParent(String parent) {
+	public void setParent(long parent) {
 		this.parent = parent;
 	}
-
-
 
 
 	public String getPcode() {

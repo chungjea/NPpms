@@ -143,6 +143,7 @@ public class A01_Controller_hcj {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("msg", service.updateTask(upt));
+		System.out.println("-------");
 		return modelAndView;
 	}
 	

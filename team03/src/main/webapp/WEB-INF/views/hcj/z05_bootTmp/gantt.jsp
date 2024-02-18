@@ -295,16 +295,23 @@ html, body {
 								Siblings.forEach(function(Siblingid){
 									var Sibling = gantt.getTask(Siblingid)
 									tot +=Sibling.progress;
-									if(parent_startdte>Sibling.start_date) parent_startdte = Sibling.start_date
-									if(parent_enddate<Sibling.end_date) parent_enddate = Sibling.end_date
+									if(parent_startdte>Sibling.start_date){
+										parent_startdte = Sibling.start_date
+										funcTask("updateTask",parentdata)
+									}
+									if(parent_enddate<Sibling.end_date){
+										parent_enddate = Sibling.end_date
+										funcTask("updateTask",parentdata)
+									
+									}
 								})
 								var progress = tot/Siblings.length
 								parentdata.progress = Math.round(progress * 10)/10
 								parentdata.start_date = parent_startdte
 								parentdata.end_date = parent_enddate
 								// 업데이트 후 랜더
-								gantt.render()
 								funcTask("updateTask",parentdata)									
+								gantt.render()
 							}
 						});
 						
