@@ -213,6 +213,11 @@ body {
 			}
 		})
 		
+		$("#mainBtn").click(function() {
+			if (confirm("메인페이지로 넘어가시겠습니까?")) {
+				location.href="${path}/mainpage"
+			}
+		})
 		function ajaxFunc(url, type) {
 			$.ajax({
 				type : type,
@@ -294,7 +299,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>Calendar</h2>
+		<h2>개인 개인</h2>
 	</div>
 	<%-- 
 		
@@ -416,8 +421,9 @@ body {
 	</div>
 	<form>
 	<div style="text-align: right;">
-		<button type="button" class="btn btn-warning" id="deptBtn">부서</button>
-		<button type="button" class="btn btn-danger" id="allBtn">전체</button>
+		<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
+		<button type="button" class="btn btn-warning" id="allBtn">전체</button>
+		<button type="button" class="btn btn-danger" id="deptBtn">부서</button>
 	</div>
 	</form>
 </body>

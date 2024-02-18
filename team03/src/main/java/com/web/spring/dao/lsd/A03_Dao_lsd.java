@@ -50,11 +50,15 @@ public interface A03_Dao_lsd {
 	// 페이징 처리, 전체조회
 	@Select("select * \r\n" + "		from(\r\n" + "		SELECT rownum cnt, nf.*\r\n"
 			+ "		from Noticeboard_f nf\r\n" + "		where 1=1\r\n" + "		and title like '%'||#{title}||'%' \r\n"
-			+ "		and writer like '%'||#{writer}||'%' \r\n)" + "		WHERE cnt BETWEEN #{start} AND #{end}")
+			+ "		and dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
 	List<Noticeboard_f> noticePage(NoticeSch_f sch);
+	
+//	@Select("select * \r\n" + "		from(\r\n" + "		SELECT rownum cnt, nf.*\r\n"
+//			+ "		from Noticeboard_f nf\r\n" + "		where dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
+//	List<Noticeboard_f> noticePage(String dname, int start, int end);
 
 	// 총 데이터건수
-	@Select("SELECT count(*) FROM Noticeboard_f WHERE 1=1 AND title LIKE '%'||#{title}||'%'AND writer LIKE '%'||#{writer}||'%'")
+	@Select("SELECT count(*) FROM Noticeboard_f where 1=1 and title like '%'||#{title}||'%' and dname=#{dname}")
 	int totNotice(NoticeSch_f sch);
 
 	// 공지 세부

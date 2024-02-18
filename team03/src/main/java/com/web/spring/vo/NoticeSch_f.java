@@ -15,13 +15,22 @@ public class NoticeSch_f {
 	private int blockSize; // 한번에 보여줄 block의 크기
 	private int startBlock; // block시작번호
 	private int endBlock; // block마지막번호
+	private String dname;
+
+	@Override
+	public String toString() {
+		return "NoticeSch_f [title=" + title + ", writer=" + writer + ", count=" + count + ", pageSize=" + pageSize
+				+ ", pageCount=" + pageCount + ", curPage=" + curPage + ", start=" + start + ", end=" + end
+				+ ", blockSize=" + blockSize + ", startBlock=" + startBlock + ", endBlock=" + endBlock + ", dname="
+				+ dname + "]";
+	}
 
 	public NoticeSch_f() {
 		// TODO Auto-generated constructor stub
 	}
 
 	public NoticeSch_f(String title, String writer, int count, int pageSize, int pageCount, int curPage, int start,
-			int end, int blockSize, int startBlock, int endBlock) {
+			int end, int blockSize, int startBlock, int endBlock, String dname) {
 		this.title = title;
 		this.writer = writer;
 		this.count = count;
@@ -33,6 +42,7 @@ public class NoticeSch_f {
 		this.blockSize = blockSize;
 		this.startBlock = startBlock;
 		this.endBlock = endBlock;
+		this.dname = dname;
 	}
 
 	public String getTitle() {
@@ -121,6 +131,14 @@ public class NoticeSch_f {
 
 	public void setEndBlock(int endBlock) {
 		this.endBlock = endBlock;
+	}
+
+	public String getDname() {
+		return dname;
+	}
+
+	public void setDname(String dname) {
+		this.dname = dname;
 	}
 
 }// NoticeSch{}

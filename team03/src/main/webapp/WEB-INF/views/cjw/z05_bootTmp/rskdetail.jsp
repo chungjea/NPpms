@@ -245,88 +245,88 @@
 					</div>
 				</div>
 				<!-- /.container-fluid -->
-					<div class="modal fade" id="exampleModalCenter" tabindex="-1"
-						role="dialog" aria-labelledby="exampleModalCenterTitle"
-						aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="modalTitle">담당자 지정</h5>
-									<button type="button" class="close" data-dismiss="modal"
-										aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body" align="center">
-									<form id="frm02" class="form" method="post">
-										<div class="row">
-											<div class="input-group-prepend ">
-												<span class="input-group-text w-100 justify-content-center">가능성</span>
-											</div>
-											<select name="probability" class="form-control" style="width:70%;">
-												<option value="최상">최상</option>
-												<option value="상">상</option>
-												<option value="중">중</option>
-												<option value="하">하</option>
-												<option value="최하">최하</option>
-											</select>
+				<div class="modal fade" id="exampleModalCenter" tabindex="-1"
+					role="dialog" aria-labelledby="exampleModalCenterTitle"
+					aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="modalTitle">담당자 지정</h5>
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body" align="center">
+								<form id="frm02" class="form" method="post">
+									<div class="row">
+										<div class="input-group-prepend ">
+											<span class="input-group-text w-100 justify-content-center">가능성</span>
 										</div>
-										<div class="row">
-											<div class="input-group-prepend ">
-												<span class="input-group-text w-100 justify-content-center">위험도</span>
-											</div>
-											<select name="danger" class="form-control" style="width:70%;">
-												<option value="최상">최상</option>
-												<option value="상">상</option>
-												<option value="중">중</option>
-												<option value="하">하</option>
-												<option value="최하">최하</option>
-											</select>
+										<select name="probability" class="form-control" style="width:70%;">
+											<option value="최상">최상</option>
+											<option value="상">상</option>
+											<option value="중">중</option>
+											<option value="하">하</option>
+											<option value="최하">최하</option>
+										</select>
+									</div>
+									<div class="row">
+										<div class="input-group-prepend ">
+											<span class="input-group-text w-100 justify-content-center">위험도</span>
 										</div>
-										<div class="row">
-											<div class="input-group-prepend ">
-												<span class="input-group-text w-100 justify-content-center">우선순위</span>
-											</div>
-											<select name="priority" class="form-control" style="width:70%;">
-												<option value="최상">최상</option>
-												<option value="상">상</option>
-												<option value="중">중</option>
-												<option value="하">하</option>
-												<option value="최하">최하</option>
-											</select>
+										<select name="danger" class="form-control" style="width:70%;">
+											<option value="최상">최상</option>
+											<option value="상">상</option>
+											<option value="중">중</option>
+											<option value="하">하</option>
+											<option value="최하">최하</option>
+										</select>
+									</div>
+									<div class="row">
+										<div class="input-group-prepend ">
+											<span class="input-group-text w-100 justify-content-center">우선순위</span>
 										</div>
-										<div class="row">
-											<div class="input-group-prepend ">
-												<span class="input-group-text w-100 justify-content-center">담당자</span>
-											</div>
-											<select name="cempno" class="form-control" style="width:70%;">
-												<option value="1001">김길동 / 인사팀</option>
-												<option value="1002">신길동 / 인사팀</option>
-												<option value="1003">오길동 / 인사팀</option>
-											</select>
+										<select name="priority" class="form-control" style="width:70%;">
+											<option value="최상">최상</option>
+											<option value="상">상</option>
+											<option value="중">중</option>
+											<option value="하">하</option>
+											<option value="최하">최하</option>
+										</select>
+									</div>
+									<div class="row">
+										<div class="input-group-prepend ">
+											<span class="input-group-text w-100 justify-content-center">담당자</span>
 										</div>
-										<div class="row">
-											<div class="input-group-prepend ">
-												<span class="input-group-text w-100 justify-content-center">마감일</span>
-											</div>
-											<input type="date" name="finaldteStr" class="form-control" style="width:70%;"/>
+										<select name="cempno" class="form-control" style="width:70%;">
+											<option value="1001">김길동 / 인사팀</option>
+											<option value="1002">신길동 / 인사팀</option>
+											<option value="1003">오길동 / 인사팀</option>
+										</select>
+									</div>
+									<div class="row">
+										<div class="input-group-prepend ">
+											<span class="input-group-text w-100 justify-content-center">마감일</span>
 										</div>
-											<input type="hidden" name="rskno" value="${drsk.rskno}"/>
-										<div class="row">
-											<div class="input-group-prepend ">
-												<span class="input-group-text w-100 justify-content-center">피드백</span>
-											</div>
-											<textarea class="form-control" placeholder="피드백 입력" name="feedback" style="width:70%;"> </textarea>
+										<input type="date" name="finaldteStr" class="form-control" style="width:70%;"/>
+									</div>
+										<input type="hidden" name="rskno" value="${drsk.rskno}"/>
+									<div class="row">
+										<div class="input-group-prepend ">
+											<span class="input-group-text w-100 justify-content-center">피드백</span>
 										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<button id="okBtn" class="btn btn-primary" type="button">확인</button>
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
-								</div>
+										<textarea class="form-control" placeholder="피드백 입력" name="feedback" style="width:70%;"> </textarea>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button id="okBtn" class="btn btn-primary" type="button">확인</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 							</div>
 						</div>
 					</div>
+				</div>
 			</div>
 			<!-- End of Main Content -->
 			<script type="text/javascript">

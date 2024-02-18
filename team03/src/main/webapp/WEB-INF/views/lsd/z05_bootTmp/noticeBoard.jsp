@@ -92,7 +92,7 @@
 
 					<form id="frm01" class="form" method="post">
 						<input type="hidden" name="curPage" value="${sch.curPage}" />
-					</form>
+					
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3 d-flex justify-content-between">
@@ -100,9 +100,9 @@
 								<h6 class="m-0 font-weight-bold text-primary">공지사항</h6>
 							</div>
 							<div>
-								<form
+								<!--  <form
 									class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-									method="post">
+									method="post" action="${path}/noticeSch">-->
 									<div class="input-group">
 										<input type="text"
 											class="form-control bg-light border-0 small"
@@ -134,7 +134,7 @@
 									</thead>
 									<tbody>
 
-										<c:forEach var="nt" items="${deptSearch}">
+										<c:forEach var="nt" items="${noticeboard}">
 											<tr ondblclick="noticeDetail(${nt.notice_num})">
 												<td>${nt.cnt}</td>
 												<td>${nt.notice_num}</td>
@@ -151,17 +151,21 @@
 								<script type="text/javascript">
 									function goPage(pcnt) {
 										$("[name=curPage]").val(pcnt)
-										$("form").submit()
+										$("#frm01").submit()
 									}
 								</script>
-								<ul class="pagination  justify-content-center">
-									<li class="page-item"><a class="page-link" href="#">이전</a></li>
-									<c:forEach var="pcnt" begin="1" end="${sch.pageCount}">
+
+								 <ul class="pagination  justify-content-center">
+									<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.curPage-1})">이전</a></li>
+								
+									<c:forEach var="pcnt" begin="${sch.startBlock}" end="${sch.endBlock}">
 										<li class="page-item ${sch.curPage==pcnt?'active':''}"><a
 											class="page-link" href="javascript:goPage(${pcnt})">${pcnt}</a></li>
 									</c:forEach>
-									<li class="page-item"><a class="page-link" href="#">다음</a></li>
+								
+									<li class="page-item"><a class="page-link" href="javascript:goPage(${sch.curPage+1})">다음</a></li>
 								</ul>
+								
 							</div>
 						</div>
 					</div>

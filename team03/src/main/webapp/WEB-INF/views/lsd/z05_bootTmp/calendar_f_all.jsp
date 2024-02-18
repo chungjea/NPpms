@@ -213,6 +213,11 @@ body {
 			}
 		})
 		
+		$("#mainBtn").click(function() {
+			if (confirm("메인페이지로 넘어가시겠습니까?")) {
+				location.href="${path}/mainpage"
+			}
+		})
 		function ajaxFunc(url, type) {
 			$.ajax({
 				type : type,
@@ -414,6 +419,7 @@ body {
 	</div>
 	<form>
 	<div style="text-align: right;">
+		<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
 		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
 		<button type="button" class="btn btn-danger" id="deptBtn">부서</button>
 	</div>

@@ -218,6 +218,27 @@
 			wsocket.send($("#id").val()+":"+$("#msg").val())
 			$("#msg").val("")			
 		}
+		
+		var msg = "${msg}"
+		if(msg!=""){
+			alert(msg)
+			location.href="${path}/chatting"
+		}
+		$("#okBtn").click(function(){
+			alert($("#frm02").serialize())
+			$.ajax({
+				type : "post",
+				url : "${path}/makechatroom",
+				data : $("#frm02").serialize(),
+				dataType : "json",
+				success : function(data) {
+					$("#clsBtn").click()
+				},
+				error : function(err) {
+					console.log(err)
+				}
+			})
+		})
 	});
 </script>
 <body id="page-top">
@@ -245,12 +266,12 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">채팅</h1>
-                        <a href="${path}/chatting" class="btn btn-secondary btn-icon-split">
+                        <button type="button" class="btn btn-secondary btn-icon-split" id="chatModal" data-toggle="modal" data-target="#exampleModalCenter">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
                         	<span class="text">채팅방 생성</span>
-                        </a>
+                        </button>
                     </div>
                     <br>
                     <div class="row">
@@ -321,6 +342,38 @@
 					</script> 
 				</div>
 				<!-- /.container-fluid -->
+				<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					<div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="modalTitle">채팅방 생성</h5>
+								<button type="button" class="close" data-dismiss="modal"\aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body" align="center">
+								<form id="frm02" class="form" method="post" action="${path}/makechatroom">
+									<div class="input-group-prepend" style="width:200px !important;">
+										<span class="justify-content-center" style="font-size:20px; width:100%">사원 리스트</span>
+									</div>
+									<div align="right">
+										<input type="reset" class="btn btn-link btn-outline-light" style="background-color:none;" name="reset" value="선택 해제"/>
+									</div>
+									<div style="max-height: 400px; overflow-x: auto; font-size:17px;">
+										<c:forEach var="e" items="${elist}">
+											<br>
+											<label><input type="checkbox" name="chatter[]" class="checkSelect" value="${e.empno}"> ${e.ename}</label>
+										</c:forEach>
+									</div>
+								</form>
+							</div>
+							<div class="modal-footer">
+								<button id="okBtn" class="btn btn-primary" type="button">완료</button>
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
 			<!-- End of Main Content -->
 

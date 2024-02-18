@@ -37,7 +37,7 @@ public class Calendar_fController {
 	}// getCalList_all()
 	
 	
-	// 전체조회(부서)
+	// 전체조회(부서관리자)
 	@GetMapping("calendar_f")
 	public String calendar() {
 		return "lsd/z05_bootTmp/calendar_f";

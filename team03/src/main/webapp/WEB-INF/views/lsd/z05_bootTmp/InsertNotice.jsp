@@ -78,7 +78,7 @@
 				<div class="input-group-prepend ">
 					<span class="input-group-text  justify-content-center"> 작성자</span>
 				</div>
-				<input placeholder="관리자" name="writer" class="form-control" value="관리자" readonly/>
+				<input placeholder="관리자" name="writer" class="form-control" value="${emp.ename}" readonly/>
 			</div>
 
 			<div class="input-group mb-0">
