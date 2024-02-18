@@ -25,7 +25,7 @@
 	});
 </script>
  --%>
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/css/theme.grey.min.css" />
 <!-- Custom fonts for this template-->
 <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css"
 	rel="stylesheet" type="text/css">
@@ -140,7 +140,7 @@
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						<div class="card-header py-3">
-							<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
+							<c:if test='${emp.dname.equals("인사팀")}'>
 								<div class="row" />
 								<div class="col" />
 								<a class="btn btn-danger btn-icon-split" id="delBtn">
@@ -148,13 +148,13 @@
 										class="fas fa-trash"></i>
 								</span> <span class="text">사원 삭제</span>
 								</a>
-
 								<a href="#" class="btn btn-warning btn-icon-split"> <span
 									class="icon text-white-50"> <i
 										class="fas fa-exclamation-triangle"></i>
 
 								</span> <span class="text">사원정보수정</span>
 								</a>
+							
 
 
 								<a href="${path}/registerFrm"
@@ -162,16 +162,23 @@
 									class="icon text-white-50"> <i class="fas fa-check"></i>
 								</span> <span class="text">사원등록</span>
 								</a>
+								</c:if>
 								
-								
+								<div class="row" />
+								<div class="col" />
 								<button type="button" class="btn btn-warning btn-circle" id="excelDownload" onclick='exportExcel'>
                                        <img src="${path}/a00_com/img/down_icon.png" width="15" height="15">
                                     </button>
-							</c:if>
+                                   
+                                    <a href="${path}/WEB-INF/views/kjw/z05_bootTmp/detailpage" class="btn btn-warning btn-icon-split"> <span
+									class="icon text-white-50"> <i
+										class="fas fa-exclamation-triangle"></i>
 
-							<c:if test='${emp.dname.equals("개발1팀")&&emp.auth.equals("관리자")}'>
-								<span class="text"> 개발1팀 관리자페이지입니다.</span>
-							</c:if>
+								</span> <span class="text">개인정보수정</span>
+								</a>
+							
+
+							
 						</div>
 
 						<%--           포멧                            <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
@@ -190,14 +197,25 @@
 								class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">
 								<div class="input-group align-items-end">
-
+<select name="dname" class="form-control form-control-user">
+                                    <option value="">부서선택	</option>
+                                    <option value="디자인팀">디자인팀</option>
+                                    <option value="인사팀">인사팀	</option>
+                                    <option value="재무팀">재무팀	</option>
+                                    <option value="기획팀">기획팀	</option>
+                                    <option value="개발1팀">개발1팀</option>
+                                    <option value="개발2팀">개발2팀</option>
+                                    <option value="개발3팀">개발3팀</option>
+                                    </select>
 									<input class="form-control bg-light border-0 small"
 										placeholder="검색할 사원번호" aria-label="Search"
 										aria-describedby="basic-addon2" name="empno"
 										value="${sch.empno}">
+									
 									<div class="input-group-append">
 										<button class="btn btn-primary" type="submit">
 											<i class="fas fa-search fa-sm">검색</i>
+											
 										</button>
 									</div>
 								</div>
@@ -208,7 +226,7 @@
 							<div class="table-responsive">
 
 								<div style="width: 100%; height: 200px; ">
-									<c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
+									<c:if test='${emp.dname!="재무팀"&&emp.auth.equals("관리자")}'>
 
 										<table class="table table-bordered"  id="dataTable"
 											width="100%" cellspacing="0">
@@ -230,28 +248,27 @@
 											<tbody>
 												<c:forEach var="el" items="${empList}">
 													<tr>
-														<td onClick="location.href='${path}/kjw/z05_bootTmp/detailpage'">${el.empno}</td>
-														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.ename}</td>
-														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.dname}</td>
-														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.hiredate}</td>
-														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.salary}</td>
-														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.panaltytot}</td>
-														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.lastfix}</td>
-														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.lastone}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.empno}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.ename}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.dname}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.hiredate}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.salary}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.panaltytot}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.lastfix}</td>
+														<td onClick="location.href='/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${el.lastone}</td>
 														<td><input type="checkbox" id="chk" class="chkGrp"
 															value="${el.empno}" name="checkboxModel"></td>
 													</tr>
 												</c:forEach>
 											</tbody>
 										</table>
-										</table>
+										
 									</c:if>
 									<div class="card-body">
 										<div class="table-responsive">
 
 
-											<c:if
-												test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
+											<c:if test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
 
 												<table class="table table-bordered" id="dataTable1"
 													width="100%" cellspacing="0">
@@ -271,20 +288,22 @@
 													<tbody>
 														<c:forEach var="sl" items="${salList}">
 															<tr>
-																<td onClick="location.href='detailpage'">${sl.empno}</td>
-																<td onClick="location.href='detailpage'">${sl.ename}</td>
-																<td onClick="location.href='detailpage'">${sl.dname}</td>
-																<td onClick="location.href='detailpage'">${sl.egrade}</td>
-																<td onClick="location.href='detailpage'">${sl.salary}</td>
-																<td onClick="location.href='detailpage'">${sl.incentive}</td>
-																<td onClick="location.href='detailpage'">${sl.lastfix}</td>
+																<td onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.empno}</td>
+																<td onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.ename}</td>
+																<td onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.dname}</td>
+																<td onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.egrade}</td>
+																<td onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.salary}</td>
+																<td onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.incentive}</td>
+																<td onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.lastfix}</td>
 																<td><input type="checkbox" id="chk" class="chkGrp"
 																	value="${sl.empno}" name="checkboxModel"></td>
 															</tr>
 														</c:forEach>
 													</tbody>
-												</table>
-											</c:if>
+													</table>
+													</c:if>
+									
+									
 										</div>
 									
 									<%@page buffer="8192kb" autoFlush="true"%>
@@ -302,6 +321,7 @@
 							</div>
 							</div>
 							</div>
+							
 <footer class="sticky-footer bg-white">
 								<div class="container my-auto">
 									<div class="copyright text-center my-auto">
@@ -322,9 +342,10 @@
 					<!-- <a class="scroll-to-top rounded" href="#page-top"> <i
 		class="fas fa-angle-up"></i>
 	</a> -->
+	
 					<!-- Logout Modal-->
 					<%@ include file="a08_logout_modal.jsp"%>
-
+					
 					<!-- Bootstrap core JavaScript-->
 					<script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
 					<script
@@ -345,6 +366,7 @@
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 
 <!-- Sheet JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" ></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
 <!--FileSaver savaAs 이용 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
@@ -352,12 +374,10 @@
 
 
 
-
-
-
 </body>
 
 <script type="text/javascript">
+var dname="${el.dname}"
 
 
 $('input:checkbox[name=checkboxModel]').each(function (index) {
@@ -365,6 +385,9 @@ $('input:checkbox[name=checkboxModel]').each(function (index) {
     	console.log($(this).val());
     }
 })
+$(function() {
+  $("#dataTable").tablesorter();
+});
 
 $("#checking").hide();
 $("#checking1").hide();
@@ -382,8 +405,7 @@ $("#checking1").hide();
 	});
 
 
-	window.history.forward();
-	 function noBack(){window.history.forward();}
+
 	
 	$("#delBtn").click(function(){
 	var checkedvals =$(".chkGrp:checked").map(function(){
@@ -479,7 +501,8 @@ function s2ab(s) {
   return buf;    
 }
 
-
+window.history.forward();
+function noBack(){window.history.forward();}
 			
 </script>
 </html>

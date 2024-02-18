@@ -8,6 +8,18 @@ import java.util.Date;
 public class Emp_master_f {
 
 	private int empno;
+	private String ename;
+	private String egrade;
+	private int deptno;
+	private String dname;
+	private String hiredate;
+	private int salary;
+	private int incentive;
+	private int panaltytot;
+	private String passwd;
+	private Date lastfix;
+	private String email;
+	private int lastone;
 	public int getEmpno() {
 		return empno;
 	}
@@ -107,18 +119,7 @@ public class Emp_master_f {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	private String ename;
-	private String egrade;
-	private int deptno;
-	private String dname;
-	private String hiredate;
-	private int salary;
-	private int incentive;
-	private int panaltytot;
-	private String passwd;
-	private Date lastfix;
-	private String email;
-	private int lastone;
+	
 	
 	
 }

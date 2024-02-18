@@ -25,7 +25,9 @@
 		SELECT *
 		from emp_master_f
 		WHERE empno like '%'|| #{empno} || '%'
+		and dname like '%' ||#{dname}||'%'
 	</select>
+
 	<select id="getSalList" 
 			resultType="sallist" 
 			parameterType="sallist">

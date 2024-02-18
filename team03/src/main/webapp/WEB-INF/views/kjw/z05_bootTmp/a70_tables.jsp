@@ -61,6 +61,7 @@
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<div class="row">
+					<c:if test='${emp.dname.equals("인사팀")}||${emp.dname.equals("재무팀")}'>
 						<div class="col-xl-3 col-md-6 mb-4" id="link1">
 							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
@@ -132,9 +133,85 @@
 								</div>
 							</div>
 						</div>
+						</c:if>
+						<c:if test="${emp.dname=='개발1팀'||'개발2팀'||'개발3팀'||'디자인팀'||'기획팀'}">
+<%-- 						<c:if test='${emp.dname.equals("개발1팀")||${emp.dname.equals("개발2팀")||
+						${emp.dname.equals("개발3팀")||${emp.dname.equals("디자인팀")||${emp.dname.equals("기획팀")}'> --%>
+						<div class="col-xl-3 col-md-6 mb-4" id="link1">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div
+												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												전체 프로젝트 수</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												id="checking"></div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-md-6 mb-4" id="link2">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div
+												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												진행중 프로젝트 수</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">???건</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-md-6 mb-4" id="link3">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div
+												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												프로젝트 완료 갯수</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800"
+												id="checking1"></div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xl-3 col-md-6 mb-4" id="link3">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div
+												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												진행예정 리스크</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">총
+												??건</div>
+										</div>
+										<div class="col-auto">
+											<i class="fas fa-calendar fa-2x text-gray-300"></i>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						</c:if>
 					</div>
 					<!-- Page Heading -->
-					<h1 class="h3 mb-2 text-gray-800">${emp.dname}${emp.auth} 상세페이지</h1>
+					<h1 class="h3 mb-2 text-gray-800">${emp.dname}${emp.auth}페이지</h1>
 
 
 					<!-- DataTales Example -->
@@ -169,9 +246,17 @@
                                     </button>
 							</c:if>
 
-							<c:if test='${emp.dname.equals("개발1팀")}'>
-								<span class="text"> 개발1팀 관리자페이지입니다.</span>
-							</c:if>
+							<div class="row" />
+								<div class="col" />
+								
+                                   
+                                    <a href="${path}/WEB-INF/views/kjw/z05_bootTmp/detailpage" class="btn btn-warning btn-icon-split"> <span
+									class="icon text-white-50"> <i
+										class="fas fa-exclamation-triangle"></i>
+
+								</span> <span class="text">개인정보수정</span>
+								</a>
+							
 						</div>
 
 						<%--           포멧                            <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
@@ -186,6 +271,7 @@
                                     </a>
                                     </c:if> --%>
 						<div class="col-xl-7">
+						<c:if test='${emp.dname.equals("인사팀")}||${emp.dname.equals("재무팀")}'>
 							<form
 								class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">
@@ -202,6 +288,7 @@
 									</div>
 								</div>
 							</form>
+							</c:if>
 						</div>
 
 						<div class="card-body">
@@ -222,6 +309,7 @@
 													<th>급여</th>
 													<th>패널티횟수</th>
 													<th>마지막수정시각</th>
+													<th>마지막수정인</th>
 													<th><input type="checkbox" id="chkAll"></th>
 												</tr>
 											</thead>
@@ -236,6 +324,7 @@
 														<td>${el.salary}</td>
 														<td>${el.panaltytot}</td>
 														<td>${el.lastfix}</td>
+														<td>${el.lastone}</td>
 														<td><input type="checkbox" id="chk" class="chkGrp"
 															value="${el.empno}" name="checkboxModel"></td>
 													</tr>
@@ -348,7 +437,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.14.3/xlsx.full.min.js"></script>
 <!--FileSaver savaAs 이용 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js"></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.3/js/jquery.tablesorter.min.js" ></script>
 
 
 
@@ -366,7 +455,9 @@ $('input:checkbox[name=checkboxModel]').each(function (index) {
     }
 })
 
-$("#checking").hide();
+$(function() {
+  $("#dataTable").tablesorter();
+});
 $("#checking1").hide();
 	var sessId = "${emp.empno}"
 	if(sessId==""){
