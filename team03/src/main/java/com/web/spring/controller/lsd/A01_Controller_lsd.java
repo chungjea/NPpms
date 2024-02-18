@@ -58,7 +58,7 @@ public class A01_Controller_lsd {
 	// 검색
 	@RequestMapping("noticeSch")
 	public String noticeSch(Noticeboard_f sch, Model d) {
-		d.addAttribute("noticeSch", service.noticeSch(sch));
+		d.addAttribute("noticeboard", service.noticeSch(sch));
 		return "lsd/z05_bootTmp/noticeBoard";
 	}
 
@@ -68,6 +68,7 @@ public class A01_Controller_lsd {
 	public String getNoticeboard(@ModelAttribute("sch") NoticeSch_f sch, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
 		String dname = emp.getDname();
+		System.out.println("사용자 danme - > "+ dname);
 		service.noticePage(sch, dname).stream().forEach(it -> System.out.println(it.getTitle()));
 		d.addAttribute("noticeboard", service.noticePage(sch, dname));
 		return "lsd/z05_bootTmp/noticeBoard";

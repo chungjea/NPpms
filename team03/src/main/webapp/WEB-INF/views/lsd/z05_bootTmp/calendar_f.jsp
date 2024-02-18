@@ -293,7 +293,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>Calendar</h2>
+		<h2>부서 부서</h2>
 	</div>
 	<%-- 
 		
@@ -413,7 +413,9 @@ body {
 	</div>
 	<form>
 	<div style="text-align: right;">
+	<c:if test="${emp.auth eq '직원'}">
 		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
+		</c:if>
 		<button type="button" class="btn btn-danger" id="allBtn">전체</button>
 	</div>
 	</form>

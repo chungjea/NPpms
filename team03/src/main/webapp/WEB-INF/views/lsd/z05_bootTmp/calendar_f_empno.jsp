@@ -294,7 +294,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>Calendar</h2>
+		<h2>개인 개인</h2>
 	</div>
 	<%-- 
 		

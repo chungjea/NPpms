@@ -5,13 +5,10 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.dao.lsd.A03_Dao_lsd;
-import com.web.spring.vo.Metfile_f;
 import com.web.spring.vo.NoticeFile_f;
 import com.web.spring.vo.NoticeSch_f;
 import com.web.spring.vo.Noticeboard_f;
@@ -33,19 +30,23 @@ public class A02_Service_lsd {
 	}//noticeSch 검색
 
 	// 공지 전체조회 및 페이징처리
-	public List<Noticeboard_f> noticePage(NoticeSch_f sch, String dname){
+	public List<Noticeboard_f> noticePage(NoticeSch_f sch,String dname){
 		if(sch.getTitle()==null) sch.setTitle("");
 		if(sch.getWriter()==null) sch.setWriter("");
-		sch.setCount(dao.totNotice(dname));
+		sch.setDname(dname);
+		sch.setCount(dao.totNotice(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
-		if(sch.getCurPage()==0) sch.setCurPage(1);
+		
 		if(sch.getCurPage()> sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		
 		sch.setEnd(sch.getCurPage()*sch.getPageSize());
 		if(sch.getEnd()>sch.getCount()) {
 			sch.setEnd(sch.getCount() );
 		}
+		
 		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
 		sch.setBlockSize(5);
 		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
@@ -54,7 +55,10 @@ public class A02_Service_lsd {
 			sch.setEndBlock(sch.getPageCount());
 		}
 		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
-		return dao.noticePage(dname, sch.getStart(), sch.getEnd());
+		System.out.println("매개변수 -> "+ sch);
+		List<Noticeboard_f> list = dao.noticePage(sch);
+		System.out.println("list -> "+list);
+		return list;
 	}//noticePage() 공지전체+페이징처리	
 	
 	//@RequestParam(value = "notice_num", defaultValue = "0") 안되면 껴넣을것 ▽
