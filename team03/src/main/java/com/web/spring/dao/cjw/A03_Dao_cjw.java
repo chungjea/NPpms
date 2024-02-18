@@ -11,6 +11,8 @@ import org.apache.ibatis.annotations.Update;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
+import com.web.spring.vo.Chatroom_f;
+import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.FileSch;
 import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
@@ -194,4 +196,14 @@ public interface A03_Dao_cjw {
 	
 	@Delete("DELETE FROM file_f WHERE fno = #{fno}")
 	int deletefile(String fno);
+	
+	@Select("SELECT empno, ename||' / '||dname ename FROM EMP_PINFO_F ORDER BY ename")
+	List<Emp_pinfo_f> empList();
+	
+	@Insert("INSERT INTO chatroom_f values(crno_seq.nextval, #{crname}, #{userid}, #{username})")
+	int makechatroom(Chatroom_f ins);
+	
+	@Select("SELECT ename||' / '||dname username FROM EMP_PINFO_F WHERE empno = #{userid}")
+	String namebyempno(int userid);
+	
 }

@@ -12,6 +12,8 @@ import com.web.spring.dao.cjw.A03_Dao_cjw;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
 import com.web.spring.vo.Apvfile_f;
+import com.web.spring.vo.Chatroom_f;
+import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.FileSch;
 import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
@@ -555,4 +557,27 @@ public class A02_Service_cjw {
 		return msg;
 	}
 	
+	
+	// 채팅 : 사원명 리스트
+	public List<Emp_pinfo_f> empList(){
+		return dao.empList();
+	}
+	
+	// 채팅 : 채팅방 생성
+	public String makechatroom(Chatroom_f ins) {
+		String msg = "";
+		int cku = 0;
+		String roomname = "";
+		int chatters[] = ins.getChatter();
+		for(int chatter:chatters) {
+			roomname += dao.namebyempno(chatter)+", ";
+		}
+		roomname = roomname.substring(0, roomname.length() - 2);
+		for(int chatter:chatters) {
+			String username = dao.namebyempno(chatter);
+			cku += dao.makechatroom(new Chatroom_f(roomname, chatter, username));
+		}
+		msg = cku+"명의 채팅방 등록 완료";
+		return msg;
+	}
 }

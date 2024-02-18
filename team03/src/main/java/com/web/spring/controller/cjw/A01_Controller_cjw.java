@@ -1,16 +1,19 @@
 package com.web.spring.controller.cjw;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.web.spring.service.cjw.A02_Service_cjw;
 import com.web.spring.vo.ApproveSch;
 import com.web.spring.vo.Approve_f;
+import com.web.spring.vo.Chatroom_f;
+import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.FileSch;
 import com.web.spring.vo.File_f;
 import com.web.spring.vo.MeetingSch_f;
@@ -224,6 +227,17 @@ public class A01_Controller_cjw {
 	@GetMapping("chatting")
 	public String chatting() {
 		
+		return "cjw/z05_bootTmp/chatting";
+	}
+	
+	@ModelAttribute("elist")
+	public List<Emp_pinfo_f> empList(){
+		return service.empList();
+	}
+	
+	@PostMapping("makechatroom")
+	public String makechatroom(Chatroom_f ins, Model d) {
+		d.addAttribute("msg", service.makechatroom(ins));
 		return "cjw/z05_bootTmp/chatting";
 	}
 	
