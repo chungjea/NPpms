@@ -64,24 +64,29 @@ public class A02_Service_hcj {
 		System.out.println(ins.getReports());
 		if(ins.getReports()!= null) {	
 			System.out.println("아이콘이미지 생성 시도!!!");
-			String path = "C:\\a01_springbt\\workspace\\maven.1707094358148\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+			String path = "C:\\a01_springbt\\workspace\\maven.1706639790004\\team03\\src\\main\\resources\\static\\";
 			try {
 						
 					// 1. 파일 업로드
 					// 파일명을 가져오기..
-					String fname = ins.getReports().getOriginalFilename();
+					
+					String frealname = ins.getReports().getOriginalFilename();
 					String savename = dao.getIconNum();
-					String ext = fname.substring(fname.lastIndexOf("."));
-					// client에서 network을 전달된 것을 받는 객체(MultipartFile)
-					// 물리적으로 특정위치에 저장할 수 있는 객체(File)
-					// MultipartFile ==> File : 실제 물리적으로 특정 위치에 파일명으로 저장
+					String fname = frealname.substring(0, frealname.lastIndexOf("."));
+					String ext = frealname.substring(frealname.lastIndexOf("."));
+					
+					
 					System.out.println(path+savename+ext);
+					System.out.println("리얼네임:"+frealname);
+					System.out.println("파일이름:"+fname);
+					System.out.println("확장자:"+ext);
 					ins.getReports().transferTo(new File(path+savename+ext));
 					
 					// 2. 업로드된 파일정보를 DB저장..(추후에 활용할 목적)(
-					dao.insertIconfile(new IconRep_f(fname,path));
+					dao.insertIconfile(new IconRep_f(fname,path,ext));
 					// FileRep(int no, String fname, String path, String etc) 
-					System.out.println("아이콘이미지 생성 성공");		
+					System.out.println("아이콘이미지 생성 성공");
+					
 			} catch (IllegalStateException e) {
 				System.out.println("파일업로드 예외1:"+e.getMessage());
 			} catch (IOException e) {

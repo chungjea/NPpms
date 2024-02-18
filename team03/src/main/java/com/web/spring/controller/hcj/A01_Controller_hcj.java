@@ -60,7 +60,10 @@ public class A01_Controller_hcj {
 				d.addAttribute("errList", service.getMyErrsListNormal(emp.getEmpno()));
 				d.addAttribute("errcnt", service.getMyErrorCntNormal(emp.getEmpno()));
 			}
+			
 		}
+		
+		
 		return "hcj/z05_bootTmp/a01_index";
 	}
 

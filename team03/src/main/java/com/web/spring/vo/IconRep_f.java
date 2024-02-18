@@ -5,21 +5,43 @@ public class IconRep_f {
 	private String fname;
 	private String path;
 	private int pcode;
+	private String ext;
 	public IconRep_f() {
 		// TODO Auto-generated constructor stub
 	}
-	public IconRep_f(int ino, String fname, String path, int pcode) {
+	
+	
+
+	public IconRep_f(String fname, String path, String ext) {
+		this.fname = fname;
+		this.path = path;
+		this.ext = ext;
+	}
+
+
+
+	public IconRep_f(int ino, String fname, String path, int pcode, String ext) {
 		this.ino = ino;
 		this.fname = fname;
 		this.path = path;
 		this.pcode = pcode;
+		this.ext = ext;
 	}
-	
 
-	public IconRep_f(String fname, String path) {
-		this.fname = fname;
-		this.path = path;
+
+
+	public String getExt() {
+		return ext;
 	}
+
+
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
+
+
 	public int getIno() {
 		return ino;
 	}

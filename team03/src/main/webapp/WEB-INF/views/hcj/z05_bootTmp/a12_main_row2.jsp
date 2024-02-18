@@ -97,11 +97,15 @@
 <h2>진행중인 프로젝트</h2>
 <div class="pjcontainer">
 	<c:forEach var="pj" items="${projects}">
-		<div class="pjbox">
+		<div class="pjbox" onclick="location.href='${path}/project?pcode=${pj.pcode}'">
 
 			<div class="pjicon">
 				<img class="pjiconImg"
-					src="https://user-images.githubusercontent.com/79133602/135301843-9c3b3466-0639-489c-8913-6fdb846fb64c.png">
+					src="icon${pj.ino}${pj.ext}">
+					<script type="text/javascript">
+					console.log("${pj.path}icon${pj.ino}${pj.ext}")
+					</script>
+					
 			</div>
 
 			<div class="pjtitle">${pj.pname}</div>

@@ -27,6 +27,9 @@ public class Project_f {
 	private String ttype;
 	private String content;
 	private MultipartFile reports;
+	private String path;
+	private int ino;
+	private String ext;
 
 	public Project_f() {
 		// TODO Auto-generated constructor stub
@@ -34,8 +37,11 @@ public class Project_f {
 	
 	
 	
+
+	
 	public Project_f(int rownum, int pcode, String pname, String startdte, String enddte, int empno, String tname,
-			int progress, String status, String ptype, String ttype, String content, MultipartFile reports) {
+			int progress, String status, String ptype, String ttype, String content, MultipartFile reports, String path,
+			int ino, String ext) {
 		this.rownum = rownum;
 		this.pcode = pcode;
 		this.pname = pname;
@@ -49,7 +55,47 @@ public class Project_f {
 		this.ttype = ttype;
 		this.content = content;
 		this.reports = reports;
+		this.path = path;
+		this.ino = ino;
+		this.ext = ext;
 	}
+
+
+
+
+
+	public int getIno() {
+		return ino;
+	}
+
+	public void setIno(int ino) {
+		this.ino = ino;
+	}
+
+	public String getExt() {
+		return ext;
+	}
+
+
+
+	public void setExt(String ext) {
+		this.ext = ext;
+	}
+
+
+
+	public String getPath() {
+		return path;
+	}
+
+
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
+
+
 
 
 

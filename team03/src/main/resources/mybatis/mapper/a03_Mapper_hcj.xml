@@ -21,20 +21,10 @@
 	</select>
 	
 	<select id="getprojectsNormal" parameterType="int" resultType="project">
-		SELECT rownum cnt,fin.*
-		FROM 
-			(SELECT mypj.*,avpg.progress
-			from
-				(SELECT pf.pcode ,pf.pname ,pf.startdte ,pf.enddte,pf.status, pf.tname, pf.ptype, pf.content
-				FROM TMEM_F tf ,PROJECT_F pf
-				WHERE tf.EMPNO = #{empno}
-				AND tf.PCODE = pf.PCODE ) mypj,
-				(SELECT  pcode ,avg(PROGRESS) PROGRESS 
-				FROM PROJECT_WORK_F pwf 
-				GROUP BY PCODE) avpg
-		WHERE mypj.PCODE = avpg.pcode(+)
-		ORDER BY CASE when status = '진행중' THEN 1 ELSE 2 END, enddte) fin
-		<![CDATA[WHERE rownum <=5]]>
+		SELECT * FROM view_project_all_info
+		WHERE status = '진행중'
+		AND MEMBER = #{empno}
+		
 	</select>
 
 

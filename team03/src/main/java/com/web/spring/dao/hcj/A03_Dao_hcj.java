@@ -77,7 +77,7 @@ public interface A03_Dao_hcj {
 		
 	// 내프로젝트 담장 프로젝트5개까지 받아오기 (관리자)
 	List<Project_f> getprojectsAdmin(int empno);
-	// 내가 참여한 프로젝트 5개까지 받아오기 (일반 사원)
+	// 내가 참여한 진행중인 프로젝트 5개까지 받아오기 (일반 사원)
 	List<Project_f> getprojectsNormal(int empno);
 	
 //---------------------------전체 프로젝트 검색----------------------------------
@@ -96,7 +96,7 @@ public interface A03_Dao_hcj {
 			+ "	to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),#{status},#{empno},#{tname},#{ptype},#{ttype},#{content})")
 	int insertProject(Project_f ins);
 	//아이콘 파일 정보 저장
-	@Insert("insert into iconrep_f values(seq_icon.currval,#{fname},#{path},project_seq.currval)")
+	@Insert("insert into iconrep_f values(seq_icon.currval,#{fname},#{path},project_seq.currval,#{ext})")
 	int insertIconfile(IconRep_f ins);
 	@Select("select 'icon'||seq_icon.nextval from dual")
 	String getIconNum();

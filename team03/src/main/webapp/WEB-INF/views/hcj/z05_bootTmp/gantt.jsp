@@ -163,7 +163,9 @@ html, body {
 					            return `<img src="${path}/a00_com/gantt/common/sample_images/close.gif" onclick="delTask()"`
 							}}
 						];
-					
+						gantt.templates.lightbox_header = function(start_date,end_date,task){
+						    return  task.text;
+						};
 						gantt.config.date_format = "%Y-%m-%d";
 						
 						gantt.templates.rightside_text = function (start, end, task) {
@@ -193,40 +195,22 @@ html, body {
 								data:"pcode=${pcode}",
 								dataType:"json",
 								success:function(data){
-									tmem = data.mem;
-									
-									
+									tmem = data.mem;	
 								},
-								error:function(err){
-									
-								}
-								
+								error:function(err){								
+								}	
 							})
-					
-						
-						console.log(tmem)
-						/* var tmem = [
-						    { key: 199001001, label: '홍길동' },
-						    { key: 199001001, label: '김길동' },
-						    { key: 199001001, label: '한길동' }
-						]; */
-						
 						gantt.config.lightbox.sections = [
 						    {name:"description", height:50, map_to:"text", type:"textarea", focus:true},
 						    {name:"assignor", height:30, type:"select", options:tmem,map_to:"assignor"},
-						    {name:"time", height:40, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]}
-						  	//{name:"progress",height:50,type}
-						    
+						    {name:"time", height:50, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]}   
 						];
-					
-						
-						console.log(gantt.config.date_format)
-						
+						gantt.config.lightbox_additional_height = 130;
 						gantt.locale.labels.section_description = "작업명";
 						gantt.locale.labels.section_time = "기간";
 						gantt.locale.labels.section_assignor = "담당배정"
 					
-						console.log(gantt.getSelectedId());
+					
 						
 					
 							gantt.attachEvent("onLightbox", function (task_id){
@@ -271,13 +255,8 @@ html, body {
 						    if(mode === "move"){
 						    	bdforeMoveDate = Task.start_date
 						    }
-							if(mode === "resize"){
-								
-							}
-						    
 						    return true;
 						});
-						
 						gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
 						    //any custom logic here
 						    const Task = gantt.getTask(id)
@@ -301,7 +280,6 @@ html, body {
 						
 						
 						gantt.attachEvent("onAfterTaskUpdate", function(id,item){
-							console.log("taskUpdate:테스크에변화가 있을때")
 							const parent = item.parent
 							const child = gantt.getChildren(id)
 							
@@ -326,13 +304,8 @@ html, body {
 								parentdata.end_date = parent_enddate
 								// 업데이트 후 랜더
 								gantt.render()
-								funcTask("updateTask",parentdata)	
-								
+								funcTask("updateTask",parentdata)									
 							}
-						
-							
-					
-							
 						});
 						
 						
