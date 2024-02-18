@@ -23,6 +23,7 @@
 		<typeAlias alias="commute_s" type="com.web.spring.vo.Commute_f"/>
 		<typeAlias alias="tmem" type="com.web.spring.vo.Tmem_f"/>
 		
+		
 	</typeAliases>
 
 </configuration>
