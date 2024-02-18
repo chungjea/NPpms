@@ -222,6 +222,7 @@
 													<th>급여</th>
 													<th>패널티횟수</th>
 													<th>마지막수정시각</th>
+													<th>마지막수정인</th>
 													<th><input type="checkbox" id="chkAll"></th>
 												</tr>
 											</thead>
@@ -229,13 +230,14 @@
 											<tbody>
 												<c:forEach var="el" items="${empList}">
 													<tr>
-														<td>${el.empno}</td>
-														<td>${el.ename}</td>
-														<td>${el.dname}</td>
-														<td>${el.hiredate}</td>
-														<td>${el.salary}</td>
-														<td>${el.panaltytot}</td>
-														<td>${el.lastfix}</td>
+														<td onClick="location.href='${path}/kjw/z05_bootTmp/detailpage'">${el.empno}</td>
+														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.ename}</td>
+														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.dname}</td>
+														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.hiredate}</td>
+														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.salary}</td>
+														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.panaltytot}</td>
+														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.lastfix}</td>
+														<td onClick="location.href='kjw/z05_bootTmp/detailpage'">${el.lastone}</td>
 														<td><input type="checkbox" id="chk" class="chkGrp"
 															value="${el.empno}" name="checkboxModel"></td>
 													</tr>
@@ -255,7 +257,7 @@
 													width="100%" cellspacing="0">
 													<thead>
 														<tr>
-															<th >사원번호</th>
+															<th>사원번호</th>
 															<th>사원명</th>
 															<th>부서명</th>
 															<th>입사일</th>
@@ -269,13 +271,13 @@
 													<tbody>
 														<c:forEach var="sl" items="${salList}">
 															<tr>
-																<td>${sl.empno}</td>
-																<td>${sl.ename}</td>
-																<td>${sl.dname}</td>
-																<td>${sl.egrade}</td>
-																<td>${sl.salary}</td>
-																<td>${sl.incentive}</td>
-																<td>${sl.lastfix}</td>
+																<td onClick="location.href='detailpage'">${sl.empno}</td>
+																<td onClick="location.href='detailpage'">${sl.ename}</td>
+																<td onClick="location.href='detailpage'">${sl.dname}</td>
+																<td onClick="location.href='detailpage'">${sl.egrade}</td>
+																<td onClick="location.href='detailpage'">${sl.salary}</td>
+																<td onClick="location.href='detailpage'">${sl.incentive}</td>
+																<td onClick="location.href='detailpage'">${sl.lastfix}</td>
 																<td><input type="checkbox" id="chk" class="chkGrp"
 																	value="${sl.empno}" name="checkboxModel"></td>
 															</tr>
@@ -421,22 +423,14 @@ console.error("Error:",status,err);
 	var count=0;
 var dname= "${emp.dname}"
 	var auth="${emp.auth}"
-
-			$("#link1").hover(function(){
-				if(dname=="인사팀"&&auth=="관리자"){
-					$("#checking").show();
-				}
-			},function(){
-				$("#checking").hide();
-			})
-
-			$("#link3").hover(function(){
-				if(dname=="재무팀"&&auth=="관리자"){
-					$("#checking1").show();
-				}
-			},function(){
-				$("#checking1").hide();
-			})
+		$(document).ready(function(){
+			if(dname=="인사팀"){
+				$("#checking").show();
+			}
+			if(dname=="재무팀"){
+				$("#checking1").show();
+			}
+	    });
 			
 			//엑셀 외부 js 사용할진 미지수
 			const excelDownload = document.querySelector('#excelDownload');

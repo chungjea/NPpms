@@ -157,7 +157,8 @@
 	$(document).ready(function(){
 		var wsocket = null;
 		$("#enterBtn").click(function(){
-			var idVal = $("#id").val()
+		//function goChat(crno){
+			var idVal = $("#id").val();
 			wsocket = new WebSocket(
 				"ws:localhost:3333/chat"	
 			)
@@ -258,7 +259,7 @@
 		                    	<table class="table table-bordered" id="roominfo">
 		                            <caption>채팅방</caption>
 		                            <tbody>
-		                                <tr><td>Bruno Nash</td></tr>
+		                                <tr ondblclick="goChat(${cr.crno})"><td>Bruno Nash</td></tr>
 		                                <tr><td>Sakura Yamamoto</td></tr>
 		                                <tr><td>Thor Walton</td></tr>
 		                                <tr><td>Finn Camacho</td></tr>
@@ -288,6 +289,17 @@
 		                    </div>
 	                    </div>
 	                    <div id="chat-container">
+	                    		<div class="input-group mb-3">	
+		<div class="input-group-prepend ">
+			<span class="input-group-text  justify-content-center">
+			아이디</span>
+		</div>
+		<input type="text" id="id" 
+			class="form-control" placeholder="접속할 아이디 입력" />
+		<input id="enterBtn" type="button" class="btn btn-info" value="채팅방입장" />
+		<input id="exitBtn" type="button" class="btn btn-danger" value="채팅방나가기" />
+				
+	</div>
 							<div id="chatArea" style="overflow-x:hidden" class="input-group-append">
 								<div class="input-group-append" id="chatName">
 									<div id="chatGroup">dd</div>

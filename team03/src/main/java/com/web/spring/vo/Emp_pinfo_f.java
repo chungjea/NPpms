@@ -17,12 +17,13 @@ public class Emp_pinfo_f {
 	private String ename;
 	private int deptno;
 	private String auth;
+	private int lastone;
 	public Emp_pinfo_f() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Emp_pinfo_f(int empno, Date birth_date, int pnumber, String passwd, String email, String dname, String ename,
-			int deptno, String auth) {
+			int deptno, String auth, int lastone) {
 		super();
 		this.empno = empno;
 		this.birth_date = birth_date;
@@ -33,6 +34,7 @@ public class Emp_pinfo_f {
 		this.ename = ename;
 		this.deptno = deptno;
 		this.auth = auth;
+		lastone = lastone;
 	}
 	public int getEmpno() {
 		return empno;
@@ -87,6 +89,12 @@ public class Emp_pinfo_f {
 	}
 	public void setAuth(String auth) {
 		this.auth = auth;
+	}
+	public int getlastone() {
+		return lastone;
+	}
+	public void setlastone(int lastone) {
+		lastone = lastone;
 	}
 	
 
