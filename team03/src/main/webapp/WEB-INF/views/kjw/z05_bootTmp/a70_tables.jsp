@@ -61,7 +61,7 @@
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<div class="row">
-					<c:if test='${emp.dname.equals("인사팀")}||${emp.dname.equals("재무팀")}'>
+					<c:if test="${emp.dname=='인사팀'||emp.dname=='재무팀'}">
 						<div class="col-xl-3 col-md-6 mb-4" id="link1">
 							<div class="card border-left-primary shadow h-100 py-2">
 								<div class="card-body">
@@ -103,10 +103,9 @@
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div
-												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												총수익</div>
+												class="text-xs font-weight-bold text-primary text-uppercase mb-1">가제</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800"
-												id="checking1">1,000,000,000원</div>
+												id="checking1"></div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -134,7 +133,7 @@
 							</div>
 						</div>
 						</c:if>
-						<c:if test="${emp.dname=='개발1팀'||'개발2팀'||'개발3팀'||'디자인팀'||'기획팀'}">
+						<c:if test="${emp.dname=='개발1팀'||emp.dname=='개발2팀'||emp.dname=='개발3팀'||emp.dname=='디자인팀'||emp.dname=='기획팀'}">
 <%-- 						<c:if test='${emp.dname.equals("개발1팀")||${emp.dname.equals("개발2팀")||
 						${emp.dname.equals("개발3팀")||${emp.dname.equals("디자인팀")||${emp.dname.equals("기획팀")}'> --%>
 						<div class="col-xl-3 col-md-6 mb-4" id="link1">
@@ -246,8 +245,7 @@
                                     </button>
 							</c:if>
 
-							<div class="row" />
-								<div class="col" />
+						
 								
                                    
                                     <a href="${path}/WEB-INF/views/kjw/z05_bootTmp/detailpage" class="btn btn-warning btn-icon-split"> <span
@@ -271,7 +269,7 @@
                                     </a>
                                     </c:if> --%>
 						<div class="col-xl-7">
-						<c:if test='${emp.dname.equals("인사팀")}||${emp.dname.equals("재무팀")}'>
+						<c:if test="${emp.dname=='인사팀'||emp.dname=='재무팀'}">
 							<form
 								class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">

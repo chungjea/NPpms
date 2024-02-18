@@ -156,7 +156,6 @@
 								</a>
 							
 
-
 								<a href="${path}/registerFrm"
 									class="btn btn-success btn-icon-split"> <span
 									class="icon text-white-50"> <i class="fas fa-check"></i>
@@ -164,8 +163,7 @@
 								</a>
 								</c:if>
 								
-								<div class="row" />
-								<div class="col" />
+								
 								<button type="button" class="btn btn-warning btn-circle" id="excelDownload" onclick='exportExcel'>
                                        <img src="${path}/a00_com/img/down_icon.png" width="15" height="15">
                                     </button>
