@@ -64,7 +64,7 @@
 	            <c:forEach var="work" items="${workList}">
 	                </tr>
 	        	    	<td>${work.pname}</td>
-	    	        	<td>${work.content}</td>
+	    	        	<td></td>
 		            	<td><fmt:parseDate var="enddte" value="${work.enddte}" pattern="yyyy-MM-dd"/>
             		<fmt:formatDate value="${enddte}" pattern="yyyy-MM-dd"/></td>
 		            	<td><div class="progress">
