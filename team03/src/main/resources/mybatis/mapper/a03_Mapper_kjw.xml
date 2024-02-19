@@ -8,8 +8,7 @@
 	</select>
 
 		<insert id="register" parameterType="emplist">
-		INSERT INTO emp_master_f values(empnoc.nextval,#{ename},#{egrade},0,#{dname},to_date(#{hiredate},'YYYY-MM-DD'),0,0,0,#{passwd},sysdate,#{email}
-		,#{lastone},#{auth}) 
+		INSERT INTO emp_master_f values(empnoc.nextval,#{ename},#{egrade},0,#{dname},to_date(#{hiredate},'YYYY-MM-DD'),0,0,0,#{passwd},sysdate,#{email},#{lastone},#{auth, jdbcType=VARCHAR}) 
 	</insert>
 	
 	<delete id="deleteEmps"  parameterType="emplist">

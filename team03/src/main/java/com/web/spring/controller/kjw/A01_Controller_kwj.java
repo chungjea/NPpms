@@ -118,10 +118,13 @@ public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping("register")
-public String register(Emp_master_f ins,Model d,HttpSession session) {
+public String register(Emp_master_f ins,Model d,MailSender mailVo,HttpSession session) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
-	d.addAttribute("msg",service.register(ins)>0?"등록성공":"등록실패");
-
+	d.addAttribute("msg",service.register(ins)>0?"등록성공":"등록실패");	
+	if(mailVo.getEmail()!=null) {
+		}else {
+			System.out.println("등록되지않은 메시지입니다");
+		}
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping("updateFrm")

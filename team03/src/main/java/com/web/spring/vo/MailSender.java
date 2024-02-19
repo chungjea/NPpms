@@ -1,7 +1,7 @@
 package com.web.spring.vo;
 
 public class MailSender {
-	private String receiver;
+	private String email;
 	private String sender;
 	private String title;
 	private String content;
@@ -10,11 +10,11 @@ public class MailSender {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public String getReceiver() {
-		return receiver;
+	public String getEmail() {
+		return email;
 	}
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	public String getSender() {
 		return sender;
@@ -40,14 +40,16 @@ public class MailSender {
 	public void setEmpno(String empno) {
 		this.empno = empno;
 	}
-	public MailSender(String receiver, String sender, String title, String content, String empno) {
+	public MailSender(String email, String sender, String title, String content, String empno) {
 		super();
-		this.receiver = receiver;
+		this.email = email;
 		this.sender = sender;
 		this.title = title;
 		this.content = content;
 		this.empno = empno;
 	}
+	
+	
 
 
 }

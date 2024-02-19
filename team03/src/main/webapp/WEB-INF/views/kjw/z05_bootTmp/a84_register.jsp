@@ -92,7 +92,7 @@
                                         <input type="date" name="hiredate" class="form-control form-control-user"   placeholder="입사일" />	
                                     </div>
                                     </div>
-                                    <input type="hidden" name="lastone" value="${emp.empno}">
+                                    
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 mb-3 mb-sm-0">
@@ -103,10 +103,14 @@
                                          <select name="emailE" id="emailE" class="form-control">
                                     <option value="@naver.com">naver.com</option>
                                     <option value="@daum.net">daum.net</option>
-                                    <option value="@google.com">google.com</option>
+                                    <option value="@gmail.com">gmail.com</option>
                                     </select>
                                     <input type="hidden" id="passwd" name="passwd" value="">
                                     <input type="hidden" id="email" name="email" value="">
+                                    <input type="hidden" id="lastone" name="lastone" value="">
+                                  
+                                  	
+                                  
                                     </div>
                                 </div>
                                 
@@ -117,7 +121,10 @@
 
 
                             </form>
-                            
+                            <form method="post" id="mailsend">
+                              <input type="hidden" id="chatArea" name="content" value="">
+                              <input type="hidden" name="title"   value="이메일을 송신합니다." />	
+                            </form>
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.jsp">Forgot Password?</a>
@@ -169,16 +176,21 @@
 <%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
             <script type="text/javascript">
-
-            
+            var empno="${emp.empno}";
+            	console.log(empno);
 				$("#regBtn").click(function(){
 					var emailE = document.getElementById('emailE').value;
 					var emailH = document.getElementById('emailH').value;
 					var email = emailH+emailE;
+					
+						document.getElementById('lastone').value= empno;
+						document.getElementById('chatArea').value= passwd;
 					  temp_pw_issuance(); 
 document.getElementById('email').value= email;
 console.log(email);
 console.log(passwd);
+console.log(chatArea);
+$("#mailsend").submit()
 					
 					if(confirm("등록하시겠습니까?")){
 						if($("[name=ename]").val()==""){
@@ -211,8 +223,9 @@ console.log(passwd);
 					let ranPick4 = Math.floor(Math.random() * ranValue4.length);
 					temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2] + ranValue3[ranPick3] + ranValue4[ranPick4];
 				}
- $('#passwd').val()==temp_pw; 
+ return temp_pw;
 			}
+			document.getElementById('passwd').value = temp_pw_issuance();
 			</script>
 </body>
 </html>

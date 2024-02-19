@@ -80,7 +80,7 @@ public class A02_Service_kjw {
 			mmsg.setSubject(email.getTitle());
 		//  2) 수신자
 			mmsg.setRecipient(RecipientType.TO, 
-					new InternetAddress(email.getReceiver()));
+					new InternetAddress(email.getEmail()));
 		//  3) 내용
 			mmsg.setText(email.getContent());
 		// 3-1) 사번
