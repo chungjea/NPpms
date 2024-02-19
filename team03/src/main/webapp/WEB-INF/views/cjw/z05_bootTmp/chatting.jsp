@@ -219,11 +219,7 @@
 			$("#msg").val("")			
 		}
 		
-		var msg = "${msg}"
-		if(msg!=""){
-			alert(msg)
-			location.href="${path}/chatting"
-		}
+		
 		$("#okBtn").click(function(){
 			alert($("#frm02").serialize())
 			$.ajax({
@@ -232,7 +228,11 @@
 				data : $("#frm02").serialize(),
 				dataType : "json",
 				success : function(data) {
-					$("#clsBtn").click()
+					var msg = data.msg
+					if(msg!=""){
+						alert(msg)
+						location.href="${path}/chatting"
+					}
 				},
 				error : function(err) {
 					console.log(err)
@@ -280,37 +280,15 @@
 		                    	<table class="table table-bordered" id="roominfo">
 		                            <caption>채팅방</caption>
 		                            <tbody>
-		                                <tr ondblclick="goChat(${cr.crno})"><td>Bruno Nash</td></tr>
-		                                <tr><td>Sakura Yamamoto</td></tr>
-		                                <tr><td>Thor Walton</td></tr>
-		                                <tr><td>Finn Camacho</td></tr>
-		                                <tr><td>Serge Baldwin</td></tr>
-		                                <tr><td>Zenaida Frank</td></tr>
-		                                <tr><td>Zorita Serrano</td></tr>
-		                                <tr><td>Jennifer Acosta</td></tr>
-		                                <tr><td>Cara Stevens</td></tr>
-		                                <tr><td>Hermione Butler</td></tr>
-		                                <tr><td>Lael Greer</td></tr>
-		                               	<tr><td>Jonas Alexander</td></tr>
-		                                <tr><td>Shad Decker</td></tr>
-		                                <tr><td>Michael Bruce</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
-		                                <tr><td>Donna Snider</td></tr>
+		                            	<c:forEach var = "cr" items="${crlist}">
+		                                	<tr ondblclick="goChat(${cr.crno})"><td>${cr.crname}</td></tr>
+		                                </c:forEach>
 		                        	</tbody>
 		                    	</table>
 		                    </div>
 	                    </div>
 	                    <div id="chat-container">
-	                    		<div class="input-group mb-3">	
+	                    		<!-- <div class="input-group mb-3">	
 		<div class="input-group-prepend ">
 			<span class="input-group-text  justify-content-center">
 			아이디</span>
@@ -320,7 +298,7 @@
 		<input id="enterBtn" type="button" class="btn btn-info" value="채팅방입장" />
 		<input id="exitBtn" type="button" class="btn btn-danger" value="채팅방나가기" />
 				
-	</div>
+	</div> -->
 							<div id="chatArea" style="overflow-x:hidden" class="input-group-append">
 								<div class="input-group-append" id="chatName">
 									<div id="chatGroup">dd</div>
@@ -347,7 +325,7 @@
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="modalTitle">채팅방 생성</h5>
-								<button type="button" class="close" data-dismiss="modal"\aria-label="Close">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 									<span aria-hidden="true">&times;</span>
 								</button>
 							</div>
@@ -362,7 +340,14 @@
 									<div style="max-height: 400px; overflow-x: auto; font-size:17px;">
 										<c:forEach var="e" items="${elist}">
 											<br>
-											<label><input type="checkbox" name="chatter[]" class="checkSelect" value="${e.empno}"> ${e.ename}</label>
+											<c:choose>
+												<c:when test="${emp.empno == e.empno}">
+													<label><input type="checkbox" name="chatter" class="checkSelect" value="${e.empno}" checked onClick="return false;"/> ${e.ename}</label>
+												</c:when>
+												<c:otherwise>
+													<label><input type="checkbox" name="chatter" class="checkSelect" value="${e.empno}"/> ${e.ename}</label>
+												</c:otherwise>
+											</c:choose>
 										</c:forEach>
 									</div>
 								</form>

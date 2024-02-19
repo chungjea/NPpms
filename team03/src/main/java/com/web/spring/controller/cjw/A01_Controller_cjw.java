@@ -225,8 +225,8 @@ public class A01_Controller_cjw {
 	// 채팅
 	// http://localhost:3333/chatting
 	@GetMapping("chatting")
-	public String chatting() {
-		
+	public String chatting(int empno, Model d) {
+		d.addAttribute("crlist", service.chatroomlist(empno));
 		return "cjw/z05_bootTmp/chatting";
 	}
 	
@@ -238,7 +238,7 @@ public class A01_Controller_cjw {
 	@PostMapping("makechatroom")
 	public String makechatroom(Chatroom_f ins, Model d) {
 		d.addAttribute("msg", service.makechatroom(ins));
-		return "cjw/z05_bootTmp/chatting";
+		return "pageJsonReport";
 	}
 	
 }

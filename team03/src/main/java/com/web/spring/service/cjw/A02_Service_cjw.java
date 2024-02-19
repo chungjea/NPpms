@@ -577,7 +577,12 @@ public class A02_Service_cjw {
 			String username = dao.namebyempno(chatter);
 			cku += dao.makechatroom(new Chatroom_f(roomname, chatter, username));
 		}
-		msg = cku+"명의 채팅방 등록 완료";
+		msg = cku+"명 채팅방 생성 완료";
 		return msg;
+	}
+	
+	// 채팅 : 채팅방 리스트
+	public List<Chatroom_f> chatroomlist(int empno) {
+		return dao.chatroomlist(empno);
 	}
 }

@@ -206,4 +206,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT ename||' / '||dname username FROM EMP_PINFO_F WHERE empno = #{userid}")
 	String namebyempno(int userid);
 	
+	@Select("SELECT * FROM chatroom_f WHERE userid = #{empno} ORDER BY crno")
+	List<Chatroom_f> chatroomlist(int empno);
+	
 }
