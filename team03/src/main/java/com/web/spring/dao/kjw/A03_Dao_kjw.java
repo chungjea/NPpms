@@ -22,7 +22,7 @@ public interface A03_Dao_kjw {
 	 
 	List<Emp_master_f> getEmpList(Emp_master_f sch);
 		
-
+int updateinfo(Emp_master_f upt);
 		List<sal_f> getSalList(sal_f sch);
 
 		List<Emp_master_f> Emplist();

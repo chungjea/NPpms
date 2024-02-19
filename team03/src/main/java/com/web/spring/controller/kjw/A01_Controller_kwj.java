@@ -124,8 +124,15 @@ public String register(Emp_master_f ins,Model d,HttpSession session) {
 
 	return "kjw/z05_bootTmp/a84_register";
 }
-@RequestMapping("test1")
-public String test1() {
+@RequestMapping("updateFrm")
+public String updateFrm() {
+	return "kjw/z05_bootTmp/detailpage";
+}
+@RequestMapping("updateinfo")
+public String updateinfo(Emp_master_f upt,HttpSession session,Model d) {
+	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
+	Emp_master_f emplist =(Emp_master_f)session.getAttribute("emplist");
+	d.addAttribute("msg",service.updateinfo(upt)>0?"수정성공":"수정실패");
 	return "kjw/z05_bootTmp/detailpage";
 }
 

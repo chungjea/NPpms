@@ -9,7 +9,7 @@
 
 		<insert id="register" parameterType="emplist">
 		INSERT INTO emp_master_f values(empnoc.nextval,#{ename},#{egrade},0,#{dname},to_date(#{hiredate},'YYYY-MM-DD'),0,0,0,#{passwd},sysdate,#{email}
-		,#{lastone}) 
+		,#{lastone},#{auth}) 
 	</insert>
 	
 	<delete id="deleteEmps"  parameterType="emplist">
@@ -42,7 +42,8 @@ SELECT COUNT(*) FROM emp_master_f
 <insert id="commute_s"  parameterType="commute_s">
 INSERT INTO Commute_f values(#{empno},#{ename},0,0,0,sysdate,#{endtime,jdbcType=DATE},#{overtime,jdbcType=DATE})
 </insert>
-
-
+<update id="updateinfo" parameterType="emplist">
+update emp_master_f set dname=#{dname},ename=#{ename},email=#{email},auth=#{auth},passwd=#{passwd},lastone=#{lastone},lastfix=sysdate where empno =#{empno}
+</update>
 
 </mapper>

@@ -45,6 +45,9 @@ public class A02_Service_kjw {
 	public int commute_s(Commute_f ins) {
 		return dao.commute_s(ins);
 	}
+	public int updateinfo(Emp_master_f upt) {
+		return dao.updateinfo(upt);
+	}
 
 	@Transactional
 	public void deleteEmps(List<Integer> empno) {

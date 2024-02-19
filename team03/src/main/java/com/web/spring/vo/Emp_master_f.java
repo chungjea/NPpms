@@ -20,6 +20,29 @@ public class Emp_master_f {
 	private Date lastfix;
 	private String email;
 	private int lastone;
+	private String auth;
+	public Emp_master_f() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Emp_master_f(int empno, String ename, String egrade, int deptno, String dname, String hiredate, int salary,
+			int incentive, int panaltytot, String passwd, Date lastfix, String email, int lastone, String auth) {
+		super();
+		this.empno = empno;
+		this.ename = ename;
+		this.egrade = egrade;
+		this.deptno = deptno;
+		this.dname = dname;
+		this.hiredate = hiredate;
+		this.salary = salary;
+		this.incentive = incentive;
+		this.panaltytot = panaltytot;
+		this.passwd = passwd;
+		this.lastfix = lastfix;
+		this.email = email;
+		this.lastone = lastone;
+		this.auth = auth;
+	}
 	public int getEmpno() {
 		return empno;
 	}
@@ -98,27 +121,13 @@ public class Emp_master_f {
 	public void setLastone(int lastone) {
 		this.lastone = lastone;
 	}
-	public Emp_master_f(int empno, String ename, String egrade, int deptno, String dname, String hiredate, int salary,
-			int incentive, int panaltytot, String passwd, Date lastfix, String email, int lastone) {
-		super();
-		this.empno = empno;
-		this.ename = ename;
-		this.egrade = egrade;
-		this.deptno = deptno;
-		this.dname = dname;
-		this.hiredate = hiredate;
-		this.salary = salary;
-		this.incentive = incentive;
-		this.panaltytot = panaltytot;
-		this.passwd = passwd;
-		this.lastfix = lastfix;
-		this.email = email;
-		this.lastone = lastone;
+	public String getAuth() {
+		return auth;
 	}
-	public Emp_master_f() {
-		super();
-		// TODO Auto-generated constructor stub
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
+	
 	
 	
 	

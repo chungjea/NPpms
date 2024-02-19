@@ -135,7 +135,13 @@
 					</div>
 					<!-- Page Heading -->
 					<h1 class="h3 mb-2 text-gray-800">${emp.dname}${emp.auth}페이지</h1>
-
+<ul class="nav nav-tabs nav-justified">
+                     <li class="nav-item"><a class="nav-link active" href="#">전체회원</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#">삭제인원리스트</a></li>
+                     <li class="nav-item"><a class="nav-link disabled" href="#"></a></li>
+                     <li class="nav-item"><a class="nav-link disabled" href="#"></a>
+                     </li>
+                  </ul>
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -168,7 +174,7 @@
                                        <img src="${path}/a00_com/img/down_icon.png" width="15" height="15">
                                     </button>
                                    
-                                    <a href="${path}/WEB-INF/views/kjw/z05_bootTmp/detailpage" class="btn btn-warning btn-icon-split"> <span
+                                    <a href="${path}/updateFrm" class="btn btn-warning btn-icon-split"> <span
 									class="icon text-white-50"> <i
 										class="fas fa-exclamation-triangle"></i>
 
