@@ -10,8 +10,8 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="col-xl-4">
-	<div class="card shadow mb-4">
+<div class="col-xl-3">
+	<div class="card shadow ">
 		<!-- Card Header - Dropdown -->
 		<div class="card-header py-3">
 			<h6 class="m-0 font-weight-bold text-primary">${emp.auth=='관리자'?'담당':'참여'}
@@ -20,16 +20,15 @@
 		<!-- Card Body -->
 		<div class="card-body">
 			<h5>전체 프로젝트:${allprojectCnt}개</h5>
-			<div class="chart-pie pt-4">
-				<canvas id="myProjectChart"></canvas>
+			<div class="chart-pie">
+				<canvas id="myProjectChart" ></canvas>
 			</div>
-			<hr>
-	
+		
 		</div>
 	</div>
 </div>
 <div class="col-xl-6">
-	<div class="card shadow mb-5">
+	<div class="card shadow ">
 		<div class="card-header py-3 ">
 			<div class="row">
 			<h6 class="m-0 font-weight-bold text-primary">작업 진행차트</h6>
@@ -40,7 +39,11 @@
 				<canvas id="myBarChart"></canvas>
 			</div>
 			<hr>
-			<select class="form-select form-select-sm"style="margin:0px"><option>ㄴㅁㅇㅇㅁㄴ</option></select>
+			<select class="form-select form-select-sm" style="margin:0px">
+			<c:forEach var="pj" items="${projects}">
+				<option>${pj.pname}</option>
+				</c:forEach>
+			</select>
 		</div>
 	</div>
 </div>
@@ -61,6 +64,7 @@
 	      backgroundColor: ['#4e73df', '#1cc88a','#eded1f',"#ed261f"],
 	      hoverBackgroundColor: ['#2e59d9', '#17a673','#ccc618','#cc1f18'],
 	      hoverBorderColor: "rgba(234, 236, 244, 1)",
+	
 	    }],
 	  },
 	  options: {
@@ -69,15 +73,22 @@
 	      backgroundColor: "rgb(255,255,255)",
 	      bodyFontColor: "#858796",
 	      borderColor: '#dddfeb',
-	      borderWidth: 1,
+	      borderWidth: 1,  
 	      xPadding: 15,
 	      yPadding: 15,
-	      displayColors: false,
-	      caretPadding: 10,
+	      displayColors: true
+	
 	    },
 	    legend: {
-	      display: true
+	      display: true,
+	      position:'bottom',
+	      labels: {
+	    	  boxWidth:15,
+	    	  fontSize:15
+          }
+	      
 	    },
+	    
 	    cutoutPercentage: 80,
 	  },
 	});
@@ -88,23 +99,25 @@
 	//바 차트
 	var ctx = document.getElementById("myBarChart");
 	var myBarChart = new Chart(ctx, {
-  	type: 'bar',
+  	type: 'horizontalBar',
   data: {
-    labels: ["총작업", "진행중인 작업"],
+    labels: ["총작업", "진행중인 작업","처리된 작업"],
     datasets: [{
-      axis: 'y',
       label: "작업",
       backgroundColor: "#4e73df",
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
-      data: [7, 7],
-      fill: false
+      barPercentage: 0.5,
+   
+      data: [7, 5, 2]
+    
+      
     }],
   },
   options: {
-	  indexAxis: 'y',
-    maintainAspectRatio: false,
-    tooltips: {
+
+     maintainAspectRatio: false,
+     tooltips: {
       titleMarginBottom: 10,
       titleFontColor: '#6e707e',
       titleFontSize: 14,
@@ -112,12 +125,19 @@
       bodyFontColor: "#858796",
       borderColor: '#dddfeb',
       borderWidth: 1,
-      xPadding: 15,
-      yPadding: 15,
+      xPadding: 10,
+      yPadding: 10,
       displayColors: true,
       caretPadding: 10,
  
     },  
+    scales: {
+    	xAxes: [{
+            stacked: true
+        }]
+      }
+     
+  
   }
 });
 	</script>

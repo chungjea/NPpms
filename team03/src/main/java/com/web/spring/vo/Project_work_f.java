@@ -6,19 +6,17 @@ public class Project_work_f {
 	private long refno;
 	private String startdte;
 	private String enddte;
-	private int progress;
+	private double progress;
 	private int pcode;
 	private int empno;
 	private String iname;
 	private String pname;
 
 	public Project_work_f() {
-		// TODO Auto-generated constructor stub
 	}
-	
-	
-	public Project_work_f(long wno, long refno, String startdte, String enddte, int progress, int pcode, int empno,
-			String iname, String pname) {
+	public Project_work_f(int rownum, long wno, long refno, String startdte, String enddte, double progress, int pcode,
+		int empno, String iname, String pname) {
+		this.rownum = rownum;
 		this.wno = wno;
 		this.refno = refno;
 		this.startdte = startdte;
@@ -29,7 +27,6 @@ public class Project_work_f {
 		this.iname = iname;
 		this.pname = pname;
 	}
-
 
 	public String getPname() {
 		return pname;
@@ -72,12 +69,17 @@ public class Project_work_f {
 	public void setEnddte(String enddte) {
 		this.enddte = enddte;
 	}
-	public int getProgress() {
+	
+	public double getProgress() {
 		return progress;
 	}
-	public void setProgress(int progress) {
+
+
+	public void setProgress(double progress) {
 		this.progress = progress;
 	}
+
+
 	public int getPcode() {
 		return pcode;
 	}

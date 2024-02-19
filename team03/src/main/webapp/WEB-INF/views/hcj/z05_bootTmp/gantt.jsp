@@ -26,6 +26,14 @@ html, body {
 .main-content {
 	height: calc(80vh - 50px);
 }
+.iconhover{
+ margin-left:5px; 
+}
+.iconhover:hover{
+	border : solid 0.5px gray;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
 </style>
 
 
@@ -79,13 +87,16 @@ html, body {
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<div class=" text-center">
-						<h2
-							style="border-radius: 10px; background: #a1b6f2; color: white; padding: 10px 0px">${pinfo.pname}</h2>
+						<h2 style="border-radius: 10px; background: #a1b6f2; color: white; padding: 10px 0px">${pinfo.pname}
+						
+						</h2>
+							
 						<ul class="nav nav-tabs nav-justified">
 							<li class="nav-item"><a class="nav-link active" href="#">간트차트</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회의록</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">결제</a></li>
-							<li class="nav-item"><a class="nav-link disabled" href="#"></a>
+							<li class="nav-item"><input class="btn" type="button"  value="수정/삭제"  data-toggle="modal" data-target="#newprojectModal"/>
+							
 							</li>
 						</ul>
 					</div>
@@ -95,6 +106,8 @@ html, body {
 						<div id="gantt_here"
 							style='width: 100%; height: 100%; padding: 0px;'></div>
 					</div>
+					
+					<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/newprojectModal.jsp" %>	
 				</div>
 
 				<!-- /.container-fluid -->
@@ -138,6 +151,15 @@ html, body {
 
 	<!-- Page level plugins -->
 	<script>
+	$("[name=pname]").val("${pinfo.pname}")
+	$("[name=ptype]").val("${pinfo.ptype}")
+	$("[name=empno]").val("${pinfo.empno}")
+	$("[name=startdte]").val("${pinfo.startdte}".substring(0,10))
+	$("[name=enddte]").val("${pinfo.startdte}".substring(0,10))
+	$("[name=content]").val("${pinfo.content}")
+	$("[name=status]").val("${pinfo.status}")
+	$("[name=teams]").val("${pinfo.tname}")
+	
 						gantt.plugins({
 							quick_info: false,
 							tooltip: true,
@@ -262,7 +284,6 @@ html, body {
 						    const Task = gantt.getTask(id)
 						    if(mode === "move"){
 						    	if(gantt.getChildren(id) !=0){
-							    	console.log("이동 후")
 							    	var moveStep =  Task.start_date.getDate() - bdforeMoveDate.getDate()  
 							    	gantt.getChildren(id).forEach(function(childid){
 							    		var childTask = gantt.getTask(childid)
@@ -289,33 +310,20 @@ html, body {
 								const Siblings = gantt.getChildren(item.parent)
 								const parentdata = gantt.getTask(parent)
 								var tot = 0;
-								var parent_startdte = parentdata.start_date;
-								var parent_enddate = parentdata.end_date;
-								
+								console.log(parentdata)
 								Siblings.forEach(function(Siblingid){
 									var Sibling = gantt.getTask(Siblingid)
 									tot +=Sibling.progress;
-									if(parent_startdte>Sibling.start_date){
-										parent_startdte = Sibling.start_date
-										funcTask("updateTask",parentdata)
-									}
-									if(parent_enddate<Sibling.end_date){
-										parent_enddate = Sibling.end_date
-										funcTask("updateTask",parentdata)
-									
-									}
+									if(parentdata.start_date>Sibling.start_date) parentdata.start_date = Sibling.start_date			
+									if(parentdata.end_date<Sibling.end_date) parentdata.end_date = Sibling.end_date;
 								})
 								var progress = tot/Siblings.length
 								parentdata.progress = Math.round(progress * 10)/10
-								parentdata.start_date = parent_startdte
-								parentdata.end_date = parent_enddate
 								// 업데이트 후 랜더
 								funcTask("updateTask",parentdata)									
 								gantt.render()
 							}
 						});
-						
-						
 						
 						gantt.attachEvent("onAfterTaskAdd", function(id,item){
 							console.log("onAfterTaskAdd:테스크 생성시 사용")
@@ -337,7 +345,7 @@ html, body {
 						const end = {enddte:transferDateformat(item.end_date)};
 						const pcode = {"pcode":"${pcode}"}
 						var data = {...datas,...start,...end,...pcode}
-						
+						console.log(datas)
 						 $.ajax({
 								url:"${path}/"+type,
 								type:"post",
@@ -346,7 +354,8 @@ html, body {
 								data :JSON.stringify(data),
 								success:function(data){
 									//alert(data.msg)
-									gantt.message(data.msg);	
+									//gantt.message(data.msg);
+									
 								},
 								error:function(err){
 									console.log(err)

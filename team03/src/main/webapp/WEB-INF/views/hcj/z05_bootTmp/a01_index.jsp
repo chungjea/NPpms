@@ -117,13 +117,8 @@
 					</c:choose> 
 					
 					<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/newprojectModal.jsp" %>	
-
-				
+		
 					<!-- Content Row -->
-
-					
-
-					
 
 				</div>
 				<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/empsch.jsp" %>

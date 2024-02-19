@@ -13,10 +13,6 @@ public class Task_f {
 
 	}
 
-
-
-
-
 	public Task_f(long id, String startdte, String enddte, String text, double progress, int assignor, long parent,
 			String pcode) {
 		this.id = id;

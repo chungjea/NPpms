@@ -64,7 +64,7 @@ public class A02_Service_hcj {
 		System.out.println(ins.getReports());
 		if(ins.getReports()!= null) {	
 			System.out.println("아이콘이미지 생성 시도!!!");
-			String path = "C:\\a01_springbt\\workspace\\maven.1706639790004\\team03\\src\\main\\resources\\static\\";
+			String path = "C:\\a01_springbt\\workspace\\maven.1708074911159\\team03\\src\\main\\resources\\static\\";
 			try {
 						
 					// 1. 파일 업로드

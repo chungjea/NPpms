@@ -104,16 +104,14 @@
 					src="icon${pj.ino}${pj.ext}">
 					<script type="text/javascript">
 					console.log("${pj.path}icon${pj.ino}${pj.ext}")
-					</script>
-					
+					</script>	
 			</div>
-
 			<div class="pjtitle">${pj.pname}</div>
 			<div style="font-size: 12px">마감일 <fmt:parseDate var="enddte" value="${pj.enddte}" pattern="yyyy-MM-dd"/>
             		<fmt:formatDate value="${enddte}" pattern="yyyy-MM-dd"/> / PMS</div>
 			<div class="progress">
-				<div class="progress-bar" role="progressbar" style="width: ${pj.progress}%"
-					aria-valuenow="${pj.progress}" aria-valuemin="0" aria-valuemax="100">${pj.progress}%</div>
+				<div class="progress-bar" role="progressbar" style="width: ${pj.progress*100}%"
+					aria-valuenow="${pj.progress*100}" aria-valuemin="0" aria-valuemax="100"><fmt:formatNumber value="${pj.progress*100}" pattern="00"/>%</div>
 			</div>
 			<span class="d_day">7</span>
 		</div>

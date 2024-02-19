@@ -21,7 +21,7 @@ public class Project_f {
 	private String enddte;
 	private int empno;
 	private String tname;
-	private int progress;
+	private double progress;
 	private String status;
 	private String ptype;
 	private String ttype;
@@ -40,8 +40,9 @@ public class Project_f {
 
 	
 	public Project_f(int rownum, int pcode, String pname, String startdte, String enddte, int empno, String tname,
-			int progress, String status, String ptype, String ttype, String content, MultipartFile reports, String path,
-			int ino, String ext) {
+			double progress, String status, String ptype, String ttype, String content, MultipartFile reports,
+			String path, int ino, String ext) {
+		super();
 		this.rownum = rownum;
 		this.pcode = pcode;
 		this.pname = pname;
@@ -59,8 +60,6 @@ public class Project_f {
 		this.ino = ino;
 		this.ext = ext;
 	}
-
-
 
 
 
@@ -171,12 +170,15 @@ public class Project_f {
 	public void setTname(String tname) {
 		this.tname = tname;
 	}
-	public int getProgress() {
+	
+	public double getProgress() {
 		return progress;
 	}
-	public void setProgress(int progress) {
+
+	public void setProgress(double progress) {
 		this.progress = progress;
 	}
+
 	public String getStatus() {
 		return status;
 	}

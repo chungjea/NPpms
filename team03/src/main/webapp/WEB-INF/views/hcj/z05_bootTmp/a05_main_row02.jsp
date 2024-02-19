@@ -27,8 +27,7 @@
 	                <th>작업</th>
 	                <th>이슈사항</th>
 	                <th>상태</th>
-	                </tr>
-	            
+	                </tr>         
 	            <c:forEach var="err" items="${errList}">
 	            <tr>
 	            <td>${err.pname}</td>
@@ -64,7 +63,7 @@
 	            <c:forEach var="work" items="${workList}">
 	                </tr>
 	        	    	<td>${work.pname}</td>
-	    	        	<td></td>
+	    	        	<td>  </td>
 		            	<td><fmt:parseDate var="enddte" value="${work.enddte}" pattern="yyyy-MM-dd"/>
             		<fmt:formatDate value="${enddte}" pattern="yyyy-MM-dd"/></td>
 		            	<td><div class="progress">
