@@ -83,7 +83,9 @@
 				</form>-->
 				<!-- <//%@ include file="/WEB-INF/views/lsd/z05_bootTmp/a03_topBar.jsp"%>-->
 				<!-- End of Topbar -->
-
+				<!-- Topbar    -->
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp" %>
+				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 
@@ -120,10 +122,10 @@
 						</div>
 						<div class="card-body">
 							<div class="table-responsive">
-								<table class="table table-bordered" id="dataTable" width="100%"
+								<table class="table table-hover table-striped" id="dataTable" width="100%"
 									cellspacing="0">
 									<thead>
-										<tr>
+										<tr class="text-center" style="background-color:skyblue;">
 											<th>번호</th>
 											<th>공지번호</th>
 											<th>제목</th>
@@ -136,12 +138,12 @@
 
 										<c:forEach var="nt" items="${noticeboard}">
 											<tr ondblclick="noticeDetail(${nt.notice_num})">
-												<td>${nt.cnt}</td>
-												<td>${nt.notice_num}</td>
-												<td>${nt.title}</td>
-												<td>${nt.writer}</td>
-												<td><fmt:formatDate value="${nt.regDate}" /></td>
-												<td>${nt.readcnt}</td>
+												<td class="text-center">${nt.cnt}</td>
+												<td class="text-center">${nt.notice_num}</td>
+												<td class="text-center">${nt.title}</td>
+												<td class="text-center">${nt.writer}</td>
+												<td class="text-center"><fmt:formatDate value="${nt.regDate}" /></td>
+												<td class="text-center">${nt.readcnt}</td>
 											</tr>
 										</c:forEach>
 

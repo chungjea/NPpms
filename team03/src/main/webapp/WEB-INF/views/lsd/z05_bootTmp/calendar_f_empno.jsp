@@ -48,13 +48,13 @@ body {
 	height: 100px;
 	overflow-y: auto;
 	text-align: left;
-	border: 1px solid green;
 }
 
 #calendar {
 	max-width: 1100px;
-	margin: 0 auto;
+	margin : 0 auto;
 }
+
 </style>
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
@@ -299,7 +299,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>개인 개인</h2>
+		<h2>${emp.ename}님의 개인일정과 업무</h2>
 	</div>
 	<%-- 
 		
@@ -420,7 +420,7 @@ body {
 		</div>
 	</div>
 	<form>
-	<div style="text-align: right;">
+	<div style="text-align: center;  margin-top: 20px;">
 		<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
 		<button type="button" class="btn btn-warning" id="allBtn">전체</button>
 		<button type="button" class="btn btn-danger" id="deptBtn">부서</button>

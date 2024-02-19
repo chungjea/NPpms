@@ -48,7 +48,6 @@ body {
 	height: 100px;
 	overflow-y: auto;
 	text-align: left;
-	border: 1px solid green;
 }
 
 #calendar {
@@ -298,7 +297,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>전체 전체</h2>
+		<h2>${emp.dname},${emp.ename}의 일정,업무 전체</h2>
 	</div>
 	<%-- 
 		
@@ -418,7 +417,7 @@ body {
 		
 	</div>
 	<form>
-	<div style="text-align: right;">
+	<div style="text-align: center;  margin-top: 20px;">
 		<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
 		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
 		<button type="button" class="btn btn-danger" id="deptBtn">부서</button>

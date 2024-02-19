@@ -48,7 +48,7 @@ body {
 	height: 100px;
 	overflow-y: auto;
 	text-align: left;
-	border: 1px solid green;
+	
 }
 
 #calendar {
@@ -56,6 +56,7 @@ body {
 	margin: 0 auto;
 }
 </style>
+<!--  -->
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
 <script src="${path}/a00_com/bootstrap.min.js"></script>
@@ -296,8 +297,11 @@ body {
 </head>
 
 <body>
+<!-- Topbar    -->
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp" %>
+				<!-- End of Topbar -->
 	<div class="jumbotron text-center">
-		<h2>관리자 관리자</h2>
+		<h2>${emp.dname}의 일정과 업무</h2>
 	</div>
 	<%-- 
 		
@@ -314,7 +318,7 @@ body {
 		<div class="modal-dialog modal-dialog-centered" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
-					<h5 class="modal-title" id="calTitle">일정등록</h5>
+					<h5 class="modal-title" id="calTitle" >일정등록</h5>
 					<button type="button" class="close" data-dismiss="modal"
 						aria-label="Close">
 						<span aria-hidden="true">&times;</span>
@@ -330,14 +334,21 @@ body {
 								<span class="input-group-text  justify-content-center">
 									제목</span>
 							</div>
-							<input type="text" name="title" class="form-control" value="" />
+							<c:choose>
+    						<c:when test="${emp.auth eq '직원'}">
+    							<input type="text" name="title" class="form-control" value="" readonly/>
+    						</c:when>
+    						<c:otherwise>
+								<input type="text" name="title" class="form-control" value="" />
+							</c:otherwise>
+							</c:choose>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									시작일</span>
 							</div>
-							<input type="text" id="start" readonly class="form-control" /> <input
+							<input type="text" id="start" class="form-control" /> <input
 								type="hidden" name="start" />
 						</div>
 						<div class="input-group mb-3">
@@ -345,7 +356,7 @@ body {
 								<span class="input-group-text  justify-content-center">
 									종료일</span>
 							</div>
-							<input type="text" id="end" readonly class="form-control" /> <input
+							<input type="text" id="end" class="form-control" /> <input
 								type="hidden" name="end" />
 						</div>
 						<div class="input-group mb-3">
@@ -361,41 +372,83 @@ body {
 								<span class="input-group-text  justify-content-center">
 									내용</span>
 							</div>
-							<textarea name="content" id="chatArea" class="form-control"></textarea>
+							<c:choose>
+    						<c:when test="${emp.auth eq '직원'}">
+								<textarea name="content" id="chatArea" class="form-control" readonly></textarea>
+							</c:when>
+							  <c:otherwise>
+							  	<textarea name="content" id="chatArea" class="form-control"></textarea>
+							  </c:otherwise>
+							</c:choose>
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									배경색</span>
 							</div>
+							<c:choose>
+    						<c:when test="${emp.auth eq '직원'}">
+							<input type="color" name="backgroundColor" class="form-control"
+								value="" readonly/>
+							</c:when>
+							<c:otherwise>
 							<input type="color" name="backgroundColor" class="form-control"
 								value="#0099cc" />
+							</c:otherwise>
+							</c:choose>
 						</div>
+						
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									글자색</span>
 							</div>
+							<c:choose>
+    						<c:when test="${emp.auth eq '직원'}">
+							<input type="color" name="textColor" class="form-control"
+								value="#ccffff" readonly/>
+							</c:when>
+							<c:otherwise>
 							<input type="color" name="textColor" class="form-control"
 								value="#ccffff" />
+							</c:otherwise>
+							</c:choose>
+							
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									종일여부</span>
 							</div>
-
-							<select name="allDay" class="form-control">
+						<c:choose>
+    						<c:when test="${emp.auth eq '직원'}">
+							<select name="allDay" class="form-control" disabled>
 								<option value="1">종일</option>
 								<option value="0">시간</option>
 							</select>
+							</c:when>
+							 <c:otherwise>
+							 <select name="allDay" class="form-control">
+								<option value="1">종일</option>
+								<option value="0">시간</option>
+							</select>
+							</c:otherwise>
+						</c:choose>
+						
 						</div>
 						<div class="input-group mb-3">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									참고 link</span>
 							</div>
-							<input type="text" name="urlLink" class="form-control" value="" />
+							<c:choose>
+    						<c:when test="${emp.auth eq '직원'}">
+							<input type="text" name="urlLink" class="form-control" value="" readonly/>
+							</c:when>
+							<c:otherwise>
+							<input type="text" name="urlLink" class="form-control" value=""/>
+							</c:otherwise>
+							</c:choose>
 						</div>
 					</form>
 				</div>
@@ -416,7 +469,7 @@ body {
 		
 	</div>
 	<form>
-	<div style="text-align: right;">
+	<div style="text-align: center;  margin-top: 20px;">
 	<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
 	<c:if test="${emp.auth eq '직원'}">
 		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>

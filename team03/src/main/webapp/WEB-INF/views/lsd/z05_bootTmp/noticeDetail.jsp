@@ -32,9 +32,21 @@
 	height: 200px;
 	overflow-y: auto;
 	text-align: left;
-	border: 1px solid green;
+	
 }
+
+
 </style>
+  <!-- Custom fonts for this template-->
+    <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="${path}/a00_com/css/sb-admin-2.min.css" rel="stylesheet">
+
+<!-- 여기서부터 내꺼 -->
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
 <script src="${path}/a00_com/bootstrap.min.js"></script>
@@ -165,28 +177,30 @@ private Date updateDate;
 				<textarea id="chatArea" name="content" class="form-control">${notice.content}
 		</textarea>
 			</div>
-			<div class="input-group mb-0">	
-		<div class="input-group mb-0">
-				<div class="input-group-prepend ">
-					<span class="input-group-text  justify-content-center"> 첨부파일</span>
+			<div class="input-group mb-0">
+				<div class="input-group mb-0">
+					<div class="input-group-prepend ">
+						<span class="input-group-text  justify-content-center">
+							첨부파일</span>
+					</div>
+					<c:forEach var="nf" items="${noticeFile}">
+						<span ondblclick="download('${nf.fno}','${nf.fname}')"
+							class="form-control">${nf.fname}</span>
+					</c:forEach>
 				</div>
-				<c:forEach var="nf" items="${noticeFile}">
-					<span ondblclick="download('${nf.fno}','${nf.fname}')" class="form-control">${nf.fname}</span>	
-				</c:forEach>
-			</div>	
-		
-	</div>
-	<script type="text/javascript">
-		function download(fno, fname){
-			if( confirm(fname+" 다운로드 하시겠습니까?")){
-				location.href="${path}/downloadNotice?fno="+fno
-			}
-		}
-	</script>	
-			<div style="text-align: right;">
-			<c:if test="${emp.auth eq '관리자'}">
-				<input type="button" class="btn btn-warning" value="수정" id="uptBtn" />
-				<input type="button" class="btn btn-danger" value="삭제" id="delBtn" />
+
+			</div>
+			<script type="text/javascript">
+				function download(fno, fname) {
+					if (confirm(fname + " 다운로드 하시겠습니까?")) {
+						location.href = "${path}/downloadNotice?fno=" + fno
+					}
+				}
+			</script>
+			<div style="text-align: right;  margin-top: 20px;">
+				<c:if test="${emp.auth eq '관리자'}">
+					<input type="button" class="btn btn-warning" value="수정" id="uptBtn" />
+					<input type="button" class="btn btn-danger" value="삭제" id="delBtn" />
 				</c:if>
 				<input type="button" class="btn btn-success" value="전체공지"
 					id="mainBtn" />
