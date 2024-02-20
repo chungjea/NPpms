@@ -25,7 +25,12 @@
 	});
 </script>
  --%>
-
+<script type="text/javascript">
+	if("${emp}"==""){
+	    alert("로그인후 이용해주세요")
+	    location.href="${path}/login"
+	 }
+</script>
 
 <style>
 	td{text-align:center;}
@@ -174,7 +179,7 @@
 						<span id="cnt" class="mt-4" style="align-item:left important!; width:150px; font-weight: bolder; color:black;">검색결과: ${sch.count}건</span>
                     </div>
                     <script type="text/javascript">
-		                $("[name=title").keyup(function(){
+		                $("[name=title]").keyup(function(){
 							if(event.keyCode==13){
 								schapv()
 							}

@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -60,7 +61,7 @@ public interface A03_Dao_cjw {
 	int insertfileapv(Apvfile_f ins);
 	
 	@Select("SELECT empno, ename, dname FROM EMP_PINFO_F WHERE deptno = #{deptno}")
-	List<Emp_pinfo_f> getdeptmen(int deptno);
+	List<Emp_pinfo_f> getdeptmen(@Param("deptno") int deptno);
 	
 	Approve_f detailapv(int apvno);
 	

@@ -92,7 +92,7 @@
                     		var msg = "${msg}"
                     		if(msg!=""){
                     			alert(msg)
-                    			location.href="${path}/file?empno=1000&deptno=10";
+                    			$("#frmfile").submit();
                     		}
                     		$("[name=reports]").change(function(){
                     			if(confirm("파일을 업로드하시겠습니까?")){
@@ -142,7 +142,7 @@
                     <div align="center">
                     	&nbsp;&nbsp;&nbsp;
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-								id="frm01" class="form" method="get">
+								id="frm01" class="form" method="post" action="${path}/file">
 						<div class="input-group align-items-end" >
 							<select class="form-control border-0 small" style="width:120px;" name="type">
 								<option value="fname">파일명</option>
@@ -294,7 +294,7 @@
 						</div>
                     </div>
 				</div>
-				<form id="ffrm">
+				<form id="ffrm" method="post">
 					<input type="hidden" name="type" value="${sch.type}"/>
 					<input type="hidden" name="fname" value="${sch.fname}"/>
 					<input type="hidden" name="page" value="${sch.page}"/>
@@ -326,7 +326,7 @@
 				<!-- /.container-fluid -->
                     <form id="filefrm" method="post" action="${path}/upload" enctype="multipart/form-data">
                     	<input type="file" name="reports" multiple="multiple" value="" />
-                    	<input type="text" name="empno" value="1000" />
+                    	<input type="text" name="empno" value="${emp.empno}" />
                     </form>
 			</div>
 			<!-- End of Main Content -->

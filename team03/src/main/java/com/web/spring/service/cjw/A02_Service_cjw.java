@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -144,7 +145,7 @@ public class A02_Service_cjw {
 	}
 	
 	// 결재 : 결재 올릴 같은 부서 사람들 명단
-	public List<Emp_pinfo_f> getdeptmen(int deptno) {
+	public List<Emp_pinfo_f> getdeptmen(@Param("deptno") int deptno) {
 		return dao.getdeptmen(deptno);
 	}
 	

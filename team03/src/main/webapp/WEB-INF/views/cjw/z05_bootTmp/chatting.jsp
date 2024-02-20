@@ -162,7 +162,7 @@
 			
 		wsocket.onopen = function(evt){
 			console.log(evt)
-			console.log(crno+":"+idVal+":접속하셨습니다!")
+			console.log()
 			wsocket.send(crno+":"+idVal+":접속하셨습니다!")
 		}
 		wsocket.onmessage = function(evt){
@@ -173,6 +173,7 @@
 	}
 	
 	$(document).ready(function(){
+		var wsocket = null;
 		function revMsg(msg){
 			// 보내는 메시지는 오른쪽
 			// 받는 메시지는 왼쪽 정렬 처리 : 사용자아이디:메시지 내용

@@ -25,7 +25,12 @@
 	});
 </script>
  --%>
-
+<script type="text/javascript">
+	if("${emp}"==""){
+	    alert("로그인후 이용해주세요")
+		location.href="${path}/login"
+	}
+</script>
 
 <style>
 	td{text-align:center;}

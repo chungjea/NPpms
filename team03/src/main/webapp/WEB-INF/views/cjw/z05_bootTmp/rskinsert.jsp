@@ -47,6 +47,11 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+	if("${emp}"==""){
+	    alert("로그인후 이용해주세요")
+		location.href="${path}/login"
+	}
+
 	var empno = "${emp.empno}"
 	var name = "${emp.ename}(${emp.dname})"
 	$(document).ready(function(){
@@ -113,7 +118,7 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">작성자(*)</span>
 							</div>
-							<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly/>	
+							<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important"/>	
 							<input type="hidden" name="wempno" value="${emp.empno}" readonly />
 							<input type="hidden" name="manager" value=1003 readonly />
 						</div>			

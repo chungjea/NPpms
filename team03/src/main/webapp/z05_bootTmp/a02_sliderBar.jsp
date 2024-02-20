@@ -51,7 +51,7 @@
 							class="collapse-item" href="javascript:goMet()">회의록</a>
 					</div>
 				</div></li>
-			<li class="nav-item"><a class="nav-link" href="${path}/file?empno=1000&deptno=10">
+			<li class="nav-item"><a class="nav-link" href="javascript:goFile()">
 					<span>문서관리</span>
 			</a></li>
 			
@@ -118,6 +118,10 @@
 			<input type="hidden" name="manager" value="${emp.empno}"/>
 		</form>
 		<form id="frmmet" method="post" action="${path}/meeting">
+			<input type="hidden" name="deptno" value="${emp.deptno}"/>
+		</form>
+		<form id="frmfile" method="post" action="${path}/file">
+			<input type="hidden" name="empno" value="${emp.empno}"/>
 			<input type="hidden" name="deptno" value="${emp.deptno}"/>
 		</form>
 		

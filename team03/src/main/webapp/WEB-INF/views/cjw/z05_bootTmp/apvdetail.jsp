@@ -56,6 +56,11 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
+	if("${emp}"==""){
+	    alert("로그인후 이용해주세요")
+		location.href="${path}/login"
+	}
+	
 	var empno = "${emp.empno}"
 	var name = "${emp.ename}(${emp.dname})"
 	var apvno = "${dapv.apvno}"

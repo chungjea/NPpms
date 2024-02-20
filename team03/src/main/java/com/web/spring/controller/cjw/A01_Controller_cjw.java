@@ -2,6 +2,7 @@ package com.web.spring.controller.cjw;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -54,13 +55,9 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("insertapvFrm")
-	public String insertapvFrm() {
+	public String insertapvFrm(int deptno, Model d) {
+		d.addAttribute("dmlist", service.getdeptmen(deptno));
 		return "cjw/z05_bootTmp/apvinsert";
-	}
-	
-	@ModelAttribute("dmlist")
-	public List<Emp_pinfo_f> getdeptmen(int deptno) {
-		return service.getdeptmen(deptno);
 	}
 	
 	@PostMapping("insertapv")
@@ -140,9 +137,10 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("detailrsk")
-	public String detailrsk(int rskno, Model d) {
+	public String detailrsk(@Param("rskno")int rskno, @Param("deptno")int deptno, Model d) {
 		d.addAttribute("drsk", service.detailrsk(rskno));
 		d.addAttribute("drskfile", service.getrskfile(rskno));
+		d.addAttribute("dmlist", service.getdeptmen(deptno));
 		return "cjw/z05_bootTmp/rskdetail";
 	}
 	
@@ -209,7 +207,7 @@ public class A01_Controller_cjw {
 	
 	// 문서관리
 	// http://localhost:3333/file?empno=1000&deptno=10
-	@GetMapping("file")
+	@PostMapping("file")
 	public String file(@ModelAttribute("sch") FileSch sch, Model d) {
 		d.addAttribute("bfile", service.boardfile(sch));
 		d.addAttribute("mfile", service.myfile(sch));
