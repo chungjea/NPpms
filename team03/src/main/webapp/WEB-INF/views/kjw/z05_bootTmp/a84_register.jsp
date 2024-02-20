@@ -57,7 +57,7 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
                             </div>
-                            <form method="post" id="send" action="${path}/register">
+                            <form method="post" id="send" action="${path}/register" >
                                 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -110,23 +110,26 @@
                                     <input type="hidden" id="passwd" name="passwd" value="">
                                     <input type="hidden" id="email" name="email" value="">
                                     <input type="hidden" id="lastone" name="lastone" value="">
+                                    <input type="hidden" id="receiver" name="receiver" value="">
+                                    <input type="hidden" id="title" name="title" value="${ename}님의 비밀번호">
                                   
                                   	
                                   
                                     </div>
                                 </div>
                                 
-                                <a class="btn btn-primary btn-user btn-block" id="regBtn">
-                                    Register Account
-                                </a>
+                                <input type="submit" class="btn btn-primary btn-user btn-block" id="regBtn">
+                                    
+                                
                                 <hr>
 
 
                             </form>
-                            <form method="post" id="mailsend">
-                              <input type="hidden" id="chatArea" name="content" value="">
-                              <input type="hidden" name="title"   value="이메일을 송신합니다." />	
+                            <form method="post" id="email"action="${path}/confirming">
+                              <input type="hidden" id="email" name="email" value="email">
+                              <input type="hidden" name="passwd" id="passwd"   value="" />	
                             </form>
+                       
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.jsp">Forgot Password?</a>
@@ -180,13 +183,17 @@
             <script type="text/javascript">
             var empno="${emp.empno}";
             	console.log(empno);
+            	var receiver= email;
+            	console.log(receiver);
 				$("#regBtn").click(function(){
 					var emailE = document.getElementById('emailE').value;
 					var emailH = document.getElementById('emailH').value;
 					var email = emailH+emailE;
 					
 						document.getElementById('lastone').value= empno;
-						document.getElementById('chatArea').value= passwd;
+						document.getElementById('passwd').value= passwd;
+						
+						document.getElementById('receiver').value= email;
 					  temp_pw_issuance(); 
 document.getElementById('email').value= email;
 console.log(email);
@@ -200,14 +207,11 @@ $("#mailsend").submit()
 							return;
 						}
 						$("#send").submit()
+							$("#email").submit()
 					}
-					$.ajax({})
-					type:'get',
-					url:'<c:url value = "/{path}/confirming?email="/>'+email;
-					success:function(data){
-						console.log("data:"+data);
-						alert("비밀번호가 전송되었습니다.")
-					}
+
+	
+					
 				})
 			var msg = "${msg}"
 			if(msg!=""){

@@ -137,8 +137,8 @@
 					
 					<h1 class="h3 mb-2 text-gray-800">${emp.dname}${emp.auth}페이지</h1>
 <ul class="nav nav-tabs nav-justified" id="choice">
-                     <li class="nav-item"><a class="nav-link active" href="#">전체회원</a></li>
-                     <li class="nav-item"><a class="nav-link" href="#">삭제인원리스트</a></li>
+                     <li class="nav-item"><a class="nav-link " href="#tab01">전체회원</a></li>
+                     <li class="nav-item"><a class="nav-link" href="#tab02">삭제인원리스트</a></li>
                      <li class="nav-item"><a class="nav-link disabled" href="#"></a></li>
                      <li class="nav-item"><a class="nav-link disabled" href="#"></a>
                      </li>
@@ -146,7 +146,8 @@
                   
 
 					<!-- DataTales Example -->
-					<div class="card shadow mb-4">
+				
+					<div class="card shadow mb-4" id="tab01">
 						<div class="card-header py-3">
 							<c:if test='${emp.dname.equals("인사팀")}'>
 								<div class="row" />
@@ -324,6 +325,7 @@
 							</div>
 							</div>
 							</div>
+							<div id="tab02">두번째탭</div>
 							</div>
 							</div>
 							</div>
@@ -511,10 +513,15 @@ window.history.forward();
 function noBack(){window.history.forward();}
 
 
-$("#choice a").click(function() {
-	  $('#choice li').removeClass('active');
-	  $(this).parent().addClass('active');
-	});
+$(function(){
+	  $('.card shadow mb-4 > div').hide();
+	  $('.nav nav-tabs nav-justified a').click(function () {
+	    $('.card shadow mb-4 > div').hide().filter(this.hash).fadeIn();
+	    $('.nav nav-tabs nav-justified a').removeClass('active');
+	    $(this).addClass('active');
+	    return false;
+	  }).filter(':eq(0)').click();
+	  });
 			
 </script>
 </html>

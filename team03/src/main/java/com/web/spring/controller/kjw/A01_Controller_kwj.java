@@ -75,11 +75,10 @@ HttpServletResponse response) {
 
 @RequestMapping(value="confirming", method = {RequestMethod.POST,RequestMethod.GET})
 public String mailSend(MailSender mailVo,  Model d) {
-	if(mailVo.getTitle()!=null) {
-	}else {
-		System.out.println("등록되지않은 메시지입니다");
-	}
-	return "kjw/z05_bootTmp/a82_findpassword";
+	if(mailVo.getPasswd()!=null) {
+	System.out.println("email:"+mailVo.getPasswd());
+	
+	}return "kjw/z05_bootTmp/a82_register";
 }
 
 @GetMapping("logout")

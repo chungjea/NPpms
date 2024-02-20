@@ -93,7 +93,7 @@ public class A02_Service_kjw {
 			mmsg.setRecipient(RecipientType.TO, 
 					new InternetAddress(email.getEmail()));
 		//  3) 내용
-			mmsg.setText(email.getContent());
+			mmsg.setText(email.getPasswd());
 		// 3-1) 사번
 			mmsg.setText(email.getEmpno());
 
