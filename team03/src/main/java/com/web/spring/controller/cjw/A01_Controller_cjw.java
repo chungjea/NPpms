@@ -224,7 +224,7 @@ public class A01_Controller_cjw {
 	}
 	
 	// 채팅
-	// http://localhost:3333/chatting
+	// http://localhost:3333/chatting?empno=202301018
 	@GetMapping("chatting")
 	public String chatting(int empno, Model d) {
 		d.addAttribute("crlist", service.chatroomlist(empno));

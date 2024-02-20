@@ -25,8 +25,8 @@ public class ChattingHandler extends TextWebSocketHandler{
 	
 	// himan:접속했습니다.
 	// himan-소켓세션저장
-	private Map<Integer, WebSocketSession> userIds = new ConcurrentHashMap();
-	private Map<String, Integer> ser_cli = new ConcurrentHashMap();
+	private Map<String, WebSocketSession> userIds = new ConcurrentHashMap();
+	private Map<String, String> ser_cli = new ConcurrentHashMap();
 
 	// var wsocket = new WebSocket() js로 선언 후
 	// 1. 소켓 서버에 접속시 처리 메서드(onopen())
@@ -50,7 +50,7 @@ public class ChattingHandler extends TextWebSocketHandler{
 		//    himan:안녕하세요
 		log(session.getId()+"에서 온 메시지:"+message.getPayload());
 		String crnoStr = (String)(message.getPayload()).split(":")[0];
-		int userid = Integer.parseInt((message.getPayload()).split(":")[1]);
+		String userid = (String)(message.getPayload()).split(":")[1];
 		String msg = (String)(message.getPayload()).split(":")[2];
 		int crno = Integer.parseInt(crnoStr);
 		if(msg.equals("접속하셨습니다!")) {

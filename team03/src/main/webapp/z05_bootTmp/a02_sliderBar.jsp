@@ -14,7 +14,7 @@
 			<br>
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="${path}/z05_bootTmp/a01_index.jsp">
+				href="${path}/mainpage">
 				<div class="sidebar-brand-icon rotate-n-15">
 				</div>
 					<img class="sidebar-card-illustration mb-2"
