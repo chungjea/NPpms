@@ -53,9 +53,14 @@ public class A01_Controller_cjw {
 		return "cjw/z05_bootTmp/approval";
 	}
 	
-	@GetMapping("insertapvFrm")
+	@PostMapping("insertapvFrm")
 	public String insertapvFrm() {
 		return "cjw/z05_bootTmp/apvinsert";
+	}
+	
+	@ModelAttribute("dmlist")
+	public List<Emp_pinfo_f> getdeptmen(int deptno) {
+		return service.getdeptmen(deptno);
 	}
 	
 	@PostMapping("insertapv")
@@ -154,8 +159,8 @@ public class A01_Controller_cjw {
 	}
 	
 	// 회의록
-	// http://localhost:3333/meeting?deptno=10
-	@GetMapping("meeting")
+	// http://localhost:3333/meeting
+	@PostMapping("meeting")
 	public String meeting(@ModelAttribute("sch") MeetingSch_f sch, Model d) {
 		d.addAttribute("metList", service.metlist(sch));
 		return "cjw/z05_bootTmp/meeting";
@@ -230,8 +235,6 @@ public class A01_Controller_cjw {
 		d.addAttribute("crlist", service.chatroomlist(empno));
 		return "cjw/z05_bootTmp/chatting";
 	}
-
-
 	
 	@ModelAttribute("elist")
 	public List<Emp_pinfo_f> empList(){

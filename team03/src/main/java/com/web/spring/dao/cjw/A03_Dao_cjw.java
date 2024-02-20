@@ -59,6 +59,9 @@ public interface A03_Dao_cjw {
 	@Insert("Insert into file_f values(file_seq.nextval, '결재', apv_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
 	int insertfileapv(Apvfile_f ins);
 	
+	@Select("SELECT empno, ename, dname FROM EMP_PINFO_F WHERE deptno = #{deptno}")
+	List<Emp_pinfo_f> getdeptmen(int deptno);
+	
 	Approve_f detailapv(int apvno);
 	
 	@Select("SELECT fname, fno FROM apvfile_f WHERE apvno = #{apvno}")
@@ -213,5 +216,5 @@ public interface A03_Dao_cjw {
 	List<Chatroom_f> chatroomlist(int empno);
 	
 	@Select("SELECT userid FROM chatroom_f WHERE crno = #{crno}")
-	List<Integer> getuseridbycrno(int crno);
+	List<String> getuseridbycrno(int crno);
 }

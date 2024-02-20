@@ -48,7 +48,7 @@
 						<a class="collapse-item" href="${path}/calendar_f">캘린더</a> 
 						<a class="collapse-item" href="javascript:goApv()">결재</a>
 						<a class="collapse-item" href="javascript:goRsk()">리스크 관리</a> <a
-							class="collapse-item" href="${path}/meeting?deptno=10">회의록</a>
+							class="collapse-item" href="javascript:goMet()">회의록</a>
 					</div>
 				</div></li>
 			<li class="nav-item"><a class="nav-link" href="${path}/file?empno=1000&deptno=10">
@@ -108,13 +108,16 @@
 
 		</ul>     
 		<form id="frmapv" method="post" action="${path}/myapv">
-			<input type="hidden" name="wempno" value="1000" />
-			<input type="hidden" name="mempno" value="1000" />
+			<input type="hidden" name="wempno" value="${emp.empno}" />
+			<input type="hidden" name="mempno" value="${emp.empno}" />
 			<input type="hidden" name="sts" value="대기"/>
 		</form>
 		<form id="frmrsk" method="post" action="${path}/myrsk">
-			<input type="hidden" name="wempno" value="1000"/>
-			<input type="hidden" name="cempno" value="1000"/>
-			<input type="hidden" name="manager" value="1000"/>
+			<input type="hidden" name="wempno" value="${emp.empno}"/>
+			<input type="hidden" name="cempno" value="${emp.empno}"/>
+			<input type="hidden" name="manager" value="${emp.empno}"/>
+		</form>
+		<form id="frmmet" method="post" action="${path}/meeting">
+			<input type="hidden" name="deptno" value="${emp.deptno}"/>
 		</form>
 		

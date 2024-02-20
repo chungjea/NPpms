@@ -69,14 +69,21 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">결재</h1>
-                        <a href="${path}/insertapvFrm" class="btn btn-secondary btn-icon-split">
+                        <a href="javascript:goInsert()" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
                         	<span class="text">결재 작성하기</span>
                         </a>
                     </div>
-
+                    <form id="insapvFrm" method="post" action="${path}/insertapvFrm">
+                    	<input type="hidden" name="deptno" value="${emp.deptno}" />
+                    </form>
+					<script type="text/javascript">
+						function goInsert(){
+					    	$("#insapvFrm").submit()
+						}
+					</script>
                     <div class="row">
 	                    <div class="col-xl-3 col-md-6 mb-4">
 	                    	<div class="card border-left-primary shadow h-100 py-2">
@@ -154,8 +161,8 @@
 							<div class="input-group align-items-end" >
 								<input class="form-control border-0 small" placeholder="제목" name="title" value="${sch.title}">
 								<input type="hidden" name="curPage" value="${sch.curPage}"/>
-								<input type="hidden" name="wempno" value="1000"/>
-								<input type="hidden" name="mempno" value="1000"/>
+								<input type="hidden" name="wempno" value="${emp.empno}"/>
+								<input type="hidden" name="mempno" value="${emp.empno}"/>
 								<input type="hidden" id="sts" name="sts" value="${sch.sts}"/>
 								<div class="input-group-append">
 									<button class="btn btn-primary" onclick="schapv()" type="button" id="schBtn">

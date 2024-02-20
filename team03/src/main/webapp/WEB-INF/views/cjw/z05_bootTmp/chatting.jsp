@@ -162,7 +162,7 @@
 			
 		wsocket.onopen = function(evt){
 			console.log(evt)
-				
+			console.log(crno+":"+idVal+":접속하셨습니다!")
 			wsocket.send(crno+":"+idVal+":접속하셨습니다!")
 		}
 		wsocket.onmessage = function(evt){

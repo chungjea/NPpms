@@ -47,15 +47,15 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
+	var empno = "${emp.empno}"
+	var name = "${emp.ename}(${emp.dname})"
 	$(document).ready(function(){
 		var msg = "${msg}"
 		var msg2 = "${msg2}"
 		var type = "${type}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/meeting?deptno=10"
+			$("#frmmet").submit()
 		}
 		if(msg2!=""){
 			alert(msg2)
@@ -141,7 +141,7 @@
 			}
 		})
 		$("#mainBtn").click(function(){
-			location.href="${path}/meeting?deptno=10"
+			$("#frmmet").submit()
 		})
 	});
 </script>

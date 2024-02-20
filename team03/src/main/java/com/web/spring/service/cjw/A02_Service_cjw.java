@@ -143,6 +143,11 @@ public class A02_Service_cjw {
 		return msg;
 	}
 	
+	// 결재 : 결재 올릴 같은 부서 사람들 명단
+	public List<Emp_pinfo_f> getdeptmen(int deptno) {
+		return dao.getdeptmen(deptno);
+	}
+	
 	// 결재 : 결재 상세
 	public Approve_f detailapv(int apvno) {
 		return dao.detailapv(apvno);

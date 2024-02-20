@@ -45,8 +45,8 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = "${mem.empno}"
-	//var name = "${mem.ename} / ${mem.dname}"
+	var empno = "${emp.empno}"
+	var name = "${emp.ename}(${emp.dname})"
 </script>
 <body id="page-top">
 
@@ -85,7 +85,7 @@
                     <div class="row">
                     	&nbsp;&nbsp;&nbsp;
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-								id="frm01" class="form" method="get">
+								id="frm01" class="form" method="post">
 						<div class="input-group align-items-end" >
 							<input class="form-control border-0 small" placeholder="회의 목적" name="title" value="${sch.title}">
 							<input type="hidden" name="curPage" value="${sch.curPage}"/>
@@ -185,7 +185,7 @@
 	<!-- End of Page Wrapper -->
 
 	<!-- Scroll to Top Button-->
-	<a class="scroll-to-top rounded" href="#page-top"> 
+	<a class="scroll-to-top rounded" ="#page-top"> 
 		<i class="fas fa-angle-up"></i>
 	</a>
 	<!-- Logout Modal-->

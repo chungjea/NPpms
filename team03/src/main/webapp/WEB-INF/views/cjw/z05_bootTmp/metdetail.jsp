@@ -56,15 +56,14 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = "${mem.empno}""
-	//var name = "${mem.ename} / ${mem.dname}"
-	var empno = "1000"
+	var empno = "${emp.empno}"
+	var name = "${emp.ename}(${emp.dname})"
 	var wempno = "${dmet.wempno}"
 	$(document).ready(function(){
 		var msg = "${msg}"
 		if(msg!=""){
 			alert(msg)
-			location.href="${path}/meeting?deptno=10"
+			$("#frmmet").submit()
 		}
 		if(empno!=wempno){
 			$("#uptBtn").hide();
@@ -74,7 +73,7 @@
 			$("#delBtn").show();
 		}
 		$("#mainBtn").click(function(){
-			location.href="${path}/meeting?deptno=10"
+			$("#frmmet").submit()
 		})
 		$("#uptBtn").click(function(){
 			$("#frm01").attr("action","${path}/updatemetFrm")

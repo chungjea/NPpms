@@ -47,8 +47,8 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
+	var empno = "${emp.empno}"
+	var name = "${emp.ename}(${emp.dname})"
 	$(document).ready(function(){
 		var msg = "${msg}"
 		if(msg!=""){
@@ -112,8 +112,8 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">작성자(*)</span>
 							</div>
-							<input name="writer" class="form-control" value="홍길동 / 전산팀" readonly/>	
-							<input type="hidden" name="wempno" value=1000 readonly />
+							<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly/>	
+							<input type="hidden" name="wempno" value="${emp.empno}"  readonly />
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
@@ -133,9 +133,9 @@
 								<span class="input-group-text w-100 justify-content-center">결재자(*)</span>
 							</div>
 							<select name="mempno" class="form-control">
-								<option value="1001">김길동 / 인사팀</option>
-								<option value="1002">신길동 / 인사팀</option>
-								<option value="1003">오길동 / 인사팀</option>
+								<c:forEach var="dm" items="${dmlist}">
+									<option value="${dm.empno}">${dm.ename}(${dm.dname})</option>
+								</c:forEach>
 							</select>	
 						</div>	
 						<br>

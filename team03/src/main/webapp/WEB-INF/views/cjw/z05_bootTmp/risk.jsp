@@ -145,13 +145,13 @@
                     	&nbsp;&nbsp;&nbsp;
                     	<ul class="pagination  justify-content-center">
                     	<li class="page-item ${sts=='1'?'active':''}">
-                    	<a class="page-link" id="mysubmit" href="javascript:goPage1('1000')">등록한 리스크</a></li>
+                    	<a class="page-link" id="mysubmit" href="javascript:goPage1(${emp.empno})">등록한 리스크</a></li>
                     	<li class="page-item ${sts=='2'?'active':''}">
-                    	<a class="page-link" id="myck" href="javascript:goPage2('1000')">처리할 리스크</a></li>
+                    	<a class="page-link" id="myck" href="javascript:goPage2(${emp.empno})">처리할 리스크</a></li>
                     	<li class="page-item ${sts=='3'?'active':''}">
-                    	<a class="page-link" id="tocheck" href="javascript:goPage3('1000')">담당중인 리스크</a></li>
+                    	<a class="page-link" id="tocheck" href="javascript:goPage3(${emp.empno})">담당중인 리스크</a></li>
                     	<li class="page-item ${sts=='4'?'active':''}">
-                    	<a class="page-link" id="finish" href="javascript:goPage4('1000')">완료된 리스크</a></li>
+                    	<a class="page-link" id="finish" href="javascript:goPage4(${emp.empno})">완료된 리스크</a></li>
                     	</ul>
                     <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">

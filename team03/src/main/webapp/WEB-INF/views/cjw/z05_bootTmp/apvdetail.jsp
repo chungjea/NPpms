@@ -56,8 +56,8 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
+	var empno = "${emp.empno}"
+	var name = "${emp.ename}(${emp.dname})"
 	var apvno = "${dapv.apvno}"
 	var wempno = "${dapv.wempno}"
 	var mempno = "${dapv.mempno}"
@@ -86,7 +86,7 @@
 		$("#noBtn").click(function(){
 			apvajax()
 		})
-		if(mempno==1000){
+		if(mempno==empno){
 			$("#okModal").show();
 			$("#noModal").show();
 		}else{

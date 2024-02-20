@@ -56,8 +56,8 @@
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = ${mem.empno}
-	//var name = ${mem.ename}+" / "+${mem.dname}
+	var empno = "${emp.empno}"
+	var name = "${emp.ename}(${emp.dname})"
 	var rskno = "${drsk.rskno}"
 	var charge = "${drsk.charge}"
 	var sts = "${drsk.sts}"
@@ -300,9 +300,9 @@
 											<span class="input-group-text w-100 justify-content-center">담당자</span>
 										</div>
 										<select name="cempno" class="form-control" style="width:70%;">
-											<option value="1001">김길동 / 인사팀</option>
-											<option value="1002">신길동 / 인사팀</option>
-											<option value="1003">오길동 / 인사팀</option>
+											<c:forEach var="dm" items="${dmlist}">
+												<option value="${dm.empno}">${dm.ename}(${dm.dname})</option>
+											</c:forEach>
 										</select>
 									</div>
 									<div class="row">
