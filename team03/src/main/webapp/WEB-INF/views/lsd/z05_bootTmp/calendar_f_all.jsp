@@ -325,78 +325,78 @@ body {
 						<input type="hidden" name="id" value="0" />
 						<input type="hidden" name="dname" value="${emp.dname}" />
 						<input type="hidden" name="auth" value="${emp.auth}" />
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									제목</span>
 							</div>
-							<input type="text" name="title" class="form-control" value="" readonly/>
+							<input type="text" name="title" class="form-control" value="" style="background-color:white !important;" readonly/>
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									시작일</span>
 							</div>
-							<input type="text" id="start" readonly class="form-control" /> <input
+							<input type="text" id="start" readonly class="form-control" style="background-color:white !important;"/> <input
 								type="hidden" name="start" readonly/>
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									종료일</span>
 							</div>
-							<input type="text" id="end" readonly class="form-control" /> <input
+							<input type="text" id="end" readonly class="form-control" style="background-color:white !important;"/> <input
 								type="hidden" name="end" readonly/>
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									작성자</span>
 							</div>
-							<input name="writer" class="form-control" value="${emp.ename}"
+							<input name="writer" class="form-control" value="${emp.ename}" style="background-color:white !important;"
 								readonly />
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									내용</span>
 							</div>
-							<textarea name="content" id="chatArea" class="form-control" readonly></textarea>
+							<textarea name="content" id="chatArea" class="form-control" style="background-color:white !important;" readonly></textarea>
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									배경색</span>
 							</div>
 							<input type="color" name="backgroundColor" class="form-control"
-								value="#0099cc" readonly/>
+								value="#0099cc" style="background-color:white !important;" readonly/>
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									글자색</span>
 							</div>
 							<input type="color" name="textColor" class="form-control"
-								value="#ccffff" readonly/>
+								value="#ccffff" style="background-color:white !important;" readonly/>
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center" >
 									종일여부</span>
 							</div>
 						
-							<select name="allDay" class="form-control" disabled>
+							<select name="allDay" class="form-control" style="background-color:white !important;" disabled>
 								<option value="1" >종일</option>
 								<option value="0">시간</option>
 							</select>
 							
 						</div>
-						<div class="input-group mb-3">
+						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									참고 link</span>
 							</div>
-							<input type="text" name="urlLink" class="form-control" value="" readonly/>
+							<input type="text" name="urlLink" class="form-control" value="" style="background-color:white !important;" readonly/>
 						</div>
 					</form>
 				</div>
@@ -419,7 +419,9 @@ body {
 	<form>
 	<div style="text-align: center;  margin-top: 20px;">
 		<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
+		<c:if test="${emp.auth eq '직원'}">
 		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
+		</c:if>
 		<button type="button" class="btn btn-danger" id="deptBtn">부서</button>
 	</div>
 	</form>

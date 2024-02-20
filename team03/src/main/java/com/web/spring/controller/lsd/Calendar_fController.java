@@ -19,7 +19,7 @@ public class Calendar_fController {
 	@Autowired(required = false)
 	private Calendar_fService service;
 
-	//전체조회(부서)
+	//전체조회(부서+개인)
 	@GetMapping("calendar_f_all")
 	public String calendar_f_all() {
 		return "lsd/z05_bootTmp/calendar_f_all";
@@ -81,7 +81,7 @@ public class Calendar_fController {
 		d.addAttribute("crud", "insert");
 		d.addAttribute("cal_fList", service.getCalList(dName));
 		return "pageJsonReport";
-	}// insCal_f()
+	}// insCal_f`()
 
 	// 등록(개인)
 	@RequestMapping("insCal_f_empno")

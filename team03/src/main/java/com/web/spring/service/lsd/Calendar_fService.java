@@ -35,11 +35,11 @@ public class Calendar_fService {
 
 	// 수정
 	public String updateCalendar(Calendar_f upt) {
-		return dao.updateCalendar(upt) > 0 ? "등록성공" : "등록실패";
+		return dao.updateCalendar(upt) > 0 ? "수정성공" : "수정실패";
 	}// updateCalendar()
 
 	// 삭제
 	public String deleteCalendar(int id) {
-		return dao.deleteCalendar(id) > 0 ? "등록성공" : "등록실패";
+		return dao.deleteCalendar(id) > 0 ? "삭제성공" : "삭제실패";
 	}// updateCalendar()
 }// Calendar_fService{}
