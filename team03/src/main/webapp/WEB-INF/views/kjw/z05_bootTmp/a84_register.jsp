@@ -61,9 +61,11 @@
                                 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input name="ename" class="form-control form-control-user"   placeholder="사원명" />	
+                                    <p><strong>이름을 입력해주세요</strong><span id="EnameChk"></span>
+                                        <input name="ename" id="ename" class="form-control form-control-user"   placeholder="사원명(숫자9자리)" />	
                                     </div>
-                                    <div class="col-sm-6">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <p><strong>직급을 선택하세요</strong><span id="idChk"></span>
  										 <select name="egrade" class="form-control form-control-user">
                                     <option value="선택">직급</option>
                                     <option value="사원">사원</option>
@@ -199,7 +201,13 @@ $("#mailsend").submit()
 						}
 						$("#send").submit()
 					}
-					
+					$.ajax({})
+					type:'get',
+					url:'<c:url value = "/{path}/confirming?email="/>'+email;
+					success:function(data){
+						console.log("data:"+data);
+						alert("비밀번호가 전송되었습니다.")
+					}
 				})
 			var msg = "${msg}"
 			if(msg!=""){
@@ -208,6 +216,8 @@ $("#mailsend").submit()
 				}
 			}
 			
+
+			         
 			function temp_pw_issuance() {
 				let ranValue1 = ['1','2','3','4','5','6','7','8','9','0'];
 				let ranValue2 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];

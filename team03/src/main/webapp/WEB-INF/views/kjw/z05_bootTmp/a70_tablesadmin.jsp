@@ -134,14 +134,16 @@
 						</div>
 					</div>
 					<!-- Page Heading -->
+					
 					<h1 class="h3 mb-2 text-gray-800">${emp.dname}${emp.auth}페이지</h1>
-<ul class="nav nav-tabs nav-justified">
+<ul class="nav nav-tabs nav-justified" id="choice">
                      <li class="nav-item"><a class="nav-link active" href="#">전체회원</a></li>
                      <li class="nav-item"><a class="nav-link" href="#">삭제인원리스트</a></li>
                      <li class="nav-item"><a class="nav-link disabled" href="#"></a></li>
                      <li class="nav-item"><a class="nav-link disabled" href="#"></a>
                      </li>
                   </ul>
+                  
 
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
@@ -504,9 +506,15 @@ function s2ab(s) {
   for (var i=0; i<s.length; i++) view[i] = s.charCodeAt(i) & 0xFF; //convert to octet
   return buf;    
 }
-
+//이전키 방지
 window.history.forward();
 function noBack(){window.history.forward();}
+
+
+$("#choice a").click(function() {
+	  $('#choice li').removeClass('active');
+	  $(this).parent().addClass('active');
+	});
 			
 </script>
 </html>

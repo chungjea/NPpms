@@ -16,14 +16,11 @@
 
 
 <%
+/* 
 Date time1 = new Date();
 SimpleDateFormat formatter1 = new SimpleDateFormat(
-		"YYYY-MM-DD: (E) hh:mm:ss",Locale.KOREA
-		);
-long lasttime1=session.getLastAccessedTime();
-long createdtime1=session.getCreationTime();
-var empno = "${emp.empno}";
-var ename = "${emp.ename}";
+		"yyyy-MM-dd: (E) HH:mm:ss", Locale.KOREA
+		); */
 
 %>
 
@@ -59,7 +56,7 @@ var ename = "${emp.ename}";
 			<div id="content">
 
 				<!-- Topbar    -->
-				<%@ include file="z05_bootTmp/a03_topBar.jsp"%>
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp"%>
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
@@ -82,27 +79,28 @@ var ename = "${emp.ename}";
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												근태관리</div>
-											<div class="card-body"><%=formatter1.format(time1)%></div>
+											<div class="card-body">$"{formatter1.format(time1)}"</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">0h0m</div>
 											<div class="progress progress-sm mr-2"></div>
 
 											<div class="h5 mb-0 font-weight-bold text-gray-800">출근시간
-												&nbsp &nbsp &nbsp &nbsp :${commute.starttime}</div>
+												:${commute_s.starttime}</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">퇴근시간
-												&nbsp &nbsp &nbsp &nbsp :${commute.endtime}</div>
+												:${commute_s.endtime}</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">야근시간
-												&nbsp &nbsp &nbsp &nbsp :${commute.overtime}</div>
+												:${commute_s.overtime}</div>
 											<hr
 												style="border-width: 1px 0 0 0; border-style: dotted; border-color: #bbb;">
-											<form method="post" id="send" action="${path}/commute_s"
+											<form method="post" class="user" action="${path}/commute_s"
 												class="btn btn-light btn-icon-split">
-												<a href="${path}/commute_s" id="StartBtn"
+												<a href='javascript:$(".user").submit()' id="StartBtn"
 													class="btn btn-light btn-icon-split"> <span
 													class="text">&nbsp &nbsp &nbsp &nbsp출근&nbsp &nbsp
 														&nbsp &nbsp</span>
 												</a> <input type="hidden" name="empno" value="${emp.empno}">
 												<input type="hidden" name="ename" value="${emp.ename}">
-
+												<input type="hidden" name="starttime" value="">
+												
 
 											</form>
 											<form method="post" id="send" action="${path}/ECommute"
@@ -253,7 +251,12 @@ var ename = "${emp.ename}";
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 	<script>
-console.log(${emp.empno})
+	$("#StartBtn").click(function(){
+		$("#user").submit()
+	})
+
+
+
 </script>
 </body>
 </html>

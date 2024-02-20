@@ -71,10 +71,11 @@
                      <h6 id="emptypwd">※비밀번호를 입력해주세요</h6>
                               </div>
                               <div class="form-group"></div>
-                              <a href='javascript:$(".user").submit()' type="button" onclick="check";)
+                              <a href='javascript:$(".user").submit()' type="button" onclick="check";
                                  class="btn btn-primary btn-user btn-block"> <spring:message
                                     code="login" />
                               </a>
+                             <input type="hidden" name="multiLang" value="">
                               <hr>
                               <select class="form-control" id="selectLan">
                                  <option value=""><spring:message code="chlange" /></option>
@@ -82,6 +83,9 @@
                                  <option value="en"><spring:message code="en" /></option>
                               </select>
 
+                           </form>
+                           <form>
+                           
                            </form>
                            <hr>
                            <div class="text-center">
@@ -152,8 +156,9 @@ $(document).ready(function() {
    // 이전화면에서 요청된 내용을 선택하게 하게, 선택할 때, 서버에 언어 선택 내용 전달.
    $("#selectLan").val("${param.lang}").change(function() {
       var chVal = $(this).val()
+       $("[name=multiLang]").val = $(this).val()
       if (chVal != '') {
-         location.href = "${path}/multiLang?lang=" + chVal
+         location.href = "${path}/login?lang=" + chVal
       }
    })
    $("#emptyempno").hide();

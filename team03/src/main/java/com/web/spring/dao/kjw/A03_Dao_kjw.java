@@ -28,6 +28,8 @@ int updateinfo(Emp_master_f upt);
 		List<Emp_master_f> Emplist();
 		
 		int commute_s(Commute_f ins);
+
+		Commute_f commute_f(Commute_f sch);
 }
 
 

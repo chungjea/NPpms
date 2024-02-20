@@ -1,8 +1,9 @@
 package com.web.spring.service.kjw;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
-
-
+import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -33,7 +34,10 @@ public class A02_Service_kjw {
 	private A03_Dao_kjw dao;
 	
 	public Emp_pinfo_f login(Emp_pinfo_f sch) {
+		
+		if(sch.getPasswd()==null) sch.setPasswd(""); 
 		return dao.login(sch);
+		
 	}
 	public List<Emp_master_f> Emplist(){
 		return dao.Emplist();
@@ -43,7 +47,14 @@ public class A02_Service_kjw {
 		return dao.register(ins);
 }
 	public int commute_s(Commute_f ins) {
+		 if(ins.getEmpno()==0) ins.setEmpno(0);
+		 if(ins.getEname()==null) ins.setEname("");
+
 		return dao.commute_s(ins);
+	}
+	public Commute_f commute_f(Commute_f sch) {
+		if(sch.getEmpno()==0) sch.setEmpno(0);
+		return dao.commute_f(sch);
 	}
 	public int updateinfo(Emp_master_f upt) {
 		return dao.updateinfo(upt);

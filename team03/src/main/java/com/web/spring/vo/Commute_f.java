@@ -2,12 +2,15 @@ package com.web.spring.vo;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Commute_f {
 	private int empno;
 	private String ename;
 	private int late;
 	private int absence;
 	private int annual;
+	@DateTimeFormat(pattern = "yyyy-MM-dd:HH-MM-SS")
 	private Date starttime;
 	private Date endtime;
 	private Date overtime;

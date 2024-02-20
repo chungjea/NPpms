@@ -39,8 +39,11 @@
 SELECT COUNT(*) FROM emp_master_f
 </select>
 <insert id="commute_s"  parameterType="commute_s">
-INSERT INTO Commute_f values(#{empno},#{ename},0,0,0,sysdate,#{endtime,jdbcType=DATE},#{overtime,jdbcType=DATE})
+INSERT INTO Commute_f(empno,ename,starttime) values(#{empno},#{ename},sysdate)
 </insert>
+<select id="commute_f" parameterType="commute_s">
+select * from commute_f where empno=#{empno}
+</select>
 <update id="updateinfo" parameterType="emplist">
 update emp_master_f set dname=#{dname},ename=#{ename},email=#{email},auth=#{auth},passwd=#{passwd},lastone=#{lastone},lastfix=sysdate where empno =#{empno}
 </update>

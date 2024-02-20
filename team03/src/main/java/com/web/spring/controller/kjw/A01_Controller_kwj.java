@@ -1,11 +1,13 @@
 package com.web.spring.controller.kjw;
 
 
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -38,15 +40,28 @@ public class A01_Controller_kwj {
 	private A02_Service_kjw service;
 
 
-@GetMapping("login")
+
 public String loginFrm() {
 	return "kjw/z05_bootTmp/a83_login";
 }
-@PostMapping("login")
-public String login(Emp_pinfo_f emplogin, HttpSession session) {
-System.out.println("test");
+
+
+
+@Autowired(required=false)
+private SessionLocaleResolver localeResolver;
+@RequestMapping(value="login", method = {RequestMethod.GET, RequestMethod.POST})
+public String login(Emp_pinfo_f emplogin, HttpSession session,@RequestParam(value="lang", defaultValue = "ko")
+String lang,
+HttpServletRequest request,
+HttpServletResponse response) {
+	Locale locale = new Locale(lang);
+	localeResolver.setLocale(request, response, locale);
 	Emp_pinfo_f emp = service.login(emplogin);
+	System.out.println("선택한 언어:"+lang);
+
 	
+	
+
 	System.out.println("데이터 check:");
 	System.out.println(emp); // null or 주소값
 	if(emp!=null) {
@@ -58,7 +73,7 @@ System.out.println("test");
 	return "kjw/z05_bootTmp/a83_login";
 }
 
-@RequestMapping("findpassword")
+@RequestMapping(value="confirming", method = {RequestMethod.POST,RequestMethod.GET})
 public String mailSend(MailSender mailVo,  Model d) {
 	if(mailVo.getTitle()!=null) {
 	}else {
@@ -105,8 +120,13 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }
-@RequestMapping("commute_s")
-public String commute_s(Commute_f ins,Model d) {
+@RequestMapping("commute_frm")
+public String commuteFrm() {
+	return "kjw/z05_bootTmp/a20_cards";
+}
+@RequestMapping(value ="commute_s", method = {RequestMethod.POST,RequestMethod.GET})
+public String commute_s(Commute_f ins,Commute_f sch,Model d,@DateTimeFormat(pattern="HH:mm:ss") Date starttime,HttpSession session) {
+	
 	d.addAttribute("msg",service.commute_s(ins)>0?"출근등록성공":"출근등록실패");
 	return "kjw/z05_bootTmp/a20_cards";
 	
@@ -140,7 +160,7 @@ public String updateinfo(Emp_master_f upt,HttpSession session,Model d) {
 }
 
 //컨테이너에 선언한 지역 언어선택 객체 호출
-private SessionLocaleResolver localeResolver;
+
 	
 
 	@RequestMapping(value = "multiLang", method = {RequestMethod.POST,RequestMethod.GET})
