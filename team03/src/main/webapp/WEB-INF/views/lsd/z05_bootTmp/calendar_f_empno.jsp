@@ -149,12 +149,16 @@ body {
 				$("#calModal").click()
 			},
 			eventDrop : function(arg) {
+				console.log("# 수정 #")
+				console.log(arg.event)
+				
 				addForm(arg.event)
-				ajaxFunc("updateCalendar.do", "post")
+				
+				ajaxFunc("uptCal_f_empno", "post")
 			},
 			eventResize : function(arg) {
 				addForm(arg.event)
-				ajaxFunc("updateCalendar.do", "post")
+				ajaxFunc("uptCal_f_empno", "post")
 			},
 			editable : true,
 			dayMaxEvents : true, // allow "more" link when too many events
@@ -219,6 +223,8 @@ body {
 			}
 		})
 		function ajaxFunc(url, type) {
+			
+			//alert(url+':'+$("#frm01").serialize())
 			$.ajax({
 				type : type,
 				url : "${path}/" + url,
@@ -235,6 +241,7 @@ body {
 					console.log(data.msg);
 					console.log(data.cal_fList);
 					console.log(data.crud);
+					//alert(data.title)
 					if (data.crud === 'insert') {
 						if (data.msg === '등록성공') {
 							alert("등록성공"); // 등록성공/등록실패
@@ -242,17 +249,23 @@ body {
 							alert("등록실패");
 						}
 					} else if (data.crud === 'update') {
+						alert(data.msg)
+						/*
 						if (data.msg === '등록성공') {
 							alert("수정성공"); // 등록성공/등록실패
 						} else {
 							alert("수정실패");
 						}
+						*/
 					} else {
+						alert(data.msg)
+						/*
 						if (data.msg === '등록성공') {
 							alert("삭제성공"); // 등록성공/등록실패
 						} else {
 							alert("삭제실패");
 						}
+						*/
 					}
 
 					$("#clsBtn").click() // 등록 모달창 닫기..
@@ -281,6 +294,7 @@ body {
 			$("[name=title]").val(evt.title)
 			$("[name=writer]").val(evt.extendedProps.writer)
 			$("#start").val(evt.start.toLocaleString())
+			//alert("변경할 시작일:"+evt.startStr)
 			$("[name=start]").val(evt.startStr)
 			$("#end").val(evt.end.toLocaleString())
 			$("[name=end]").val(evt.endStr)
@@ -339,7 +353,7 @@ body {
 								<span class="input-group-text  justify-content-center">
 									시작일</span>
 							</div>
-							<input type="text" id="start" readonly class="form-control" /> <input
+							<input type="text" id="start" class="form-control" /> <input
 								type="hidden" name="start" />
 						</div>
 						<div class="input-group mb-3">
@@ -347,7 +361,7 @@ body {
 								<span class="input-group-text  justify-content-center">
 									종료일</span>
 							</div>
-							<input type="text" id="end" readonly class="form-control" /> <input
+							<input type="text" id="end" class="form-control" /> <input
 								type="hidden" name="end" />
 						</div>
 						<div class="input-group mb-3">
