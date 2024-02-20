@@ -197,16 +197,21 @@ public interface A03_Dao_cjw {
 	@Delete("DELETE FROM file_f WHERE fno = #{fno}")
 	int deletefile(String fno);
 	
-	@Select("SELECT empno, ename||' / '||dname ename FROM EMP_PINFO_F ORDER BY ename")
+	@Select("SELECT empno, ename||' ('||dname||')' ename FROM EMP_PINFO_F ORDER BY ename")
 	List<Emp_pinfo_f> empList();
 	
-	@Insert("INSERT INTO chatroom_f values(crno_seq.nextval, #{crname}, #{userid}, #{username})")
+	@Select("SELECT crno_seq.nextval FROM dual")
+	int crno();
+	
+	@Insert("INSERT INTO chatroom_f values(#{crno}, #{crname}, #{userid}, #{username})")
 	int makechatroom(Chatroom_f ins);
 	
-	@Select("SELECT ename||' / '||dname username FROM EMP_PINFO_F WHERE empno = #{userid}")
+	@Select("SELECT ename||'('||dname||')' username FROM EMP_PINFO_F WHERE empno = #{userid}")
 	String namebyempno(int userid);
 	
 	@Select("SELECT * FROM chatroom_f WHERE userid = #{empno} ORDER BY crno")
 	List<Chatroom_f> chatroomlist(int empno);
 	
+	@Select("SELECT userid FROM chatroom_f WHERE crno = #{crno}")
+	List<Integer> getuseridbycrno(int crno);
 }

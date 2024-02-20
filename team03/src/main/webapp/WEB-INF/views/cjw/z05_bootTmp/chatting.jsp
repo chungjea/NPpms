@@ -36,8 +36,8 @@
 		text-align:center;
 		background-color:whitesmoke;
 		height:40px;
-		line-height: 40px;
-		font-size:20px;
+		line-height:40px;
+		font-size:18px;
 	}
 	td:hover{
 		background-color:gainsboro;
@@ -147,49 +147,52 @@
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script type="text/javascript">
-	//var empno = "${mem.empno}"
-	//var name = "${mem.ename} / ${mem.dname}"
+	var empno = "${emp.empno}"
+	var name = "${emp.ename}(${emp.dname})"
 		// 화면 크기에 따라 동적으로 조절 처리
 	window.addEventListener("resize",function(){
-		$("#chatMessageArea>div").width(
-				$("#chatArea").width()-5)
+		$("#chatMessageArea>div").width($("#chatArea").width()-5)
 	})
-	$(document).ready(function(){
-		var wsocket = null;
-		$("#enterBtn").click(function(){
-		//function goChat(crno){
-			var idVal = $("#id").val();
-			wsocket = new WebSocket(
-				"ws:localhost:3333/chat"	
-			)
-			// 주의: localhost:로 현재 pc로 완료가 되었으면 서버(공유아이피주소설정)
-			// 업로드 후, 서버에서 잘 작동되는지 확인..
+	var wsocket = null;
+	function goChat(crno, userid){
+		var idVal = userid;
+		wsocket = new WebSocket("ws:localhost:3333/chat")
+		// 주의: localhost:로 현재 pc로 완료가 되었으면 서버(공유아이피주소설정)
+		// 업로드 후, 서버에서 잘 작동되는지 확인..
 			
-			wsocket.onopen = function(evt){
-				console.log(evt)
+		wsocket.onopen = function(evt){
+			console.log(evt)
 				
-				wsocket.send(idVal+":접속하셨습니다!")
-			}
-			wsocket.onmessage = function(evt){
-				// 서버에서 push 접속한 모든 client에 전송..
-				revMsg(evt.data) // 메시지 처리 공통 함수 정의				
-			}
-		})
-		
+			wsocket.send(crno+":"+idVal+":접속하셨습니다!")
+		}
+		wsocket.onmessage = function(evt){
+			// 서버에서 push 접속한 모든 client에 전송..
+			revMsg(evt.data) // 메시지 처리 공통 함수 정의				
+		}
+		$("#crno").val(crno)
+	}
+	
+	$(document).ready(function(){
 		function revMsg(msg){
 			// 보내는 메시지는 오른쪽
 			// 받는 메시지는 왼쪽 정렬 처리 : 사용자아이디:메시지 내용
-			var alignOpt = "left"
 			var msgArr = msg.split(":") // 사용자명:메시지 구분 하여 처리..
-			var sndId = msgArr[0] // 보내는 사람 메시지 id
-			if($("#id").val()==sndId){ 
-				// 보내는 사람과 받는 사람의 아이디 동일:현재 접속한 사람이 보낸 메시지 
-				alignOpt = "right"
-				msg = msgArr[1] // 받는 사람 아이디 생략 처리
+			var crno = msgArr[0]
+			var sndId = msgArr[1] // 보내는 사람 메시지 id
+			var msgtext = msgArr[2]
+			var crnonow = $("#crno").val(crno);
+			if(crnonow == crno){
+				if(empno==sndId){ 
+					// 보내는 사람과 받는 사람의 아이디 동일:현재 접속한 사람이 보낸 메시지 
+					var alignOpt = "right"
+					var msgObj = $("<div></div>").text(msgtext).attr("align",alignOpt).css("width",$("#chatArea").width()-10)
+					$("#chatMessageArea").append(msgObj);
+				}else{
+					var alignOpt = "left"
+					var msgObj = $("<div></div><br>").text(sndId).attr("align",alignOpt).css("width",$("#chatArea").width()-10)+$("<div></div>").text(msgtext).attr("align",alignOpt).css("width",$("#chatArea").width()-10)
+					$("#chatMessageArea").append(msgObj);
+				}
 			}
-			var msgObj = $("<div></div>").text(msg).attr("align",
-					alignOpt).css("width",$("#chatArea").width())
-			$("#chatMessageArea").append(msgObj);
 			
 			// 스크롤링 처리..
 			// 1. 전체 해당 데이터의 높이를 구한다.
@@ -209,13 +212,10 @@
 				sendMsg()
 			}
 		})
-		$("#exitBtn").click(function(){
-			if(confirm("접속을 종료하시겠습니까?")){
-				wsocket.close()
-			}
-		})
 		function sendMsg(){
-			wsocket.send($("#id").val()+":"+$("#msg").val())
+			var crnonow = $("#crno").val();
+			var id = $("#id").val();
+			wsocket.send(crnonow+":"+id+":"+$("#msg").val())
 			$("#msg").val("")			
 		}
 		
@@ -231,7 +231,7 @@
 					var msg = data.msg
 					if(msg!=""){
 						alert(msg)
-						location.href="${path}/chatting"
+						location.href="${path}/chatting?empno="+empno
 					}
 				},
 				error : function(err) {
@@ -281,7 +281,7 @@
 		                            <caption>채팅방</caption>
 		                            <tbody>
 		                            	<c:forEach var = "cr" items="${crlist}">
-		                                	<tr ondblclick="goChat(${cr.crno})"><td>${cr.crname}</td></tr>
+		                                	<tr ondblclick="goChat(${cr.crno}, ${emp.empno})"><td>${cr.crname}</td></tr>
 		                                </c:forEach>
 		                        	</tbody>
 		                    	</table>
@@ -299,9 +299,9 @@
 		<input id="exitBtn" type="button" class="btn btn-danger" value="채팅방나가기" />
 				
 	</div> -->
-							<div id="chatArea" style="overflow-x:hidden" class="input-group-append">
+							<div id="chatArea" style="overflow-x:hidden" class="input-group-append"><input type="hidden" id="crno" /><input type="hidden" id="id" />
 								<div class="input-group-append" id="chatName">
-									<div id="chatGroup">dd</div>
+									<div id="chatGroup">선택된 채팅방 없음</div>
 								</div>			
 								<div id="chatMessageArea"></div>
 								<div class="input-group align-items-end" >

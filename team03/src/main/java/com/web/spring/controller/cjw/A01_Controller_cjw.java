@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.web.spring.service.cjw.A02_Service_cjw;
 import com.web.spring.vo.ApproveSch;
@@ -229,6 +230,8 @@ public class A01_Controller_cjw {
 		d.addAttribute("crlist", service.chatroomlist(empno));
 		return "cjw/z05_bootTmp/chatting";
 	}
+
+
 	
 	@ModelAttribute("elist")
 	public List<Emp_pinfo_f> empList(){

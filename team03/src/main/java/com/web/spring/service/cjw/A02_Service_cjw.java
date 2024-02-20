@@ -573,9 +573,10 @@ public class A02_Service_cjw {
 			roomname += dao.namebyempno(chatter)+", ";
 		}
 		roomname = roomname.substring(0, roomname.length() - 2);
+		int crno = dao.crno();
 		for(int chatter:chatters) {
 			String username = dao.namebyempno(chatter);
-			cku += dao.makechatroom(new Chatroom_f(roomname, chatter, username));
+			cku += dao.makechatroom(new Chatroom_f(crno, roomname, chatter, username));
 		}
 		msg = cku+"명 채팅방 생성 완료";
 		return msg;

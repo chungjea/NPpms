@@ -113,7 +113,7 @@
                     			if(type=="fname"){
                     				$("#sch").attr("placeholder", "파일명")
                     			}else if(type=="page"){
-                    				$("#sch").attr("placeholder", "파일위치")
+                    				$("#sch").attr("placeholder", "업무")
                     			}
                     		}
                     		var fname = "${sch.fname}"
@@ -129,7 +129,7 @@
                     			if(type=="fname"){
                     				$("#sch").attr("placeholder", "파일명")
                     			}else if(type=="page"){
-                    				$("#sch").attr("placeholder", "파일위치")
+                    				$("#sch").attr("placeholder", "업무")
                     			}
                     		})
                     	});
@@ -146,7 +146,7 @@
 						<div class="input-group align-items-end" >
 							<select class="form-control border-0 small" style="width:120px;" name="type">
 								<option value="fname">파일명</option>
-								<option value="page">파일위치</option>
+								<option value="page">업무</option>
 							</select>
 							<input class="form-control border-0 small" style="width:400px;" name="fname" id="sch" value="">
 							<input type="hidden" name="empno" value="${sch.empno}"/>
@@ -184,7 +184,7 @@
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
-							        <th>파일위치</th>
+							        <th>업무</th>
 							        <th></th>
 							      </tr>
 							    </thead>	
@@ -247,7 +247,7 @@
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
-							        <th>파일위치</th>
+							        <th>업무</th>
 							        <th></th>
 							      </tr>
 							    </thead>	
@@ -268,7 +268,7 @@
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
-							        <th>파일 위치</th>
+							        <th>업무</th>
 							        <th></th>
 							        <th></th>
 							      </tr>
