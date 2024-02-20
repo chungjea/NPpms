@@ -64,7 +64,8 @@ public class A02_Service_hcj {
 		System.out.println(ins.getReports());
 		if(ins.getReports()!= null) {	
 			System.out.println("아이콘이미지 생성 시도!!!");
-			String path = "C:\\a01_springbt\\workspace\\maven.1708074911159\\team03\\src\\main\\resources\\static\\";
+			String path = "C:/a01_springbt/workspace/maven.1708074911159/team03/src/main/resources/static/z01_upload/";
+			String dbpath = "/z01_upload/";
 			try {
 						
 					// 1. 파일 업로드
@@ -83,7 +84,7 @@ public class A02_Service_hcj {
 					ins.getReports().transferTo(new File(path+savename+ext));
 					
 					// 2. 업로드된 파일정보를 DB저장..(추후에 활용할 목적)(
-					dao.insertIconfile(new IconRep_f(fname,path,ext));
+					dao.insertIconfile(new IconRep_f(fname,dbpath,ext));
 					// FileRep(int no, String fname, String path, String etc) 
 					System.out.println("아이콘이미지 생성 성공");
 					
@@ -202,7 +203,20 @@ public class A02_Service_hcj {
 		return dao.deleteTask(del)>0?"삭제성공":"삭제실패";
 	}
 	public Project_f getProjectInfo(int pcode) {
-		return dao.getProjectInfo(pcode);
+		Project_f pinfo =dao.getProjectInfo(pcode);
+		
+		
+	/*	 for(Tmem_f f :dao.getTmemEmp(pcode)) {
+		 System.out.println("사원번호1:"+f.getKey());
+		 System.out.println("이름1:"+f.getLabel()); }
+		 */
+		 pinfo.setTmem(dao.getTmemEmp(pcode)); 
+		 for(Tmem_f f :pinfo.getTmem()) {
+			 System.out.println("사원번호2:"+f.getKey());
+			 System.out.println("이름2:"+f.getLabel()); 
+		 }
+		 
+		return pinfo;
 	}
 	
 }

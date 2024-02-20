@@ -1,5 +1,7 @@
 package com.web.spring.vo;
 
+import java.util.List;
+
 import org.springframework.web.multipart.MultipartFile;
 
 /*
@@ -30,6 +32,8 @@ public class Project_f {
 	private String path;
 	private int ino;
 	private String ext;
+	private String mgname;
+	private List<Tmem_f> tmem;
 
 	public Project_f() {
 		// TODO Auto-generated constructor stub
@@ -61,7 +65,19 @@ public class Project_f {
 		this.ext = ext;
 	}
 
+	public List<Tmem_f> getTmem() {
+		return tmem;
+	}
+	public void setTmem(List<Tmem_f> tmem) {
+		this.tmem = tmem;
+	}
 
+	public String getMgname() {
+		return mgname;
+	}
+	public void setMgname(String mgname) {
+		this.mgname = mgname;
+	}
 
 	public int getIno() {
 		return ino;

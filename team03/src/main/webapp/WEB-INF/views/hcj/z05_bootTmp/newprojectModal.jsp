@@ -10,11 +10,8 @@
 	<div class="modal-dialog modal-dialog-centered" role="document">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h5 class="modal-title" id="exampleModalLongTitle">프로젝트 생성</h5>
-				<button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
+				<h5 class="modal-title" id="projectmodalheader">프로젝트 생성</h5>
+				
 			</div>
 			<div class="modal-body">
 				<form id="frm02" class="form" action="${path}/insertProject"
@@ -38,7 +35,7 @@
 						<div
 							style="width: 150px; height: 150px; border-radius: 70%; border: solid 1px; margin: 10px auto; overflow: hidden;"
 							id="image_preview">
-							<img class="pjiconImg" id="previewImage" src="">
+							<img class="pjiconImg" id="previewImage" src="" style="width: 100%;height: 100%;object-fit: cover">
 						</div>
 					</div>
 					<div class="row">
@@ -56,7 +53,7 @@
 					<div class="row">
 						<div class="col">
 							프로젝트 매니저 <input type="text" readonly class="form-control"
-								value="${emp.ename}"> <input type="hidden" name="empno"
+								value="${emp.ename}"  name="mgname"> <input type="hidden" name="empno"
 								value="${emp.empno}">
 						</div>
 					</div>
@@ -111,12 +108,18 @@
 				</form>
 			</div>
 			<div class="modal-footer">
+				<button type="button" class="btn btn-success" id="uptBtn">수정</button>
+				<button type="button" class="btn btn-danger" id="delBtn">삭제</button>
 				<button type="button" class="btn btn-primary" id="regBtn">생성</button>
 				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+				
+				
 			</div>
 		</div>
 	</div>
 </div>
+
+<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/empsch.jsp" %>
 <script>
 const img = document.getElementById("previewImage");
 const imgbox = document.getElementById("image_preview")

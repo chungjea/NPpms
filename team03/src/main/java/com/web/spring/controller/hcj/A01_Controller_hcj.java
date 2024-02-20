@@ -1,8 +1,7 @@
 package com.web.spring.controller.hcj;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,7 +19,6 @@ import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Task_f;
-
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -72,6 +70,7 @@ public class A01_Controller_hcj {
 		d.addAttribute("msg", service.insertProject(ins, teams));
 		return "pageJsonReport";
 	}
+	
 
 	@RequestMapping("empsearch")
 	public String empsearch(Emp_pinfo_f sch, String empnoStr, Model d) {
@@ -103,10 +102,15 @@ public class A01_Controller_hcj {
 
 	@RequestMapping("project")
 	public String project(@ModelAttribute("pcode") int pcode,Model d) {
+		
+		
 		d.addAttribute("pinfo", service.getProjectInfo(pcode));
 		return "hcj/z05_bootTmp/gantt";
 	}
-
+	@PostMapping("loadpinfo")
+	public ResponseEntity<?> loadpinfo(@RequestParam("pcode")int pcode) {	
+		return ResponseEntity.ok(service.getProjectInfo(pcode));
+	}
 	@PostMapping("Tmem")
 	public ModelAndView  getTeamMember(int pcode) {
 		ModelAndView modelAndView = new ModelAndView();

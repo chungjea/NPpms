@@ -24,7 +24,6 @@
 		SELECT * FROM view_project_all_info
 		WHERE status = '진행중'
 		AND MEMBER = #{empno}
-		
 	</select>
 
 

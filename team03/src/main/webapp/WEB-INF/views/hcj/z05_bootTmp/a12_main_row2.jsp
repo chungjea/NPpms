@@ -94,14 +94,14 @@
 
 
 <!-- Content Column -->
-<h2>진행중인 프로젝트</h2>
+<h2>진행중인 프로젝트<c:if test="${emp.auth=='관리자'}"><input type="button" value="프로젝트 생성" data-toggle="modal" data-target="#newprojectModal"/></c:if> </h2>
 <div class="pjcontainer">
 	<c:forEach var="pj" items="${projects}">
 		<div class="pjbox" onclick="location.href='${path}/project?pcode=${pj.pcode}'">
 
 			<div class="pjicon">
 				<img class="pjiconImg"
-					src="icon${pj.ino}${pj.ext}">
+					src="${pj.path}icon${pj.ino}${pj.ext}">
 					<script type="text/javascript">
 					console.log("${pj.path}icon${pj.ino}${pj.ext}")
 					</script>	

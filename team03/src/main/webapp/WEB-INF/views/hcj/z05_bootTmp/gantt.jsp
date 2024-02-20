@@ -95,7 +95,7 @@ html, body {
 							<li class="nav-item"><a class="nav-link active" href="#">간트차트</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">회의록</a></li>
 							<li class="nav-item"><a class="nav-link" href="#">결제</a></li>
-							<li class="nav-item"><input class="btn" type="button"  value="수정/삭제"  data-toggle="modal" data-target="#newprojectModal"/>
+							<li class="nav-item"><input class="btn" type="button"  value="수정/삭제"  id="uptOrDel" data-toggle="modal" data-target="#newprojectModal"/>
 							
 							</li>
 						</ul>
@@ -148,17 +148,57 @@ html, body {
 
 	<!-- Custom scripts for all pages-->
 	<script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+	<script src="${path}/customjs/projectmodal.js"></script>
 
 	<!-- Page level plugins -->
 	<script>
-	$("[name=pname]").val("${pinfo.pname}")
-	$("[name=ptype]").val("${pinfo.ptype}")
-	$("[name=empno]").val("${pinfo.empno}")
-	$("[name=startdte]").val("${pinfo.startdte}".substring(0,10))
-	$("[name=enddte]").val("${pinfo.startdte}".substring(0,10))
-	$("[name=content]").val("${pinfo.content}")
-	$("[name=status]").val("${pinfo.status}")
-	$("[name=teams]").val("${pinfo.tname}")
+		$("#projectmodalheader").text("프로젝트 관리") 
+		$("#uptBtn").show()
+		$("#delBtn").show()
+		$("#regBtn").hide()
+	$("#delBtn").click(function(){
+		if(confirm("정말로 삭제하시겠습니까?")){
+			
+		}
+	})
+	
+	//프로젝트 수정 정보 불러오기
+	
+	loadProjectinfo("${pcode}")
+	function loadProjectinfo(pcode){
+		$.ajax({
+			url:"loadpinfo",
+			type:"post",
+			data:"pcode="+pcode,
+			datatype:"json",
+			success:function(pinfo){
+				$("[name=pname]").val(pinfo.pname)
+				$("[name=ptype]").val(pinfo.ptype)
+				$("[name=empno]").val(pinfo.empno)
+				$("[name=mgname]").val(pinfo.mgname)
+				$("[name=startdte]").val(pinfo.startdte.substring(0,10))
+				$("[name=enddte]").val(pinfo.startdte.substring(0,10))
+				$("[name=content]").val(pinfo.content)
+				$("[name=status]").val(pinfo.status)
+				$("[name=teams]").val(pinfo.tname)
+				pinfo.tmem.forEach(function(mem){
+					$("#teams_name").append('<button type="button" id="'+mem.key+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+mem.label+'</button>')
+				})
+					
+				
+				
+				imgbox.style.display="";
+				img.src=pinfo.path+"icon"+pinfo.ino+pinfo.ext;	
+			},
+			error:function(err){
+				console.log(err)
+			}
+		})
+		
+	}
+	
+	
+	
 	
 						gantt.plugins({
 							quick_info: false,
