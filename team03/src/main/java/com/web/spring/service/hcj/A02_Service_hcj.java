@@ -58,7 +58,7 @@ public class A02_Service_hcj {
 	
 	
 	// 프로젝트 생성
-	public String insertProject(Project_f ins,String teams) {
+	public String insertProject(Project_f ins) {
 		System.out.println("프로젝트 생성 시작!!!");
 		String msg = dao.insertProject(ins)>0?"프로젝트 생성성공!":"프로젝트 생성 실패";
 		System.out.println(ins.getReports());
@@ -95,18 +95,23 @@ public class A02_Service_hcj {
 			}
 		
 		}
-		if(!teams.equals("")) {
-			String[] tmems = teams.split(",");
-			int cnt = 0;
-			for(String tmem : tmems) {
-				
-				cnt += dao.insertTMemInNewProject(Integer.parseInt(tmem));
-			}
-			msg += cnt+"명의 팀 추가 완료";
-		}
+		/*
+		 * if(!teams.equals("")) { String[] tmems = teams.split(","); int cnt = 0;
+		 * for(String tmem : tmems) {
+		 * 
+		 * cnt += dao.insertTMemInNewProject(Integer.parseInt(tmem)); } msg +=
+		 * cnt+"명의 팀 추가 완료"; }
+		 */
 		System.out.println("프로젝트 생성 완료");
 		return msg;
 	}
+	
+	public int updateProject(Project_f upt) {
+		List<Tmem_f> curTmem = dao.getTeamMemeber(upt.getPcode());
+		//List<Tmem_f> uptTmem = upt.get
+		return 0;
+	}
+	
 	// 사원 검색
 	public List<Emp_pinfo_f> getemplist(Emp_pinfo_f sch){
 		if(sch.getDname()==null||sch.getDname()=="")return dao.getemplist(sch);

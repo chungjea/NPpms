@@ -162,12 +162,16 @@
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
 <script src="${path}/customjs/slidbar.js"></script>
-	<script src="${path}/customjs/projectmodal.js"></script>
+	<%-- <script src="${path}/customjs/projectmodal.js"></script> --%>
 <script type="text/javascript">
-/* 	//----프로젝트 생성------
+$("#uptBtn").hide();
+$("#delBtn").hide();
+var members = new Map();
+
+ 	//----프로젝트 생성------
 	$("#regBtn").click(function(){
 		//### 유효성 검사 ###
-		if($("[name=pname]").val()==""){
+	/* 	if($("[name=pname]").val()==""){
 			alert("프로젝트명을 입력해주세요")
 			$("[name=pname]").focus()
 			return;
@@ -195,7 +199,9 @@
 		if($("#teams").val()==""){
 			if(!confirm("팀원이 존재하지 않습니다\n그대로 진행하시겠습니까? "))return;
 			
-		}
+		} */
+
+		
 		// 프로젝트 생성 시작
 		functproject("insertProject")
 		
@@ -221,7 +227,7 @@
 					emphtml += "<td>"+emp.empno+"</td>"
 					emphtml += "<td>"+emp.ename+"</td>"
 					emphtml += "<td>"+emp.dname+"</td>"
-					emphtml += "<td><a href='#' onclick='addemp(\" "+emp.ename+"\","+emp.empno+")' class='btn btn-success btn-circle btn-sm'> "
+					emphtml += "<td><a href='#' onclick='addemp2(\" "+emp.ename+"\","+emp.empno+")' class='btn btn-success btn-circle btn-sm'> "
 					emphtml += '<i class="fas fa-check"></i></a></td>'
 					emphtml += "</tr>"
 				})
@@ -235,6 +241,17 @@
 			}
 		}) 
 	})
+	
+	function addemp2(ename,empno){
+		if(members.has(empno)){
+			alert("중복된 사원입니다.")
+		}else{
+			members.set(empno,ename)
+			alert(ename+"사원 추가")
+			$("#teams_name").append('<button type="button" id="'+empno+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams2(this)">'+ename+'</button>')
+			$("#echclsBtn").click()
+		}
+ 	}
 	
 	// 조회된 팀원을 프로젝트 팀에 추가
 	function addemp(ename,empno){
@@ -264,6 +281,15 @@
 		alert("팀원이 추가되었습니다")
 		$("#echclsBtn").click()
   	}
+	function deleteTeams2(obj){
+		if(confirm($(obj).text()+"사원을 팀에서 제외하시겠습니까?")){
+			if(members.delete(parseInt($(obj).prop("id")))){
+				obj.remove()
+				alert("삭제완료")	
+			}			
+		}
+	}
+	
 	function deleteTeams(obj){
 		if(confirm($(obj).text()+"사원을 팀에서 제외하시겠습니까?")){
 			var teamemp = $("#teams").val().split(",")
@@ -280,7 +306,21 @@
 	}
 	function functproject(url){
 		var formdata = new FormData($("#frm02")[0]);
-		 $.ajax({
+		
+		var tmeme = new List();
+		
+	 	/* var memidx = 0;
+		members.forEach(function(value,key){
+			formdata.append("key["+memidx+"]",key)
+			formdata.append("label["+memidx+"]",value)
+			memidx++;
+		})  */
+		formdata.append("members",members)
+		  for (let value of formdata) {
+			  console.log(value)
+			  }
+		
+		  $.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
 			url:"${path}/"+url,
@@ -297,8 +337,8 @@
 			error:function(err){
 				console.log(err)
 			}
-		}) 
-	} */
+		})  
+	} 
 </script>
 <!-- Page level plugins -->
 

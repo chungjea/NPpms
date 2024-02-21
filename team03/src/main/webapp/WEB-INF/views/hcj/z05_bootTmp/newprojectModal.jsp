@@ -62,10 +62,8 @@
 						<div class="col-9">
 							<input type="text" id="team" class="form-control" name="tname" />
 							<!-- 팀이름 -->
-							<input type="hidden" id="teams" name="teams" />
+
 							<!-- 팀원의 사원번호값 -->
-							<input type="hidden" id="teamtype" name="ttype" value="" />
-							<!-- 팀 타입 -->
 
 						</div>
 						<div class="col-3">
@@ -111,9 +109,7 @@
 				<button type="button" class="btn btn-success" id="uptBtn">수정</button>
 				<button type="button" class="btn btn-danger" id="delBtn">삭제</button>
 				<button type="button" class="btn btn-primary" id="regBtn">생성</button>
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-				
-				
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>	
 			</div>
 		</div>
 	</div>

@@ -197,9 +197,6 @@ html, body {
 		
 	}
 	
-	
-	
-	
 						gantt.plugins({
 							quick_info: false,
 							tooltip: true,
@@ -212,8 +209,7 @@ html, body {
 							else
 								gantt.config.highlight_critical_path = true;
 							gantt.render();
-						};
-						
+						};	
 						gantt.config.columns = [
 							{name: "wbs", label: "번호", width: 40, template: gantt.getWBSCode, resize: true},
 							{name: "text", label: "작업명", tree: true, width: 170, resize: true, min_width: 10},

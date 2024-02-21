@@ -10,7 +10,7 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<div class="col-xl-3">
+<div class="col-xl-4">
 	<div class="card shadow ">
 		<!-- Card Header - Dropdown -->
 		<div class="card-header py-3">
@@ -21,15 +21,15 @@
 		<div class="card-body">
 			<h5>전체 프로젝트:${allprojectCnt}개</h5>
 			<div class="chart-pie">
-				<canvas id="myProjectChart" ></canvas>
+				<canvas id="myProjectChart"></canvas>
 			</div>
 		
 		</div>
 	</div>
 </div>
-<div class="col-xl-6">
-	<div class="card shadow ">
-		<div class="card-header py-3 ">
+<div class="col-xl-4">
+	<div class="card shadow">
+		<div class="card-header py-3">
 			<div class="row">
 			<h6 class="m-0 font-weight-bold text-primary">작업 진행차트</h6>
 			</div>
@@ -64,7 +64,6 @@
 	      backgroundColor: ['#4e73df', '#1cc88a','#eded1f',"#ed261f"],
 	      hoverBackgroundColor: ['#2e59d9', '#17a673','#ccc618','#cc1f18'],
 	      hoverBorderColor: "rgba(234, 236, 244, 1)",
-	
 	    }],
 	  },
 	  options: {
@@ -77,7 +76,6 @@
 	      xPadding: 15,
 	      yPadding: 15,
 	      displayColors: true
-	
 	    },
 	    legend: {
 	      display: true,
@@ -86,16 +84,11 @@
 	    	  boxWidth:15,
 	    	  fontSize:15
           }
-	      
 	    },
-	    
 	    cutoutPercentage: 80,
 	  },
 	});
-	
-	
-	
-	
+
 	//바 차트
 	var ctx = document.getElementById("myBarChart");
 	var myBarChart = new Chart(ctx, {
@@ -108,14 +101,10 @@
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
       barPercentage: 0.5,
-   
-      data: [7, 5, 2]
-    
-      
+      data: [7, 5, 2]   
     }],
   },
   options: {
-
      maintainAspectRatio: false,
      tooltips: {
       titleMarginBottom: 10,
@@ -129,7 +118,6 @@
       yPadding: 10,
       displayColors: true,
       caretPadding: 10,
- 
     },  
     scales: {
     	xAxes: [{

@@ -4,7 +4,31 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 
+
+
 <mapper namespace="com.web.spring.dao.hcj.A03_Dao_hcj">
+
+<!-- ########################프로젝트#################### -->
+<insert id="insertProject" parameterType="project" >
+		INSERT INTO PROJECT_F values(project_seq.nextval,#{pname},
+		to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),
+		#{status},#{empno},#{tname},#{ptype},#{ttype},#{content})
+</insert>
+
+
+<update id="updateProject" parameterType="project" >
+			UPDATE  PROJECT_F 
+					SET 	pname = #{pname},
+							STARTDTE = to_date(#{startdte},'YYYY-MM-DD'),
+							ENDDTE = to_date('#{enddte},'YYYY-MM-DD'),
+							STATUS = #{status},
+							tname = #{tname},
+							PTYPE = #{ptype},
+							CONTENT = #{content}
+			WHERE pcode = #{pcode}
+	</update>
+	
+	
 	<select id="getprojectsAdmin" parameterType="int" resultType="project">
 		SELECT rownum,f.*
 		from

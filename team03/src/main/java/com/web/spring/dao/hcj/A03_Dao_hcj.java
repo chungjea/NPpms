@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -91,18 +92,32 @@ public interface A03_Dao_hcj {
 	//------------------------------------프로젝트 생성----------------------------
 	
 	// project 생성
-	@Insert("INSERT INTO PROJECT_F values(project_seq.nextval,#{pname},\r\n"
-			+ "	to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),#{status},#{empno},#{tname},#{ptype},#{ttype},#{content})")
 	int insertProject(Project_f ins);
+	
+	// project 업데이트
+	int updateProject(Project_f upt);
+	
+	// project 삭제
+	@Delete("DELETE FROM PROJECT_F WHERE pcode =")
+	int deleteProject(Project_f upt);
+	
+	
+	// 
+	
 	//아이콘 파일 정보 저장
 	@Insert("insert into iconrep_f values(seq_icon.currval,#{fname},#{path},project_seq.currval,#{ext})")
 	int insertIconfile(IconRep_f ins);
 	@Select("select 'icon'||seq_icon.nextval from dual")
 	String getIconNum();
+	
+	
 	// 팀 멤버 추가
 	@Insert("insert into TMEM_F values(#{empno},project_seq.currval)")
 	int insertTMemInNewProject(int empno);
 	
+	// 팀 멤버 삭제
+	@Delete("delete from Tmem_f where empno = #{empno} and pcode = #{pcode}")
+	int deleteTMem(@Param("empno")int empno,@Param("pcode")int pcode);
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.web.spring.controller.hcj;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -64,10 +66,14 @@ public class A01_Controller_hcj {
 		
 		return "hcj/z05_bootTmp/a01_index";
 	}
-
+	@ResponseBody
 	@PostMapping("insertProject")
-	public String insertProject(Project_f ins, String teams, Model d) {
-		d.addAttribute("msg", service.insertProject(ins, teams));
+	public String insertProject(Project_f ins, @RequestBody Map<Integer,String> members, Model d) {
+		System.out.println("일단들어옴!!!!!!!");
+		System.out.println(members.get(0));
+	
+		 
+		//d.addAttribute("msg", service.insertProject(ins));
 		return "pageJsonReport";
 	}
 	
