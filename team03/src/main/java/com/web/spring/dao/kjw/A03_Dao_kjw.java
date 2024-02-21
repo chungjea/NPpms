@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
+import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.sal_f;
 
@@ -22,6 +23,8 @@ public interface A03_Dao_kjw {
 	 
 	List<Emp_master_f> getEmpList(Emp_master_f sch);
 		
+	int doneProj(int empno);
+	
 int updateinfo(Emp_master_f upt);
 		List<sal_f> getSalList(sal_f sch);
 
@@ -30,6 +33,11 @@ int updateinfo(Emp_master_f upt);
 		int commute_s(Commute_f ins);
 
 		Commute_f commute_f(Commute_f sch);
+		
+		int empcnt(Emp_master_f cnt);
+		int LatestEmp();
+
+		int sumProj(int empno);
 }
 
 

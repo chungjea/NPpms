@@ -61,7 +61,7 @@
                                 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <p><strong>이름을 입력해주세요</strong><span id="EnameChk"></span>
+                                    <p><strong>${LatestEmp}</strong><span id="EnameChk"></span>
                                         <input name="ename" id="ename" class="form-control form-control-user"   placeholder="사원명(숫자9자리)" />	
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -98,8 +98,10 @@
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 mb-3 mb-sm-0">
-                                        <input type="emailH" name="emailH" id="emailH" class="form-control form-control-user"   placeholder="이메일주소" />	
+                                        <input type="text" name="emailH" id="emailH" class="form-control form-control-user"   placeholder="이메일주소" />	
                                     </div>
+                                    
+                                    
                                     <span class="col-sm-0 mb-3 mb-sm-0">@</span>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                          <select name="emailE" id="emailE" class="form-control">
@@ -110,10 +112,12 @@
                                     <input type="hidden" id="passwd" name="passwd" value="">
                                     <input type="hidden" id="email" name="email" value="">
                                     <input type="hidden" id="lastone" name="lastone" value="">
-                                    <input type="hidden" id="receiver" name="receiver" value="">
+                                   <!--  <input type="hidden" id="receiver" name="receiver" value=""> -->
                                     <input type="hidden" id="title" name="title" value="${ename}님의 비밀번호">
                                   
-                                  	
+                                  	<input type="hidden" id="receiver" name="receiver" value=""/>
+                             		<input type="hidden" name="password" id="password" value="" />	
+                              		
                                   
                                     </div>
                                 </div>
@@ -125,10 +129,7 @@
 
 
                             </form>
-                            <form method="post" id="email"action="${path}/confirming">
-                              <input type="hidden" id="email" name="email" value="email">
-                              <input type="hidden" name="passwd" id="passwd"   value="" />	
-                            </form>
+                            
                        
                             <hr>
                             <div class="text-center">
@@ -182,24 +183,42 @@
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
             <script type="text/javascript">
             var empno="${emp.empno}";
-            	console.log(empno);
-            	var receiver= email;
-            	console.log(receiver);
-				$("#regBtn").click(function(){
-					var emailE = document.getElementById('emailE').value;
-					var emailH = document.getElementById('emailH').value;
-					var email = emailH+emailE;
+            
+            	$("#SendBtn").click(function(){//임시버튼
+                    
+            		
+						 $("#testsend").submit() 
 					
-						document.getElementById('lastone').value= empno;
-						document.getElementById('passwd').value= passwd;
-						
-						document.getElementById('receiver').value= email;
-					  temp_pw_issuance(); 
-document.getElementById('email').value= email;
-console.log(email);
-console.log(passwd);
-console.log(chatArea);
-$("#mailsend").submit()
+					
+            	})
+            	/* var msg = "${msg}"
+						if(msg!=""){
+							alert(msg);
+						}else{
+							$("#email").submit()
+						} */
+            	
+            	
+            	
+				$("#regBtn").click(function(){ //등록
+					temp_pw_issuance();
+					 
+					var password=document.getElementById('password').value;
+					var receiver=document.getElementById('emailH').value+document.getElementById('emailE').value;
+					var emailE=document.getElementById('emailE').value;
+					var emailH=document.getElementById('emailH').value;
+					  
+					document.getElementById('email').value= email;
+					document.getElementById('receiver').value = receiver;
+					document.getElementById('password').value = password;
+					document.getElementById('passwd').value= passwd;
+					document.getElementById('receiver').value= email;
+					console.log(password)
+					console.log(receiver)
+					console.log(document.getElementById('receiver').value)
+					 
+
+
 					
 					if(confirm("등록하시겠습니까?")){
 						if($("[name=ename]").val()==""){
@@ -207,18 +226,20 @@ $("#mailsend").submit()
 							return;
 						}
 						$("#send").submit()
-							$("#email").submit()
+							
 					}
 
 	
 					
 				})
-			var msg = "${msg}"
+		/* 	var msg = "${msg}"
 			if(msg!=""){
+				
 				if(!confirm(msg+"\n계속 등록하시겠습니까?")){
 					location.href="${path}/mainpage"
+						
 				}
-			}
+			} */
 			
 
 			         
@@ -240,6 +261,7 @@ $("#mailsend").submit()
  return temp_pw;
 			}
 			document.getElementById('passwd').value = temp_pw_issuance();
+			document.getElementById('password').value = temp_pw_issuance();
 			</script>
 </body>
 </html>

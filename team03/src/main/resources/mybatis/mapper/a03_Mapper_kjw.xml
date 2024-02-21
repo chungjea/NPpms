@@ -26,7 +26,10 @@
 		WHERE empno like '%'|| #{empno} || '%'
 		and dname like '%' ||#{dname}||'%'
 	</select>
-
+<select id="sumProj" parameterType="int" resultType="int">
+SELECT count(*)FROM TMEM_F  
+WHERE empno=#{empno}
+</select>
 	<select id="getSalList" 
 			resultType="sallist" 
 			parameterType="sallist">
@@ -34,7 +37,12 @@
 		from sal_f
 		WHERE empno like '%'|| #{empno} || '%'
 	</select>
-
+	<select id="LatestEmp" resultType="int" >
+SELECT EMPNOC.CURRVAL FROM DUAL
+</select>
+<select id="doneProj" parameterType="int" resultType="int">
+SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno}
+</select>
 <select id="empcnt" parameterType="emplist">
 SELECT COUNT(*) FROM emp_master_f
 </select>

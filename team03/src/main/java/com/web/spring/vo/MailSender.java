@@ -4,19 +4,21 @@ public class MailSender {
 	private String email;
 	private String sender;
 	private String title;
-	private String passwd;
-	private String empno;
+	private String receiver;
+	private int empno;
+	private String password;
 	public MailSender() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MailSender(String email, String sender, String title, String passwd, String empno) {
+	public MailSender(String email, String sender, String title, String receiver, int empno, String password) {
 		super();
 		this.email = email;
 		this.sender = sender;
 		this.title = title;
-		this.passwd = passwd;
+		this.receiver = receiver;
 		this.empno = empno;
+		this.password = password;
 	}
 	public String getEmail() {
 		return email;
@@ -36,19 +38,24 @@ public class MailSender {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public String getPasswd() {
-		return passwd;
+	public String getReceiver() {
+		return receiver;
 	}
-	public void setPasswd(String passwd) {
-		this.passwd = passwd;
+	public void setReceiver(String receiver) {
+		this.receiver = receiver;
 	}
-	public String getEmpno() {
+	public int getEmpno() {
 		return empno;
 	}
-	public void setEmpno(String empno) {
+	public void setEmpno(int empno) {
 		this.empno = empno;
 	}
-	
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	
 	
 

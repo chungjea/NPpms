@@ -21,11 +21,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
+
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
+import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.sal_f;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -38,7 +40,6 @@ import jakarta.servlet.http.HttpSession;
 public class A01_Controller_kwj {
 	@Autowired(required = false)
 	private A02_Service_kjw service;
-
 
 
 public String loginFrm() {
@@ -59,8 +60,6 @@ HttpServletResponse response) {
 	Emp_pinfo_f emp = service.login(emplogin);
 	System.out.println("선택한 언어:"+lang);
 
-	
-	
 
 	System.out.println("데이터 check:");
 	System.out.println(emp); // null or 주소값
@@ -73,13 +72,7 @@ HttpServletResponse response) {
 	return "kjw/z05_bootTmp/a83_login";
 }
 
-@RequestMapping(value="confirming", method = {RequestMethod.POST,RequestMethod.GET})
-public String mailSend(MailSender mailVo,  Model d) {
-	if(mailVo.getPasswd()!=null) {
-	System.out.println("email:"+mailVo.getPasswd());
-	
-	}return "kjw/z05_bootTmp/a82_register";
-}
+
 
 @GetMapping("logout")
 public String logout(HttpSession session) {
@@ -104,18 +97,24 @@ public String logout(HttpSession session) {
 
 @RequestMapping("mypagefilter")
 public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
-		 sal_f sch1,Model d,HttpSession session) {
+		 sal_f sch1,Model d,HttpSession session,Emp_master_f cnt) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 
 	if(emp.getAuth().equals("관리자")) {
 		d.addAttribute("empList", service.getEmpList(sch));
 		d.addAttribute("salList", service.getSalList(sch1));
+		d.addAttribute("empcnt", service.empcnt(cnt));
+		d.addAttribute("sumProj", service.sumProj(emp.getEmpno()));
+		d.addAttribute("doneProj", service.doneProj(emp.getEmpno()));
 		
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
 			d.addAttribute("empList", service.getEmpList(sch));
 			d.addAttribute("salList", service.getSalList(sch1));
+			d.addAttribute("empcnt", service.empcnt(cnt));
+			d.addAttribute("sumProj", service.sumProj(emp.getEmpno()));
+			d.addAttribute("doneProj", service.doneProj(emp.getEmpno()));
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }
@@ -131,21 +130,42 @@ public String commute_s(Commute_f ins,Commute_f sch,Model d,@DateTimeFormat(patt
 	
 }
 
+@Autowired(required = false)
+@RequestMapping(value="confirming", method = {RequestMethod.POST,RequestMethod.GET})
+public String mailSend(MailSender mailVo,  Model d) {
+	d.addAttribute("LatestEmp", service.LatestEmp());
+	if(mailVo.getReceiver()!=null) {
+	System.out.println("email:"+mailVo.getReceiver());
+	System.out.println("password:"+mailVo.getPassword());
+	d.addAttribute("msg", service.sendMail(mailVo));
+	
+	}else {
+		return "mailVo.getReceiver()";
+	}
+	return "kjw/z05_bootTmp/a84_register";
+}
 
 @RequestMapping("registerFrm")
 public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
-@RequestMapping("register")
-public String register(Emp_master_f ins,Model d,MailSender mailVo,HttpSession session) {
+@RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
+public String register(Emp_master_f ins,Model d,MailSender email,HttpSession session) {
+	d.addAttribute("LatestEmp", service.LatestEmp());
+	if(email.getReceiver()!=null) {
+	System.out.println("email:"+email.getReceiver());
+	System.out.println("password:"+email.getPassword());
+	d.addAttribute("msg", service.sendMail(email));
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
-	d.addAttribute("msg",service.register(ins)>0?"등록성공":"등록실패");	
-	if(mailVo.getEmail()!=null) {
-		}else {
+	}
+	else {
 			System.out.println("등록되지않은 메시지입니다");
 		}
 	return "kjw/z05_bootTmp/a84_register";
-}
+	}
+	
+
+
 @RequestMapping("updateFrm")
 public String updateFrm() {
 	return "kjw/z05_bootTmp/detailpage";
