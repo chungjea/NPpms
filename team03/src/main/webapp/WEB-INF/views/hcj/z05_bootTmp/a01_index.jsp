@@ -307,15 +307,15 @@ var members = new Map();
 	function functproject(url){
 		var formdata = new FormData($("#frm02")[0]);
 		
-		var tmeme = new List();
+
 		
-	 	/* var memidx = 0;
+	  	var memidx = 0;
 		members.forEach(function(value,key){
-			formdata.append("key["+memidx+"]",key)
-			formdata.append("label["+memidx+"]",value)
+			formdata.append("tmem["+memidx+"].key",key)
+			formdata.append("tmem["+memidx+"].label",value)
 			memidx++;
-		})  */
-		formdata.append("members",members)
+		})   
+		
 		  for (let value of formdata) {
 			  console.log(value)
 			  }

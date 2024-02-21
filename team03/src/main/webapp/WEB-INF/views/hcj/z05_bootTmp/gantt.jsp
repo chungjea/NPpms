@@ -161,6 +161,9 @@ html, body {
 			
 		}
 	})
+	$("#uptBtn").click(function(){
+		functproject("${path}/updateProject")
+	})
 	
 	//프로젝트 수정 정보 불러오기
 	
@@ -172,6 +175,7 @@ html, body {
 			data:"pcode="+pcode,
 			datatype:"json",
 			success:function(pinfo){
+				$("[name=pcode]").val(pinfo.pcode)
 				$("[name=pname]").val(pinfo.pname)
 				$("[name=ptype]").val(pinfo.ptype)
 				$("[name=empno]").val(pinfo.empno)

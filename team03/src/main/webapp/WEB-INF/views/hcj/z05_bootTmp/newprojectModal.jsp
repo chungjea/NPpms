@@ -16,6 +16,7 @@
 			<div class="modal-body">
 				<form id="frm02" class="form" action="${path}/insertProject"
 					method="post" enctype="multipart/form-data">
+					<input type="hidden" name="pcode"/>
 					<div class="row">
 						<div class="col">
 							프로젝트 명 <input type="text" class="form-control"

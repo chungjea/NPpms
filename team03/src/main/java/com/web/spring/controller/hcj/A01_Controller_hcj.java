@@ -21,6 +21,7 @@ import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Task_f;
+import com.web.spring.vo.Tmem_f;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -68,12 +69,23 @@ public class A01_Controller_hcj {
 	}
 	@ResponseBody
 	@PostMapping("insertProject")
-	public String insertProject(Project_f ins, @RequestBody Map<Integer,String> members, Model d) {
+	public String insertProject(Project_f ins,Model d) {
 		System.out.println("일단들어옴!!!!!!!");
-		System.out.println(members.get(0));
+		
+		for(Tmem_f t:ins.getTmem()) {
+			System.out.println("키:"+t.getKey());
+			System.out.println("라벨:"+t.getLabel());
+		}
 	
 		 
-		//d.addAttribute("msg", service.insertProject(ins));
+		d.addAttribute("msg", service.insertProject(ins));
+		return "pageJsonReport";
+	}
+	@ResponseBody
+	@PostMapping("updateProject")
+	public String updateProject(Project_f upt,Model d) {
+	
+		d.addAttribute("msg", service.updateProject(upt));
 		return "pageJsonReport";
 	}
 	

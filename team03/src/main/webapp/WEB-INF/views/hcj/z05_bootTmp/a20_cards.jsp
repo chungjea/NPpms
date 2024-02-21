@@ -285,5 +285,6 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!-- Page level custom scripts -->
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	
+
 </body>
 </html>

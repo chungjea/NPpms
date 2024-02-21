@@ -95,6 +95,12 @@ public class A02_Service_hcj {
 			}
 		
 		}
+		int cnt = 0;
+		if(ins.getTmem().size()!=0)
+		for(Tmem_f mem:ins.getTmem()) {
+			cnt += dao.insertTMemInNewProject(mem.getKey());
+		}
+		msg += cnt+"명의 팀 추가 완료";
 		/*
 		 * if(!teams.equals("")) { String[] tmems = teams.split(","); int cnt = 0;
 		 * for(String tmem : tmems) {
@@ -106,10 +112,15 @@ public class A02_Service_hcj {
 		return msg;
 	}
 	
-	public int updateProject(Project_f upt) {
+	public String updateProject(Project_f upt) {
 		List<Tmem_f> curTmem = dao.getTeamMemeber(upt.getPcode());
-		//List<Tmem_f> uptTmem = upt.get
-		return 0;
+		System.out.println("업데이트 pcode:"+upt.getPcode());
+		for(Tmem_f mem : curTmem) {
+			System.out.println("key:::"+mem.getKey());
+			System.out.println("label:::"+mem.getLabel());
+		}
+	
+		return "수정성공일까말까";
 	}
 	
 	// 사원 검색
