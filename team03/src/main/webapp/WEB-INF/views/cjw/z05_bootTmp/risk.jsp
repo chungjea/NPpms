@@ -78,13 +78,21 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">리스크 관리</h1>
-                        <a href="${path}/insertrskFrm" class="btn btn-secondary btn-icon-split">
+                        <a href="javascript:goInsert()" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
                         	<span class="text">리스크 등록</span>
                         </a>
                     </div>
+                    <form id="insrskFrm" method="post" action="${path}/insertrskFrm">
+                    	<input type="hidden" name="deptno" value="${emp.deptno}" />
+                    </form>
+					<script type="text/javascript">
+						function goInsert(){
+					    	$("#insrskFrm").submit()
+						}
+					</script>
 					
                     <div class="row" style="align-self: center !important; display:flex;">
                     	<div class="col-xl-3 col-md-6 mb-4">

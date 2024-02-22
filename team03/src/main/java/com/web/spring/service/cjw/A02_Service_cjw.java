@@ -321,6 +321,11 @@ public class A02_Service_cjw {
 		return msg;
 	}
 	
+	// 리스크 : 리스크 올릴 매니저 사번
+	public int getmymanager(int deptno) {
+		return dao.getmymanager(deptno);
+	}
+	
 	// 리스크 : 리스크 상세
 	public Risk_f detailrsk(int rskno) {
 		Risk_f rsk = dao.detailrsk(rskno);

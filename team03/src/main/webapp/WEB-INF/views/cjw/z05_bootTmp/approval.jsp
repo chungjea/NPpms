@@ -25,12 +25,6 @@
 	});
 </script>
  --%>
-<script type="text/javascript">
-	if("${emp}"==""){
-	    alert("로그인후 이용해주세요")
-	    location.href="${path}/login"
-	 }
-</script>
 
 <style>
 	td{text-align:center;}
@@ -49,6 +43,14 @@
  
 </head>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+		if("${emp}"==""){
+		   alert("로그인후 이용해주세요")
+		   location.href="${path}/login"
+		}
+	})
+</script>
 <body id="page-top">
 
 	<!-- Page Wrapper -->

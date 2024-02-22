@@ -113,6 +113,9 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO RISKADMIN_F VALUES(rsk_seq.currval,NULL,NULL,NULL,NULL,#{manager},#{probability},#{danger})")
 	int insertrsk2(Risk_f ins);
 	
+	@Select("SELECT empno FROM EMP_PINFO_F WHERE egrade = '팀장' AND deptno = #{deptno}")
+	int getmymanager(int deptno);
+	
 	@Insert("INSERT INTO rskfile_f values(rsk_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertrskfile(Rskfile_f ins);
 	

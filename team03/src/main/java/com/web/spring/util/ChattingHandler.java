@@ -14,28 +14,31 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.web.spring.dao.cjw.A03_Dao_cjw;
+import com.web.spring.vo.Emp_pinfo_f;
 
+import jakarta.servlet.http.HttpSession;
 
 // 컨테이너에서 handler이름 chatHandler와  front단에서 ${path}/chat-ws.do
 // 연동할 수 있게 선언된다.
 @Component("chatHandler")
 public class ChattingHandler extends TextWebSocketHandler{
 	// 접속한 계정을 저장하는 필드 선언.
-	private Map<String, WebSocketSession> users = new ConcurrentHashMap();
+	private static final ConcurrentHashMap<String, WebSocketSession> USERS = new ConcurrentHashMap();
 	
 	// himan:접속했습니다.
 	// himan-소켓세션저장
 	private Map<String, WebSocketSession> userIds = new ConcurrentHashMap();
 	private Map<String, String> ser_cli = new ConcurrentHashMap();
-
+	
 	// var wsocket = new WebSocket() js로 선언 후
 	// 1. 소켓 서버에 접속시 처리 메서드(onopen())
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		users.put(session.getId(), session);
-		log(session.getId()+"님 접속합니다!! 현재 접속자 수:"+users.size());
-		
-		
+		Map<String, Object> sessions = session.getAttributes();
+		Emp_pinfo_f emp = (Emp_pinfo_f)sessions.get("emp");
+		int crno = 0;
+		USERS.put(crno+":"+emp.getEmpno(), session);
+		log(emp.getEname()+"님 접속합니다!! 현재 접속자 수:"+USERS.size());
 	}
 	
 	// 2. 소켓 서버에 메시지 전송시 처리 메서드
@@ -48,6 +51,9 @@ public class ChattingHandler extends TextWebSocketHandler{
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		// 1) 특정한 client를 통해 전달해온 메시지를 출력
 		//    himan:안녕하세요
+		Map<String, Object> sessions = session.getAttributes();
+		Emp_pinfo_f emp = (Emp_pinfo_f)sessions.get("emp");
+		
 		log(session.getId()+"에서 온 메시지:"+message.getPayload());
 		String crnoStr = (String)(message.getPayload()).split(":")[0];
 		String userid = (String)(message.getPayload()).split(":")[1];
@@ -58,15 +64,18 @@ public class ChattingHandler extends TextWebSocketHandler{
 			userIds.put(userid, session);
 			ser_cli.put(session.getId(), userid);
 		}
+		System.out.println("접속자사번 확인"+userid);
 		List<String> sendClints = dao.getuseridbycrno(crno);
 		List< WebSocketSession> sndusers= new ArrayList<WebSocketSession>();
 		for(String cid : sendClints) {
 			sndusers.add(userIds.get(cid));
+			System.out.println(userIds.get(cid));
 		}
 		for(WebSocketSession ws:sndusers) {
 			ws.sendMessage(message);
 		}		
 		// 2) 현재 접속한 모든 계정에 메시지 전달
+		/*
 		for(WebSocketSession ws:users.values()) {
 			// 1. 각 접속한 클라이언트에게 메시지 전달
 			ws.sendMessage(message);
@@ -75,22 +84,25 @@ public class ChattingHandler extends TextWebSocketHandler{
 			// 2. 각 전달할 사용자 및 메시지 확인
 			log(ws.getId()+"에게 전달 메시지:"+message.getPayload());
 		}
+		*/
 	}
 	// 3. 소켓 서버 종료시 처리 메서드
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+		Map<String, Object> sessions = session.getAttributes();
+		Emp_pinfo_f emp = (Emp_pinfo_f)sessions.get("emp");
 		//String delCliId = ser_cli.get( session.getId() );
 		//dao.delChatRoom(delCliId);
 		// 1) 기능 등록자에서 제거 처리
-		users.remove(session.getId());
+		int crno = 0;
+		USERS.remove(crno+":"+emp.getEmpno());
 		//dao.delChatRoom();
-		log(session.getId()+" 접속 종료합니다.");
+		log(emp.getEname()+" 접속 종료합니다.");
 	}
 	// 4. 에러발생시 처리 메서드 
 	@Override
 	public void handleTransportError(WebSocketSession session, Throwable exception) throws Exception {
 		 log(session.getId()+"에러 발생! 에러내용"+exception.getMessage());
-		 //session.sendMessage( "에러 발생! 에러내용"+exception.getMessage());
 	}
 	// # 기본 로그 처리
 	private void log(String logMsg) {

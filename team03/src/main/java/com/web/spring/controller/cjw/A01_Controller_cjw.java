@@ -125,8 +125,9 @@ public class A01_Controller_cjw {
 		return "cjw/z05_bootTmp/risk";
 	}
 	
-	@GetMapping("insertrskFrm")
-	public String insertrskFrm() {
+	@PostMapping("insertrskFrm")
+	public String insertrskFrm(int deptno, Model d) {
+		d.addAttribute("mempno", service.getmymanager(deptno));
 		return "cjw/z05_bootTmp/rskinsert";
 	}
 	

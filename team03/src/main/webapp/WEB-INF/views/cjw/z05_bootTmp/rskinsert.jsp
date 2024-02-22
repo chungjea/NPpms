@@ -120,7 +120,7 @@
 							</div>
 							<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important"/>	
 							<input type="hidden" name="wempno" value="${emp.empno}" readonly />
-							<input type="hidden" name="manager" value=1003 readonly />
+							<input type="hidden" name="manager" value="${mempno}" readonly />
 						</div>			
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
