@@ -32,9 +32,16 @@
 	height: 200px;
 	overflow-y: auto;
 	text-align: left;
-	border: 1px solid green;
 }
 </style>
+ <!-- Custom fonts for this template-->
+    <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="${path}/a00_com/css/sb-admin-2.min.css" rel="stylesheet">
 <script src="${path}/a00_com/jquery.min.js"></script>
 <script src="${path}/a00_com/popper.min.js"></script>
 <script src="${path}/a00_com/bootstrap.min.js"></script>
@@ -48,11 +55,31 @@
 </script>
 </head>
 
-<body>
-	<div class="jumbotron text-center">
+<body id="page-top">
+	<div id="wrapper">
+	<!-- Sidebar -->
+		<%@ include file="/z05_bootTmp/a02_sliderBar.jsp"%>
+		<!-- End of Sidebar -->
+
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
+
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar    -->
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp"%>
+				<!-- End of Topbar -->
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">공지등록</h1>
+
+				</div>
+	
+	<!--  <div class="jumbotron text-center">
 		<h2>공지등록</h2>
 
-	</div>
+	</div>-->
 	<%-- 
 기본 게시판 등록 + 답글 등록		
 --%>
@@ -94,7 +121,7 @@
 				<input type="file" name="reports" multiple="multiple"
 					class="form-control" value="" />
 			</div>
-			<div style="text-align: right;">
+			<div style="text-align: right; margin-top: 20px;">
 				<input type="button" class="btn btn-success" value="등록" id="regBtn" />
 				<input type="button" class="btn btn-info" value="게시글 조회"
 					id="mainBtn" />
@@ -123,5 +150,8 @@
 		</form>
 
 	</div>
+</div>
+	<%@ include file="/z05_bootTmp/a08_logout_modal.jsp" %>
+	<script src="${path}/customjs/slidbar.js"></script>
 </body>
 </html>

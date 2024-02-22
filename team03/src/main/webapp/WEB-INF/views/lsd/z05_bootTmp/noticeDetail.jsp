@@ -32,19 +32,17 @@
 	height: 200px;
 	overflow-y: auto;
 	text-align: left;
-	
 }
-
-
 </style>
-  <!-- Custom fonts for this template-->
-    <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+<!-- Custom fonts for this template-->
+<link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css"
+	rel="stylesheet" type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
 
-    <!-- Custom styles for this template-->
-    <link href="${path}/a00_com/css/sb-admin-2.min.css" rel="stylesheet">
+<!-- Custom styles for this template-->
+<link href="${path}/a00_com/css/sb-admin-2.min.css" rel="stylesheet">
 
 <!-- 여기서부터 내꺼 -->
 <script src="${path}/a00_com/jquery.min.js"></script>
@@ -117,13 +115,28 @@
 	});
 </script>
 </head>
+<!-- 아래 새로 : body -->
+<body id="page-top">
+	<div id="wrapper">
+		<!-- Sidebar -->
+		<%@ include file="/z05_bootTmp/a02_sliderBar.jsp"%>
+		<!-- End of Sidebar -->
 
-<body>
-	<div class="jumbotron text-center">
-		<h2>공지 세부사항</h2>
+		<!-- Content Wrapper -->
+		<div id="content-wrapper" class="d-flex flex-column">
 
-	</div>
-	<%-- 
+			<!-- Main Content -->
+			<div id="content">
+
+				<!-- Topbar    -->
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp"%>
+				<!-- End of Topbar -->
+				<div
+					class="d-sm-flex align-items-center justify-content-between mb-4">
+					<h1 class="h3 mb-0 text-gray-800">공지 세부사항</h1>
+
+				</div>
+				<%-- 
 Noticeboard_f 
 private int notice_num;
 private String title;	
@@ -133,80 +146,146 @@ private Date regDate;
 private Date updateDate;
 	
 --%>
-	<div class="container">
-		<form method="post">
-			<div class="input-group mb-0">
-				<div class="input-group-prepend ">
-					<span class="input-group-text  justify-content-center"> 공지번호</span>
-				</div>
-				<input name="notice_num" class="form-control" readonly
-					value="${notice.notice_num}" />
-				<div class="input-group-prepend ">
-					<span class="input-group-text  justify-content-center"> 작성자</span>
-				</div>
-				<input name="writer" class="form-control" readonly
-					value="${notice.writer}" />
-			</div>
-			<!-- 제목 : 한칸크게 -->
-			<div class="input-group mb-0">
-				<div class="input-group-prepend ">
-					<span class="input-group-text  justify-content-center"> 제목</span>
-				</div>
-				<input name="title" class="form-control" value="${notice.title}" />
-			</div>
-			<div class="input-group mb-0">
-				<div class="input-group-prepend ">
-					<span class="input-group-text  justify-content-center"> 등록일</span>
-				</div>
-				<input type="date" class="form-control"
-					value='<fmt:formatDate value="${notice.regDate}" 
+				<div class="container">
+					<form method="post">
+						<div class="input-group mb-0">
+							<div class="input-group-prepend ">
+								<span class="input-group-text  justify-content-center">
+									공지번호</span>
+							</div>
+							<input name="notice_num" class="form-control" readonly
+								style="background-color: white !important;"
+								value="${notice.notice_num}" />
+							<div class="input-group-prepend ">
+								<span class="input-group-text  justify-content-center">
+									작성자</span>
+							</div>
+							<input name="writer" class="form-control" readonly
+								style="background-color: white !important;"
+								value="${notice.writer}" />
+						</div>
+						<!-- 제목 : 한칸크게 -->
+						<div class="input-group mb-0">
+							<div class="input-group-prepend ">
+								<span class="input-group-text  justify-content-center">
+									제목</span>
+							</div>
+							<c:choose>
+								<c:when test="${emp.auth eq '직원'}">
+									<input name="title" class="form-control"
+										value="${notice.title}"
+										style="background-color: white !important;" readonly />
+								</c:when>
+								<c:otherwise>
+									<input name="title" class="form-control"
+										value="${notice.title}"
+										style="background-color: white !important;" />
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="input-group mb-0">
+							<div class="input-group-prepend ">
+								<span class="input-group-text  justify-content-center">
+									등록일</span>
+							</div>
+							<c:choose>
+								<c:when test="${emp.auth eq '직원'}">
+									<input type="date" class="form-control"
+										value='<fmt:formatDate value="${notice.regDate}" 
 				pattern="yyyy-MM-dd"/>'
-					readonly />
-				<div class="input-group-prepend ">
-					<span class="input-group-text  justify-content-center"> 수정일</span>
-				</div>
-				<input type="date" class="form-control"
-					value='<fmt:formatDate value="${notice.updateDate}" 
+										style="background-color: white !important;" readonly />
+								</c:when>
+								<c:otherwise>
+									<input type="date" class="form-control"
+										value='<fmt:formatDate value="${notice.regDate}" 
+				pattern="yyyy-MM-dd"/>' />
+								</c:otherwise>
+							</c:choose>
+							<div class="input-group-prepend ">
+								<span class="input-group-text  justify-content-center">
+									수정일</span>
+							</div>
+							<c:choose>
+								<c:when test="${emp.auth eq '직원'}">
+									<input type="date" class="form-control"
+										value='<fmt:formatDate value="${notice.updateDate}" 
 				pattern="yyyy-MM-dd"/>'
-					readonly />
-			</div>
-			<div class="input-group mb-0">
-				<div class="input-group-prepend ">
-					<span class="input-group-text  justify-content-center"> 공지내용</span>
-				</div>
-				<textarea id="chatArea" name="content" class="form-control">${notice.content}
-		</textarea>
-			</div>
-			<div class="input-group mb-0">
-				<div class="input-group mb-0">
-					<div class="input-group-prepend ">
-						<span class="input-group-text  justify-content-center">
-							첨부파일</span>
-					</div>
-					<c:forEach var="nf" items="${noticeFile}">
-						<span ondblclick="download('${nf.fno}','${nf.fname}')"
-							class="form-control">${nf.fname}</span>
-					</c:forEach>
-				</div>
+										style="background-color: white !important;" readonly />
+								</c:when>
+								<c:otherwise>
+									<input type="date" class="form-control"
+										value='<fmt:formatDate value="${notice.updateDate}" 
+				pattern="yyyy-MM-dd"/>' />
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="input-group mb-0">
+							<div class="input-group-prepend ">
+								<span class="input-group-text w-100 justify-content-center">
+									공지내용</span>
+							</div>
+							<c:choose>
+								<c:when test="${emp.auth eq '직원'}">
+									<div id="chatArea" name="content" class="form-control"
+										style="background-color: white !important; text-align: left"
+										readonly>${notice.content}</div>
+								</c:when>
+								<c:otherwise>
+									<div id="chatArea" name="content" class="form-control"
+										style="background-color: white !important; text-align: left">
+										${notice.content}</div>
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="input-group mb-0">
+							<div class="input-group mb-0">
+								<div class="input-group-prepend ">
+									<span class="input-group-text  justify-content-center">
+										첨부파일</span>
+								</div>
+								<c:choose>
+									<c:when test="${emp.auth eq '직원'}">
+										<c:forEach var="nf" items="${noticeFile}">
+											<span ondblclick="download('${nf.fno}','${nf.fname}')"
+												class="form-control"
+												style="background-color: white !important;" readonly>${nf.fname}</span>
+										</c:forEach>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="nf" items="${noticeFile}">
+											<span ondblclick="download('${nf.fno}','${nf.fname}')"
+												class="form-control"
+												style="background-color: white !important;">${nf.fname}</span>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+							</div>
 
+						</div>
+						<script type="text/javascript">
+							function download(fno, fname) {
+								if (confirm(fname + " 다운로드 하시겠습니까?")) {
+									location.href = "${path}/downloadNotice?fno="
+											+ fno
+								}
+							}
+						</script>
+						<div style="text-align: right; margin-top: 20px;">
+							<c:if test="${emp.auth eq '관리자'}">
+								<input type="button" class="btn btn-warning" value="수정"
+									id="uptBtn" />
+								<input type="button" class="btn btn-danger" value="삭제"
+									id="delBtn" />
+							</c:if>
+							<input type="button" class="btn btn-success" value="전체공지"
+								id="mainBtn" />
+						</div>
+					</form>
+				</div>
 			</div>
-			<script type="text/javascript">
-				function download(fno, fname) {
-					if (confirm(fname + " 다운로드 하시겠습니까?")) {
-						location.href = "${path}/downloadNotice?fno=" + fno
-					}
-				}
-			</script>
-			<div style="text-align: right;  margin-top: 20px;">
-				<c:if test="${emp.auth eq '관리자'}">
-					<input type="button" class="btn btn-warning" value="수정" id="uptBtn" />
-					<input type="button" class="btn btn-danger" value="삭제" id="delBtn" />
-				</c:if>
-				<input type="button" class="btn btn-success" value="전체공지"
-					id="mainBtn" />
-			</div>
-		</form>
-
+		</div>
 	</div>
+	<%@ include file="/z05_bootTmp/a08_logout_modal.jsp" %>
+	<script src="${path}/customjs/slidbar.js"></script>
 </body>
 </html>

@@ -68,8 +68,8 @@ public class A01_Controller_lsd {
 	public String getNoticeboard(@ModelAttribute("sch") NoticeSch_f sch, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f)session.getAttribute("emp");
 		String dname = emp.getDname();
-		System.out.println("사용자 danme - > "+ dname);
-		service.noticePage(sch, dname).stream().forEach(it -> System.out.println(it.getTitle()));
+		//System.out.println("사용자 danme - > "+ dname);
+		//service.noticePage(sch, dname).stream().forEach(it -> System.out.println(it.getTitle()));
 		d.addAttribute("noticeboard", service.noticePage(sch, dname));
 		return "lsd/z05_bootTmp/noticeBoard";
 	}// getNoticeboard()
@@ -103,8 +103,8 @@ public class A01_Controller_lsd {
 	// 게시글을 더블클릭했을 떄 상세화면이 나오고, 그 화면에서 내가 수정하면 수정이 되는것
 	@RequestMapping("updateNotice")
 	public String updateBoard(Noticeboard_f upt, Model d) {
-		System.out.println("title : " + upt.getTitle());
-		System.out.println("title : " + upt.getContent());
+		//System.out.println("title : " + upt.getTitle());
+		//System.out.println("title : " + upt.getContent());
 
 		// 수정 처리 내용
 		d.addAttribute("proc", "upt");
