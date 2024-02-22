@@ -55,5 +55,8 @@ select * from commute_f where empno=#{empno}
 <update id="updateinfo" parameterType="emplist">
 update emp_master_f set dname=#{dname},ename=#{ename},email=#{email},auth=#{auth},passwd=#{passwd},lastone=#{lastone},lastfix=sysdate where empno =#{empno}
 </update>
-
+<select id="EmpHistory" resultType="EmpHistory"  parameterType="EmpHistory">
+select * from emp_master_his_f WHERE empno like '%'|| #{empno} || '%'
+		and dname like '%' ||#{dname}||'%'
+</select>
 </mapper>

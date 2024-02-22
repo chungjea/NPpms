@@ -10,6 +10,13 @@
 <meta charset="UTF-8">
 <title>Good day!!</title>
 
+<style>
+      #dataTable th {
+	position: sticky;
+	top: 0;
+	background-color:white;
+}
+</style>
 
 
 
@@ -140,9 +147,8 @@
 					<ul class="nav nav-tabs nav-justified">
 						<li class="nav-item active"><a class="nav-link" href="#home">전체회원</a></li>
 						<li class="nav-item"><a class="nav-link" href="#tab02">삭제인원리스트</a></li>
-						<li class="nav-item"><a class="nav-link disabled" href="#"></a></li>
-						<li class="nav-item"><a class="nav-link disabled" href="#"></a>
-						</li>
+						<li class="nav-item"><a class="nav-link " href="#"></a></li>
+						<li class="nav-item"><a class="nav-link " href="#"></a></li>
 					</ul>
 
 
@@ -235,155 +241,24 @@
 								<div class="card-body">
 									<div class="table-responsive">
 
-										<div style="width: 100%; height: 200px;">
-											<c:if test='${emp.dname!="재무팀"&&emp.auth.equals("관리자")}'>
-
-												<table class="table table-bordered" id="dataTable"
-													width="100%" cellspacing="0">
-
-													<thead>
-														<tr>
-															<th>사원번호</th>
-															<th>사원명</th>
-															<th>부서명</th>
-															<th>입사일</th>
-															<th>급여</th>
-															<th>패널티횟수</th>
-															<th>마지막수정시각</th>
-															<th>마지막수정인</th>
-															<th><input type="checkbox" id="chkAll"></th>
-														</tr>
-													</thead>
-
-													<tbody>
-														<c:forEach var="el" items="${empList}">
-															<tr>
-																<td onClick="location.href=">${el.empno}</td>
-																<td onClick="location.href=">${el.ename}</td>
-																<td onClick="location.href=">${el.dname}</td>
-																<td onClick="location.href=">${el.hiredate}</td>
-																<td onClick="location.href=">${el.salary}</td>
-																<td onClick="location.href=">${el.panaltytot}</td>
-																<td onClick="location.href=">${el.lastfix}</td>
-																<td onClick="location.href=">${el.lastone}</td>
-																<td><input type="checkbox" id="chk" class="chkGrp"
-																	value="${el.empno}" name="checkboxModel"></td>
-															</tr>
-														</c:forEach>
-													</tbody>
-												</table>
-
-											</c:if>
-										</div>
-									</div>
-									<div>
-										<div class="card shadow mb-4">
-											<div class="card-header py-3">
-												<c:if test='${emp.dname.equals("인사팀")}'>
-													<div class="row" />
-													<div class="col" />
-													<a class="btn btn-danger btn-icon-split" id="delBtn"> <span
-														class="icon text-white-50"> <i class="fas fa-trash"></i>
-													</span> <span class="text">사원 삭제</span>
-													</a>
-													<a href="#" class="btn btn-warning btn-icon-split"> <span
-														class="icon text-white-50"> <i
-															class="fas fa-exclamation-triangle"></i>
-
-													</span> <span class="text">사원정보수정</span>
-													</a>
-
-
-													<a href="${path}/registerFrm"
-														class="btn btn-success btn-icon-split"> <span
-														class="icon text-white-50"> <i class="fas fa-check"></i>
-													</span> <span class="text">사원등록</span>
-													</a>
-												</c:if>
-
-
-												<button type="button" class="btn btn-warning btn-circle"
-													id="excelDownload" onclick='exportExcel'>
-													<img src="${path}/a00_com/img/down_icon.png" width="15"
-														height="15">
-												</button>
-
-												<a href="${path}/updateFrm"
-													class="btn btn-warning btn-icon-split"> <span
-													class="icon text-white-50"> <i
-														class="fas fa-exclamation-triangle"></i>
-
-												</span> <span class="text">개인정보수정</span>
-												</a>
-
-
-
-											</div>
-
-											<%--           포멧                            <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
-                                         <a href="#" class="btn btn-warning btn-icon-split">
-                                        <span class="icon text-white-50">
-                           
-                                        
-                                            <i class="fas fa-exclamation-triangle"></i>
-                                           
-                                        </span>
-                                        <span class="text">사원정보수정</span>
-                                    </a>
-                                    </c:if> --%>
-											<div class="col-xl-7">
-												<form
-													class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
-													id="frm01" class="form" method="post">
-													<div class="input-group align-items-end">
-														<select name="dname"
-															class="form-control form-control-user">
-															<option value="">부서선택</option>
-															<option value="디자인팀">디자인팀</option>
-															<option value="인사팀">인사팀</option>
-															<option value="재무팀">재무팀</option>
-															<option value="기획팀">기획팀</option>
-															<option value="개발1팀">개발1팀</option>
-															<option value="개발2팀">개발2팀</option>
-															<option value="개발3팀">개발3팀</option>
-														</select> <input class="form-control bg-light border-0 small"
-															placeholder="검색할 사원번호" aria-label="Search"
-															aria-describedby="basic-addon2" name="empno"
-															value="${sch.empno}">
-
-														<div class="input-group-append">
-															<button class="btn btn-primary" type="submit">
-																<i class="fas fa-search fa-sm">검색</i>
-
-															</button>
-														</div>
-													</div>
-												</form>
-											</div>
-										</div>
-										<div class="card-body">
-											<div class="table-responsive">
-
-												<div style="width: 100%; height: 200px;">
-													<c:if test='${emp.dname!="재무팀"&&emp.auth.equals("관리자")}'>
-
-														<table class="table table-bordered" id="dataTable"
-															width="100%" cellspacing="0">
-
-															<thead>
+										<div style="width: 100%; height: 200px;" class="tables">
+											<c:if test='${!emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}' >
+												<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+												<thead>
+												
 																<tr>
-																	<th>사원번호</th>
-																	<th>사원명</th>
-																	<th>부서명</th>
-																	<th>입사일</th>
-																	<th>급여</th>
-																	<th>패널티횟수</th>
-																	<th>마지막수정시각</th>
-																	<th>마지막수정인</th>
-																	<th><input type="checkbox" id="chkAll"></th>
+																	<th id='head'>사원번호</th>
+																	<th id='head'>사원명</th>
+																	<th id='head'>부서명</th>
+																	<th id='head'>입사일</th>
+																	<th id='head'>급여</th>
+																	<th id='head'>패널티횟수</th>
+																	<th id='head'>마지막수정시각</th>
+																	<th id='head'>마지막수정인</th>
+																	<th id='head'><input type="checkbox" id="chkAll"></th>
 																</tr>
 															</thead>
-
+												
 															<tbody>
 																<c:forEach var="el" items="${empList}">
 																	<tr>
@@ -401,96 +276,129 @@
 																	</tr>
 																</c:forEach>
 															</tbody>
-														</table>
-
-													</c:if>
-												</div>
-											</div>
+															</table>
+											</c:if>
 										</div>
 									</div>
+
 								</div>
-							
-							</div>
-							
-							</div>
+								<div class="card-body">
+									<div class="table-responsive">
+
+										<div style="width: 100%; height: 200px;">
+											<c:if test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
+
+												<table class="table table-bordered" id="dataTable1"
+													width="100%" cellspacing="0">
+													<thead>
+														<tr>
+															<th id='head'>사원번호</th>
+															<th id='head'>사원명</th>
+															<th id='head'>부서명</th>
+															<th id='head'>입사일</th>
+															<th id='head'>급여</th>
+															<th id='head'>인센티브</th>
+															<th id='head'>마지막수정시각</th>
+															<th id='head'><input type="checkbox" id="chkAll"></th>
+														</tr>
+													</thead>
+
+													<tbody>
+														<c:forEach var="sl" items="${salList}">
+															<tr>
+																<td>${sl.empno}</td>
+																<td>${sl.ename}</td>
+																<td>${sl.dname}</td>
+																<td>${sl.egrade}</td>
+																<td>${sl.salary}</td>
+																<td>${sl.incentive}</td>
+																<td>${sl.lastfix}</td>
+																<td><input type="checkbox" id="chk" class="chkGrp"
+																	value="${sl.empno}" name="checkboxModel"></td>
+															</tr>
+														</c:forEach>
+													</tbody>
+												</table>
+											</c:if>
 										</div>
-												<div id="tab02" class="tab-pane fade">
-													<div class="card-body">
-														<div class="table-responsive">
+									</div>
+
+								</div>
+
+							</div>
+
+						</div>
 
 
-															<c:if
-																test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
+						<div id="tab02" class="tab-pane fade">
+							<div class="card-body">
+								<div class="table-responsive"></div>
+<div style="width: 100%; height: 200px;">
+											<c:if test='${emp.auth.equals("관리자")}'>
 
-																<table class="table table-bordered" id="dataTable1"
-																	width="100%" cellspacing="0">
-																	<thead>
-																		<tr>
-																			<th>사원번호</th>
-																			<th>사원명</th>
-																			<th>부서명</th>
-																			<th>입사일</th>
-																			<th>급여</th>
-																			<th>인센티브</th>
-																			<th>마지막수정시각</th>
-																			<th><input type="checkbox" id="chkAll"></th>
-																		</tr>
-																	</thead>
-
-																	<tbody>
-																		<c:forEach var="sl" items="${salList}">
-																			<tr>
-																				<td
-																					onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.empno}</td>
-																				<td
-																					onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.ename}</td>
-																				<td
-																					onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.dname}</td>
-																				<td
-																					onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.egrade}</td>
-																				<td
-																					onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.salary}</td>
-																				<td
-																					onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.incentive}</td>
-																				<td
-																					onClick="/team03/src/main/webapp/WEB-INF/views/kjw/z05_bootTmp/detailpage.jsp'">${sl.lastfix}</td>
-																				<td><input type="checkbox" id="chk"
-																					class="chkGrp" value="${sl.empno}"
-																					name="checkboxModel"></td>
-																			</tr>
-																		</c:forEach>
-																	</tbody>
-																</table>
-															</c:if>
-
-
-														</div>
-
-														<%@page buffer="8192kb" autoFlush="true"%>
-													</div>
-													<!-- /.container-fluid -->
-
+												<table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+												<thead>
 												
-										<!-- End of Main Content -->
+																<tr>
+																	<th id='head'>사원번호</th>
+																	<th id='head'>사원명</th>
+																	<th id='head'>부서명</th>
+																	<th id='head'>입사일</th>
+																	<th id='head'>급여</th>
+																	<th id='head'>패널티횟수</th>
+																	<th id='head'>마지막수정시각</th>
+																	<th id='head'>마지막수정인</th>
+																	<th id='head'><input type="checkbox" id="chkAll"></th>
+																</tr>
+															</thead>
+												
+															<tbody>
+																<c:forEach var="eh" items="${EmpHistory}">
+																	<tr>
+																		<td onClick="location.href=">${eh.empno}</td>
+																		<td onClick="location.href=">${eh.ename}</td>
+																		<td onClick="location.href=">${eh.dname}</td>
+																		<td onClick="location.href=">${eh.hiredate}</td>
+																		<td onClick="location.href=">${eh.salary}</td>
+																		<td onClick="location.href=">${eh.panaltytot}</td>
+																		<td onClick="location.href=">${eh.lastfix}</td>
+																		<td onClick="location.href=">${eh.lastone}</td>
+																		<td><input type="checkbox" id="chk"
+																			class="chkGrp" value="${eh.empno}"
+																			name="checkboxModel"></td>
+																	</tr>
+																</c:forEach>
+															</tbody>
+															</table>
+											</c:if>
+										</div>
 
-										<!-- Footer -->
-									</div>
-								</div>
-				</div>
+								<%@page buffer="8192kb" autoFlush="true"%>
+							</div>
+							<!-- /.container-fluid -->
+
+
+							<!-- End of Main Content -->
+
+							<!-- Footer -->
+						</div>
+					</div>
 				</div>
 			</div>
-		
+		</div>
+	</div>
 
-		<footer class="sticky-footer bg-white">
-			<div class="container my-auto">
-				<div class="copyright text-center my-auto">
-					<span>Copyright &copy; Your Website 2021</span>
-					
-				</div>
+
+	<footer class="sticky-footer bg-white">
+		<div class="container my-auto">
+			<div class="copyright text-center my-auto">
+				<span>Copyright &copy; Your Website 2021</span>
+
 			</div>
-			</footer>
-			<!-- End of Footer -->
-	
+		</div>
+	</footer>
+	<!-- End of Footer -->
+
 
 	<!-- End of Content Wrapper -->
 
@@ -605,7 +513,7 @@ $("#checking1").hide();
 error:function(xhr,status,err){
 alert("진행도중 문제발생");
 console.error("Error:",status,err);
-}
+}	
 		});
 	
 });
@@ -671,8 +579,23 @@ function s2ab(s) {
 window.history.forward();
 function noBack(){window.history.forward();}
 
+var DNAME = '${emp.dname}';
+var AUTH='${emp.auth}';
 
+if(AUTH == '관리자' && DNAME!='재무팀') {
+
+   $("#datatable").css("display");//인사,전체
+   $("#datatable1").css("display","none"); //재무
+
+} else if (AUTH =='관리자' && DNAME=='재무팀') {
+
+  $("datatable").css("display","none");
+  $("datatable1").css("display");
+
+
+}
 
 			
 </script>
+
 </html>

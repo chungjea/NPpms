@@ -212,7 +212,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 	<!-- Logout Modal-->
-	<%@ include file="WEB-INF/webapp/kjw/z05_bootTmp/a08_logout_modal.jsp" %>
+	<%@ include file="a08_logout_modal.jsp" %>
 	
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>

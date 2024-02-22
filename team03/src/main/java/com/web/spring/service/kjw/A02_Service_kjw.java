@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.web.spring.dao.kjw.A03_Dao_kjw;
 import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.Emp_master_f;
+import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
 import com.web.spring.vo.Tmem_f;
@@ -130,9 +131,16 @@ public class A02_Service_kjw {
 		
 		return dao.getEmpList(sch);
 	}
-	public List<sal_f> getSalList(sal_f sch){
-		if(sch.getEmpno()==0) sch.setEmpno(0);
-		return dao.getSalList(sch);
+	public List<Emp_master_his_f> EmpHistory(Emp_master_his_f psearch){
+		if(psearch.getEmpno()==0) psearch.setEmpno(0);
+		if(psearch.getDname()==null) psearch.setDname("");
+		
+		
+		return dao.EmpHistory(psearch);
+	}
+	public List<sal_f> getSalList(sal_f ssah){
+		if(ssah.getEmpno()==0) ssah.setEmpno(0);
+		return dao.getSalList(ssah);
 	}
 
 

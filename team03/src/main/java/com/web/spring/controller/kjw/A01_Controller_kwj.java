@@ -25,6 +25,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.Emp_master_f;
+import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
 import com.web.spring.vo.Tmem_f;
@@ -97,24 +98,26 @@ public String logout(HttpSession session) {
 
 @RequestMapping("mypagefilter")
 public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
-		 sal_f sch1,Model d,HttpSession session,Emp_master_f cnt) {
+		 sal_f ssch,Model d,HttpSession session,Emp_master_f cnt,Emp_master_his_f psearch) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 
 	if(emp.getAuth().equals("관리자")) {
 		d.addAttribute("empList", service.getEmpList(sch));
-		d.addAttribute("salList", service.getSalList(sch1));
+		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
+		d.addAttribute("salList", service.getSalList(ssch));
 		d.addAttribute("empcnt", service.empcnt(cnt));
 		d.addAttribute("sumProj", service.sumProj(emp.getEmpno()));
 		d.addAttribute("doneProj", service.doneProj(emp.getEmpno()));
-		
+		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
 			d.addAttribute("empList", service.getEmpList(sch));
-			d.addAttribute("salList", service.getSalList(sch1));
+			d.addAttribute("salList", service.getSalList(ssch));
 			d.addAttribute("empcnt", service.empcnt(cnt));
 			d.addAttribute("sumProj", service.sumProj(emp.getEmpno()));
 			d.addAttribute("doneProj", service.doneProj(emp.getEmpno()));
+			d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }

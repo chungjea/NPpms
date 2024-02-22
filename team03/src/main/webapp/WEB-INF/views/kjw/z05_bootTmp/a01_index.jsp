@@ -56,7 +56,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@ include file="/pmsprj_makerplace/kjw/z05_bootTmp/a02_sliderBar.jsp" %>
+		<%@ include file="a02_sliderBar.jsp" %>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -69,7 +69,7 @@
 				
 				<!-- Topbar   %>  
 				-->
-				<%@ include file="/pmsprj_makerplace/kjw/z05_bootTmp/a03_topBar.jsp" %> 
+				<%@ include file="a03_topBar.jsp" %> 
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
@@ -85,7 +85,7 @@
 
 					<!-- Content Row -->
 					<div class="row">
-						<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/a04_main_row01.jsp" %>
+						<%@ include file="a04_main_row01.jsp" %>
 
 					</div>
 					<%-- <!-- Content Row -->
@@ -100,10 +100,10 @@
 					
 						<c:when test="${allprojectCnt>0}">
 						<div class="row">
-							<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/a06_main_row03.jsp" %>
+							<%@ include file="a06_main_row03.jsp" %>
 						</div>
 						<div class="row">
-						<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/a05_main_row02.jsp" %>
+						<%@ include file="a05_main_row02.jsp" %>
 					</div>
 						</c:when> 
 						<c:otherwise>
