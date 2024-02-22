@@ -96,31 +96,38 @@ public class A02_Service_hcj {
 		
 		}
 		int cnt = 0;
-		if(ins.getTmem().size()!=0)
-		for(Tmem_f mem:ins.getTmem()) {
-			cnt += dao.insertTMemInNewProject(mem.getKey());
+		if(ins.getTmem()!=null) {
+			for(Tmem_f mem:ins.getTmem()) {
+				cnt += dao.insertTMemInNewProject(mem.getKey());
+				System.out.println("현재팀원 "+cnt+"명!!");
+			}
 		}
 		msg += cnt+"명의 팀 추가 완료";
-		/*
-		 * if(!teams.equals("")) { String[] tmems = teams.split(","); int cnt = 0;
-		 * for(String tmem : tmems) {
-		 * 
-		 * cnt += dao.insertTMemInNewProject(Integer.parseInt(tmem)); } msg +=
-		 * cnt+"명의 팀 추가 완료"; }
-		 */
+
 		System.out.println("프로젝트 생성 완료");
 		return msg;
 	}
 	
 	public String updateProject(Project_f upt) {
-		List<Tmem_f> curTmem = dao.getTeamMemeber(upt.getPcode());
-		System.out.println("업데이트 pcode:"+upt.getPcode());
-		for(Tmem_f mem : curTmem) {
-			System.out.println("key:::"+mem.getKey());
-			System.out.println("label:::"+mem.getLabel());
+		System.out.println("---------------업데이트 서비스 접근!!---------------");
+		System.out.println("---------------프로젝트 수정 접근!!---------------");
+		String msg = dao.updateProject(upt)>0?"수정성공":"수정실패";
+		System.out.println("---------------프로젝트 수정 완료!!---------------");
+		System.out.println("---------------전체 팀원 삭제 접근!!---------------");
+		//dao.deleteTmemALL(upt.getPcode());
+		System.out.println("---------------전체 팀원 삭제 완료!!---------------");
+		System.out.println("---------------팀원 추가 접근!!---------------");
+		if(upt.getTmem()!=null) {			
+			for(Tmem_f mem: upt.getTmem()) {
+				System.out.println(mem.getLabel()+" 팀원 추가");
+				//dao.insertTMemProject(mem.getKey(),upt.getPcode());
+			}
 		}
-	
-		return "수정성공일까말까";
+		System.out.println("---------------전체 팀원 추가 완료!!---------------");	
+		if(upt.getReports()!=null) {
+			System.out.println("파일:"+upt.getReports());
+		}
+		return msg;
 	}
 	
 	// 사원 검색

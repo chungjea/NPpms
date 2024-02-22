@@ -162,16 +162,16 @@
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
 <script src="${path}/customjs/slidbar.js"></script>
-	<%-- <script src="${path}/customjs/projectmodal.js"></script> --%>
+<script src="${path}/customjs/projectmodal.js"></script>
 <script type="text/javascript">
 $("#uptBtn").hide();
 $("#delBtn").hide();
-var members = new Map();
+/* 	var members = new Map();
 
  	//----프로젝트 생성------
 	$("#regBtn").click(function(){
 		//### 유효성 검사 ###
-	/* 	if($("[name=pname]").val()==""){
+	 	if($("[name=pname]").val()==""){
 			alert("프로젝트명을 입력해주세요")
 			$("[name=pname]").focus()
 			return;
@@ -199,7 +199,7 @@ var members = new Map();
 		if($("#teams").val()==""){
 			if(!confirm("팀원이 존재하지 않습니다\n그대로 진행하시겠습니까? "))return;
 			
-		} */
+		} 
 
 		
 		// 프로젝트 생성 시작
@@ -306,9 +306,7 @@ var members = new Map();
 	}
 	function functproject(url){
 		var formdata = new FormData($("#frm02")[0]);
-		
 
-		
 	  	var memidx = 0;
 		members.forEach(function(value,key){
 			formdata.append("tmem["+memidx+"].key",key)
@@ -338,7 +336,7 @@ var members = new Map();
 				console.log(err)
 			}
 		})  
-	} 
+	}  */ 
 </script>
 <!-- Page level plugins -->
 

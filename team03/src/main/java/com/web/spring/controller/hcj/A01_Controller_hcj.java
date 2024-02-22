@@ -1,7 +1,5 @@
 package com.web.spring.controller.hcj;
 
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -67,26 +65,37 @@ public class A01_Controller_hcj {
 		
 		return "hcj/z05_bootTmp/a01_index";
 	}
+	
 	@ResponseBody
 	@PostMapping("insertProject")
-	public String insertProject(Project_f ins,Model d) {
-		System.out.println("일단들어옴!!!!!!!");
+	public ModelAndView insertProject(Project_f ins) {
 		
-		for(Tmem_f t:ins.getTmem()) {
-			System.out.println("키:"+t.getKey());
-			System.out.println("라벨:"+t.getLabel());
-		}
-	
-		 
-		d.addAttribute("msg", service.insertProject(ins));
-		return "pageJsonReport";
+		System.out.println("일단들어옴!!!!!!!");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+
+		modelAndView.addObject("msg", service.insertProject(ins));
+		return modelAndView;
 	}
 	@ResponseBody
 	@PostMapping("updateProject")
-	public String updateProject(Project_f upt,Model d) {
-	
-		d.addAttribute("msg", service.updateProject(upt));
-		return "pageJsonReport";
+	public ModelAndView updateProject(Project_f upt) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		System.out.println("---------------데이터 확인!!---------------");
+		System.out.println("매니저번호:"+upt.getEmpno());
+		System.out.println("프로젝트 이름:"+upt.getPname());
+		System.out.println("시작일:"+upt.getStartdte());
+		System.out.println("마감일:"+upt.getEnddte());
+		System.out.println("상태:"+upt.getStatus());
+		System.out.println("번호:"+upt.getStartdte());
+		System.out.println("프로젝트 번호:"+upt.getPcode());
+		System.out.println("프로젝트명:"+upt.getPname());
+		
+		System.out.println("---------------확인완료---------------");
+		System.out.println("---------------업데이트 컨트롤러 접근!!---------------");
+		modelAndView.addObject("msg", service.updateProject(upt));
+		return modelAndView;
 	}
 	
 
@@ -120,8 +129,6 @@ public class A01_Controller_hcj {
 
 	@RequestMapping("project")
 	public String project(@ModelAttribute("pcode") int pcode,Model d) {
-		
-		
 		d.addAttribute("pinfo", service.getProjectInfo(pcode));
 		return "hcj/z05_bootTmp/gantt";
 	}

@@ -16,7 +16,7 @@
 			<div class="modal-body">
 				<form id="frm02" class="form" action="${path}/insertProject"
 					method="post" enctype="multipart/form-data">
-					<input type="hidden" name="pcode"/>
+				<input type="hidden" name="pcode"  value="0"/> 
 					<div class="row">
 						<div class="col">
 							프로젝트 명 <input type="text" class="form-control"
@@ -26,7 +26,7 @@
 					<div class="row">
 						<div class="col">
 							사진선택 <input class="form-control" type="file" id="image"
-								accept="image/*" onchange="seticonimage(this)" name="reports" value=""/>
+								accept="image/*" onchange="seticonimage(this)" name="reports" />
 
 
 						</div>

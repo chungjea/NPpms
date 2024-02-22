@@ -87,7 +87,7 @@ html, body {
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 					<div class=" text-center">
-						<h2 style="border-radius: 10px; background: #a1b6f2; color: white; padding: 10px 0px">${pinfo.pname}
+						<h2 style="border-radius: 10px; background: #a1b6f2; color: white; padding: 10px 0px" id="titleheader">
 						
 						</h2>
 							
@@ -152,6 +152,7 @@ html, body {
 
 	<!-- Page level plugins -->
 	<script>
+	
 		$("#projectmodalheader").text("프로젝트 관리") 
 		$("#uptBtn").show()
 		$("#delBtn").show()
@@ -162,7 +163,7 @@ html, body {
 		}
 	})
 	$("#uptBtn").click(function(){
-		functproject("${path}/updateProject")
+		functproject("updateProject")
 	})
 	
 	//프로젝트 수정 정보 불러오기
@@ -175,6 +176,8 @@ html, body {
 			data:"pcode="+pcode,
 			datatype:"json",
 			success:function(pinfo){
+					
+				$("#titleheader").text(pinfo.pname)
 				$("[name=pcode]").val(pinfo.pcode)
 				$("[name=pname]").val(pinfo.pname)
 				$("[name=ptype]").val(pinfo.ptype)
@@ -187,6 +190,7 @@ html, body {
 				$("[name=teams]").val(pinfo.tname)
 				pinfo.tmem.forEach(function(mem){
 					$("#teams_name").append('<button type="button" id="'+mem.key+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+mem.label+'</button>')
+					members.set(mem.key,mem.label)
 				})
 					
 				

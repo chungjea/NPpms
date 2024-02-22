@@ -10,21 +10,21 @@
 
 <!-- ########################프로젝트#################### -->
 <insert id="insertProject" parameterType="project" >
-		INSERT INTO PROJECT_F values(project_seq.nextval,#{pname},
+		INSERT INTO PROJECT_F values(project_seq.nextval, #{pname}, 
 		to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),
-		#{status},#{empno},#{tname},#{ptype},#{ttype},#{content})
+		#{status},#{empno},#{tname},#{ptype},#{content})
 </insert>
 
 
-<update id="updateProject" parameterType="project" >
+<update id="updateProject" parameterType="project">
 			UPDATE  PROJECT_F 
-					SET 	pname = #{pname},
-							STARTDTE = to_date(#{startdte},'YYYY-MM-DD'),
-							ENDDTE = to_date('#{enddte},'YYYY-MM-DD'),
-							STATUS = #{status},
-							tname = #{tname},
-							PTYPE = #{ptype},
-							CONTENT = #{content}
+				SET 	pname = #{pname},
+				startdte = to_date(#{startdte},'YYYY-MM-DD'),
+				enddte = to_date(#{enddte},'YYYY-MM-DD'),
+				status = #{status},
+				tname = #{tname},
+				ptype = #{ptype},
+				content = #{content}
 			WHERE pcode = #{pcode}
 	</update>
 	
@@ -45,7 +45,7 @@
 	</select>
 	
 	<select id="getprojectsNormal" parameterType="int" resultType="project">
-		SELECT * FROM view_project_all_info
+		SELECT * FROM VIEW_PROJECT_ALL_INFO_Tmember
 		WHERE status = '진행중'
 		AND MEMBER = #{empno}
 	</select>

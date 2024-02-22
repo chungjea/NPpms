@@ -1,4 +1,5 @@
 //----프로젝트 생성------
+var members = new Map();
 	$("#regBtn").click(function(){
 		//### 유효성 검사 ###
 		if($("[name=pname]").val()==""){
@@ -38,7 +39,7 @@
 
 	// 사원 조회 모달 - 검색버튼 클릭
 	$("#schBtn").click(function(){
-		
+
 		 $.ajax({
 			type:"post",
 			url:"empsearch",
@@ -71,49 +72,39 @@
 	
 	// 조회된 팀원을 프로젝트 팀에 추가
 	function addemp(ename,empno){
-		var team = $("#teams").val()
-		var teams_name = $("#teams_name").text()
-		if(team ==""||team == null){ 
-			team = empno; 
+		if(members.has(empno)){
+			alert("중복된 사원입니다.")
+		}else{
+			members.set(empno,ename)
+			alert(ename+"사원 추가")
+			$("#teams_name").append('<button type="button" id="'+empno+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+ename+'</button>')
+			$("#echclsBtn").click()
 		}
-		else{
-			let emps = team.split(",")
-			let empck = false;
-			emps.forEach(function(emp){
-				if(empno == parseInt(emp)){
-					alert("이미 추가된 사원입니다.")
-					empck = true;
-					return;				
-				}
-			})
-			if(empck==true)return;
-			else{
-				team += ","+empno;
-				
-			}
-		}
-		$("#teams").val(team)	
-		$("#teams_name").append('<button type="button" id="'+empno+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+ename+'</button>')
-		alert("팀원이 추가되었습니다")
-		$("#echclsBtn").click()
-  	}
+ 	}
+ 	
 	function deleteTeams(obj){
 		if(confirm($(obj).text()+"사원을 팀에서 제외하시겠습니까?")){
-			var teamemp = $("#teams").val().split(",")
-			var retval = ""
-			teamemp.forEach(function(emp){
-				if($(obj).prop("id")!=emp){
-					retval += emp+","
-				}
-			})
-			$("#teams").val(retval.slice(0,retval.length-1))
-			obj.remove()
-			alert("삭제완료")
+			if(members.delete(parseInt($(obj).prop("id")))){
+				obj.remove()
+				alert("삭제완료")	
+			}			
 		}
 	}
+	
 	function functproject(url){
 		var formdata = new FormData($("#frm02")[0]);
-		 $.ajax({
+	  	var memidx = 0;
+		members.forEach(function(value,key){
+			formdata.append("tmem["+memidx+"].key",key)
+			formdata.append("tmem["+memidx+"].label",value)
+			memidx++;
+		})   
+	
+		  for (let value of formdata) {
+			  console.log(value)
+			  }
+		
+		  $.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
 			url:url,
@@ -122,6 +113,8 @@
 			contentType: false,
 			dataType:"json",
 			success:function(data){
+				console.log("ajax 성공!")
+				console.log(data.msg)
 				if(data.msg!=""){
 					alert(data.msg)
 					location.reload()
@@ -130,5 +123,5 @@
 			error:function(err){
 				console.log(err)
 			}
-		}) 
+		})  
 	}

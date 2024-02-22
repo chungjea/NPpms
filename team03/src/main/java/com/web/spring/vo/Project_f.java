@@ -4,17 +4,11 @@ import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
 
-/*
-projectcode  NUMBER PRIMARY KEY,
-	projectteam varchar2(100),
-	teammanger NUMBER ,
-	projectname varchar2(500),
-	projecttype varchar2(200),
-	progress NUMBER DEFAULT 0,
-	projectstatus varchar2(50)
- * */
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 //team03.vo.Project_f
+
 public class Project_f {
 	private int rownum;
 	private int pcode;

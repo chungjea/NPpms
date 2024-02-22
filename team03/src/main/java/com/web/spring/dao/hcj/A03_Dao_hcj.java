@@ -98,7 +98,7 @@ public interface A03_Dao_hcj {
 	int updateProject(Project_f upt);
 	
 	// project 삭제
-	@Delete("DELETE FROM PROJECT_F WHERE pcode =")
+	@Delete("DELETE FROM PROJECT_F WHERE pcode = #{pcode}")
 	int deleteProject(Project_f upt);
 	
 	
@@ -115,9 +115,17 @@ public interface A03_Dao_hcj {
 	@Insert("insert into TMEM_F values(#{empno},project_seq.currval)")
 	int insertTMemInNewProject(int empno);
 	
+	// 팀 멤버 추가
+		@Insert("insert into TMEM_F values(#{empno},#{pcode})")
+		int insertTMemProject(@Param("empno")int empno,@Param("pcode")int pcode);
+	
 	// 팀 멤버 삭제
 	@Delete("delete from Tmem_f where empno = #{empno} and pcode = #{pcode}")
 	int deleteTMem(@Param("empno")int empno,@Param("pcode")int pcode);
+	
+	// 팀멤버 전체 삭제
+	@Delete("delete from Tmem_f where pcode=#{pcode}")
+	int deleteTmemALL(int pcode);
 	
 	
 	
