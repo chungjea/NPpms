@@ -3,7 +3,6 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<%@ page isErrorPage = "true"%>
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html>
@@ -67,7 +66,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                         <div class="error mx-auto" data-text="404">404</div>
                         <p class="lead text-gray-800 mb-5">Page Not Found</p>
                         <p class="text-gray-500 mb-0">It looks like you found a glitch in the matrix...</p>
-                        <a href="index.html">&larr; Back to Dashboard</a>
+                        <a href="${path}/mainpage">&larr; Back to Dashboard</a>
                     </div>
 
                 </div>

@@ -114,7 +114,7 @@
 						</c:otherwise> 
 					</c:choose> 
 					
-					<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/newprojectModal.jsp" %>	
+					<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/newprojectModal.jsp" %>	
 
 				
 					<!-- Content Row -->
@@ -124,7 +124,7 @@
 					
 
 				</div>
-				<%@ include file="/pmsprj_makerplace/hcj/z05_bootTmp/empsch.jsp" %>
+				<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/empsch.jsp" %>
 				<!-- /.container-fluid -->
 
 			</div>
@@ -151,7 +151,7 @@
 		<i class="fas fa-angle-up"></i>
 	</a>
 	<!-- Logout Modal-->
-	<%@ include file="/pmsprj_makerplace/kjw/z05_bootTmp/a08_logout_modal.jsp" %>
+	<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a08_logout_modal.jsp" %>
 	
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>

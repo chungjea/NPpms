@@ -21,6 +21,7 @@ public interface A03_Dao_kjw {
 	 int register(Emp_master_f ins);
 	 
 	 int deleteEmps(List<Integer> empno);
+	 int deleteEmpsagain(List<Integer> empno);
 	 
 	List<Emp_master_f> getEmpList(Emp_master_f sch);
 		

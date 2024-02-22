@@ -123,6 +123,10 @@ public class A02_Service_kjw {
 	public void deleteEmps(List<Integer> empno) {
 		dao.deleteEmps(empno);
 	}
+	@Transactional
+	public void deleteEmpsagain(List<Integer> empno) {
+		dao.deleteEmpsagain(empno);
+	}
 	
 	public List<Emp_master_f> getEmpList(Emp_master_f sch){
 		if(sch.getEmpno()==0) sch.setEmpno(0);

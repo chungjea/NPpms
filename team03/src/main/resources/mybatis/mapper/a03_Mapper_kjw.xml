@@ -18,6 +18,13 @@
 	#{empno}
 	</foreach>
 	</delete>
+	<delete id="deleteEmpsagain"  parameterType="EmpHistory">
+	delete from emp_master_his_f
+	where empno in
+	<foreach item="empno" collection="list" open="(" separator="," close=")">
+	#{empno}
+	</foreach>
+	</delete>
 	<select id="getEmpList" 
 			resultType="emplist" 
 			parameterType="emplist">
