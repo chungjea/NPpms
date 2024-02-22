@@ -64,7 +64,6 @@ public class ChattingHandler extends TextWebSocketHandler{
 			userIds.put(userid, session);
 			ser_cli.put(session.getId(), userid);
 		}
-		System.out.println("접속자사번 확인"+userid);
 		List<String> sendClints = dao.getuseridbycrno(crno);
 		List< WebSocketSession> sndusers= new ArrayList<WebSocketSession>();
 		for(String cid : sendClints) {
