@@ -53,6 +53,7 @@
 
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 <script type="text/javascript">
+
 var labeldata = [];
 var cntdata =[];
 var totcnt =0;
@@ -61,14 +62,14 @@ var totcnt =0;
 	cntdata["${sts.index}"] = "${pj.cnt}"
 	totcnt += ${pj.cnt}
 </c:forEach>
-	
+
 	 console.log(labeldata)
 	//도넛차트
 	var ctx = document.getElementById("myProjectChart");
 	var myProjectChart = new Chart(ctx, {
 	  type: 'doughnut',
 	  data: {
-	    labels:labeldata ,
+	    labels:labeldata,
 	    datasets: [{
 	      data: cntdata,
 	      backgroundColor: ['#4e73df', '#1cc88a','#eded1f',"#ed261f"],
