@@ -41,13 +41,13 @@
 		AND MEMBER = #{empno}
 	</select>
 	
-<!-- 프로젝트 수 -->
+
 	<select id="getProjectCntByStatusAdmin" parameterType="int" resultType="pjcnt">
 		SELECT STATUS ,count(*) cnt FROM PROJECT_F pf
 		WHERE empno = #{empno}
 		GROUP BY STATUS 
 	</select>
-	<select id="getProjectCntByStatusAdmin" parameterType="int" resultType="pjcnt">
+	<select id="getProjectCntByStatusNormal" parameterType="int" resultType="pjcnt">
 		SELECT STATUS ,count(*) cnt FROM VIEW_PROJECT_ALL_INFO_Tmember 
 		WHERE member = #{empno}
 		GROUP BY STATUS 

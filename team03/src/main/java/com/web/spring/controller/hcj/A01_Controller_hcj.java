@@ -35,11 +35,11 @@ public class A01_Controller_hcj {
 		HttpSession session = request.getSession();
 
 		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
-		d.addAttribute("projects", service.getprojects(emp));
-		//d.addAttribute("pjcnt",service.getProjectCntAdmin(emp));
+		
 		if (emp != null) {
 			// 프로젝트 할당
-			
+			d.addAttribute("projects", service.getprojects(emp));
+			d.addAttribute("pjcnt",service.getProjectCntAdmin(emp));
 			
 			if (emp.getAuth().equals("관리자")) {
 				
