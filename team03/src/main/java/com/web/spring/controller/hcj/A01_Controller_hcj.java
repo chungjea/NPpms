@@ -35,10 +35,15 @@ public class A01_Controller_hcj {
 		HttpSession session = request.getSession();
 
 		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
+		d.addAttribute("projects", service.getprojects(emp));
+		//d.addAttribute("pjcnt",service.getProjectCntAdmin(emp));
 		if (emp != null) {
+			// 프로젝트 할당
+			
+			
 			if (emp.getAuth().equals("관리자")) {
-				d.addAttribute("projects", service.getprojectsAdmin(emp.getEmpno()));
-				d.addAttribute("CompleteprojectCnt", service.getCompleteProjectCntAdmin(emp.getEmpno()));
+				
+	
 				d.addAttribute("ExpectedprojectCnt", service.getExpectedProjectCntAdmin(emp.getEmpno()));
 				d.addAttribute("stopedprojectCnt", service.getStopedProjectCntAdmin(emp.getEmpno()));
 				d.addAttribute("projectCnt", service.getProceedProjectCntAdmin(emp.getEmpno()));
@@ -48,8 +53,7 @@ public class A01_Controller_hcj {
 				d.addAttribute("errList", service.getMyErrsListAdmin(emp.getEmpno()));
 				d.addAttribute("errcnt", service.getMyErrorCntAdmin(emp.getEmpno()));
 			} else {
-				d.addAttribute("projects", service.getprojectsNormal(emp.getEmpno()));
-				d.addAttribute("CompleteprojectCnt", service.getCompleteProjectCntNormal(emp.getEmpno()));
+				
 				d.addAttribute("ExpectedprojectCnt", service.getExpectedProjectCntNormal(emp.getEmpno()));
 				d.addAttribute("stopedprojectCnt", service.getStopedProjectCntNormal(emp.getEmpno()));
 				d.addAttribute("projectCnt", service.getProceedProjectCntNormal(emp.getEmpno()));

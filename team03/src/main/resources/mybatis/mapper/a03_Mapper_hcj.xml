@@ -28,29 +28,30 @@
 			WHERE pcode = #{pcode}
 	</update>
 	
-	
-	<select id="getprojectsAdmin" parameterType="int" resultType="project">
-		SELECT rownum,f.*
-		from
-		(SELECT PROJECT_F.*,pg.progress
-		FROM PROJECT_F ,
-		(SELECT pcode,avg(PROGRESS) PROGRESS 
-		FROM PROJECT_WORK_F pwf 
-		GROUP BY pcode) pg
-		WHERE PROJECT_F.pcode = pg.pcode(+)
+
+	<select id="getprojectsAdmin" parameterType="emp" resultType="project">
+		SELECT * FROM VIEW_PROJECT_ALL_INFO
+		WHERE status = '진행중'
 		AND empno = #{empno}
-		ORDER BY CASE WHEN status ='진행중' THEN 1
-		ELSE 2 END,enddte) f
-		 <![CDATA[WHERE rownum <= 5]]>
 	</select>
 	
-	<select id="getprojectsNormal" parameterType="int" resultType="project">
+	<select id="getprojectsNormal" parameterType="emp" resultType="project">
 		SELECT * FROM VIEW_PROJECT_ALL_INFO_Tmember
 		WHERE status = '진행중'
 		AND MEMBER = #{empno}
 	</select>
-
-
+	
+<!-- 프로젝트 수 -->
+	<select id="getProjectCntByStatusAdmin" parameterType="int" resultType="pjcnt">
+		SELECT STATUS ,count(*) cnt FROM PROJECT_F pf
+		WHERE empno = #{empno}
+		GROUP BY STATUS 
+	</select>
+	<select id="getProjectCntByStatusAdmin" parameterType="int" resultType="pjcnt">
+		SELECT STATUS ,count(*) cnt FROM VIEW_PROJECT_ALL_INFO_Tmember 
+		WHERE member = #{empno}
+		GROUP BY STATUS 
+	</select>
 
 	<select id="getMyErrsListNormal" parameterType="int" resultType="errs">
 		SELECT rownum ,fin.* 

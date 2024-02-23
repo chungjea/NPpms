@@ -52,7 +52,8 @@
 
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 <script type="text/javascript">
-	
+	var labeldata = "${pjcnt.size}";
+	alert(labeldata)
 	//도넛차트
 	var ctx = document.getElementById("myProjectChart");
 	var myProjectChart = new Chart(ctx, {

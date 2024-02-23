@@ -3,7 +3,6 @@ package com.web.spring.service.hcj;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +12,7 @@ import com.web.spring.vo.Data;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Error_f;
 import com.web.spring.vo.IconRep_f;
+import com.web.spring.vo.ProjectCnt;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
@@ -29,7 +29,10 @@ public class A02_Service_hcj {
 	public int getAllMyProjectCntNormal(int empno){return dao.getAllMyProjectCntNormal(empno);}
 	
 	// 완료중인 프로젝트 수(admin-담당한)
-	public int getCompleteProjectCntAdmin(int empno){return dao.getCompleteProjectCntAdmin(empno);}
+	public List<ProjectCnt> getProjectCntAdmin(Emp_pinfo_f emp){
+		if(emp.getAuth().equals("관리자")) return dao.getProjectCntByStatusAdmin(emp.getEmpno());
+		else return dao.getProjectCntByStatusNormal(emp.getEmpno());
+	}
 	// 완료중인 프로젝트 수(normal-참여한)
 	public int getCompleteProjectCntNormal(int empno){return dao.getCompleteProjectCntNormal(empno);}
 	// 예정중인 프로젝트 수(admin-담당한)
@@ -46,13 +49,14 @@ public class A02_Service_hcj {
 	public int getProceedProjectCntNormal(int empno){return dao.getProceedProjectCntNormal(empno);}
 	
 	
-	// 내 담당 프로젝트 5개까지 불러오기(진행중인상태 우선)
-	public List<Project_f> getprojectsAdmin(int empno){
-		return dao.getprojectsAdmin(empno);	
-	}
+
 	// 내가 참여한 프로젝트 5개까지 불러오기(진행중인상태 우선)
-	public List<Project_f> getprojectsNormal(int empno){
-		return dao.getprojectsNormal(empno);
+	public List<Project_f> getprojects(Emp_pinfo_f emp){
+		if(emp.getAuth().equals("관리자")) {
+			return dao.getprojectsAdmin(emp);
+		}else {
+			return dao.getprojectsNormal(emp);
+		}	 
 	}
 	
 	
@@ -109,21 +113,18 @@ public class A02_Service_hcj {
 	}
 	
 	public String updateProject(Project_f upt) {
-		System.out.println("---------------업데이트 서비스 접근!!---------------");
-		System.out.println("---------------프로젝트 수정 접근!!---------------");
+		
 		String msg = dao.updateProject(upt)>0?"수정성공":"수정실패";
-		System.out.println("---------------프로젝트 수정 완료!!---------------");
-		System.out.println("---------------전체 팀원 삭제 접근!!---------------");
-		//dao.deleteTmemALL(upt.getPcode());
-		System.out.println("---------------전체 팀원 삭제 완료!!---------------");
-		System.out.println("---------------팀원 추가 접근!!---------------");
+		
+		dao.deleteTmemALL(upt.getPcode());
+
 		if(upt.getTmem()!=null) {			
 			for(Tmem_f mem: upt.getTmem()) {
 				System.out.println(mem.getLabel()+" 팀원 추가");
-				//dao.insertTMemProject(mem.getKey(),upt.getPcode());
+				dao.insertTMemProject(mem.getKey(),upt.getPcode());
 			}
 		}
-		System.out.println("---------------전체 팀원 추가 완료!!---------------");	
+
 		if(upt.getReports()!=null) {
 			System.out.println("파일:"+upt.getReports());
 		}

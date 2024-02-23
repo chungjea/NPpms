@@ -13,6 +13,7 @@ import com.web.spring.vo.Data;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Error_f;
 import com.web.spring.vo.IconRep_f;
+import com.web.spring.vo.ProjectCnt;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
@@ -32,11 +33,9 @@ public interface A03_Dao_hcj {
 		@Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n"
 			+ "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n")
 		int getAllMyProjectCntNormal(int empno);
-	// 완료된 프로젝트 수
+	//  프로젝트 수
 		//관리자
-		@Select("SELECT count(*) FROM project_f\r\n"
-		+ "where status='완료' and empno = #{empno} \r\n")
-		int getCompleteProjectCntAdmin(int empno);
+		int getProjectCntAdmin(Emp_pinfo_f emp);
 		// 사원
 		@Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n"
 				+ "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n"
@@ -73,12 +72,17 @@ public interface A03_Dao_hcj {
 			+ "		AND STATUS ='진행중'")
 		int getProceedProjectCntNormal(int empno);
 	
+		
+		List<ProjectCnt> getProjectCntByStatusAdmin(int empno);
+		List<ProjectCnt> getProjectCntByStatusNormal(int empno);
+		
+		
 //--------------------------대시보드 리스트----------------------------------------
 		
 	// 내프로젝트 담장 프로젝트5개까지 받아오기 (관리자)
-	List<Project_f> getprojectsAdmin(int empno);
+	List<Project_f> getprojectsAdmin(Emp_pinfo_f emp);
 	// 내가 참여한 진행중인 프로젝트 5개까지 받아오기 (일반 사원)
-	List<Project_f> getprojectsNormal(int empno);
+	List<Project_f> getprojectsNormal(Emp_pinfo_f emp);
 	
 //---------------------------전체 프로젝트 검색----------------------------------
 	// 내 담당 프로젝트 검색해서 가져오기 count,list(관리자)
