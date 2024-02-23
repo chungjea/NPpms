@@ -597,4 +597,24 @@ public class A02_Service_cjw {
 	public List<Chatroom_f> chatroomlist(int empno) {
 		return dao.chatroomlist(empno);
 	}
+	
+	
+	public String insChatRoom(Chatroom_f ins) {
+		return dao.insChatRoom(ins)>0?"입장성공":"입장실패";
+	}
+	
+	public String delChatRoom(Chatroom_f del) {
+		return dao.delChatRoom(del)>0?"퇴장성공":"퇴장실패";
+	}
+
+	public List<String> getChRooms(){
+		return dao.getChRooms();
+	}
+	public List<String> getChRoomIds(String username){
+		return dao.getChRoomIds(username);
+	}	
+	public List<String> getIdsByRoom(String crname){
+		return dao.getIdsByRoom(crname);
+	}		
+	
 }

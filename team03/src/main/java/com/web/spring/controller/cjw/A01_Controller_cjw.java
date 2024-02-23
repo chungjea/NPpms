@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -232,6 +233,7 @@ public class A01_Controller_cjw {
 	@GetMapping("chatting")
 	public String chatting(int empno, Model d) {
 		d.addAttribute("crlist", service.chatroomlist(empno));
+		d.addAttribute("socketServer", socketServer);
 		return "cjw/z05_bootTmp/chatting";
 	}
 	
@@ -243,6 +245,37 @@ public class A01_Controller_cjw {
 	@PostMapping("makechatroom")
 	public String makechatroom(Chatroom_f ins, Model d) {
 		d.addAttribute("msg", service.makechatroom(ins));
+		return "pageJsonReport";
+	}
+	
+	
+	@Value("${socketServer}")
+	private String socketServer;	
+
+	// enterChRoom
+	@PostMapping("enterChRoom")
+	public String enterChRoom(Chatroom_f croom, Model d) {
+		d.addAttribute("result", service.insChatRoom(croom));
+		d.addAttribute("conIds", service.getChRoomIds(croom.getUsername()));
+		d.addAttribute("conRooms", service.getChRooms());
+		
+		return "pageJsonReport";
+	}
+	@GetMapping("conRooms")
+	public String conRooms(Model d) {
+		d.addAttribute("conRooms", service.getChRooms());
+		
+		return "pageJsonReport";
+	}	
+	@GetMapping("conIds")
+	public String conIds(@RequestParam("crno") String crname, Model d) {
+		d.addAttribute("conIds", service.getIdsByRoom(crname));
+		
+		return "pageJsonReport";
+	}		
+	@PostMapping("exitChRoom")	
+	public String delChatRoom(Chatroom_f croom, Model d) {
+		d.addAttribute("result", service.delChatRoom(croom));
 		return "pageJsonReport";
 	}
 	

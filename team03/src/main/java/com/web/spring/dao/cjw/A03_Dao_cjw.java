@@ -221,4 +221,24 @@ public interface A03_Dao_cjw {
 	
 	@Select("SELECT userid FROM chatroom_f WHERE crno = #{crno}")
 	List<String> getuseridbycrno(int crno);
+	
+	
+	@Insert("MERGE INTO chatroom_f target USING (SELECT #{crname} AS crname, #{username} AS username from dual) source ON (target.crname = source.crname AND target.username = source.username) WHEN NOT MATCHED THEN INSERT (crname, username) VALUES (source.crname, source.username)")
+	int insChatRoom(Chatroom_f ins);
+	
+	@Delete("Delete from chatroom_f where  username=#{username}  and crname = #{crname}	")
+	int delChatRoom(Chatroom_f del);
+
+	@Delete("Delete from chatroom_f where  username=#{username}")
+	int delChatId(@Param("username") String username);	
+	
+	@Select("	SELECT DISTINCT crname FROM chatroom_f")
+	List<String> getChRooms();
+	
+	@Select("SELECT username FROM chatroom_f WHERE crname = (SELECT crname FROM chatroom_f WHERE username=#{username})")
+	List<String> getChRoomIds(@Param("username") String username);
+	
+	@Select("	SELECT username FROM chatroom_f WHERE  crname = #{crname}")
+	List<String> getIdsByRoom(@Param("crname") String crname);
+	
 }
