@@ -10,7 +10,7 @@
 		<insert id="register" parameterType="emplist">
 		INSERT INTO emp_master_f values(empnoc.nextval,#{ename},#{egrade},0,#{dname},to_date(#{hiredate},'YYYY-MM-DD'),0,0,0,#{passwd},sysdate,#{email},#{lastone},#{auth, jdbcType=VARCHAR}) 
 	</insert>
-	
+
 	<delete id="deleteEmps"  parameterType="emplist">
 	delete from emp_master_f
 	where empno in
@@ -44,8 +44,8 @@ WHERE empno=#{empno}
 		from sal_f
 		WHERE empno like '%'|| #{empno} || '%'
 	</select>
-	<select id="LatestEmp" resultType="int" >
-SELECT EMPNOC.CURRVAL FROM DUAL
+		<select id="LatestEmp" resultType="int" > 
+SELECT last_number FROM user_sequences WHERE sequence_name='EMPNOC'
 </select>
 <select id="doneProj" parameterType="int" resultType="int">
 SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno}

@@ -61,8 +61,8 @@
                                 
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                    <p><strong>${LatestEmp}</strong><span id="EnameChk"></span>
-                                        <input name="ename" id="ename" class="form-control form-control-user"   placeholder="사원명(숫자9자리)" />	
+                                    <p><strong>사원명을 입력하세요</strong><span id="EnameChk"></span>
+                                        <input name="ename" id="ename" class="form-control form-control-user"   placeholder="사원명" />	
                                     </div>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                     <p><strong>직급을 선택하세요</strong><span id="idChk"></span>
@@ -109,20 +109,21 @@
                                     <option value="@daum.net">daum.net</option>
                                     <option value="@gmail.com">gmail.com</option>
                                     </select>
+                                    <input type="hidden" id="password" name="password" value="">
                                     <input type="hidden" id="passwd" name="passwd" value="">
                                     <input type="hidden" id="email" name="email" value="">
+                                    <input type="hidden" id="empno" name="empno" value="">
                                     <input type="hidden" id="lastone" name="lastone" value="">
                                    <!--  <input type="hidden" id="receiver" name="receiver" value=""> -->
-                                    <input type="hidden" id="title" name="title" value="${ename}님의 비밀번호">
+                                    <input type="hidden" id="title" name="title" value="회원등록된 정보를 전송해드립니다.">
                                   
-                                  	<input type="hidden" id="receiver" name="receiver" value=""/>
-                             		<input type="hidden" name="password" id="password" value="" />	
+           
                               		
                                   
                                     </div>
                                 </div>
                                 
-                                <input type="submit" class="btn btn-primary btn-user btn-block" id="regBtn">
+                                <input type="button" class="btn btn-primary btn-user btn-block" id="regBtn">
                                     
                                 
                                 <hr>
@@ -182,15 +183,8 @@
 <%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
             <script type="text/javascript">
+            var n_empno="${LatestEmp}";
             var empno="${emp.empno}";
-            
-            	$("#SendBtn").click(function(){//임시버튼
-                    
-            		
-						 $("#testsend").submit() 
-					
-					
-            	})
             	/* var msg = "${msg}"
 						if(msg!=""){
 							alert(msg);
@@ -204,18 +198,19 @@
 					temp_pw_issuance();
 					 
 					var password=document.getElementById('password').value;
-					var receiver=document.getElementById('emailH').value+document.getElementById('emailE').value;
+					var email=document.getElementById('emailH').value+document.getElementById('emailE').value;
 					var emailE=document.getElementById('emailE').value;
 					var emailH=document.getElementById('emailH').value;
-					  
+
+					
 					document.getElementById('email').value= email;
-					document.getElementById('receiver').value = receiver;
 					document.getElementById('password').value = password;
 					document.getElementById('passwd').value= passwd;
-					document.getElementById('receiver').value= email;
+					document.getElementById('empno').value= n_empno;
+					document.getElementById('lastone').value= empno;
 					console.log(password)
-					console.log(receiver)
-					console.log(document.getElementById('receiver').value)
+					console.log(empno)
+					console.log(n_empno)
 					 
 
 

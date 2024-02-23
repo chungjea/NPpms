@@ -16,6 +16,20 @@
 	position: sticky;
 	top: 0;
 	background-color:white;
+	text-align:center;
+}
+#dataTable td {
+text-align:right;
+}
+      #dataTable1 th {
+	position: sticky;
+	top: 0;
+	background-color:white;
+}
+      #dataTable2 th {
+	position: sticky;
+	top: 0;
+	background-color:white;
 }
 </style>
 
@@ -273,7 +287,7 @@
 																		<td >${el.ename}</td>
 																		<td >${el.dname}</td>
 																		<td >${el.hiredate}</td>
-																		<td >${el.salary}</td>
+																		<td ><fmt:formatNumber value="${el.salary}" pattern="#,###"/></td>
 																		<td >${el.panaltytot}</td>
 																		<td >${el.lastfix}</td>
 																		<td >${el.lastone}</td>
@@ -474,7 +488,10 @@ $('input:checkbox[name=checkboxModel]').each(function (index) {
     }
 })
 $(function() {
-  $("#dataTable #dataTable1 #dataTable2").tablesorter();
+  $("#dataTable").tablesorter();
+  $("#dataTable1").tablesorter();
+  $("#dataTable2").tablesorter();
+ 
 
 });
 
@@ -629,7 +646,7 @@ $("#tab02").click(function(){
 		   $("#dataTable").css("display");//인사,전체
 		   $("#dataTable2").css("display"); //삭제인원페이지
 
-	}else{
+	}else if(AUTH == '관리자' && !DNAME=='인사팀') {
 			alert("허가되지 않은 부서입니다. 인사팀 관리자만 사용가능합니다.")
 		}
 

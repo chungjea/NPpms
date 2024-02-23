@@ -6,18 +6,12 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.web.servlet.error.AbstractErrorController;
-import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,20 +19,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
-
 
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.Emp_master_f;
-import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
-import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.sal_f;
 
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -49,6 +38,7 @@ import jakarta.servlet.http.HttpSession;
 public class A01_Controller_kwj {
 	@Autowired(required = false)
 	private A02_Service_kjw service;
+
 
 
 public String loginFrm() {
@@ -69,6 +59,8 @@ HttpServletResponse response) {
 	Emp_pinfo_f emp = service.login(emplogin);
 	System.out.println("선택한 언어:"+lang);
 
+	
+	
 
 	System.out.println("데이터 check:");
 	System.out.println(emp); // null or 주소값
@@ -115,29 +107,20 @@ public ResponseEntity<?> deleteEmpsagain(@RequestBody List<Integer> empno){
 	}
 }
 
-
 @RequestMapping("mypagefilter")
 public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
-		 sal_f ssch,Model d,HttpSession session,Emp_master_f cnt,Emp_master_his_f psearch) {
+		 sal_f sch1,Model d,HttpSession session) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 
 	if(emp.getAuth().equals("관리자")) {
 		d.addAttribute("empList", service.getEmpList(sch));
-		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
-		d.addAttribute("salList", service.getSalList(ssch));
-		d.addAttribute("empcnt", service.empcnt(cnt));
-		d.addAttribute("sumProj", service.sumProj(emp.getEmpno()));
-		d.addAttribute("doneProj", service.doneProj(emp.getEmpno()));
-		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
+		d.addAttribute("salList", service.getSalList(sch1));
+		
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
 			d.addAttribute("empList", service.getEmpList(sch));
-			d.addAttribute("salList", service.getSalList(ssch));
-			d.addAttribute("empcnt", service.empcnt(cnt));
-			d.addAttribute("sumProj", service.sumProj(emp.getEmpno()));
-			d.addAttribute("doneProj", service.doneProj(emp.getEmpno()));
-			d.addAttribute("EmpHistory", service.EmpHistory(psearch));
+			d.addAttribute("salList", service.getSalList(sch1));
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }
@@ -152,15 +135,14 @@ public String commute_s(Commute_f ins,Commute_f sch,Model d,@DateTimeFormat(patt
 	return "kjw/z05_bootTmp/a20_cards";
 	
 }
-
 @Autowired(required = false)
 @RequestMapping(value="confirming", method = {RequestMethod.POST,RequestMethod.GET})
-public String mailSend(MailSender mailVo,  Model d) {
+public String mailSend(MailSender email,  Model d) {
 	d.addAttribute("LatestEmp", service.LatestEmp());
-	if(mailVo.getReceiver()!=null) {
-	System.out.println("email:"+mailVo.getReceiver());
-	System.out.println("password:"+mailVo.getPassword());
-	d.addAttribute("msg", service.sendMail(mailVo));
+	if(email.getEmail()!=null) {
+	System.out.println("email:"+email.getEmail());
+	System.out.println("password:"+email.getPassword());
+	d.addAttribute("msg", service.sendMail(email));
 	
 	}else {
 		return "mailVo.getReceiver()";
@@ -175,9 +157,10 @@ public String registerFrm() {
 @RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
 public String register(Emp_master_f ins,Model d,MailSender email,HttpSession session) {
 	d.addAttribute("LatestEmp", service.LatestEmp());
-	if(email.getReceiver()!=null) {
-	System.out.println("email:"+email.getReceiver());
+	if(email.getEmail()!=null) {
+	System.out.println("email:"+email.getEmail());
 	System.out.println("password:"+email.getPassword());
+	System.out.println("empno:"+email.getEmpno());
 	d.addAttribute("msg", service.sendMail(email));
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 	}
@@ -186,8 +169,6 @@ public String register(Emp_master_f ins,Model d,MailSender email,HttpSession ses
 		}
 	return "kjw/z05_bootTmp/a84_register";
 	}
-	
-
 
 @RequestMapping("updateFrm")
 public String updateFrm() {
@@ -223,17 +204,6 @@ public String updateinfo(Emp_master_f upt,HttpSession session,Model d) {
 		return "kjw/z05_bootTmp/a83_login";
 
 	}
-	@RequestMapping("${server.error.path:${error.path:/error}}")
-	public class BasicErrorController extends AbstractErrorController{
-
-		public BasicErrorController(ErrorAttributes errorAttributes) {
-			super(errorAttributes);
-			// TODO Auto-generated constructor stub
-		}
-		
-	}
-	
-	//에러페이지 설정
 
 }
 

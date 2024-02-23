@@ -28,20 +28,22 @@ public interface A03_Dao_kjw {
 	int doneProj(int empno);
 	
 int updateinfo(Emp_master_f upt);
-		List<sal_f> getSalList(sal_f ssah);
+		List<sal_f> getSalList(sal_f ssah); //급여리스트
 
-		List<Emp_master_f> Emplist();
+		List<Emp_master_f> Emplist(); //사원정보리스트
 		
 		int commute_s(Commute_f ins);
 
-		Commute_f commute_f(Commute_f sch);
+		Commute_f commute_f(Commute_f sch); //출근
 		
-		int empcnt(Emp_master_f cnt);
-		int LatestEmp();
+		int empcnt(Emp_master_f cnt); //사원총합
+		int LatestEmp(); //사원번호
 
 		int sumProj(int empno);
 
 		List<Emp_master_his_f> EmpHistory(Emp_master_his_f psearch);
+
+		boolean existByName(String ename);
 }
 
 

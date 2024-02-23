@@ -248,12 +248,13 @@
 						
 								
                                    
-                                    <a href="${path}/WEB-INF/views/kjw/z05_bootTmp/detailpage" class="btn btn-warning btn-icon-split"> <span
-									class="icon text-white-50"> <i
-										class="fas fa-exclamation-triangle"></i>
+                                    <a href="${path}/updateFrm"
+										class="btn btn-warning btn-icon-split"> <span
+										class="icon text-white-50"> <i
+											class="fas fa-exclamation-triangle"></i>
 
-								</span> <span class="text">개인정보수정</span>
-								</a>
+									</span> <span class="text">개인정보수정</span>
+									</a>
 							
 						</div>
 
