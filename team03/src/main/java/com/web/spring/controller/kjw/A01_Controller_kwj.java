@@ -24,6 +24,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Commute_f;
 import com.web.spring.vo.Emp_master_f;
+import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
 import com.web.spring.vo.sal_f;
@@ -108,21 +109,35 @@ public ResponseEntity<?> deleteEmpsagain(@RequestBody List<Integer> empno){
 }
 
 @RequestMapping("mypagefilter")
-public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,
+public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_his_f psearch,
 		 sal_f sch1,Model d,HttpSession session) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 
 	if(emp.getAuth().equals("관리자")) {
 		d.addAttribute("empList", service.getEmpList(sch));
 		d.addAttribute("salList", service.getSalList(sch1));
-		
+		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
 			d.addAttribute("empList", service.getEmpList(sch));
 			d.addAttribute("salList", service.getSalList(sch1));
+			d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 		return "kjw/z05_bootTmp/a70_tables";
 		}
+}
+
+@RequestMapping("HRFilter")
+public String HRFilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_his_f psearch, Model d,HttpSession session) {
+	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
+	if(emp.getDname().equals("인사팀")) {
+		d.addAttribute("empList", service.getEmpList(sch));
+		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
+		return "kjw/z05_bootTmp/a70_tablesadmin";
+
+	}else {
+		return "권한이 없는 사용자입니다.";
+	}
 }
 @RequestMapping("commute_frm")
 public String commuteFrm() {
@@ -156,6 +171,7 @@ public String registerFrm() {
 }
 @RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
 public String register(Emp_master_f ins,Model d,MailSender email,HttpSession session) {
+	
 	d.addAttribute("LatestEmp", service.LatestEmp());
 	if(email.getEmail()!=null) {
 	System.out.println("email:"+email.getEmail());

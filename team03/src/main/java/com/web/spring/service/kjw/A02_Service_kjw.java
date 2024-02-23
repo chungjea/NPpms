@@ -62,7 +62,7 @@ public class A02_Service_kjw {
 	}
 
 	public String register(Emp_master_f ins, MailSender email) {
-		sendMail(email);
+		
 
 		String msg = dao.register(ins) > 0 ? "회원정보등록성공" : "회원정보등록실패";
 		int empno = dao.LatestEmp();

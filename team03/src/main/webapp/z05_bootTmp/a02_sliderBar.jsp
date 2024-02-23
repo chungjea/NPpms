@@ -65,7 +65,7 @@
 					<span>문서관리</span>
 			</a></li>
 			
-			<li class="nav-item"><a class="nav-link" href="${path}/z05_bootTmp/a60_chart.jsp">
+			<li class="nav-item"><a class="nav-link" href="${path}/HRFilter">
 					<span>인사관리</span>
 			</a></li>
 			
