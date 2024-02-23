@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
+
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <link
@@ -19,7 +21,7 @@
 		</div>
 		<!-- Card Body -->
 		<div class="card-body">
-			<h5>전체 프로젝트:${allprojectCnt}개</h5>
+			<h5 id="dchartheader">전체 프로젝트:${allprojectCnt}개</h5>
 			<div class="chart-pie">
 				<canvas id="myProjectChart"></canvas>
 			</div>
@@ -49,19 +51,26 @@
 </div>
 
 
-
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 <script type="text/javascript">
-	var labeldata = "${pjcnt.size}";
-	alert(labeldata)
+var labeldata = [];
+var cntdata =[];
+var totcnt =0;
+<c:forEach items="${pjcnt}" var="pj" varStatus="sts">
+	labeldata["${sts.index}"] = "${pj.status}"
+	cntdata["${sts.index}"] = "${pj.cnt}"
+	totcnt += ${pj.cnt}
+</c:forEach>
+	
+	 console.log(labeldata)
 	//도넛차트
 	var ctx = document.getElementById("myProjectChart");
 	var myProjectChart = new Chart(ctx, {
 	  type: 'doughnut',
 	  data: {
-	    labels: ["완료된 프로젝트","진행중인 프로젝트","예정된 프로젝트","중단된 프로젝트"],
+	    labels:labeldata ,
 	    datasets: [{
-	      data: [${CompleteprojectCnt}, ${projectCnt},${ExpectedprojectCnt},${stopedprojectCnt}],
+	      data: cntdata,
 	      backgroundColor: ['#4e73df', '#1cc88a','#eded1f',"#ed261f"],
 	      hoverBackgroundColor: ['#2e59d9', '#17a673','#ccc618','#cc1f18'],
 	      hoverBorderColor: "rgba(234, 236, 244, 1)",

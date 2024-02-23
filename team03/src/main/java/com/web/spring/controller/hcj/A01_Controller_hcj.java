@@ -44,8 +44,7 @@ public class A01_Controller_hcj {
 			if (emp.getAuth().equals("관리자")) {
 				
 	
-				d.addAttribute("ExpectedprojectCnt", service.getExpectedProjectCntAdmin(emp.getEmpno()));
-				d.addAttribute("stopedprojectCnt", service.getStopedProjectCntAdmin(emp.getEmpno()));
+				
 				d.addAttribute("projectCnt", service.getProceedProjectCntAdmin(emp.getEmpno()));
 				d.addAttribute("allprojectCnt", service.getAllMyProjectCntAdmin(emp.getEmpno()));
 				d.addAttribute("workList", service.getProjectWorkByEmpnoAdmin(emp.getEmpno()));
@@ -54,8 +53,7 @@ public class A01_Controller_hcj {
 				d.addAttribute("errcnt", service.getMyErrorCntAdmin(emp.getEmpno()));
 			} else {
 				
-				d.addAttribute("ExpectedprojectCnt", service.getExpectedProjectCntNormal(emp.getEmpno()));
-				d.addAttribute("stopedprojectCnt", service.getStopedProjectCntNormal(emp.getEmpno()));
+				
 				d.addAttribute("projectCnt", service.getProceedProjectCntNormal(emp.getEmpno()));
 				d.addAttribute("allprojectCnt", service.getAllMyProjectCntNormal(emp.getEmpno()));
 				d.addAttribute("workList", service.getProjectWorkByEmpnoNormal(emp.getEmpno()));

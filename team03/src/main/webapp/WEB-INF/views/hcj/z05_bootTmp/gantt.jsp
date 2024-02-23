@@ -105,7 +105,7 @@ html, body {
 
 						<div id="gantt_here"
 							style='width: 100%; height: 100%; padding: 0px;'></div>
-					</div>
+						</div>
 					
 					<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/newprojectModal.jsp" %>	
 				</div>
@@ -342,8 +342,7 @@ html, body {
 						    }
 						    return true;
 						});
-						
-						
+								
 						gantt.attachEvent("onAfterTaskUpdate", function(id,item){
 							const parent = item.parent
 							const child = gantt.getChildren(id)
