@@ -39,19 +39,23 @@ public interface A03_Dao_lsd {
 	 * @Select("select * from Noticeboard_f") List<Noticeboard_f>
 	 * noticePage(NoticeSch_f sch);
 	 */
+	// 프로젝트별 조회
+	@Select("select * from Noticeboard_f where #{pcode}=pcode")
+	List<Noticeboard_f> projectSearch(int pcode);
+	
 	// 부서별 조회
-	@Select("select * from Noticeboard_f where dname=#{dname}")
-	List<Noticeboard_f> deptSearch(String dname);
+//	@Select("select * from Noticeboard_f where dname=#{dname}")
+//	List<Noticeboard_f> deptSearch(String dname);
 	
 	// 검색
 	@Select(" select * from Noticeboard_f where title like '%'||#{title}||'%' ")
 	List<Noticeboard_f> noticeSch(Noticeboard_f sch);
 
 	// 페이징 처리, 전체조회
-	@Select("select * \r\n" + "		from(\r\n" + "		SELECT rownum cnt, nf.*\r\n"
-			+ "		from Noticeboard_f nf\r\n" + "		where 1=1\r\n" + "		and title like '%'||#{title}||'%' \r\n"
-			+ "		and dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
-	List<Noticeboard_f> noticePage(NoticeSch_f sch);
+//	@Select("select * \r\n" + "	from(\r\n" + "SELECT rownum cnt, nf.*\r\n"
+//			+ "	from Noticeboard_f nf\r\n" + "where 1=1\r\n" + "and title like '%'||#{title}||'%' \r\n"
+//			+ "		and dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
+//	List<Noticeboard_f> noticePage(NoticeSch_f sch);
 	
 //	@Select("select * \r\n" + "		from(\r\n" + "		SELECT rownum cnt, nf.*\r\n"
 //			+ "		from Noticeboard_f nf\r\n" + "		where dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
@@ -61,12 +65,12 @@ public interface A03_Dao_lsd {
 	@Select("SELECT count(*) FROM Noticeboard_f where 1=1 and title like '%'||#{title}||'%' and dname=#{dname}")
 	int totNotice(NoticeSch_f sch);
 
-	// 공지 세부
-	@Select("select * from Noticeboard_f where notice_num=#{notice_num}")
-	Noticeboard_f noticeboardDetail(@Param("notice_num") int notice_num);
+	// 공지 세부 === pcode 추가함===
+	@Select("select * from Noticeboard_f where notice_num=#{notice_num} and pcode=#{pcode}")
+	Noticeboard_f noticeboardDetail(@Param("notice_num") int notice_num, @Param("pcode") int pcode);
 
-	// 공지 등록
-	@Insert("insert into Noticeboard_f values(board_seq.nextval,#{writer},#{content},sysdate,sysdate,#{title},0,#{dname})")
+	// 공지 등록 #{dname},있었음 - 오류날때
+	@Insert("insert into Noticeboard_f values(board_seq.nextval,#{writer},#{content},sysdate,sysdate,#{title},0,#{pcode})")
 	int insertNotice(Noticeboard_f ins);
 
 	// 공지 수정
