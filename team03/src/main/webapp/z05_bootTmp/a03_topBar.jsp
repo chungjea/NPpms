@@ -113,10 +113,9 @@ long time_used=(lasttime-createdtime)/60000;
 
 		<!-- Nav Item - Messages -->
 		<li class="nav-item dropdown no-arrow mx-1"><a
-			class="nav-link dropdown-toggle" href="#" id="messagesDropdown"
-			role="button" data-toggle="dropdown" aria-haspopup="true"
-			aria-expanded="false"> <i class="fas fa-envelope fa-fw"></i> <!-- Counter - Messages -->
-				<span class="badge badge-danger badge-counter">7</span>
+			class="nav-link dropdown-toggle" href="${path}/chatting?empno=${emp.empno}" id="messagesDropdown"
+			role="button"> <i class="fas fa-envelope fa-fw"></i> <!-- Counter - Messages -->
+				<!-- <span class="badge badge-danger badge-counter">7</span> -->
 		</a> <!-- Dropdown - Messages -->
 			<div
 				class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
