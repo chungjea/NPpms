@@ -191,8 +191,18 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">작성자</span>
 							</div>
-							<input name="writer" class="form-control" value="홍길동 / 전산팀" readonly style="background-color:white !important;"/>	
-							<input type="hidden" name="wempno" value=1000 readonly />
+							<c:choose>
+								<c:when test="${not empty umet}">
+									<input name="writer" class="form-control" value="${umet.ename}(${umet.dname})" readonly style="background-color:white !important;"/>	
+									<input type="hidden" name="wempno" value="${umet.empno}" readonly />
+									<input type="hidden" name="pcode" value="${param.pcode}" readonly />
+								</c:when>
+								<c:otherwise>
+									<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important;"/>	
+									<input type="hidden" name="wempno" value="${emp.empno}" readonly />
+									<input type="hidden" name="pcode" value="${param.pcode}" readonly />
+								</c:otherwise>
+							</c:choose>
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">

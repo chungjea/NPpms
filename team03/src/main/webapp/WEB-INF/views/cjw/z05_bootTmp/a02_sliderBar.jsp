@@ -6,6 +6,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>     
+<script type="text/javascript">
+	var pcode = ${param.pcode}
+</script>
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
@@ -36,22 +39,28 @@
 			<div class="sidebar-heading">category</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-toggle="collapse" data-target="#collapsePages"
-				aria-expanded="true" aria-controls="collapsePages"> <i
-					class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
-			</a>
-				<div id="collapsePages" class="collapse"
-					aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="http://localhost:5080/team03/getNoticeboard.do">공지 게시판</a> 
-						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
-						<a class="collapse-item" href="${path}/z05_bootTmp/a82_forgot-password.jsp">결재</a>
-						<a class="collapse-item" href="${path}/z05_bootTmp/a50_404.jsp">리스크 관리</a> <a
-							class="collapse-item" href="${path}/z05_bootTmp/a51_blank.jsp">회의록</a>
-					</div>
-				</div></li>
-
+			<c:choose>
+				<c:when test="${param.pcode != null && param.pcode > 0}">
+					<li class="nav-item"><a class="nav-link collapsed" href="#"
+						data-toggle="collapse" data-target="#collapsePages"
+						aria-expanded="true" aria-controls="collapsePages"> <i
+							class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+					</a>
+						<div id="collapsePages" class="collapse"
+							aria-labelledby="headingPages" data-parent="#accordionSidebar">
+							<div class="bg-white py-2 collapse-inner rounded">
+								<a class="collapse-item" href="http://localhost:5080/team03/getNoticeboard.do">공지 게시판</a> 
+								<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
+								<a class="collapse-item" href="${path}/z05_bootTmp/a82_forgot-password.jsp">결재</a>
+								<a class="collapse-item" href="${path}/z05_bootTmp/a50_404.jsp">리스크 관리</a>
+								<a class="collapse-item" href="${path}/z05_bootTmp/a51_blank.jsp">회의록</a>
+							</div>
+						</div></li>
+				</c:when>
+				<c:otherwise>
+					<li class="nav-item"><a href="#"> <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span> </a></li>
+				</c:otherwise>
+			</c:choose>
 			<li class="nav-item"><a class="nav-link" href="${path}/z05_bootTmp/a60_chart.jsp">
 					<span>문서관리</span>
 			</a></li>

@@ -5,7 +5,7 @@ public class FileSch {
 	private String fname;
 	private String page;
 	private int empno;
-	private int deptno;
+	private int pcode;
 	private int wempno;
 	private int cempno;
 	private int manager;
@@ -40,13 +40,13 @@ public class FileSch {
 	public FileSch() {
 	}
 
-	public FileSch(String type, String fname, String page, int empno, int deptno, int wempno, int cempno, int manager, int count, int pageSize, int pageCount,
+	public FileSch(String type, String fname, String page, int empno, int pcode, int wempno, int cempno, int manager, int count, int pageSize, int pageCount,
 			int curPage, int start, int end, int blockSize, int startBlock, int endBlock) {
 		this.type = type;
 		this.fname = fname;
 		this.page = page;
 		this.empno = empno;
-		this.deptno = deptno;
+		this.pcode = pcode;
 		this.wempno = wempno;
 		this.cempno = cempno;
 		this.manager = manager;
@@ -93,12 +93,12 @@ public class FileSch {
 		this.empno = empno;
 	}
 
-	public int getDeptno() {
-		return deptno;
+	public int getPcode() {
+		return pcode;
 	}
 
-	public void setDeptno(int deptno) {
-		this.deptno = deptno;
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 
 	public int getWempno() {

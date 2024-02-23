@@ -45,7 +45,7 @@
 	<div id="wrapper">
 
 		<!-- Sidebar -->
-		<%@ include file="/pmsprj_makerplace/lsd/z05_bootTmp/a02_sliderBar.jsp" %>
+		<%@ include file="/z05_bootTmp/a02_sliderBar.jsp" %>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->

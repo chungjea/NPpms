@@ -317,6 +317,7 @@
 										<input type="date" name="finaldteStr" class="form-control" style="width:70%;"/>
 									</div>
 										<input type="hidden" name="rskno" value="${drsk.rskno}"/>
+										<input type="hidden" name="pcode" value="${param.pcode}"/>
 									<div class="row">
 										<div class="input-group-prepend ">
 											<span class="input-group-text w-100 justify-content-center">피드백</span>

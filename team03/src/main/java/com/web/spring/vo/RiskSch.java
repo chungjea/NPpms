@@ -5,6 +5,7 @@ public class RiskSch {
 	private int wempno;
 	private int cempno;
 	private int manager;
+	private int pcode;
 	private int count;
 	private int pageSize;
 	private int pageCount;
@@ -18,12 +19,13 @@ public class RiskSch {
 	public RiskSch() {
 	}
 
-	public RiskSch(String title, int wempno, int cempno, int manager, int count, int pageSize, int pageCount, int curPage,
+	public RiskSch(String title, int wempno, int cempno, int manager, int pcode, int count, int pageSize, int pageCount, int curPage,
 			int start, int end, int blockSize, int startBlock, int endBlock) {
 		this.title = title;
 		this.wempno = wempno;
 		this.cempno = cempno;
 		this.manager = manager;
+		this.pcode = pcode;
 		this.count = count;
 		this.pageSize = pageSize;
 		this.pageCount = pageCount;
@@ -65,6 +67,14 @@ public class RiskSch {
 
 	public void setManager(int manager) {
 		this.manager = manager;
+	}
+
+	public int getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 
 	public int getCount() {

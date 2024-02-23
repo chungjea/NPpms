@@ -32,11 +32,6 @@ public class A01_Controller_cjw {
 	// http://localhost:3333/myapv
 	@PostMapping("myapv")
 	public String myapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
-		//System.out.println(sch.getCurPage());
-		//System.out.println(sch.getTitle());
-		//System.out.println(sch.getSts());
-		//System.out.println(sch.getWempno());
-		//System.out.println(sch.getMempno());
 		d.addAttribute("apvList", service.myapv(sch));
 		d.addAttribute("myapvcnt", service.myapvcnt(sch));
 		d.addAttribute("badapvcnt", service.badapvcnt(sch));
@@ -56,8 +51,8 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("insertapvFrm")
-	public String insertapvFrm(int deptno, Model d) {
-		d.addAttribute("dmlist", service.getdeptmen(deptno));
+	public String insertapvFrm(int pcode, Model d) {
+		d.addAttribute("dmlist", service.getteammen(pcode));
 		return "cjw/z05_bootTmp/apvinsert";
 	}
 	
@@ -127,8 +122,8 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("insertrskFrm")
-	public String insertrskFrm(int deptno, Model d) {
-		d.addAttribute("mempno", service.getmymanager(deptno));
+	public String insertrskFrm(int pcode, Model d) {
+		d.addAttribute("mempno", service.getmymanager(pcode));
 		return "cjw/z05_bootTmp/rskinsert";
 	}
 	
@@ -139,10 +134,10 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("detailrsk")
-	public String detailrsk(@Param("rskno")int rskno, @Param("deptno")int deptno, Model d) {
+	public String detailrsk(@Param("rskno")int rskno, @Param("team")int pcode, Model d) {
 		d.addAttribute("drsk", service.detailrsk(rskno));
 		d.addAttribute("drskfile", service.getrskfile(rskno));
-		d.addAttribute("dmlist", service.getdeptmen(deptno));
+		d.addAttribute("dmlist", service.getteammen(pcode));
 		return "cjw/z05_bootTmp/rskdetail";
 	}
 	

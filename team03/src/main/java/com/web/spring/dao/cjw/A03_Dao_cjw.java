@@ -22,6 +22,7 @@ import com.web.spring.vo.Metfile_f;
 import com.web.spring.vo.RiskSch;
 import com.web.spring.vo.Risk_f;
 import com.web.spring.vo.Rskfile_f;
+import com.web.spring.vo.Team;
 
 @Mapper
 public interface A03_Dao_cjw {
@@ -30,25 +31,25 @@ public interface A03_Dao_cjw {
 	
 	List<Approve_f> ckapv(ApproveSch sch);
 	
-	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts=#{sts} and title like '%'||#{title}||'%'")
+	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts=#{sts} and title like '%'||#{title}||'%' and pcode = #{pcode}")
 	int mycnt(ApproveSch sch);
 	
-	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기' and af.title like '%'||#{title}||'%'")
+	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기' and af.title like '%'||#{title}||'%' and af.pcode = #{pcode}")
 	int tocnt(ApproveSch sch);
 	
-	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='대기'")
+	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='대기' and pcode = #{pcode}")
 	int myapvcnt(ApproveSch sch);
 	
-	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='반려'")
+	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='반려' and pcode = #{pcode}")
 	int badapvcnt(ApproveSch sch);
 	
-	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='완료'")
+	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='완료' and pcode = #{pcode}")
 	int goodapvcnt(ApproveSch sch);
 	
-	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기'")
+	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기' and af.pcode = #{pcode}")
 	int toapvcnt(ApproveSch sch);
 	
-	@Insert("INSERT INTO approve_f values(apv_seq.nextval, #{title}, #{content}, #{wempno}, sysdate, '대기', #{writer})")
+	@Insert("INSERT INTO approve_f values(apv_seq.nextval, #{title}, #{content}, #{wempno}, sysdate, '대기', #{writer}. #{pcode})")
 	int insertapv(Approve_f ins);
 	
 	@Insert("INSERT INTO approveadmin_f values(apv_seq.currval, #{mempno}, NULL, null)")
@@ -57,11 +58,10 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO apvfile_f values(apv_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertapvfile(Apvfile_f ins);
 	
-	@Insert("Insert into file_f values(file_seq.nextval, '결재', apv_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	@Insert("Insert into file_f values(file_seq.nextval, '결재', apv_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno}, #{pcode})")
 	int insertfileapv(Apvfile_f ins);
 	
-	@Select("SELECT empno, ename, dname FROM EMP_PINFO_F WHERE deptno = #{deptno}")
-	List<Emp_pinfo_f> getdeptmen(@Param("deptno") int deptno);
+	List<Team> getteammen(@Param("pcode") int pcode);
 	
 	Approve_f detailapv(int apvno);
 	
@@ -83,43 +83,43 @@ public interface A03_Dao_cjw {
 	
 	List<Risk_f> finrsk(RiskSch sch);
 	
-	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정' and title like '%'||#{title}||'%'")
+	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정' and title like '%'||#{title}||'%' and pcode = #{pcode}")
 	int myrskcntp(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정' and rf.title like '%'||#{title}||'%'")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
 	int ckrskcntp(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.title like '%'||#{title}||'%'")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
 	int torskcntp(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' and rf.title like '%'||#{title}||'%'")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
 	int finrskcntp(RiskSch sch);
 	
-	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정'")
+	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정' and pcode = #{pcode}")
 	int myrskcnt(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정'")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정' and rf.pcode = #{pcode}")
 	int ckrskcnt(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중'")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.pcode = #{pcode}")
 	int torskcnt(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료'")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' and rf.pcode = #{pcode}")
 	int finrskcnt(RiskSch sch);
 	
-	@Insert("INSERT INTO RISK_F values(rsk_seq.nextval,#{title},sysdate,NULL,#{wempno},#{writer},#{content},'발생예정')")
+	@Insert("INSERT INTO RISK_F values(rsk_seq.nextval,#{title},sysdate,NULL,#{wempno},#{writer},#{content},'발생예정',#{pcode})")
 	int insertrsk(Risk_f ins);
 	
 	@Insert("INSERT INTO RISKADMIN_F VALUES(rsk_seq.currval,NULL,NULL,NULL,NULL,#{manager},#{probability},#{danger})")
 	int insertrsk2(Risk_f ins);
 	
-	@Select("SELECT empno FROM EMP_PINFO_F WHERE egrade = '팀장' AND deptno = #{deptno}")
-	int getmymanager(int deptno);
+	@Select("SELECT empno FROM project_f WHERE pcode = #{pcode}")
+	int getmymanager(int pcode);
 	
 	@Insert("INSERT INTO rskfile_f values(rsk_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertrskfile(Rskfile_f ins);
 	
-	@Insert("Insert into file_f values(file_seq.nextval, '리스크', rsk_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	@Insert("Insert into file_f values(file_seq.nextval, '리스크', rsk_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno}, #{pcode})")
 	int insertfilersk(Rskfile_f ins);
 	
 	Risk_f detailrsk(int rskno);
@@ -139,7 +139,7 @@ public interface A03_Dao_cjw {
 	@Select("select * from rskfile_f where fno = #{fno}")
 	Rskfile_f getrskfileinfo(int fno);
 	
-	@Insert("Insert into file_f values(file_seq.nextval, '리스크', #{rskno}, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	@Insert("Insert into file_f values(file_seq.nextval, '리스크', #{rskno}, #{fname}, #{path}, sysdate, #{fno}, #{empno}, #{pcode})")
 	int insertfilersk2(Rskfile_f ins);
 	
 	@Update("UPDATE RISK_F set sts = '완료' where rskno = #{rskno}")
@@ -148,7 +148,7 @@ public interface A03_Dao_cjw {
 	// 회의록
 	List<Meeting_f> metlist(MeetingSch_f sch);
 	
-	@Select("SELECT count(mf.METNO) FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND df.DEPTNO = #{deptno} and mf.title like '%'||#{title}||'%'")
+	@Select("SELECT count(*) FROM MEETING_F WHERE pcode = #{pcode} AND title like '%'||#{title}||'%'")
 	int totmet(MeetingSch_f sch);
 	
 	int insertmet(Meeting_f ins);
@@ -156,10 +156,7 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO metfile_f values(met_seq.currval, #{fname}, #{path}, #{fno})")
 	int insertmetfile(Metfile_f ins);
 	
-	@Select("SELECT deptno FROM emp_master_f WHERE empno = #{wempno}")
-	int deptno(int wempno);
-	
-	@Insert("Insert into file_f values(file_seq.nextval, '회의록', met_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{deptno})")
+	@Insert("Insert into file_f values(file_seq.nextval, '회의록', met_seq.currval, #{fname}, #{path}, sysdate, #{fno}, 0, #{pcode})")
 	int insertfilemet(Metfile_f ins);
 	
 	@Select("SELECT fno_seq.nextval FROM dual")
@@ -190,10 +187,10 @@ public interface A03_Dao_cjw {
 	// 문서관리
 	List<File_f> boardfile(FileSch sch);
 	
-	@Select("SELECT count(*) FROM file_f WHERE  page NOT IN ('채팅','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND (auth = #{empno} OR auth = #{deptno}) OR auth = 0")
+	@Select("SELECT count(*) FROM file_f WHERE  page NOT IN ('채팅','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND (auth = #{empno} OR auth = 0) AND pcode = #{pcode}")
 	int boardfilecnt(FileSch sch);
 	
-	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno})")
+	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno}, 0)")
 	int insertfilemy(String fname, String path, String fno, int empno);
 	
 	List<File_f> myfile(FileSch sch);

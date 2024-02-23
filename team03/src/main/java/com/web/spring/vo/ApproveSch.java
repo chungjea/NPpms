@@ -2,6 +2,7 @@ package com.web.spring.vo;
 
 public class ApproveSch {
 	private String title;
+	private int pcode;
 	private int wempno;
 	private int mempno;
 	private String sts;
@@ -18,9 +19,10 @@ public class ApproveSch {
 	public ApproveSch() {
 	}
 
-	public ApproveSch(String title, int wempno, int mempno, String sts, int count, int pageSize, int pageCount, int curPage,
+	public ApproveSch(String title, int pcode, int wempno, int mempno, String sts, int count, int pageSize, int pageCount, int curPage,
 			int start, int end, int blockSize, int startBlock, int endBlock) {
 		this.title = title;
+		this.pcode = pcode;
 		this.wempno = wempno;
 		this.mempno = mempno;
 		this.sts = sts;
@@ -37,6 +39,14 @@ public class ApproveSch {
 
 	public String getTitle() {
 		return title;
+	}
+
+	public int getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 
 	public void setTitle(String title) {

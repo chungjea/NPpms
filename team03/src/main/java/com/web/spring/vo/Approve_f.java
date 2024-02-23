@@ -19,12 +19,13 @@ public class Approve_f {
 	private String feedback;
 	private MultipartFile[] reports;
 	private List<String> fnames;
+	private int pcode;
 	
 	public Approve_f() {
 	}
 
 	public Approve_f(int apvno, String title, String content, String writer, int wempno, Date regdte, String manager,
-			int mempno, String sts) {
+			int mempno, String sts, int pcode) {
 		this.apvno = apvno;
 		this.title = title;
 		this.content = content;
@@ -34,10 +35,11 @@ public class Approve_f {
 		this.manager = manager;
 		this.mempno = mempno;
 		this.sts = sts;
+		this.pcode = pcode;
 	}
 
 	public Approve_f(int apvno, String title, String content, String writer, int wempno, Date regdte, String manager,
-			int mempno, Date ckdte, String sts, String feedback) {
+			int mempno, Date ckdte, String sts, String feedback, int pcode) {
 		this.apvno = apvno;
 		this.title = title;
 		this.content = content;
@@ -49,6 +51,7 @@ public class Approve_f {
 		this.ckdte = ckdte;
 		this.sts = sts;
 		this.feedback = feedback;
+		this.pcode = pcode;
 	}
 
 	public int getApvno() {
@@ -153,6 +156,14 @@ public class Approve_f {
 
 	public void setFnames(List<String> fnames) {
 		this.fnames = fnames;
+	}
+
+	public int getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 	
 }

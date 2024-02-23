@@ -6,6 +6,7 @@ public class Apvfile_f {
 	private String path;
 	private String fno;
 	private int empno;
+	private int pcode;
 	
 	public Apvfile_f() {
 	}
@@ -21,11 +22,12 @@ public class Apvfile_f {
 		this.fno = fno;
 	}
 
-	public Apvfile_f(String fname, String path, String fno, int empno) {
+	public Apvfile_f(String fname, String path, String fno, int empno, int pcode) {
 		this.fname = fname;
 		this.path = path;
 		this.fno = fno;
 		this.empno = empno;
+		this.pcode = pcode;
 	}
 
 	public Apvfile_f(int apvno, String fname, String path) {
@@ -79,6 +81,14 @@ public class Apvfile_f {
 
 	public void setEmpno(int empno) {
 		this.empno = empno;
+	}
+
+	public int getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 	
 }

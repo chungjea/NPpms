@@ -85,6 +85,7 @@
                     </div>
                     <form id="insapvFrm" method="post" action="${path}/insertapvFrm">
                     	<input type="hidden" name="deptno" value="${emp.deptno}" />
+                    	<input type="hidden" name="pcode" value="${param.pcode}" />
                     </form>
 					<script type="text/javascript">
 						function goInsert(){
@@ -171,6 +172,7 @@
 								<input type="hidden" name="wempno" value="${emp.empno}"/>
 								<input type="hidden" name="mempno" value="${emp.empno}"/>
 								<input type="hidden" id="sts" name="sts" value="${sch.sts}"/>
+								<input type="hidden" name="pcode" value="${param.pcode}"/>
 								<div class="input-group-append">
 									<button class="btn btn-primary" onclick="schapv()" type="button" id="schBtn">
 										<i class="fas fa-search fa-sm"></i>
@@ -243,6 +245,7 @@
 					</table>
 					<form method="post" id="frm02" action="${path}/detailapv">
 						<input id="test" name="apvno" type="hidden">
+						<input name="pcode" type="hidden" value="${param.pcode}"/>
 					</form>
 					<script type="text/javascript">
 					    function goDetail(no){

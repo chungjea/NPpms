@@ -23,6 +23,7 @@ import com.web.spring.vo.Metfile_f;
 import com.web.spring.vo.RiskSch;
 import com.web.spring.vo.Risk_f;
 import com.web.spring.vo.Rskfile_f;
+import com.web.spring.vo.Team;
 
 @Service
 public class A02_Service_cjw {
@@ -114,6 +115,7 @@ public class A02_Service_cjw {
 		int ckf = 0;
 		int wempno = ins.getWempno();
 		int mempno = ins.getMempno();
+		int pcode = ins.getPcode();
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -124,8 +126,8 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertapvfile(new Apvfile_f(fname,path,fno));
-							dao.insertfileapv(new Apvfile_f(fname,path,fno,wempno));
-							dao.insertfileapv(new Apvfile_f(fname,path,fno,mempno));
+							dao.insertfileapv(new Apvfile_f(fname,path,fno,wempno,pcode));
+							dao.insertfileapv(new Apvfile_f(fname,path,fno,mempno, pcode));
 						}
 					}
 				}
@@ -145,8 +147,8 @@ public class A02_Service_cjw {
 	}
 	
 	// 결재 : 결재 올릴 같은 부서 사람들 명단
-	public List<Emp_pinfo_f> getdeptmen(@Param("deptno") int deptno) {
-		return dao.getdeptmen(deptno);
+	public List<Team> getteammen(@Param("pcode") int pcode) {
+		return dao.getteammen(pcode);
 	}
 	
 	// 결재 : 결재 상세
@@ -291,6 +293,7 @@ public class A02_Service_cjw {
 		int ckf = 0;
 		int wempno = ins.getWempno();
 		int manager = ins.getManager();
+		int pcode = ins.getPcode();
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -301,8 +304,8 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertrskfile(new Rskfile_f(fname,path,fno));
-							dao.insertfilersk(new Rskfile_f(fname,path,fno,wempno));
-							dao.insertfilersk(new Rskfile_f(fname,path,fno,manager));
+							dao.insertfilersk(new Rskfile_f(fname,path,fno,wempno,pcode));
+							dao.insertfilersk(new Rskfile_f(fname,path,fno,manager,pcode));
 						}
 					}
 				}
@@ -322,8 +325,8 @@ public class A02_Service_cjw {
 	}
 	
 	// 리스크 : 리스크 올릴 매니저 사번
-	public int getmymanager(int deptno) {
-		return dao.getmymanager(deptno);
+	public int getmymanager(int pcode) {
+		return dao.getmymanager(pcode);
 	}
 	
 	// 리스크 : 리스크 상세
@@ -347,6 +350,7 @@ public class A02_Service_cjw {
 					int n = Integer.parseInt(no);
 					Rskfile_f rf = dao.getrskfileinfo(n);
 					rf.setEmpno(rsk.getCempno());
+					rf.setPcode(rsk.getPcode());
 					dao.insertfilersk2(rf);
 				}
 			}
@@ -398,7 +402,7 @@ public class A02_Service_cjw {
 			msg = "회의록 등록 실패\\n";
 		}
 		int ckf = 0;
-		int deptno = dao.deptno(ins.getWempno());
+		int pcode = ins.getPcode();
 		MultipartFile[] mpfs = ins.getReports();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
@@ -409,7 +413,7 @@ public class A02_Service_cjw {
 							String fno = ""+dao.getfno();
 							mpf.transferTo(new File(path+fno));
 							ckf+=dao.insertmetfile(new Metfile_f(fname,path,fno));
-							dao.insertfilemet(new Metfile_f(fname,path,fno,deptno));
+							dao.insertfilemet(new Metfile_f(fname,path,fno,pcode));
 						}
 					}
 				}

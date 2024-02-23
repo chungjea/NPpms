@@ -6,6 +6,9 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>
+<script type="text/javascript">
+	var pcode = ${param.pcode}
+</script>
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
@@ -36,21 +39,28 @@
 			<div class="sidebar-heading">category</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-toggle="collapse" data-target="#collapsePages"
-				aria-expanded="true" aria-controls="collapsePages"> <i
-					class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
-			</a>
-				<div id="collapsePages" class="collapse"
-					aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="${path}/noticePage">공지 게시판</a> 
-						<a class="collapse-item" href="${path}/calendar_f">캘린더</a> 
-						<a class="collapse-item" href="javascript:goApv()">결재</a>
-						<a class="collapse-item" href="javascript:goRsk()">리스크 관리</a> <a
-							class="collapse-item" href="javascript:goMet()">회의록</a>
-					</div>
-				</div></li>
+			<c:choose>
+				<c:when test="${param.pcode != null && param.pcode > 0}">
+					<li class="nav-item"><a class="nav-link collapsed" href="#"
+						data-toggle="collapse" data-target="#collapsePages"
+						aria-expanded="true" aria-controls="collapsePages"> <i
+							class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+					</a>
+					<div id="collapsePages" class="collapse"
+							aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="${path}/noticePage?pcode=${param.pcode}">공지 게시판</a> 
+							<a class="collapse-item" href="${path}/calendar_f?pcode=${param.pcode}">캘린더</a> 
+							<a class="collapse-item" href="javascript:goApv()">결재</a>
+							<a class="collapse-item" href="javascript:goRsk()">리스크 관리</a>
+							<a class="collapse-item" href="javascript:goMet()">회의록</a>
+						</div>
+					</div></li>
+				</c:when>
+				<c:otherwise>
+					<li class="nav-item"><a class="nav-link collapsed" href="#" > <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span> </a></li>
+				</c:otherwise>
+			</c:choose>
 			<li class="nav-item"><a class="nav-link" href="javascript:goFile()">
 					<span>문서관리</span>
 			</a></li>
@@ -111,17 +121,19 @@
 			<input type="hidden" name="wempno" value="${emp.empno}" />
 			<input type="hidden" name="mempno" value="${emp.empno}" />
 			<input type="hidden" name="sts" value="대기"/>
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
 		</form>
 		<form id="frmrsk" method="post" action="${path}/myrsk">
 			<input type="hidden" name="wempno" value="${emp.empno}"/>
 			<input type="hidden" name="cempno" value="${emp.empno}"/>
 			<input type="hidden" name="manager" value="${emp.empno}"/>
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
 		</form>
 		<form id="frmmet" method="post" action="${path}/meeting">
-			<input type="hidden" name="deptno" value="${emp.deptno}"/>
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
 		</form>
 		<form id="frmfile" method="post" action="${path}/file">
 			<input type="hidden" name="empno" value="${emp.empno}"/>
-			<input type="hidden" name="deptno" value="${emp.deptno}"/>
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
 		</form>
 		

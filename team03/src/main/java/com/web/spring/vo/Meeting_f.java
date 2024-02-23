@@ -20,6 +20,7 @@ public class Meeting_f {
 	private String content;
 	private String conclusion;
 	private Date regdte;
+	private int pcode;
 	private MultipartFile[] reports;
 	private List<String> fnames;
 	private int cnt;
@@ -29,7 +30,7 @@ public class Meeting_f {
 	}
 
 	public Meeting_f(int metno, String title, String metdteStr, String starttmStr, String fintmStr, String participant,
-			int wempno, String writer, String content, String conclusion) {
+			int wempno, String writer, String content, String conclusion, int pcode) {
 		this.metno = metno;
 		this.title = title;
 		this.metdteStr = metdteStr;
@@ -40,11 +41,12 @@ public class Meeting_f {
 		this.writer = writer;
 		this.content = content;
 		this.conclusion = conclusion;
+		this.pcode = pcode;
 	}
 
 	public Meeting_f(int metno, String title, Date metdte, String metdteStr, Date starttm, String starttmStr,
 			Date fintm, String fintmStr, String participant, int wempno, String writer, String content,
-			String conclusion, Date regdte) {
+			String conclusion, int pcode, Date regdte) {
 		this.metno = metno;
 		this.title = title;
 		this.metdte = metdte;
@@ -58,6 +60,7 @@ public class Meeting_f {
 		this.writer = writer;
 		this.content = content;
 		this.conclusion = conclusion;
+		this.pcode = pcode;
 		this.regdte = regdte;
 	}
 
@@ -171,6 +174,14 @@ public class Meeting_f {
 
 	public void setRegdte(Date regdte) {
 		this.regdte = regdte;
+	}
+
+	public int getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 
 	public MultipartFile[] getReports() {

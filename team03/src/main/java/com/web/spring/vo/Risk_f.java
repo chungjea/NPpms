@@ -23,6 +23,7 @@ public class Risk_f {
 	private String finaldteStr;
 	private String feedback;
 	private int manager;
+	private int pcode;
 	private MultipartFile[] reports;
 	private List<String> fnames;
 	
@@ -31,7 +32,7 @@ public class Risk_f {
 
 	public Risk_f(int rskno, String title, Date regdte, Date uptdte, int wempno, String writer, String probability,
 			String danger, String content, String sts, String priority, String charge, int cempno, Date finaldte,
-			String finaldteStr, String feedback, int manager) {
+			String finaldteStr, String feedback, int manager, int pcode) {
 		this.rskno = rskno;
 		this.title = title;
 		this.regdte = regdte;
@@ -49,6 +50,7 @@ public class Risk_f {
 		this.finaldteStr = finaldteStr;
 		this.feedback = feedback;
 		this.manager = manager;
+		this.pcode = pcode;
 	}
 
 	public int getRskno() {
@@ -201,6 +203,14 @@ public class Risk_f {
 
 	public void setFnames(List<String> fnames) {
 		this.fnames = fnames;
+	}
+
+	public int getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 
 }

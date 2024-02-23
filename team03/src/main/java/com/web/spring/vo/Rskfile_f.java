@@ -6,6 +6,7 @@ public class Rskfile_f {
 	private String path;
 	private String fno;
 	private int empno;
+	private int pcode;
 	
 	public Rskfile_f() {
 	}
@@ -21,11 +22,12 @@ public class Rskfile_f {
 		this.fno = fno;
 	}
 
-	public Rskfile_f(String fname, String path, String fno, int empno) {
+	public Rskfile_f(String fname, String path, String fno, int empno, int pcode) {
 		this.fname = fname;
 		this.path = path;
 		this.fno = fno;
 		this.empno = empno;
+		this.pcode = pcode;
 	}
 
 	public Rskfile_f(int rskno, String fname, String path, String fno, int empno) {
@@ -87,6 +89,14 @@ public class Rskfile_f {
 
 	public void setEmpno(int empno) {
 		this.empno = empno;
+	}
+
+	public int getPcode() {
+		return pcode;
+	}
+
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 	
 }

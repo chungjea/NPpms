@@ -86,7 +86,7 @@
                         </a>
                     </div>
                     <form id="insrskFrm" method="post" action="${path}/insertrskFrm">
-                    	<input type="hidden" name="deptno" value="${emp.deptno}" />
+                    	<input type="hidden" name="pcode" value="${param.pcode}" />
                     </form>
 					<script type="text/javascript">
 						function goInsert(){
@@ -174,6 +174,7 @@
 	                    	<input type="hidden" name="wempno" id="1" value="${sch.wempno}"/>
 	                    	<input type="hidden" name="cempno" id="2" value="${sch.cempno}"/>
 	                    	<input type="hidden" name="manager" id="3" value="${sch.manager}"/>
+	                    	<input type="hidden" name="pcode" value="${param.pcode}"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary" onclick="schrsk()" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
@@ -272,6 +273,7 @@
 					</table>
 					<form method="post" id="frm02" action="${path}/detailrsk">
 							<input id="test" name="rskno" type="hidden">
+							<input name="pcode" type="hidden" value="${param.pcode}">
 					</form>
 					<script type="text/javascript">
 					    function goDetail(no){

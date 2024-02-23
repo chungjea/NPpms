@@ -150,7 +150,7 @@
 							</select>
 							<input class="form-control border-0 small" style="width:400px;" name="fname" id="sch" value="">
 							<input type="hidden" name="empno" value="${sch.empno}"/>
-							<input type="hidden" name="deptno" value="${sch.deptno}"/>
+							<input type="hidden" name="pcode" value="${param.pcode}"/>
 							<input type="hidden" name="curPage" value="0"/>
 							<input type="hidden" name="curPage3" value="0"/>
 							<div class="input-group-append">
@@ -173,8 +173,8 @@
 		                  }
                     </script>
                     <br><br><br>
-                    <div class="row" style="width:100%;">
-                    	<div style="width:33%;">
+                    <div class="row" style="width:100%;" style="align-items : center;">
+                    	<div style="width:45%;">
 	                    	<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 	                    		<caption>게시판</caption>
 	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count}건</caption>
@@ -198,7 +198,9 @@
 							<form id="dbfrm" method="post">
 								<input type="hidden" name="apvno" value=""/>
 								<input type="hidden" name="rskno" value=""/>
+								<input type="hidden" name="deptno" value="${emp.deptno}"/>
 								<input type="hidden" name="metno" value=""/>
+								<input type="hidden" name="pcode" value="${param.pcode}"/>
 							</form>
 							<br>
 							<ul class="pagination  justify-content-center">
@@ -237,6 +239,7 @@
 								}
 							</script>
 						</div>
+						<!-- 
 						<div style="width:33%; border-right: solid 1px; border-left: solid 1px; height:450px">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>채팅</caption>
@@ -257,7 +260,8 @@
 							    </tbody>
 							</table>
 						</div>
-						<div style="width:33%;">
+						 -->
+						<div style="width:45%;">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>개인</caption>
 	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count3}건</caption>
@@ -301,7 +305,7 @@
 					<input type="hidden" name="curPage" value="${sch.curPage}"/>
 					<input type="hidden" name="curPage3" value="${sch.curPage3}"/>
 					<input type="hidden" name="empno" value="${sch.empno}"/>
-					<input type="hidden" name="deptno" value="${sch.deptno}"/>
+					<input type="hidden" name="pcode" value="${param.pcode}"/>
 				</form>
 				<script type="text/javascript">
 					function goPage(pcnt){

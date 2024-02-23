@@ -151,6 +151,7 @@
 					<div align="center">
                     	<form id="frm01" method="post" enctype="multipart/form-data" action="${path}/detailapv">
                     	<input type="hidden" name="apvno" value="${dapv.title}"/>
+                    	<input type="hidden" name="pcode" value="${param.pcode}" />
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">제목</span>

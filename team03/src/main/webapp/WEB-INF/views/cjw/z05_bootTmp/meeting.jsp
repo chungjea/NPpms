@@ -94,7 +94,7 @@
 						<div class="input-group align-items-end" >
 							<input class="form-control border-0 small" placeholder="회의 목적" name="title" value="${sch.title}">
 							<input type="hidden" name="curPage" value="${sch.curPage}"/>
-							<input type="hidden" name="deptno" value="${emp.deptno}"/>
+							<input type="hidden" name="pcode" value="${param.pcode}"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary" onclick="schmet()" type="button" id="schBtn">
 									<i class="fas fa-search fa-sm"></i>
@@ -145,6 +145,7 @@
 					</table>
 					<form method="post" id="frm02" action="${path}/detailmet">
 						<input id="test" name="metno" type="hidden">
+						<input id="test" name="pcode" type="hidden" value="${param.pcode}">
 					</form>
 					<script type="text/javascript">
 					    function goDetail(no){

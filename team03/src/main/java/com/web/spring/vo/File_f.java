@@ -15,7 +15,7 @@ public class File_f {
 	private String fno;
 	private int auth;
 	private int empno;
-	private int deptno;
+	private int pcode;
 	private MultipartFile[] reports;
 	private List<String> fnames;
 	
@@ -41,7 +41,7 @@ public class File_f {
 	}
 
 	public File_f(int no, String page, int bno, String fname, String path, Date regdte, String fno, int auth, int empno,
-			int deptno) {
+			int pcode) {
 		this.no = no;
 		this.page = page;
 		this.bno = bno;
@@ -51,7 +51,7 @@ public class File_f {
 		this.fno = fno;
 		this.auth = auth;
 		this.empno = empno;
-		this.deptno = deptno;
+		this.pcode = pcode;
 	}
 
 	public int getNo() {
@@ -126,12 +126,12 @@ public class File_f {
 		this.empno = empno;
 	}
 
-	public int getDeptno() {
-		return deptno;
+	public int getPcode() {
+		return pcode;
 	}
 
-	public void setDeptno(int deptno) {
-		this.deptno = deptno;
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 
 	public MultipartFile[] getReports() {
