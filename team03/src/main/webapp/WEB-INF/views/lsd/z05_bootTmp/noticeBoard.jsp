@@ -11,7 +11,7 @@
 <title>Good day!!</title>
 <script type="text/javascript">
 	function noticeDetail(notice_num) {
-		location.href = "${path}/noticeboardDetail?notice_num=" + notice_num
+		location.href = "${path}/noticeboardDetail?notice_num=" + notice_num+"&pcode=${param.pcode}"
 	}
 </script>
 
@@ -93,6 +93,7 @@
 					<h1 class="h3 mb-2 text-gray-800">공지게시판</h1>
 
 					<form id="frm01" class="form" method="post">
+						
 						<input type="hidden" name="curPage" value="${sch.curPage}" />
 					
 					<!-- DataTales Example -->
@@ -136,7 +137,7 @@
 									</thead>
 									<tbody>
 
-										<c:forEach var="nt" items="${noticeboard}">
+										<c:forEach var="nt" items="${projectSearch}">
 											<tr ondblclick="noticeDetail(${nt.notice_num})">
 												<td class="text-center">${nt.cnt}</td>
 												<td class="text-center">${nt.notice_num}</td>

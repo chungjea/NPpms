@@ -96,7 +96,7 @@ public class A02_Service_lsd {
 	private String path;*/
 	// 파일 업로드랑 같이
 	public String insertNotice(Noticeboard_f ins) {
-		
+		System.out.println("서비스 시작");
 		// 기본데이터 등록 처리
 		int ck01 = dao.insertNotice(ins);
 
@@ -138,7 +138,7 @@ public class A02_Service_lsd {
 			}
 			msg+="파일 "+ck02+"건 등록 완료";
 		}
-		
+		System.out.println("서비스 종료:");
 		return msg;
 	}
 

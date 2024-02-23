@@ -70,7 +70,7 @@
 
 	$(document).ready(function() {
 		$("#mainBtn").click(function() {
-			location.href = "${path}/noticePage"
+			location.href = "${path}/noticePage?pcode=${param.pcode}"
 		})
 		var sessId = "${emp.auth}"
 		$("#uptBtn").click(function() {
@@ -153,6 +153,8 @@ private Date updateDate;
 								<span class="input-group-text  justify-content-center">
 									공지번호</span>
 							</div>
+							<input type="hidden" name="pcode" class="form-control" 
+								value="${param.pcode}" />
 							<input name="notice_num" class="form-control" readonly
 								style="background-color: white !important;"
 								value="${notice.notice_num}" />

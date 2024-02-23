@@ -40,7 +40,7 @@ public interface A03_Dao_lsd {
 	 * noticePage(NoticeSch_f sch);
 	 */
 	// 프로젝트별 조회
-	@Select("select * from Noticeboard_f where #{pcode}=pcode")
+	@Select("select * from Noticeboard_f where pcode=#{pcode}")
 	List<Noticeboard_f> projectSearch(int pcode);
 	
 	// 부서별 조회

@@ -99,15 +99,17 @@ public class A01_Controller_lsd {
 	// 공지 등록 폼
 	// http://localhost:3333/springweb/insertNoticeFrm
 	@RequestMapping("insertNoticeFrm")
-	public String insertNoticeFrm(Noticeboard_f noticeIns) {
+	public String insertNoticeFrm(Noticeboard_f noticeIns,int pcode) {
 		return "lsd/z05_bootTmp/InsertNotice";
 	}// insertNoticeFrm()
 
 	 //공지 등록 === pcode ===
 	@RequestMapping("insertNotice")
-	public String insertNotice(Noticeboard_f ins, Model d, HttpSession session,int pcode) {
+	public String insertNotice(Noticeboard_f ins, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
+		System.out.println("이엠피 나와라"+emp);
 		if(emp!=null) {
+			System.out.println("아이엔에스 나와라:"+ins.getPcode());
 			d.addAttribute("msg", service.insertNotice(ins));
 		}
 		return "lsd/z05_bootTmp/InsertNotice";

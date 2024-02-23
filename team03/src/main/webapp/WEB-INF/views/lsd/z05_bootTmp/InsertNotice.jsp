@@ -93,7 +93,7 @@
 		</div>
 		<input name="notice_num" class="form-control" value=board_seq/>	
 	</div>--%>
-			<input type="hidden" name="pcode" value="${notice.pcode}" />
+			<input type="hidden" name="pcode" value="${param.pcode}" />
 			<%-- <input type="hidden" name="dname" value="${emp.dname}" />--%>
 			<div class="input-group mb-0">
 				<div class="input-group-prepend ">
@@ -139,9 +139,11 @@
 					$("form").submit()
 				})
 				var msg = "${msg}"
+					console.log(msg)
 				if (msg != "") {
 					if (!confirm(msg + "\n계속 등록하시겠습니까?")) {
 						location.href = "${path}/noticePage"
+						
 					}
 				}
 				$("#mainBtn").click(function() {
