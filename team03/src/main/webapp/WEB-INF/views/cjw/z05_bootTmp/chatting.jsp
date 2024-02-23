@@ -160,7 +160,7 @@ function conFun(){
 	$.ajax({
 		url:"${path}/enterChRoom",
 		type:"post",
-		data:{chroom:roomVal, id:$("#id").val()},
+		data:{crname:roomVal, username:$("#id").val()},
 		dataType:"json",
 		success:function(data){
 			//alert(data.result)
@@ -268,7 +268,7 @@ $(document).ready(function(){
 			$.ajax({
 				url:"${path}/exitChRoom",
 				type:"post",
-				data:{chroom:$("#chRooms").val(), id:$("#id").val()},
+				data:{crname:$("#chRooms").val(), username:$("#id").val()},
 				dataType:"json",
 				success:function(data){
 					if(delMessageToLocalStore()){
@@ -332,7 +332,7 @@ function connectorInfo(){
 	$.ajax({
 		url:"${path}/conIds",
 		type:"get",
-		data:{chroom:roomVal},
+		data:{crname:roomVal},
 		dataType:"json",
 		success:function(data){
 			var add=""
@@ -593,9 +593,9 @@ function displayMessage(message) {
 		<input id="enterBtn" type="button" class="btn btn-info" value="채팅방입장" />
 		<input id="exitBtn" type="button" class="btn btn-danger" value="채팅방나가기" />
 	</div>
-							<form>
-								<input type="hidden" id="crno" value="" /><input type="hidden" id="chatid" value="" />
-							</form>
+							<!--<form>
+								 <input type="hidden" id="crno" value="" /><input type="hidden" id="chatid" value="" />
+							</form> -->
 							<div id="chatArea" style="overflow-x:hidden" class="input-group-append">
 								<div class="input-group-append" id="chatName">
 									<div id="chatGroup">선택된 채팅방 없음</div>
