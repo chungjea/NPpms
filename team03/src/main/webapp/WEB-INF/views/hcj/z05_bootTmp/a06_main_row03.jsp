@@ -21,7 +21,7 @@
 		</div>
 		<!-- Card Body -->
 		<div class="card-body">
-			<h5 id="dchartheader">전체 프로젝트:${allprojectCnt}개</h5>
+			<h5 id="dchartheader"></h5>
 			<div class="chart-pie">
 				<canvas id="myProjectChart"></canvas>
 			</div>
@@ -62,6 +62,7 @@ var totcnt =0;
 	cntdata["${sts.index}"] = "${pj.cnt}"
 	totcnt += ${pj.cnt}
 </c:forEach>
+	document.getElementById("dchartheader").innerText = "전체 프로젝트 "+totcnt+"건"
 
 	 console.log(labeldata)
 	//도넛차트

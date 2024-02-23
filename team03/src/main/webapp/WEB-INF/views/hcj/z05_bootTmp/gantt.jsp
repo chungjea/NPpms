@@ -149,7 +149,7 @@ html, body {
 	<!-- Custom scripts for all pages-->
 	<script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 	<script src="${path}/customjs/projectmodal.js"></script>
-
+	<script src="${path}/customjs/slidbar.js"></script>
 	<!-- Page level plugins -->
 	<script>
 	
