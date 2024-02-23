@@ -78,13 +78,21 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">회의록</h1>
-                        <a href="${path}/insertmetFrm" class="btn btn-secondary btn-icon-split">
+                        <a href="javascript:goInsert()" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
                         	<span class="text">회의록 작성하기</span>
                         </a>
                     </div>
+                    <form id="insmetFrm" method="post" action="${path}/insertmetFrm">
+                    	<input type="hidden" name="pcode" value="${param.pcode}" />
+                    </form>
+					<script type="text/javascript">
+						function goInsert(){
+					    	$("#insmetFrm").submit()
+						}
+					</script>
 					<br>
 					<br>
                     <div class="row">

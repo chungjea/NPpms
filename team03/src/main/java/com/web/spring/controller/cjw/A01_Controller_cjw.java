@@ -161,8 +161,8 @@ public class A01_Controller_cjw {
 		return "cjw/z05_bootTmp/meeting";
 	}
 	
-	@GetMapping("insertmetFrm")
-	public String insertmetFrm(Model d) {
+	@PostMapping("insertmetFrm")
+	public String insertmetFrm(int pcode, Model d) {
 		d.addAttribute("type", "reg");
 		return "cjw/z05_bootTmp/metinsert";
 	}
@@ -181,7 +181,7 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("updatemetFrm")
-	public String updatemetFrm(int metno, Model d) {
+	public String updatemetFrm(@Param("metno") int metno, @Param("pcode") int pcode, Model d) {
 		d.addAttribute("type", "upt");
 		d.addAttribute("umet", service.detailmet(metno));
 		return "cjw/z05_bootTmp/metinsert";

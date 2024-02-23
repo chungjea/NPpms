@@ -198,7 +198,6 @@
 							<form id="dbfrm" method="post">
 								<input type="hidden" name="apvno" value=""/>
 								<input type="hidden" name="rskno" value=""/>
-								<input type="hidden" name="deptno" value="${emp.deptno}"/>
 								<input type="hidden" name="metno" value=""/>
 								<input type="hidden" name="pcode" value="${param.pcode}"/>
 							</form>

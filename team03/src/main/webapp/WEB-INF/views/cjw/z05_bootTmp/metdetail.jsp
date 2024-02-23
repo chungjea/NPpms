@@ -121,6 +121,7 @@
 					<div align="center">
                     	<form method="post" id="frm01" enctype="multipart/form-data">
                     	<input type="hidden" name="metno" value="${dmet.metno}"/>
+                    	<input type="hidden" name="pcode" value="${param.pcode}"/>
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">회의 날짜</span>
