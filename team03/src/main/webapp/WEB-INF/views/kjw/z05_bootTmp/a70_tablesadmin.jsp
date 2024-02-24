@@ -6,7 +6,7 @@
 <%@ page errorPage = "a50_404.jsp" %>
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>Good day!!</title>
@@ -275,6 +275,7 @@ text-align:right;
 																	<th>급여</th>
 																	<th>패널티횟수</th>
 																	<th>마지막수정시각</th>
+																	<th>로그인여부</th>
 																	<th>마지막수정인</th>
 																	<th><input type="checkbox" id="chkAll"></th>
 																</tr>
@@ -290,10 +291,12 @@ text-align:right;
 																		<td ><fmt:formatNumber value="${el.salary}" pattern="#,###"/></td>
 																		<td >${el.panaltytot}</td>
 																		<td >${el.lastfix}</td>
+																		<td><c:out value=${'${emp.ename}'=='${el.ename}' ? 'Y':'N'}/></td>
 																		<td >${el.lastone}</td>
 																		<td><input type="checkbox" id="chk"
 																			class="chkGrp" value="${el.empno}"
 																			name="checkboxModel"></td>
+																			
 																	</tr>
 																</c:forEach>
 															</tbody>
