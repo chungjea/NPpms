@@ -104,7 +104,7 @@ public class A01_Controller_lsd {
 
 	 //공지 등록 === pcode ===
 	@RequestMapping("insertNotice")
-	public String insertNotice(@ModelAttribute("sch") NoticeSch_f sch, Noticeboard_f ins, Model d, HttpSession session) {
+	public String insertNotice(@RequestParam("pcode")int pcode, @ModelAttribute("sch") NoticeSch_f sch, Noticeboard_f ins, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
 		System.out.println("이엠피 나와라"+emp);
 		if(emp!=null) {
@@ -112,7 +112,7 @@ public class A01_Controller_lsd {
 			service.insertNotice(ins);
 			d.addAttribute("msg", "등록성공");
 		}
-		return "lsd/z05_bootTmp/InsertNotice";
+		return "redirect:noticePage?pcode=" + pcode;
 	}// insertNotice()
 	
 	// 공지 등록 == dname있는데 pcode

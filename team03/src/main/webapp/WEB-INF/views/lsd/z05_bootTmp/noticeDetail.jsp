@@ -230,7 +230,7 @@ private Date updateDate;
 							<c:choose>
 								<c:when test="${emp.auth eq '직원'}">
 									<input id="chatArea" name="content" class="form-control" value="${notice.content}"
-										style="background-color: white !important; text-align: left"
+										style="background-color: white !important; text-align: left;"
 										readonly></input>
 								</c:when>
 								<c:otherwise>

@@ -409,10 +409,10 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button" id="regBtn" class="btn btn-primary">일정등록</button>
-					<c:if test="${emp.empno == empno}">
+					
 					<button type="button" id="uptBtn" class="btn btn-info">일정수정</button>
 					<button type="button" id="delBtn" class="btn btn-warning">일정삭제</button>
-					</c:if>
+					
 					<button type="button" id="clsBtn" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
@@ -426,10 +426,7 @@ body {
 	<form>
 	<div style="text-align: center;  margin-top: 20px;">
 		<button type="button" class="btn btn-info" id="mainBtn">메인페이지</button>
-		<c:if test="${emp.auth eq '직원'}">
-		<button type="button" class="btn btn-warning" id="empnoBtn">개인</button>
-		</c:if>
-		<button type="button" class="btn btn-danger" id="deptBtn">부서</button>
+	
 	</div>
 	</form>
 
