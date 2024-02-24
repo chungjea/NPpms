@@ -11,14 +11,8 @@ import com.web.spring.vo.Calendar_f;
 
 @Mapper
 public interface Calendar_fDao {
-	// 전체조회(부서+개인)
-	List<Calendar_f> getCalList_all(String dName);
-	
-	// 전체조회(부서별)
-	List<Calendar_f> getCalList(String dName);
-
-	// 전체조회(개인)
-	List<Calendar_f> getCalList_empno(int empno);
+	// 프로젝트별 조회
+	List<Calendar_f> getCalList_all(int pcode, int empno);
 	
 	// 등록
 	int insertCalendar(Calendar_f ins);

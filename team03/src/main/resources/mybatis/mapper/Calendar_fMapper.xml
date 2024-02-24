@@ -9,34 +9,27 @@
 		<result column="urllink" property="urlLink" />
 	</resultMap>
 
+	<!-- 프로젝트별로 캘린더 조회 -->
 	<select id="getCalList_all" resultMap="calRst">
-		select *
-		from calendar_f
-		where dName = #{dName}
+		SELECT *
+		FROM calendar_f
+		WHERE pcode = #{pcode}
+  		AND (empno = #{empno} OR auth = '관리자')
 	</select>
 
-	<select id="getCalList" resultMap="calRst">
-		select *
-		from calendar_f
-		where
-		dName = #{dName} and auth='관리자'
-	</select>
 
-	<select id="getCalList_empno" resultMap="calRst">
-		select *
-		from calendar_f
-		where empno = #{empno}
-	</select>
+	
+
 	<!-- <select id="getCalList" resultMap="calRst"> select id, title, writer, 
 		to_char(start1,'YYYY-MM-DD"T"HH24:MI:SS"+09:00"') start1, to_char(end1,'YYYY-MM-DD"T"HH24:MI:SS"+09:00"') 
 		end1, content, backgroundcolor, textcolor, allday, url from calendar_f </select> -->
 
-	<insert id="insertCalendar" parameterType="calendar_f">
+	<insert id="insertCalendar" parameterType="Calendar_f">
 		INSERT INTO Calendar_f values(cal_seq.nextval, #{title},
 		#{start},
 		#{end},
 		#{writer},#{content},#{backgroundColor},
-		#{textColor},#{allDay},#{urlLink},#{dName},#{empno},#{auth})
+		#{textColor},#{allDay},#{urlLink},#{auth},#{pcode},#{empno})
 	</insert>
 
 	<!-- <insert id="insertCalendar" parameterType="calendar_f"> INSERT INTO 

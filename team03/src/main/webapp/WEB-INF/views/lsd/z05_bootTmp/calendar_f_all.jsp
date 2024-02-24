@@ -68,6 +68,8 @@ body {
 	$(document).ready(function() {
 		var calendarEl = document.getElementById('calendar');
 		var today = new Date(); // 날짜형 js 객체
+		var pcode = "${pcode}"
+		var empno;
 		console.log(today)
 		console.log(today.toLocaleString())
 		// GMT기준으로 시간별 경도의 날짜/시간표시
@@ -140,7 +142,7 @@ body {
 				console.log("#일정 클릭시#")
 				console.log(arg.event)
 				addForm(arg.event)
-
+				console.log("ddd" + empno)
 				$("#calTitle").text("일정상세")
 				$("#regBtn").hide()
 				$("#uptBtn").show()
@@ -159,7 +161,7 @@ body {
 			dayMaxEvents : true, // allow "more" link when too many events
 			events : function(info, successCallback, failureCallBack) {
 				$.ajax({
-					url : "${path}/Cal_fList_all",
+					url : "${path}/Cal_fList_all?pcode=${pcode}",
 					dataType : "json",
 					success : function(data) {
 						console.log(data.cal_fList_all)
@@ -241,13 +243,14 @@ body {
 							alert("등록실패");
 						}
 					} else if (data.crud === 'update') {
-						if (data.msg === '등록성공') {
+						if (data.msg === '수정성공') {
 							alert("수정성공"); // 등록성공/등록실패
 						} else {
 							alert("수정실패");
 						}
 					} else {
-						if (data.msg === '등록성공') {
+						alert(data.msg)
+						if (data.msg === '삭제성공') {
 							alert("삭제성공"); // 등록성공/등록실패
 						} else {
 							alert("삭제실패");
@@ -277,6 +280,7 @@ body {
 			// evt.extendedProps.속성 : 기본속성이 아닌 추가적으로 
 			//		상세화면에 출력시 사용되는 속성
 			$("[name=id]").val(evt.id)
+			$("[name=empno]").val(evt.extendedProps.empno)
 			$("[name=title]").val(evt.title)
 			$("[name=writer]").val(evt.extendedProps.writer)
 			$("#start").val(evt.start.toLocaleString())
@@ -289,9 +293,12 @@ body {
 			$("[name=content]").val(evt.extendedProps.content)
 			$("[name=urlLink]").val(evt.extendedProps.urlLink)
 			$("[name=allDay]").val(evt.allDay ? 1 : 0)
+			<!--실제 작성한 사람꺼 empno-->
+			empno = evt.extendedProps.empno;
 		}
 
 	});
+	
 </script>
 </head>
 
@@ -323,30 +330,30 @@ body {
 				<div class="modal-body">
 					<form id="frm01" class="form" method="post">
 						<input type="hidden" name="id" value="0" />
-						<input type="hidden" name="dname" value="${emp.dname}" />
-						<input type="hidden" name="auth" value="${emp.auth}" />
+						<input type="hidden" name="pcode" value="${pcode}" />
+						
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									제목</span>
 							</div>
-							<input type="text" name="title" class="form-control" value="" style="background-color:white !important;" readonly/>
+							<input type="text" name="title" class="form-control" value="" style="background-color:white !important;" />
 						</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									시작일</span>
 							</div>
-							<input type="text" id="start" readonly class="form-control" style="background-color:white !important;"/> <input
-								type="hidden" name="start" readonly/>
+							<input type="text" id="start"  class="form-control" style="background-color:white !important;"/> <input
+								type="hidden" name="start" />
 						</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									종료일</span>
 							</div>
-							<input type="text" id="end" readonly class="form-control" style="background-color:white !important;"/> <input
-								type="hidden" name="end" readonly/>
+							<input type="text" id="end"  class="form-control" style="background-color:white !important;"/> <input
+								type="hidden" name="end" />
 						</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
@@ -354,14 +361,14 @@ body {
 									작성자</span>
 							</div>
 							<input name="writer" class="form-control" value="${emp.ename}" style="background-color:white !important;"
-								readonly />
+								 />
 						</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
 									내용</span>
 							</div>
-							<textarea name="content" id="chatArea" class="form-control" style="background-color:white !important;" readonly></textarea>
+							<textarea name="content" id="chatArea" class="form-control" style="background-color:white !important;" ></textarea>
 						</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
@@ -369,7 +376,7 @@ body {
 									배경색</span>
 							</div>
 							<input type="color" name="backgroundColor" class="form-control"
-								value="#0099cc" style="background-color:white !important;" readonly/>
+								value="#0099cc" style="background-color:white !important;" />
 						</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
@@ -377,7 +384,7 @@ body {
 									글자색</span>
 							</div>
 							<input type="color" name="textColor" class="form-control"
-								value="#ccffff" style="background-color:white !important;" readonly/>
+								value="#ccffff" style="background-color:white !important;" />
 						</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
@@ -385,7 +392,7 @@ body {
 									종일여부</span>
 							</div>
 						
-							<select name="allDay" class="form-control" style="background-color:white !important;" disabled>
+							<select name="allDay" class="form-control" style="background-color:white !important;">
 								<option value="1" >종일</option>
 								<option value="0">시간</option>
 							</select>
@@ -396,16 +403,16 @@ body {
 								<span class="input-group-text  justify-content-center">
 									참고 link</span>
 							</div>
-							<input type="text" name="urlLink" class="form-control" value="" style="background-color:white !important;" readonly/>
+							<input type="text" name="urlLink" class="form-control" value="" style="background-color:white !important;" />
 						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-				<!--<c:if test="${emp.auth eq '관리자' and emp.auth eq '직원'}">-->
 					<button type="button" id="regBtn" class="btn btn-primary">일정등록</button>
+					<c:if test="${emp.empno == empno}">
 					<button type="button" id="uptBtn" class="btn btn-info">일정수정</button>
 					<button type="button" id="delBtn" class="btn btn-warning">일정삭제</button>
-				<!--</c:if>-->
+					</c:if>
 					<button type="button" id="clsBtn" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>
