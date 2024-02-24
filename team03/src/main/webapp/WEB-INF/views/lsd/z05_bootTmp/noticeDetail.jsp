@@ -58,13 +58,13 @@
 	var msg = "${msg}"
 	if (proc != "") {
 		if (proc == "upt") {
-			if (confirm(msg + "\n메인화면으로 이동하시겠습니까?")) {
-				location.href = "${path}/noticePage"
+			if (confirm(msg + "\n공지화면으로 이동하시겠습니까?")) {
+				location.href = "${path}/noticePage?pcode=${param.pcode}"
 			}
 		}
 		if (proc == "del") {
 			alert(msg)
-			location.href = "${path}/noticePage"
+			location.href = "${path}/noticePage?pcode=${param.pcode}"
 		}
 	}
 
@@ -96,8 +96,9 @@
 				return
 			}*/
 			var no = $("[name=notice_num]").val()
+			var pcode = $("[name=pcode]").val()
 			if (confirm("삭제하시겠습니까?")) {
-				location.href = "${path}/deleteNotice?no=" + no
+				location.href = "${path}/deleteNotice?no=" + no + "&pcode=" + pcode
 			}
 		})
 
@@ -228,14 +229,14 @@ private Date updateDate;
 							</div>
 							<c:choose>
 								<c:when test="${emp.auth eq '직원'}">
-									<div id="chatArea" name="content" class="form-control"
+									<input id="chatArea" name="content" class="form-control" value="${notice.content}"
 										style="background-color: white !important; text-align: left"
-										readonly>${notice.content}</div>
+										readonly></input>
 								</c:when>
 								<c:otherwise>
-									<div id="chatArea" name="content" class="form-control"
-										style="background-color: white !important; text-align: left">
-										${notice.content}</div>
+									<input id="chatArea" name="content" class="form-control" value="${notice.content}"
+										style="background-color: white !important; text-align: left" >
+										</input>
 								</c:otherwise>
 							</c:choose>
 						</div>

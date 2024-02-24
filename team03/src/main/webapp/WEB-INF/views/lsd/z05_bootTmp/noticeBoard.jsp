@@ -137,7 +137,7 @@
 									</thead>
 									<tbody>
 
-										<c:forEach var="nt" items="${projectSearch}">
+										<c:forEach var="nt" items="${noticeboard}">
 											<tr ondblclick="noticeDetail(${nt.notice_num})">
 												<td class="text-center">${nt.cnt}</td>
 												<td class="text-center">${nt.notice_num}</td>

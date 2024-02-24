@@ -128,6 +128,15 @@
 					id="mainBtn" />
 			</div>
 			<script type="text/javascript">
+			var pcode = $("[name=pcode]").val();
+			var msg = "${msg}"
+			
+				if (msg === '등록성공') {
+					if (!confirm("등록되었습니다.")) {
+						location.href = "${path}/noticePage?pcode=" + pcode
+					}
+				}
+			
 				$("#regBtn").click(function() {
 					<%--if (confirm("등록하시겠습니까?")) {
 						if ($("[name=writer]").val() == "") {
@@ -138,16 +147,10 @@
 					}--%>
 					$("form").submit()
 				})
-				var msg = "${msg}"
-					console.log(msg)
-				if (msg != "") {
-					if (!confirm(msg + "\n계속 등록하시겠습니까?")) {
-						location.href = "${path}/noticePage"
-						
-					}
-				}
+				
+
 				$("#mainBtn").click(function() {
-					location.href = "${path}/noticePage"
+					location.href = location.href = "${path}/noticePage?pcode=" + pcode
 				})
 			</script>
 		</form>

@@ -33,16 +33,15 @@ private String etc;
 */
 @Mapper
 public interface A03_Dao_lsd {
-	/*
-	 * 공지 전체 List<Noticeboard_f> getNoticeboard(Noticeboard_f sch);
-	 * 
-	 * @Select("select * from Noticeboard_f") List<Noticeboard_f>
-	 * noticePage(NoticeSch_f sch);
-	 */
+
+	 //공지 전체 List<Noticeboard_f> getNoticeboard(Noticeboard_f sch);
+//	 @Select("select * from Noticeboard_f where pcode=#{pcode}") 
+//	 List<Noticeboard_f> projectSearch (int pcode);
+//	
 	// 프로젝트별 조회
-	@Select("select * from Noticeboard_f where pcode=#{pcode}")
-	List<Noticeboard_f> projectSearch(int pcode);
-	
+//	@Select("select * from Noticeboard_f where pcode=#{pcode}")
+//	List<Noticeboard_f> projectSearch(int pcode);
+//	
 	// 부서별 조회
 //	@Select("select * from Noticeboard_f where dname=#{dname}")
 //	List<Noticeboard_f> deptSearch(String dname);
@@ -52,17 +51,17 @@ public interface A03_Dao_lsd {
 	List<Noticeboard_f> noticeSch(Noticeboard_f sch);
 
 	// 페이징 처리, 전체조회
-//	@Select("select * \r\n" + "	from(\r\n" + "SELECT rownum cnt, nf.*\r\n"
-//			+ "	from Noticeboard_f nf\r\n" + "where 1=1\r\n" + "and title like '%'||#{title}||'%' \r\n"
-//			+ "		and dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
-//	List<Noticeboard_f> noticePage(NoticeSch_f sch);
+	@Select("select * \r\n" + "	from(\r\n" + "SELECT rownum cnt, nf.*\r\n"
+			+ "	from Noticeboard_f nf\r\n" + "where 1=1\r\n" + "and title like '%'||#{title}||'%' \r\n"
+			+ "		and pcode=#{pcode})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
+	List<Noticeboard_f> noticePage(NoticeSch_f sch);
 	
 //	@Select("select * \r\n" + "		from(\r\n" + "		SELECT rownum cnt, nf.*\r\n"
 //			+ "		from Noticeboard_f nf\r\n" + "		where dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
 //	List<Noticeboard_f> noticePage(String dname, int start, int end);
 
 	// 총 데이터건수
-	@Select("SELECT count(*) FROM Noticeboard_f where 1=1 and title like '%'||#{title}||'%' and dname=#{dname}")
+	@Select("SELECT count(*) FROM Noticeboard_f where 1=1 and title like '%'||#{title}||'%' and pcode=#{pcode}")
 	int totNotice(NoticeSch_f sch);
 
 	// 공지 세부 === pcode 추가함===
@@ -75,8 +74,8 @@ public interface A03_Dao_lsd {
 
 	// 공지 수정
 	@Update("update Noticeboard_f set content=#{content},updateDate=sysdate,"
-			+ "title=#{title} where notice_num = #{notice_num}")
-	int updateNotice(Noticeboard_f notice);
+			+ "title=#{title} where notice_num = #{notice_num} and pcode = #{pcode}")
+	int updateNotice(Noticeboard_f upt);
 
 	// 공지 삭제
 	@Delete("delete from Noticeboard_f where notice_num=#{notice_num}")

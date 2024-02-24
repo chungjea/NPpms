@@ -10,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.dao.lsd.A03_Dao_lsd;
 import com.web.spring.vo.NoticeFile_f;
+import com.web.spring.vo.NoticeSch_f;
 import com.web.spring.vo.Noticeboard_f;
 
 @Service
@@ -18,53 +19,55 @@ public class A02_Service_lsd {
 	private A03_Dao_lsd dao;
 
 	// 프로젝트별 조회
-	public List<Noticeboard_f> projectSearch(int pcode){
-		return dao.projectSearch(pcode);
-	}//projectSearch()
+//	public List<Noticeboard_f> projectSearch(int pcode){
+//		return dao.projectSearch(pcode);
+//	}//projectSearch()
 	
 	// 부서별 조회
 //	public List<Noticeboard_f> deptSearch(String dname){
 //		return dao.deptSearch(dname);
 //	}//deptSearch()
 	
+	// noticeSch 검색
 	public List<Noticeboard_f> noticeSch(Noticeboard_f sch) {
 		if (sch.getTitle() == null)
 			sch.setTitle("");
 		return dao.noticeSch(sch);
-	}//noticeSch 검색
+	}
 
 	// 공지 전체조회 및 페이징처리
-//	public List<Noticeboard_f> noticePage(NoticeSch_f sch,String dname){
-//		if(sch.getTitle()==null) sch.setTitle("");
-//		if(sch.getWriter()==null) sch.setWriter("");
-//		sch.setDname(dname);
-//		sch.setCount(dao.totNotice(sch));
-//		if(sch.getPageSize()==0) sch.setPageSize(5);
-//		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
-//		sch.setPageCount(totPage);
-//		
-//		if(sch.getCurPage()> sch.getPageCount()) sch.setCurPage(sch.getPageCount());
-//		if(sch.getCurPage()==0) sch.setCurPage(1);
-//		
-//		sch.setEnd(sch.getCurPage()*sch.getPageSize());
-//		if(sch.getEnd()>sch.getCount()) {
-//			sch.setEnd(sch.getCount() );
-//		}
-//		
-//		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
-//		sch.setBlockSize(5);
-//		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
-//		sch.setEndBlock(blockNum*sch.getBlockSize());
-//		if(sch.getEndBlock()>sch.getPageCount()) {
-//			sch.setEndBlock(sch.getPageCount());
-//		}
-//		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
-//		//System.out.println("매개변수 -> "+ sch);
-//		List<Noticeboard_f> list = dao.noticePage(sch);
-//		//System.out.println("list -> "+list);
-//		return list;
-//	}//noticePage() 공지전체+페이징처리	
+	public List<Noticeboard_f> noticePage(NoticeSch_f sch, int pcode){
+		if(sch.getTitle()==null) sch.setTitle("");
+		if(sch.getWriter()==null) sch.setWriter("");
+		sch.setPcode(pcode);
+		sch.setCount(dao.totNotice(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		
+		if(sch.getCurPage()> sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getEnd()>sch.getCount()) {
+			sch.setEnd(sch.getCount() );
+		}
+		
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
+//		System.out.println("매개변수 -> "+ sch);
+		List<Noticeboard_f> list = dao.noticePage(sch);
+		list.stream().forEach(it -> System.out.println(it.getNotice_num()));
+		return list;
+	}//noticePage() 공지전체+페이징처리	
 	
+	// noticeDetail() 공지 세부
 	//@RequestParam(value = "notice_num", defaultValue = "0") 안되면 껴넣을것 ▽
 	// === pcode ===
 		public Noticeboard_f noticeboardDetail(int notice_num, int pcode) {
@@ -80,7 +83,7 @@ public class A02_Service_lsd {
 			Noticeboard_f noticeboard = dao.noticeboardDetail(notice_num,pcode);
 			//noticeboard.setFname(dao.getNoticeFile(notice_num));
 			return noticeboard;
-		}// noticeDetail() 공지 세부
+		}
 
 
 		public List<NoticeFile_f> getNoticeFile(int notice_num) {
@@ -146,9 +149,12 @@ public class A02_Service_lsd {
 		return dao.getfnamebyfnoNF(fno);
 	}
 	
-	public String updateNotice(Noticeboard_f upt,int pcode) {
+	// updateNotice() 공지 수정
+	public String updateNotice(Noticeboard_f upt) {
+		String content = upt.getContent();
+		String title = upt.getTitle();
 		return dao.updateNotice(upt) > 0 ? "수정성공" : "수정실패";
-	}// updateNotice() 공지 수정
+	}//updateNotice()
 
 	public String deleteNotice(int notice_num) {
 		List<String> delFnames = dao.getfnobynameNF(notice_num);
