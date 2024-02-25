@@ -62,14 +62,13 @@ public class A02_Service_kjw {
 	}
 
 	
-	public String register(Emp_master_f ins, MailSender email) {
+	public int register(Emp_master_f ins) {
 
 
-		String msg = dao.register(ins) > 0 ? "회원정보등록성공" : "회원정보등록실패";
 
-		
-		return msg ;
+			return dao.register(ins);
 	}
+	
 
 	public int commute_e(Commute_f ins) {
 		if (ins.getEmpno() == 0)

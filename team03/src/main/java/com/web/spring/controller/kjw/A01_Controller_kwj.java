@@ -206,21 +206,12 @@ public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
-public String register(Emp_master_f ins,Model d,MailSender email,HttpSession session) {
-	
-	d.addAttribute("LatestEmp", service.LatestEmp());
-	if(email.getEmail()!=null) {
-	System.out.println("email:"+email.getEmail());
-	System.out.println("password:"+email.getPassword());
-	System.out.println("empno:"+email.getEmpno());
+public String register(Emp_master_f ins,Model d,HttpSession session) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
-	}
-	else {
-			System.out.println("등록되지않은 메시지입니다");
-		}
-	return "kjw/z05_bootTmp/a84_register";
-	}
+	d.addAttribute("msg",service.register(ins)>0?"등록성공":"등록실패");
 
+	return "kjw/z05_bootTmp/a84_register";
+}
 @RequestMapping("updateFrm")
 public String updateFrm() {
 	return "kjw/z05_bootTmp/detailpage";
