@@ -9,7 +9,6 @@ import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.Commute_f;
-import com.web.spring.vo.Emp;
 import com.web.spring.vo.sal_f;
 
 @Mapper

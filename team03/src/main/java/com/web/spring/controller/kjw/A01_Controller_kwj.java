@@ -23,7 +23,6 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.web.spring.service.kjw.A02_Service_kjw;
 import com.web.spring.vo.Commute_f;
-import com.web.spring.vo.Emp;
 import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
