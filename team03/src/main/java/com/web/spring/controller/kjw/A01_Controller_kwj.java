@@ -157,7 +157,7 @@ public String commuteFrm() {
 	return "kjw/z05_bootTmp/a20_cards";
 }
 @RequestMapping(value ="commute_s", method = {RequestMethod.POST,RequestMethod.GET})
-public String commute_s(Commute_f ins,Commute_f sch,Model d,Commute_f csch,@DateTimeFormat(pattern="HH:mm:ss") Date starttime,HttpSession session) {
+public String commute_s(Commute_f ins,Commute_f sch,Model d,Commute_f csch,@DateTimeFormat(pattern="HH:mm:ss") Date starttime,HttpSession session,String div) {
 	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",service.commute_s(ins)>0?"출근등록성공":"출근등록실패");
 	d.addAttribute("inputS", service.starttime_c(csch));
@@ -186,20 +186,19 @@ public String commute_end(Commute_f ins, Model d,HttpSession session,Commute_f c
 	}
 	return "kjw/z05_bootTmp/a20_cards";
 }
-@Autowired(required = false)
-@RequestMapping(value="confirming", method = {RequestMethod.POST,RequestMethod.GET})
-public String mailSend(MailSender email,  Model d) {
-	d.addAttribute("LatestEmp", service.LatestEmp());
-	if(email.getEmail()!=null) {
-	System.out.println("email:"+email.getEmail());
-	System.out.println("password:"+email.getPassword());
-	d.addAttribute("msg", service.sendMail(email));
-	
-	}else {
-		return "mailVo.getReceiver()";
-	}
-	return "kjw/z05_bootTmp/a84_register";
-}
+/*
+ * @Autowired(required = false)
+ * 
+ * @RequestMapping(value="confirming", method =
+ * {RequestMethod.POST,RequestMethod.GET}) public String mailSend(String email,
+ * Model d,String div) { d.addAttribute("LatestEmp", service.LatestEmp());
+ * if(email.getEmail()!=null) { System.out.println("email:"+email.getEmail());
+ * System.out.println("password:"+email.getPassword()); d.addAttribute("msg",
+ * service.sendMail(email,div));
+ * 
+ * }else { return "mailVo.getReceiver()"; } return
+ * "kjw/z05_bootTmp/a84_register"; }
+ */
 
 @RequestMapping("registerFrm")
 public String registerFrm() {
@@ -207,8 +206,14 @@ public String registerFrm() {
 }
 @RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
 public String register(Emp_master_f ins,Model d,HttpSession session) {
+	String result = service.register(ins);
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
-	d.addAttribute("msg",service.register(ins)>0?"등록성공":"등록실패");
+	d.addAttribute("msg",result);
+	d.addAttribute("LatesteEmps",service.LatestEmp());
+	String div="reg";
+	if("등록성공".equals(result)) {
+		d.addAttribute("Emsg",service.sendMail(ins.getEmail(), div));
+	}
 
 	return "kjw/z05_bootTmp/a84_register";
 }

@@ -115,12 +115,12 @@
 											<option value="@daum.net">daum.net</option>
 											<option value="@gmail.com">gmail.com</option>
 										</select>
-										<!--  <input type="hidden" id="password" name="password" value=""> -->
+										  <input type="hidden" id="password" name="password" value=""> 
 										<input type="hidden" id="passwd" name="passwd" value="">
 										<input type="hidden" id="email" name="email" value="">
-										<!-- <input type="hidden" id="empno" name="empno" value=""> -->
-										<!--  <input type="hidden" id="lastone" name="lastone" value=""> -->
-										<!--  <input type="hidden" id="receiver" name="receiver" value=""> -->
+										 <input type="hidden" id="empno" name="empno" value=""> 
+										  <input type="hidden" id="lastone" name="lastone" value=""> 
+										  <input type="hidden" id="receiver" name="receiver" value=""> 
 										<input type="hidden" id="title" name="title"
 											value="회원등록된 정보를 전송해드립니다.">
 
@@ -206,16 +206,16 @@
 						$("#regBtn").click(function(){ //등록
 							temp_pw_issuance();
 							 
-							/* var passwd=document.getElementById('passwd').value; */
+							 var passwd=document.getElementById('passwd').value; 
 							var receiver=document.getElementById('emailH').value+document.getElementById('emailE').value;
 							var emailE=document.getElementById('emailE').value;
 							var emailH=document.getElementById('emailH').value;
 							  
 							document.getElementById('email').value= emailH+emailE;
-							/* document.getElementById('receiver').value = receiver; */
-							/* document.getElementById('password').value = password; */
-							/* document.getElementById('passwd').value= passwd; */
-							/* document.getElementById('receiver').value= email; */
+							 document.getElementById('receiver').value = receiver; 
+							 document.getElementById('password').value = password; 
+							 document.getElementById('passwd').value= passwd; 
+							 document.getElementById('receiver').value= email; 
 
 							 
 

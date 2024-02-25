@@ -62,11 +62,11 @@ public class A02_Service_kjw {
 	}
 
 	
-	public int register(Emp_master_f ins) {
+	public String register(Emp_master_f ins) {
 
 
 
-			return dao.register(ins);
+			return dao.register(ins)>0?"등록성공":"등록실패";
 	}
 	
 
@@ -148,22 +148,26 @@ public class A02_Service_kjw {
 	// 메일발송 메서드
 	@Autowired(required = false)
 	// 메일발송 메서드
-	public String sendMail(MailSender email) {
-		String msg = "";
+	public String sendMail(String email,String div) {
+		String Emsg = "";
+		String message="";
+		Emp_master_f Einform = dao.getnewinfo(email);
 		// 1. 메일 발송 데이터 전송을 위한 객체 생성.
 		MimeMessage mmsg = sender.createMimeMessage();
 		// 2. 해당 객체로 화면단에 입력된 내용 할당
 		try {
+			
+			if(div.equals("reg")) {
 			// 1) 제목
-			mmsg.setSubject(email.getTitle());
+			mmsg.setSubject("PMS시스템 사원번호와 임시비밀번호입니다");
 			// 2) 수신자
-			mmsg.setRecipient(RecipientType.TO, new InternetAddress(email.getEmail()));
+			mmsg.setRecipient(RecipientType.TO, new InternetAddress(Einform.getEmail()));
 			// 3) 내용
-			mmsg.setText("사번:" + email.getEmpno() + "비번:" + email.getPassword());
-
+			mmsg.setText("사번:" + Einform.getEmpno() + "비번:" + Einform.getPasswd());
+			}
 			// 4) 발송처리..
 			sender.send(mmsg);
-			msg = "메일발송 성공";
+			Emsg = "메일발송 성공";
 			/*
 			
 				 
@@ -171,12 +175,12 @@ public class A02_Service_kjw {
 			 * */
 		} catch (MessagingException e) {
 			System.out.println("메시지 전송 에러 발송:" + e.getMessage());
-			msg = "메일 발송 에러 발생:" + e.getMessage();
+			Emsg = "메일 발송 에러 발생:" + e.getMessage();
 		} catch (Exception e) {
 			System.out.println("기타 에러 :" + e.getMessage());
-			msg = "기타 에러 발생:" + e.getMessage();
+			Emsg = "기타 에러 발생:" + e.getMessage();
 		}
-		return msg;
+		return Emsg;
 	}
 
 }

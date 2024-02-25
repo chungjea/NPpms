@@ -9,6 +9,7 @@ import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.Commute_f;
+import com.web.spring.vo.Emp;
 import com.web.spring.vo.sal_f;
 
 @Mapper
@@ -48,6 +49,7 @@ int updateinfo(Emp_master_f upt);
 		boolean existByName(String ename);
 		List<Commute_f> starttime_c(Commute_f csch);
 		List<Commute_f> endtime_c(Commute_f csch);
+		Emp_master_f getnewinfo(String email);
 }
 
 
