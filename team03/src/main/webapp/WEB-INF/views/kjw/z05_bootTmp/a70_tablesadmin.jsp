@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<%@ page errorPage = "a50_404.jsp" %>
+<%@ page import="java.util.Objects" %> 
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
@@ -25,11 +25,16 @@ text-align:right;
 	position: sticky;
 	top: 0;
 	background-color:white;
+	text-align:center;
 }
       #dataTable2 th {
 	position: sticky;
 	top: 0;
 	background-color:white;
+	text-align:center;
+}
+#home{
+display:show;
 }
 </style>
 
@@ -258,7 +263,7 @@ text-align:right;
 						<div id="home" class="tab-pane fade in active">
 						
 	
-
+								<div id="home option">
 								<div class="card-body">
 									<div class="table-responsive">
 
@@ -291,7 +296,7 @@ text-align:right;
 																		<td ><fmt:formatNumber value="${el.salary}" pattern="#,###"/></td>
 																		<td >${el.panaltytot}</td>
 																		<td >${el.lastfix}</td>
-																		<td><c:out value=${'${emp.ename}'=='${el.ename}' ? 'Y':'N'}/></td>
+																		<td>${(emp.ename == el.ename) ? "Y" : "N" }</td>
 																		<td >${el.lastone}</td>
 																		<td><input type="checkbox" id="chk"
 																			class="chkGrp" value="${el.empno}"
@@ -306,6 +311,8 @@ text-align:right;
 									</div>
 
 								</div>
+								</div>
+								<div id="home option2">
 								<div class="card-body">
 									<div class="table-responsive">
 
@@ -350,7 +357,7 @@ text-align:right;
 								</div>
 
 							</div>
-
+</div>
 						
 
 
@@ -473,8 +480,8 @@ text-align:right;
 </body>
 
 <script type="text/javascript">
-var home=false;
-var tab02=false;
+var home=false; //전체인사목록페이지(재무팀제외 열람가능)
+var tab02=false; //인사팀만열람가능
 var url=(home===true)?'${path}/deleteEmps':'${path}/deleteEmpsagain';
 
 $(document).ready(function(){
@@ -634,7 +641,6 @@ if(AUTH == '관리자' && DNAME!='재무팀') {
   $("dataTable").css("display","none");
   $("dataTable1").css("display");
 
-
 }else{
 	$("dataTable").css("display","none");
 	  $("dataTable1").css("display","none");
@@ -646,7 +652,7 @@ $("#tab02").click(function(){
 	 $("#textchange").text('복구');
 	if(AUTH == '관리자' && DNAME=='인사팀') {
 		
-		   $("#dataTable").css("display");//인사,전체
+		  
 		   $("#dataTable2").css("display"); //삭제인원페이지
 
 	}else if(AUTH == '관리자' && !DNAME=='인사팀') {
