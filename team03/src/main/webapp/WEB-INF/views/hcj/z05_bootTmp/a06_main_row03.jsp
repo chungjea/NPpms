@@ -22,7 +22,7 @@
 		<!-- Card Body -->
 		<div class="card-body">
 			<h5 id="dchartheader"></h5>
-			<div class="chart-pie">
+			<div class="chart-pie" style="height: 250px;margin:5px">
 				<canvas id="myProjectChart"></canvas>
 			</div>
 		
@@ -37,13 +37,13 @@
 			</div>
 		</div>
 		<div class="card-body">
-			<div class="chart-bar">
+			<div class="chart-bar" style="height: 250px">
 				<canvas id="myBarChart"></canvas>
 			</div>
 			<hr>
-			<select class="form-select form-select-sm" style="margin:0px">
+			<select class="form-select form-select-sm" style="margin:0px" id="pjselect" onchange="selectpjwork()">
 			<c:forEach var="pj" items="${projects}">
-				<option>${pj.pname}</option>
+				<option value="${pj.pcode}">${pj.pname}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -113,7 +113,7 @@ var totcnt =0;
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
       barPercentage: 0.5,
-      data: [7, 5, 2]   
+      data: []   
     }],
   },
   options: {
@@ -128,8 +128,8 @@ var totcnt =0;
       borderWidth: 1,
       xPadding: 10,
       yPadding: 10,
-      displayColors: true,
-      caretPadding: 10,
+      displayColors: true
+ 
     },  
     scales: {
     	xAxes: [{

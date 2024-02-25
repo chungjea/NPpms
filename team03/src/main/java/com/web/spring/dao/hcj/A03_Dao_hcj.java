@@ -19,59 +19,69 @@ import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
 import com.web.spring.vo.Tmem_f;
+import com.web.spring.vo.Workcnt;
 
 
 @Mapper
 public interface A03_Dao_hcj {
 //------------------------차트----------------------------------
-	//전체 프로젝트 수
-		//관리자
-		@Select("Select count(*) from project_f "
-		+ "where empno = #{empno}")
-		int getAllMyProjectCntAdmin(int empno);
-		// 사원
-		@Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n"
-			+ "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n")
-		int getAllMyProjectCntNormal(int empno);
-	//  프로젝트 수
-		//관리자
-		int getProjectCntAdmin(Emp_pinfo_f emp);
-		// 사원
-		@Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n"
-				+ "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n"
-				+ "		AND STATUS ='완료'")
-		int getCompleteProjectCntNormal(int empno);	
-	// 예정된 프로젝트 수
-		//관리자
-		@Select("SELECT count(*) FROM project_f\r\n"
-		+ "where status='예정' and empno = #{empno} \r\n")
-		int getExpectedProjectCntAdmin(int empno);
-		// 사원
-		@Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n"
-			+ "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n"
-			+ "		AND STATUS ='예정'")
-		int getExpectedProjectCntNormal(int empno);
-	// 중단된 프로젝트 수
-		//관리자
-		@Select("SELECT count(*) FROM project_f\r\n"
-		+ "where status='중단' and empno = #{empno} \r\n")
-		int getStopedProjectCntAdmin(int empno);	
-		// 사원
-		@Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n"
-			+ "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n"
-			+ "		AND STATUS ='중단'")
-		int getStopedProjectCntNormal(int empno);
-	// 진행중인 프로젝트 수	
-		//관리자
-		@Select("SELECT count(*) FROM project_f\r\n"
-			+ "where status='진행중' and empno = #{empno} \r\n")
-		int getProceedProjectCntAdmin(int empno);
-		// 사원
-		@Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n"
-			+ "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n"
-			+ "		AND STATUS ='진행중'")
-		int getProceedProjectCntNormal(int empno);
+	/*
+	 * //전체 프로젝트 수 //관리자
+	 * 
+	 * @Select("Select count(*) from project_f " + "where empno = #{empno}") int
+	 * getAllMyProjectCntAdmin(int empno); // 사원
+	 * 
+	 * @Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n" +
+	 * "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n") int
+	 * getAllMyProjectCntNormal(int empno); // 프로젝트 수 //관리자 int
+	 * getProjectCntAdmin(Emp_pinfo_f emp); // 사원
+	 * 
+	 * @Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n" +
+	 * "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n" +
+	 * "		AND STATUS ='완료'") int getCompleteProjectCntNormal(int empno); //
+	 * 예정된 프로젝트 수 //관리자
+	 * 
+	 * @Select("SELECT count(*) FROM project_f\r\n" +
+	 * "where status='예정' and empno = #{empno} \r\n") int
+	 * getExpectedProjectCntAdmin(int empno); // 사원
+	 * 
+	 * @Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n" +
+	 * "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n" +
+	 * "		AND STATUS ='예정'") int getExpectedProjectCntNormal(int empno); //
+	 * 중단된 프로젝트 수 //관리자
+	 * 
+	 * @Select("SELECT count(*) FROM project_f\r\n" +
+	 * "where status='중단' and empno = #{empno} \r\n") int
+	 * getStopedProjectCntAdmin(int empno); // 사원
+	 * 
+	 * @Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n" +
+	 * "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n" +
+	 * "		AND STATUS ='중단'") int getStopedProjectCntNormal(int empno); // 진행중인
+	 * 프로젝트 수 //관리자
+	 * 
+	 * @Select("SELECT count(*) FROM project_f\r\n" +
+	 * "where status='진행중' and empno = #{empno} \r\n") int
+	 * getProceedProjectCntAdmin(int empno); // 사원
+	 * 
+	 * @Select("SELECT count(*) FROM PROJECT_F pf ,TMEM_F tf \r\n" +
+	 * "		WHERE tf.PCODE = pf.PCODE AND tf.EMPNO = #{empno}\r\n" +
+	 * "		AND STATUS ='진행중'") int getProceedProjectCntNormal(int empno);
+	 */
 	
+		@Select("SELECT count(*) Allcnt,\r\n"
+				+ "		count(CASE WHEN PROGRESS<1 THEN 1 end) AS Proceeding, \r\n"
+				+ "		count(CASE WHEN PROGRESS = 1 THEN 1 END) AS complete\r\n"
+				+ "		FROM project_work_f\r\n"
+				+ "		WHERE empno = #{empno}\r\n"
+				+ "		and pcode = #{pcode}")
+		Workcnt getWorkCntNormal(@Param("empno")int empno,@Param("pcode")int pcode);
+		
+		@Select("SELECT count(*) Allcnt,\r\n"
+				+ "count(CASE WHEN PROGRESS<1 THEN 1 end) AS Proceeding, \r\n"
+				+ "count(CASE WHEN PROGRESS = 1 THEN 1 END) AS complete\r\n"
+				+ "FROM project_work_f\r\n"
+				+ "where PCODE = #{pcode}")
+		Workcnt getWorkCntAdmin(@Param("pcode")int pcode);
 		
 		List<ProjectCnt> getProjectCntByStatusAdmin(int empno);
 		List<ProjectCnt> getProjectCntByStatusNormal(int empno);

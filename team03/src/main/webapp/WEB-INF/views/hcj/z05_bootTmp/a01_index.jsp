@@ -5,8 +5,8 @@
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
-<html>
-<head>
+<html> 
+<head> 
 <meta charset="UTF-8">
 <title>Good day!!</title>
 <style>
@@ -14,7 +14,7 @@
 </style>
 
 
-
+  
 <%--
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script

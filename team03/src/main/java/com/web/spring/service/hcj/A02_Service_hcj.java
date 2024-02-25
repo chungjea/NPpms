@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,45 +19,55 @@ import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
 import com.web.spring.vo.Tmem_f;
+import com.web.spring.vo.Workcnt;
 
 @Service
 public class A02_Service_hcj {
 	@Autowired(required = false)
 	private A03_Dao_hcj dao;
-	//전체 프로젝트 수(admin-담당한)
-	public int getAllMyProjectCntAdmin(int empno){return dao.getAllMyProjectCntAdmin(empno);}
-	//전체 프로젝트 수(normal-참여한)
-	public int getAllMyProjectCntNormal(int empno){return dao.getAllMyProjectCntNormal(empno);}
+	/*
+	 * //전체 프로젝트 수(admin-담당한) public int getAllMyProjectCntAdmin(int empno){return
+	 * dao.getAllMyProjectCntAdmin(empno);} //전체 프로젝트 수(normal-참여한) public int
+	 * getAllMyProjectCntNormal(int empno){return
+	 * dao.getAllMyProjectCntNormal(empno);}
+	 */
 	
 	// 완료중인 프로젝트 수(admin-담당한)
 	public List<ProjectCnt> getProjectCntAdmin(Emp_pinfo_f emp){
 		if(emp.getAuth().equals("관리자")) return dao.getProjectCntByStatusAdmin(emp.getEmpno());
 		else return dao.getProjectCntByStatusNormal(emp.getEmpno());
 	}
-	// 완료중인 프로젝트 수(normal-참여한)
-	public int getCompleteProjectCntNormal(int empno){return dao.getCompleteProjectCntNormal(empno);}
-	// 예정중인 프로젝트 수(admin-담당한)
-	public int getExpectedProjectCntAdmin(int empno){return dao.getExpectedProjectCntAdmin(empno);}
-	// 예정중인 프로젝트 수(normal-참여한)
-	public int getExpectedProjectCntNormal(int empno){return dao.getExpectedProjectCntNormal(empno);}
-	// 중단된 프로젝트 수(admin-담당한)
-	public int getStopedProjectCntAdmin(int empno){return dao.getStopedProjectCntAdmin(empno);}
-	// 중단된 프로젝트 수(normal-참여한)
-	public int getStopedProjectCntNormal(int empno){return dao.getStopedProjectCntNormal(empno);}
-	// 진행중인 프로젝트 수(admin-담당한)
-	public int getProceedProjectCntAdmin(int empno){return dao.getProceedProjectCntAdmin(empno);}
-	// 진행중인 프로젝트 수(normal-참여한)
-	public int getProceedProjectCntNormal(int empno){return dao.getProceedProjectCntNormal(empno);}
+	/*
+	 * // 완료중인 프로젝트 수(normal-참여한) public int getCompleteProjectCntNormal(int
+	 * empno){return dao.getCompleteProjectCntNormal(empno);} // 예정중인 프로젝트
+	 * 수(admin-담당한) public int getExpectedProjectCntAdmin(int empno){return
+	 * dao.getExpectedProjectCntAdmin(empno);} // 예정중인 프로젝트 수(normal-참여한) public int
+	 * getExpectedProjectCntNormal(int empno){return
+	 * dao.getExpectedProjectCntNormal(empno);} // 중단된 프로젝트 수(admin-담당한) public int
+	 * getStopedProjectCntAdmin(int empno){return
+	 * dao.getStopedProjectCntAdmin(empno);} // 중단된 프로젝트 수(normal-참여한) public int
+	 * getStopedProjectCntNormal(int empno){return
+	 * dao.getStopedProjectCntNormal(empno);} // 진행중인 프로젝트 수(admin-담당한) public int
+	 * getProceedProjectCntAdmin(int empno){return
+	 * dao.getProceedProjectCntAdmin(empno);} // 진행중인 프로젝트 수(normal-참여한) public int
+	 * getProceedProjectCntNormal(int empno){return
+	 * dao.getProceedProjectCntNormal(empno);}
+	 */
 	
 	
+	public Workcnt getWorkCnt(int empno, int pcode,String auth) {
+		System.out.println("서비스 접근!");
+		System.out.println("pcode:"+pcode);
+		System.out.println("empno:"+empno);
+		System.out.println("auth:"+auth);
+			return auth.equals("관리자")?
+					dao.getWorkCntAdmin(pcode):dao.getWorkCntNormal(empno, pcode);
+	}
 
 	// 내가 참여한 프로젝트 5개까지 불러오기(진행중인상태 우선)
 	public List<Project_f> getprojects(Emp_pinfo_f emp){
-		if(emp.getAuth().equals("관리자")) {
-			return dao.getprojectsAdmin(emp);
-		}else {
-			return dao.getprojectsNormal(emp);
-		}	 
+		return emp.getAuth().equals("관리자")?
+				dao.getprojectsAdmin(emp):dao.getprojectsNormal(emp);
 	}
 	
 	
@@ -228,18 +239,7 @@ public class A02_Service_hcj {
 	}
 	public Project_f getProjectInfo(int pcode) {
 		Project_f pinfo =dao.getProjectInfo(pcode);
-		
-		
-	/*	 for(Tmem_f f :dao.getTmemEmp(pcode)) {
-		 System.out.println("사원번호1:"+f.getKey());
-		 System.out.println("이름1:"+f.getLabel()); }
-		 */
 		 pinfo.setTmem(dao.getTmemEmp(pcode)); 
-		 for(Tmem_f f :pinfo.getTmem()) {
-			 System.out.println("사원번호2:"+f.getKey());
-			 System.out.println("이름2:"+f.getLabel()); 
-		 }
-		 
 		return pinfo;
 	}
 	

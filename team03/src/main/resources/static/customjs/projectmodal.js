@@ -125,3 +125,42 @@ var members = new Map();
 			}
 		})  
 	}
+	
+	function loadProjectinfo(pcode){
+		$("#projectmodalheader").text("프로젝트 관리") 
+		$("#uptBtn").show()
+		$("#delBtn").show()
+		$("#regBtn").hide()
+		$.ajax({
+			url:"loadpinfo",
+			type:"post",
+			data:"pcode="+pcode,
+			datatype:"json",
+			success:function(pinfo){
+					
+				$("#frm02 #titleheader").text(pinfo.pname);
+				$("#frm02 [name=pcode]").val(pinfo.pcode);
+				$("#frm02 [name=pname]").val(pinfo.pname);
+				$("#frm02 [name=ptype]").val(pinfo.ptype);
+				$("#frm02 [name=empno]").val(pinfo.empno);
+				$("#frm02 [name=mgname]").val(pinfo.mgname);
+				$("#frm02 [name=startdte]").val(pinfo.startdte.substring(0,10));
+				$("#frm02 [name=enddte]").val(pinfo.enddte.substring(0,10));
+				$("#frm02 [name=content]").val(pinfo.content);
+				$("#frm02 [name=status]").val(pinfo.status);
+				$("#frm02 [name=teams]").val(pinfo.tname);
+				pinfo.tmem.forEach(function(mem){
+					$("#frm02 #teams_name").append('<button type="button" id="'+mem.key+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+mem.label+'</button>');
+					members.set(mem.key,mem.label);
+				})
+				
+				
+				imgbox.style.display="";
+				img.src=pinfo.path+"icon"+pinfo.ino+pinfo.ext;	
+			},
+			error:function(err){
+				console.log(err)
+			}
+		})
+		
+	}
