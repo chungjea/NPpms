@@ -26,7 +26,7 @@
 		<typeAlias alias="EmpHistory" type="com.web.spring.vo.Emp_master_his_f"/>
 		<typeAlias alias="pjcnt" type="com.web.spring.vo.ProjectCnt"/>
 		<typeAlias alias="team" type="com.web.spring.vo.Team"/>
-		
+		<!--qwe
 		
 	</typeAliases>
 
