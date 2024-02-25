@@ -296,7 +296,7 @@ display:show;
 																		<td ><fmt:formatNumber value="${el.salary}" pattern="#,###"/></td>
 																		<td >${el.panaltytot}</td>
 																		<td >${el.lastfix}</td>
-																		<td>${(emp.ename == el.ename) ? "Y" : "N" }</td>
+																		<td>${({emp} != null) ? "Y" : "N" }</td>
 																		<td >${el.lastone}</td>
 																		<td><input type="checkbox" id="chk"
 																			class="chkGrp" value="${el.empno}"

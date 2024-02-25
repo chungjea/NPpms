@@ -21,6 +21,7 @@
 		<typeAlias alias="file" type="com.web.spring.vo.File_f"/>
 		<typeAlias alias="fileSch" type="com.web.spring.vo.FileSch"/>
 		<typeAlias alias="commute_s" type="com.web.spring.vo.Commute_f"/>
+		<typeAlias alias="commute_e" type="com.web.spring.vo.Commute_f"/>
 		<typeAlias alias="tmem" type="com.web.spring.vo.Tmem_f"/>
 		<typeAlias alias="EmpHistory" type="com.web.spring.vo.Emp_master_his_f"/>
 		<typeAlias alias="pjcnt" type="com.web.spring.vo.ProjectCnt"/>

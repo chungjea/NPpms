@@ -10,10 +10,13 @@ public class Commute_f {
 	private int late;
 	private int absence;
 	private int annual;
-	@DateTimeFormat(pattern = "yyyy-MM-dd:HH-MM-SS")
-	private Date starttime;
-	private Date endtime;
-	private Date overtime;
+	@DateTimeFormat(pattern = "yyyy-MM-dd:hh-MM-ss")
+	private Date ALLTIME;
+	private String status;
+	public Commute_f() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public int getEmpno() {
 		return empno;
 	}
@@ -44,39 +47,28 @@ public class Commute_f {
 	public void setAnnual(int annual) {
 		this.annual = annual;
 	}
-	public Date getStarttime() {
-		return starttime;
+	public Date getALLTIME() {
+		return ALLTIME;
 	}
-	public void setStarttime(Date starttime) {
-		this.starttime = starttime;
+	public void setALLTIME(Date aLLTIME) {
+		ALLTIME = aLLTIME;
 	}
-	public Date getEndtime() {
-		return endtime;
+	public String getStatus() {
+		return status;
 	}
-	public void setEndtime(Date endtime) {
-		this.endtime = endtime;
+	public void setStatus(String status) {
+		this.status = status;
 	}
-	public Date getOvertime() {
-		return overtime;
-	}
-	public void setOvertime(Date overtime) {
-		this.overtime = overtime;
-	}
-	public Commute_f(int empno, String ename, int late, int absence, int annual, Date starttime, Date endtime,
-			Date overtime) {
+	public Commute_f(int empno, String ename, int late, int absence, int annual, Date aLLTIME, String status) {
 		super();
 		this.empno = empno;
 		this.ename = ename;
 		this.late = late;
 		this.absence = absence;
 		this.annual = annual;
-		this.starttime = starttime;
-		this.endtime = endtime;
-		this.overtime = overtime;
+		ALLTIME = aLLTIME;
+		this.status = status;
 	}
-	public Commute_f() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
+	
+	
 }

@@ -69,7 +69,7 @@
 					<span>인사관리</span>
 			</a></li>
 			
-			<li class="nav-item"><a class="nav-link" href="${path}/z05_bootTmp/a70_tables.jsp">
+			<li class="nav-item"><a class="nav-link" href="${path}/FIFilter">
 					<span>재정관리</span>
 			</a></li>
 

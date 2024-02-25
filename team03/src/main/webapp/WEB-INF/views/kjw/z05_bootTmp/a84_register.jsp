@@ -137,7 +137,7 @@
                                 <a class="small" href="forgot-password.jsp">Forgot Password?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login">Already have an account? Login!</a>
+                                <a class="small" href="${path}/login">Already have an account? Login!</a>
                             </div>
                         </div>
                     </div>
@@ -236,8 +236,15 @@
 				}
 			} */
 			
+			
+			
+			
+			
+			
+			
+			
 
-			         
+			         //비밀번호 생성기
 			function temp_pw_issuance() {
 				let ranValue1 = ['1','2','3','4','5','6','7','8','9','0'];
 				let ranValue2 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];

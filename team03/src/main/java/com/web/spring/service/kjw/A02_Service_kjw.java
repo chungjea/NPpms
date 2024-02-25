@@ -61,17 +61,24 @@ public class A02_Service_kjw {
 		return dao.doneProj(empno);
 	}
 
+	
 	public String register(Emp_master_f ins, MailSender email) {
-		
+
 
 		String msg = dao.register(ins) > 0 ? "회원정보등록성공" : "회원정보등록실패";
-		int empno = dao.LatestEmp();
-		ins.setEmpno(empno);
 
-		return msg += sendMail(email);
-
+		
+		return msg ;
 	}
 
+	public int commute_e(Commute_f ins) {
+		if (ins.getEmpno() == 0)
+			ins.setEmpno(0);
+		if (ins.getEname() == null)
+			ins.setEname("");
+
+		return dao.commute_e(ins);
+	}
 	public int commute_s(Commute_f ins) {
 		if (ins.getEmpno() == 0)
 			ins.setEmpno(0);
@@ -123,6 +130,20 @@ public class A02_Service_kjw {
 		if (ssah.getEmpno() == 0)
 			ssah.setEmpno(0);
 		return dao.getSalList(ssah);
+	}
+	public List<Commute_f> starttime_c(Commute_f csch){
+		if(csch.getEmpno()==0)
+			csch.setEmpno(0);
+		if(csch.getALLTIME()==null)
+			csch.setALLTIME(null);
+		return dao.starttime_c(csch);
+	}
+	public List<Commute_f> endtime_c(Commute_f csch){
+		if(csch.getEmpno()==0)
+			csch.setEmpno(0);
+		if(csch.getALLTIME()==null)
+			csch.setALLTIME(null);
+		return dao.endtime_c(csch);
 	}
 
 	// 메일발송 메서드

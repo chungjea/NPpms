@@ -33,6 +33,8 @@ int updateinfo(Emp_master_f upt);
 		List<Emp_master_f> Emplist(); //사원정보리스트
 		
 		int commute_s(Commute_f ins);
+		int commute_e(Commute_f ins);
+		
 
 		Commute_f commute_f(Commute_f sch); //출근
 		
@@ -44,6 +46,8 @@ int updateinfo(Emp_master_f upt);
 		List<Emp_master_his_f> EmpHistory(Emp_master_his_f psearch);
 
 		boolean existByName(String ename);
+		List<Commute_f> starttime_c(Commute_f csch);
+		List<Commute_f> endtime_c(Commute_f csch);
 }
 
 
