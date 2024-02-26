@@ -58,7 +58,7 @@
 					</div></li>
 				</c:when>
 				<c:otherwise>
-					<li class="nav-item"><a class="nav-link collapsed" href="#" > <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span> </a></li>
+					<li class="nav-item"><a class="nav-link collapsed" href="projectList" > <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span> </a></li>
 				</c:otherwise>
 			</c:choose>
 			<c:if test="${param.pcode != null && param.pcode > 0}">

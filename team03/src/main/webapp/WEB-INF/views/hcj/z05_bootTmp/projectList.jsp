@@ -192,182 +192,7 @@ td{text-align:center;}
 	
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
-<script
-	src="${path}/a00_com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-<!-- Core plugin JavaScript-->
-<script src="${path}/a00_com/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-<!-- Custom scripts for all pages-->
-<script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
-<script src="${path}/customjs/slidbar.js"></script>
-<script src="${path}/customjs/projectmodal.js"></script>
-<!-- <script type="text/javascript">
-	$("#regBtn").click(function(){
-		//### 유효성 검사 ###
-		if($("[name=pname]").val()==""){
-			alert("프로젝트명을 입력해주세요")
-			$("[name=pname]").focus()
-			return;
-		}
-		if($("[name=ptype]").val()==0){
-			alert("프로젝트유형을 선택해주세요")
-			$("[name=ptype]").focus()
-			return;
-		}
-		
-		if($("[name=startdte]").val()==""||$("[name=enddte]").val()==""){
-			alert("프로젝트 기간을 입력해주세요")
-			
-			if($("[name=startdte]").val()==""){
-				$("[name=startdte]").focus()
-			}else {
-				$("[name=enddte]").focus()
-			}
-			return;
-		}
-		
-		if($("[name=status]").val()==0){
-			alert("프로젝트상태를 선택해주세요")
-			$("[name=status]").focus()
-			return;
-		}
-		if($("[name=ttype]").val()=="팀개발"&&$("teams_name").text()==""){
-			if(!confirm("팀원이 존재하지 않습니다\n그대로 진행하시겠습니까? "))return;
-			else ;
-		}
-	//alert($("#frm02").serialize())
-		 $.ajax({
-			type:"post",
-			url:"${path}/insertProject",
-			data:$("#frm02").serialize(),
-			dataType:"json",
-			success:function(data){
-				if(data.msg!=""){
-					alert(data.msg)
-					location.href="${path}/mainpape.do2"
-					//$("#frm02")[0].reset();
-				}
-					
-			},
-			error:function(err){
-				console.log(err)
-			}
-			
-		}) 
-		//$("#frm02").submit()
-	})
-	
-	
-	$("#schBtn").click(function(){
-		//alert($("#frmEmpSch").serialize())
-		 $.ajax({
-			type:"post",
-			url:"${path}/empsearch",
-			data:$("#frmEmpSch").serialize(),
-			dataType:"json",
-			success:function(data){
-				
-				var emphtml = ""
-				
-				$.each(data.elist,function(idx, emp){
-					//alert("emp:"+emp+"  emp.empno:"+emp.empno+"  emp.ename:"+emp.ename+"  emp.dname:"+emp.dname)
-					emphtml += "<tr>"
-					emphtml += "<td>"+emp.empno+"</td>"
-					emphtml += "<td>"+emp.ename+"</td>"
-					emphtml += "<td>"+emp.dname+"</td>"
-					emphtml += "<td><a href='#' onclick='addemp(\" "+emp.ename+"\","+emp.empno+")' class='btn btn-success btn-circle btn-sm'> "
-					emphtml += '<i class="fas fa-check"></i></a></td>'
-					emphtml += "</tr>"
-				})
-			
-				
-				$("#empSchTbody").html(emphtml)
-				
-				
-					
-				
-			},
-			error:function(err){
-				console.log(err)
-			}
-		}) 
-	})
-	function addemp(ename,empno){
-		var team = $("#teams").val()
-		var teams_name = $("#teams_name").text()
-		if(team ==""||team == null){ 
-			team = empno; 
-			//teams_name = "팀원:"+ename;
-		
-		}
-		else{
-			let emps = team.split(",")
-			let empck = false;
-			emps.forEach(function(emp){
-				if(empno == parseInt(emp)){
-					alert("이미 추가된 사원입니다.")
-					empck = true;
-					return;				
-				}
-			})
-			if(empck==true)return;
-			else{
-				team += ","+empno;// teams_name += ","+ename
-				
-			}
-		}
-	
-		$("#teams").val(team)
-		//alert("변수:"+teams_name+"/실제 text:"+$("#teams_name").text())
-		//$("#teams_name").text(teams_name)
-		$("#teams_name").append('<button type="button" id="'+empno+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+ename+'</button>')
-		alert("팀원이 추가되었습니다")
-		//$("#empSearchModal").modal("hide");
-		$("#echclsBtn").click()
-  	}
-	
-
-	/* getworkcnt()
-	function getworkcnt(){
-		$.ajax({
-			url:"workcnt.do2",
-			data:"empno=${emp.empno}",
-			dataType:"json",
-			success:function(data){
-				$("#sp_workcnt").text(data.workcnt)
-				console.log("작업건수 호출")
-			},
-			error:function(err){
-				console.log(err)
-			}
-			
-		})
-	} */
-	function deleteTeams(obj){
-		if(confirm($(obj).text()+"사원을 팀에서 제외하시겠습니까?")){
-			var teamemp = $("#teams").val().split(",")
-			var retval = ""
-			teamemp.forEach(function(emp){
-				if($(obj).prop("id")!=emp){
-					retval += emp+","
-				}
-			})
-			$("#teams").val(retval.slice(0,retval.length-1))
-			obj.remove()
-			alert("삭제완료")
-		}
-	}
-	
-	
-</script>
-Page level plugins -->
-
-
-<!-- Page level custom scripts -->
-<%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
-<script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script> --%>
-<script type="text/javascript">
+    <script type="text/javascript">
 $("[name=status]").val("${sch.status}")
 
 function goPage(pNo){
@@ -379,5 +204,16 @@ function goproject(pcode){
 	$("#goprojectfrm").submit()
 }
 </script>
+<script
+	src="${path}/a00_com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Core plugin JavaScript-->
+<script src="${path}/a00_com/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom scripts for all pages-->
+<script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
+<script src="${path}/customjs/slidbar.js"></script>
+<script src="${path}/customjs/projectmodal.js"></script>
+
 </body>
 </html>
