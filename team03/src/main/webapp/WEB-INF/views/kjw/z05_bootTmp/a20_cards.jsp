@@ -262,12 +262,48 @@ var starttime=new Date('<%= formatter.format(starttime) %>');
 var endtime=${inputE}
 
 	$("#StartBtn").click(function(){
-		location.href="${path}/commute_start";
-	})
+		
+	
+	$.ajax({
+			url: "${path}/commute_start",
+		method:'POST',
+		contentType:'application/json; charset=utf-8',
+		data:{starttime:Date}
+		success:function(data){
+		if(data=="success"){
+		location.reload();
+		}else{
+		alert("실패:"+data.message);
+		}
+},
+error:function(xhr,status,err){
+alert("진행도중 문제발생");
+console.error("Error:",status,err);
+}	
+		})
+	});
 		$("#EndBtn").click(function(){
 		location.href="${path}/commute_end";
 	})
-
+$.ajax({
+			url: url,
+		method:'POST',
+		contentType:'application/json; charset=utf-8',
+		data:JSON.stringify(checkedvals),
+		success:function(response){
+		if(response.status=="success"){
+		alert("선택된 인원정보가 삭제되었습니다");
+		console.log(response)
+		location.reload();
+		}else{
+		alert("실패:"+response.message);
+		}
+},
+error:function(xhr,status,err){
+alert("진행도중 문제발생");
+console.error("Error:",status,err);
+}	
+		});
 
 
 </script>

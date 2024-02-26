@@ -207,11 +207,11 @@ public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
-public String register(Emp_master_f ins,Model d,HttpSession session) {
+public String register(Emp_master_f ins,Model d,String div,HttpSession session) {
 	String result = service.register(ins);
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",result);
-	/* d.addAttribute("LatestEmp",service.LatestEmp()); */ 
+
 
 	
 	  if("등록성공".equals(result)) {

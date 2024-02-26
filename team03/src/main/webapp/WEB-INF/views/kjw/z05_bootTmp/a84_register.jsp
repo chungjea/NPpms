@@ -63,15 +63,15 @@
 								<div class="form-group row">
 									<div class="col-sm-6 mb-3 mb-sm-0">
 										<p>
-											<strong>사원명을 입력하세요</strong><span id="EnameChk"></span> <input
+											<strong>사원명을 입력하세요</strong> <input
 												name="ename" id="ename"
 												class="form-control form-control-user" placeholder="사원명" />
 									</div>
 									<div class="col-sm-6 mb-3 mb-sm-0">
 										<p>
-											<strong>직급을 선택하세요</strong><span id="idChk"></span> <select
-												name="egrade" class="form-control form-control-user">
-												<option value="선택">직급</option>
+											<strong>직급을 선택하세요</strong> <select
+												name="egrade" id="egrade" class="form-control form-control-user">
+												<option value="">직급</option>
 												<option value="사원">사원</option>
 												<option value="팀장">팀장</option>
 												<option value="전무">전무</option>
@@ -84,7 +84,7 @@
 								<div class="form-group row">
 									<div class="col-sm-6 ">
 										<select name="dname" class="form-control form-control-user">
-											<option value="선택">부서선택</option>
+											<option value="">부서선택</option>
 											<option value="디자인팀">디자인팀</option>
 											<option value="인사팀">인사팀</option>
 											<option value="재무팀">재무팀</option>
@@ -119,9 +119,8 @@
 										 -->
 										<input type="hidden" id="email" name="email" value="">
 											<div class="col-sm-6 mb-3 mb-sm-0">
-										<select name="auth" id="auth" class="form-control">
-											<option value="직원">직원</option>
-											<option value="관리자">관리자</option>
+										<input type="hidden" id="auth" name="auth" value="">
+									
 										
 										</select>
 										  <!-- <input type="hidden" id="password" name="password" value=""> 
@@ -143,7 +142,7 @@
 
 								<hr>
 
-
+</div>
 							</form>
 
 
@@ -175,10 +174,10 @@
 	</footer>
 	<!-- End of Footer -->
 
-	</div>
+
 	<!-- End of Content Wrapper -->
 
-	</div>
+
 	<!-- End of Page Wrapper -->
 
 	<!-- Bootstrap core JavaScript-->
@@ -211,7 +210,8 @@
             	
 						$("#regBtn").click(function(){ //등록
 							temp_pw_issuance();
-				         
+							 var egrade=document.getElementById('egrade'); 
+							 var auth=document.getElementById('auth'); 
 							 var passwd=document.getElementById('passwd').value; 
 							 var emailE=document.getElementById('emailE').value;
 								var emailH=document.getElementById('emailH').value;
@@ -220,7 +220,13 @@
 							  
 							document.getElementById('email').value= emailH+emailE;
 							 document.getElementById('passwd').value= passwd; 
+							
 
+if(egrade.value==="사원"||egrade.value===""){
+	auth.value='직원';
+}else if(egrade.value==="팀장"||egrade.value==="전무"||egrade.value==="사장"){
+	auth='관리자';
+}
 
 							 
 
@@ -243,7 +249,7 @@
 						if (msg != "") {
 							var confirmMessage = msg;
 							
-							if (emailMsg != "") {
+							if (Emsg != "") {
 								confirmMessage += "\n" + Emsg;
 							}
 						}
