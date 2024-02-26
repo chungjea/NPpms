@@ -174,10 +174,10 @@
                     </script>
                     <br><br><br>
                     <div class="row" style="width:100%;" style="align-items : center;">
-                    	<div style="width:45%;">
+                    	<div style="width:33%;">
 	                    	<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 	                    		<caption>게시판</caption>
-	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count}건</caption>
+	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">결과: ${sch.count}건</caption>
 							   	<col width="60%">
 							   	<col width="25%">
 							   	<col width="15%">
@@ -241,8 +241,8 @@
 						<!-- 
 						<div style="width:33%; border-right: solid 1px; border-left: solid 1px; height:450px">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
-								<caption>채팅</caption>
-	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count2}건</caption>
+								<caption>팀</caption>
+	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">결과: ${sch.count2}건</caption>
 							   	<col width="60%">
 							   	<col width="25%">
 							   	<col width="15%">
@@ -260,14 +260,14 @@
 							</table>
 						</div>
 						 -->
-						<div style="width:45%;">
+						<div style="width:33%;">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>개인</caption>
-	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">검색결과: ${sch.count3}건</caption>
-							   	<col width="55%">
-							   	<col width="27%">
-							   	<col width="9%">
-							   	<col width="9%">
+	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">결과: ${sch.count3}건</caption>
+							   	<col width="45%">
+							   	<col width="33%">
+							   	<col width="11%">
+							   	<col width="11%">
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
@@ -280,7 +280,7 @@
 							    	<c:forEach var="mf" items="${mfile}">
 								    	<tr><td>${mf.fname}</td><td>${mf.page}</td>
 								    	<td><button type="button" title="다운로드" style="border: none; background-color: transparent;" onclick="download('${mf.fno}','${mf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td>
-								    	<td><button type="button" title="삭제" style="border: none; background-color: transparent;" onclick="deletefile('${mf.fno}','${mf.fname}')""><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="20" height="20"></button></td></tr>
+								    	<td><button type="button" title="삭제" style="border: none; background-color: transparent;" onclick="deletefile('${mf.fno}','${mf.fname}')"><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="20" height="20"></button></td></tr>
 							    	</c:forEach>
 							    </tbody>
 							</table>
@@ -322,7 +322,7 @@
 					}
 					function deletefile(fno, fname){
 						if(confirm(fname+" 삭제하시겠습니까?")){
-							location.href="${path}/deletefile?fno="+fno
+							location.href="${path}/deletefile?fno="+fno+"&pcode=${param.pcode}"
 						}
 					}
 				</script>
@@ -330,6 +330,7 @@
                     <form id="filefrm" method="post" action="${path}/upload" enctype="multipart/form-data">
                     	<input type="file" name="reports" multiple="multiple" value="" />
                     	<input type="text" name="empno" value="${emp.empno}" />
+                    	<input type="text" name="pcode" value="${param.pcode}" />
                     </form>
 			</div>
 			<!-- End of Main Content -->

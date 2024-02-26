@@ -121,6 +121,7 @@
 							<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important"/>	
 							<input type="hidden" name="wempno" value="${emp.empno}" readonly />
 							<input type="hidden" name="manager" value="${mempno}" readonly />
+							<input type="hidden" name="pcode" value="${param.pcode}" />
 						</div>			
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">

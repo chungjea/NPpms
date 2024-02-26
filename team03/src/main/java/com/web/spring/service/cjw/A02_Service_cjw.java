@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -29,6 +30,9 @@ import com.web.spring.vo.Team;
 public class A02_Service_cjw {
 	@Autowired(required = false)
 	private A03_Dao_cjw dao;
+	
+	@Value("${file.upload}")
+	private String path;
 	
 	// 파일명 가져오기
 	public String getfnamebyfno(String fno) {
@@ -106,7 +110,7 @@ public class A02_Service_cjw {
 	// 결재 : 결재 상신
 	public String insertapv(Approve_f ins) {
 		String msg = "";
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		if(dao.insertapv(ins)>0 && dao.insertapv2(ins)>0) {
 			msg = "결재 상신 완료\\n";
 		}else {
@@ -147,8 +151,8 @@ public class A02_Service_cjw {
 	}
 	
 	// 결재 : 결재 올릴 같은 부서 사람들 명단
-	public List<Team> getteammen(@Param("pcode") int pcode) {
-		return dao.getteammen(pcode);
+	public List<Team> getteammen(@Param("empno") int empno, @Param("pcode") int pcode) {
+		return dao.getteammen(empno, pcode);
 	}
 	
 	// 결재 : 결재 상세
@@ -284,7 +288,7 @@ public class A02_Service_cjw {
 	// 리스크 : 리스크 등록
 	public String insertrsk(Risk_f ins) {
 		String msg = "";
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		if(dao.insertrsk(ins)>0 && dao.insertrsk2(ins)>0) {
 			msg = "리스크 등록 완료\\n";
 		}else {
@@ -395,7 +399,7 @@ public class A02_Service_cjw {
 	// 회의록 : 회의록 등록
 	public String insertmet(Meeting_f ins) {
 		String msg = "";
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		if(dao.insertmet(ins)>0) {
 			msg = "회의록 등록 완료\\n";
 		}else {
@@ -454,7 +458,7 @@ public class A02_Service_cjw {
 	// 회의록 : 회의록 삭제
 	public String deletemet(int metno) {
 		List<String> delFnames = dao.getfnobynamem(metno);
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		for(String fname:delFnames) {
 			File fileToDelete = new File(path+fname);
 			if(fileToDelete.exists()) fileToDelete.delete();
@@ -501,11 +505,12 @@ public class A02_Service_cjw {
 	
 	// 문서관리 : 개인 파일 업로드
 	public String insertfilemy(File_f ins) {
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		String msg = "";
 		int ckf = 0;
 		MultipartFile[] mpfs = ins.getReports();
 		int empno = ins.getEmpno();
+		int pcode = ins.getPcode();
 		if(mpfs!=null && mpfs.length>0) {
 			try {
 				for(MultipartFile mpf:mpfs) {
@@ -562,7 +567,7 @@ public class A02_Service_cjw {
 	// 문서관리 : 개인 파일 삭제
 	public String deletefile(String fno) {
 		String fname = dao.getfnamebyfno(fno);
-		String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		File fileToDelete = new File(path+fname);
 		if(fileToDelete.exists()) fileToDelete.delete();
 		String msg = "";

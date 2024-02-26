@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -95,18 +96,16 @@ public class A02_Service_lsd {
 	}// insertNotice() 공지 등록*/
 	
 	
-	/*@Value("${file.upload}")
-	private String path;*/
+	@Value("${file.upload}")
+	private String path;
 	// 파일 업로드랑 같이
 	public String insertNotice(Noticeboard_f ins) {
 		System.out.println("서비스 시작");
 		// 기본데이터 등록 처리
 		int ck01 = dao.insertNotice(ins);
 
-		String path = "C:\\a01_springbt\\workspace\\maven.1708065300599\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\a01_springbt\\workspace\\maven.1708065300599\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 
-		//String path = "C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
-		//String path="C:\\Users\\Administrator\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		String msg=ck01>0?"기본정보 등록성공":"등록 실패"; msg+="\\n";
 		int ck02 = 0;
 		// 파일업로드 정보 등록 처리.
@@ -159,7 +158,7 @@ public class A02_Service_lsd {
 
 	public String deleteNotice(int notice_num) {
 		List<String> delFnames = dao.getfnobynameNF(notice_num);
-		String path = "C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 		for(String fname:delFnames) {
 			File fileToDelete = new File(path+fname);
 			if(fileToDelete.exists()) fileToDelete.delete();

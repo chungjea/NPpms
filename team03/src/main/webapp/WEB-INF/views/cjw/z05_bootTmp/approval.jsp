@@ -84,6 +84,7 @@
                         </a>
                     </div>
                     <form id="insapvFrm" method="post" action="${path}/insertapvFrm">
+                    	<input type="hidden" name="empno" value="${emp.empno}" />
                     	<input type="hidden" name="pcode" value="${param.pcode}" />
                     </form>
 					<script type="text/javascript">

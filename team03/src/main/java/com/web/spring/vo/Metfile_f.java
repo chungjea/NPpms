@@ -5,7 +5,7 @@ public class Metfile_f {
 	private String fname;
 	private String path;
 	private String fno;
-	private int deptno;
+	private int pcode;
 	
 	public Metfile_f() {
 	}
@@ -22,11 +22,11 @@ public class Metfile_f {
 		this.path = path;
 	}
 
-	public Metfile_f(String fname, String path, String fno, int deptno) {
+	public Metfile_f(String fname, String path, String fno, int pcode) {
 		this.fname = fname;
 		this.path = path;
 		this.fno = fno;
-		this.deptno = deptno;
+		this.pcode = pcode;
 	}
 
 	public Metfile_f(String fname, String fno) {
@@ -66,12 +66,12 @@ public class Metfile_f {
 		this.fno = fno;
 	}
 
-	public int getDeptno() {
-		return deptno;
+	public int getPcode() {
+		return pcode;
 	}
 
-	public void setDeptno(int deptno) {
-		this.deptno = deptno;
+	public void setPcode(int pcode) {
+		this.pcode = pcode;
 	}
 	
 }

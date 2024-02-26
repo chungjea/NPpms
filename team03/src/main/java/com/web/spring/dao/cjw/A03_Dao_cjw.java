@@ -49,7 +49,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기' and af.pcode = #{pcode}")
 	int toapvcnt(ApproveSch sch);
 	
-	@Insert("INSERT INTO approve_f values(apv_seq.nextval, #{title}, #{content}, #{wempno}, sysdate, '대기', #{writer}. #{pcode})")
+	@Insert("INSERT INTO approve_f values(apv_seq.nextval, #{title}, #{content}, #{wempno}, sysdate, '대기', #{writer}, #{pcode})")
 	int insertapv(Approve_f ins);
 	
 	@Insert("INSERT INTO approveadmin_f values(apv_seq.currval, #{mempno}, NULL, null)")
@@ -61,7 +61,7 @@ public interface A03_Dao_cjw {
 	@Insert("Insert into file_f values(file_seq.nextval, '결재', apv_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno}, #{pcode})")
 	int insertfileapv(Apvfile_f ins);
 	
-	List<Team> getteammen(@Param("pcode") int pcode);
+	List<Team> getteammen(@Param("empno") int empno, @Param("pcode") int pcode);
 	
 	Approve_f detailapv(int apvno);
 	
