@@ -56,7 +56,7 @@
 					<div class="col-lg-7">
 						<div class="p-5">
 							<div class="text-center">
-								<h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+								<h1 class="h4 text-gray-900 mb-4">회원등록</h1>
 							</div>
 							<form method="post" id="send" action="${path}/register">
 
@@ -131,7 +131,7 @@
 								</div>
 
 								<input type="button" class="btn btn-primary btn-user btn-block"
-									id="regBtn">
+									id="regBtn" value="등록">
 
 
 								<hr>
@@ -192,8 +192,7 @@
 	<%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 	<script type="text/javascript">
-            var n_empno="${LatestEmp}";
-            var empno="${emp.empno}";
+
             	/* var msg = "${msg}"
 						if(msg!=""){
 							alert(msg);
@@ -201,22 +200,29 @@
 							$("#email").submit()
 						} */
             	
-            	
+						   var n_empno="${LatestEmp}";
+			            var empno="${emp.empno}";
             	
 						$("#regBtn").click(function(){ //등록
 							temp_pw_issuance();
-							 
+				         
 							 var passwd=document.getElementById('passwd').value; 
+							 var emailE=document.getElementById('emailE').value;
+								var emailH=document.getElementById('emailH').value;
 							var receiver=document.getElementById('emailH').value+document.getElementById('emailE').value;
-							var emailE=document.getElementById('emailE').value;
-							var emailH=document.getElementById('emailH').value;
+							
 							  
 							document.getElementById('email').value= emailH+emailE;
-							 document.getElementById('receiver').value = receiver; 
 							 document.getElementById('password').value = password; 
 							 document.getElementById('passwd').value= passwd; 
 							 document.getElementById('receiver').value= email; 
-
+							 document.getElementById('lastone').value= empno; 
+							 document.getElementById('empno').value= n_empno; 
+console.log(email);
+console.log(receiver);
+console.log(lastone);
+console.log(empno);
+console.log(passwd);
 							 
 
 

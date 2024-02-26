@@ -109,7 +109,7 @@ public ResponseEntity<?> deleteEmpsagain(@RequestBody List<Integer> empno){
 }
 
 @RequestMapping("mypagefilter")
-public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_his_f psearch,
+public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f cnt,Emp_master_his_f psearch,
 		 sal_f sch1,Model d,HttpSession session) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 
@@ -117,12 +117,14 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_hi
 		d.addAttribute("empList", service.getEmpList(sch));
 		d.addAttribute("salList", service.getSalList(sch1));
 		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
+		d.addAttribute("empcnt", service.empcnt(cnt));
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
 			d.addAttribute("empList", service.getEmpList(sch));
 			d.addAttribute("salList", service.getSalList(sch1));
 			d.addAttribute("EmpHistory", service.EmpHistory(psearch));
+			d.addAttribute("empcnt", service.empcnt(cnt));
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }
@@ -136,7 +138,8 @@ public String HRFilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_his_f 
 		return "kjw/z05_bootTmp/a70_tablesadmin";
 
 	}else {
-		return "권한이 없는 사용자입니다.";
+		System.out.println("권한이 없습니다.");
+		return "kjw/z05_bootTmp/filteringauth";
 	}
 }
 @RequestMapping("FIFilter")
@@ -148,7 +151,7 @@ public String FIFilter(@ModelAttribute("sch") sal_f sal, Model d,HttpSession ses
 
 	}else {
 		System.out.println("등록되지않은 유저입니다");
-		return "${path}/mainpage";
+		return"kjw/z05_bootTmp/filteringauth2";
 	}
 }
 @RequestMapping("commute_frm")
@@ -208,7 +211,8 @@ public String register(Emp_master_f ins,Model d,HttpSession session) {
 	String result = service.register(ins);
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",result);
-	d.addAttribute("LatesteEmps",service.LatestEmp());
+	System.out.println(service.LatestEmp());
+	d.addAttribute("LatestEmp",service.LatestEmp());
 	String div="reg";
 	if("등록성공".equals(result)) {
 		d.addAttribute("Emsg",service.sendMail(ins.getEmail(), div));

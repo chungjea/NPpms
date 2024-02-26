@@ -7,6 +7,7 @@
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
 <meta charset="UTF-8">
 <title>Good day!!</title>
@@ -91,7 +92,7 @@ display:show;
 					<div class="row">
 						<div class="col-xl-3 col-md-6 mb-4" id="link1">
 							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">
+								<div class="card-body">	
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div
@@ -185,12 +186,7 @@ display:show;
 											class="icon text-white-50"> <i class="fas fa-trash"></i>
 										</span> <span class="text" id="textchange">삭제</span>
 										</a>
-										<a href="#" class="btn btn-warning btn-icon-split"> <span
-											class="icon text-white-50"> <i
-												class="fas fa-exclamation-triangle"></i>
 
-										</span> <span class="text">사원정보수정</span>
-										</a>
 
 
 										<a href="${path}/registerFrm"
@@ -296,7 +292,7 @@ display:show;
 																		<td ><fmt:formatNumber value="${el.salary}" pattern="#,###"/></td>
 																		<td >${el.panaltytot}</td>
 																		<td >${el.lastfix}</td>
-																		<td>${({emp} != null) ? "Y" : "N" }</td>
+																		<td> </td>
 																		<td >${el.lastone}</td>
 																		<td><input type="checkbox" id="chk"
 																			class="chkGrp" value="${el.empno}"
@@ -633,17 +629,17 @@ $("#home").click(function(){
 	$("#textchange").text('삭제');
 if(AUTH == '관리자' && DNAME!='재무팀') {
 
-   $("#dataTable").css("display");//인사,전체
-   $("#dataTable1").css("display","none"); //재무
+   $("#home option").css("display");//인사,전체
+   $("#home option2").hide(); //재무
 
 } else if (AUTH =='관리자' && DNAME=='재무팀') {
 
-  $("dataTable").css("display","none");
-  $("dataTable1").css("display");
+  $("#home option").hide();
+  $("#home option2").css("display");
 
 }else{
-	$("dataTable").css("display","none");
-	  $("dataTable1").css("display","none");
+	$("#home option").hide();
+	  $("#home option2").hide();
 }
 })
 $("#tab02").click(function(){
