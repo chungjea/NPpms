@@ -107,10 +107,9 @@ var members = new Map();
 			data:formdata,
 			processData: false,	
 			contentType: false,
-			dataType:"json",
+			dataType:"text",
 			success:function(data){
-				console.log("ajax 성공!")
-				console.log(data.msg)
+				console.log(data)
 				if(data.msg!=""){
 					alert(data.msg)
 					location.reload()
@@ -148,11 +147,12 @@ var members = new Map();
 				
 				$("#frm02 #teams_name").html("");
 				members.clear()
-				pinfo.tmem.forEach(function(mem){	
-					$("#frm02 #teams_name").append('<button type="button" id="'+mem.key+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+mem.label+'</button>');
-					members.set(mem.key,mem.label);			
-				})
-				
+				if(pinfo.tmem.size() >0){
+						pinfo.tmem.forEach(function(mem){	
+						$("#frm02 #teams_name").append('<button type="button" id="'+mem.key+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+mem.label+'</button>');
+						members.set(mem.key,mem.label);			
+					})
+				}
 				
 				imgbox.style.display="";
 				img.src=pinfo.path+"icon"+pinfo.ino+pinfo.ext;	

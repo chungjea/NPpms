@@ -248,7 +248,7 @@ public interface A03_Dao_hcj {
 	
 	@Select("SELECT pf.*,if2.ino,IF2.PATH, IF2.EXT, epf.ENAME mgname \r\n"
 			+ "FROM PROJECT_F pf ,ICONREP_F if2,EMP_PINFO_F epf \r\n"
-			+ "WHERE pf.PCODE = IF2.PCODE \r\n"
+			+ "WHERE pf.PCODE = IF2.PCODE(+) \r\n"
 			+ "AND pf.EMPNO = epf.EMPNO \r\n"
 			+ "and pf.pcode = #{pcode}")
 	Project_f getProjectInfo(int pcode);

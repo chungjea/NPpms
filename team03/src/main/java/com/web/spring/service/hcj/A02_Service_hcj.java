@@ -203,22 +203,31 @@ public class A02_Service_hcj {
 		//권한이 관리자인지 사원인지 판별해서 총데이터 할당
 		if(auth.equals("관리자")) sch.setTotdata(dao.getprojectListCntAdmim(sch));
 		else sch.setTotdata(dao.getprojectListCntNormal(sch));
+		
 		System.out.println("Totdata:"+sch.getTotdata());
+		
 		if(sch.getPageSize()==0)sch.setPageSize(10);
-		if(sch.getCurPage()==0)sch.setCurPage(1);
+		
 		sch.setPageCount((int)Math.ceil(sch.getTotdata()/(double)sch.getPageSize()));
+		
 		if(sch.getCurPage()>sch.getPageCount()) {
 			sch.setCurPage(sch.getPageCount());
-		}		
+		}
+		if(sch.getCurPage()==0)sch.setCurPage(1);
+		
 		sch.setEnd(sch.getCurPage()*sch.getPageSize());	
 		if(sch.getEnd()>sch.getTotdata()) sch.setEnd(sch.getTotdata());
-		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
-		sch.setBolckSize(5);
-		int blockCount = (int)Math.ceil(sch.getCurPage()/(double)sch.getBolckSize());
-		sch.setEndBlock(blockCount*sch.getBolckSize());
-		if(sch.getEndBlock()>sch.getPageCount())sch.setEndBlock(sch.getPageCount());
-		sch.setStartBlock((blockCount-1)*sch.getBolckSize()+1);
 		
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		
+		sch.setBolckSize(5);
+		
+		int blockCount = (int)Math.ceil(sch.getCurPage()/(double)sch.getBolckSize());
+		
+		sch.setEndBlock(blockCount*sch.getBolckSize());
+		if(sch.getEndBlock()>sch.getPageCount()) sch.setEndBlock(sch.getPageCount());
+		sch.setStartBlock((blockCount-1)*sch.getBolckSize()+1);
+		System.out.println("시작블록:");
 		return auth.equals("관리자")?dao.getprojectListAdmim(sch):dao.getprojectListNormal(sch);
 	}
 	///--------------프로젝트----------------------
@@ -247,6 +256,8 @@ public class A02_Service_hcj {
 	}
 	public Project_f getProjectInfo(int pcode) {
 		Project_f pinfo =dao.getProjectInfo(pcode);
+		System.out.println("-----------pinfo---------");
+		System.out.println("pname"+pinfo.getPname());
 		 pinfo.setTmem(dao.getTmemEmp(pcode)); 
 		return pinfo;
 	}

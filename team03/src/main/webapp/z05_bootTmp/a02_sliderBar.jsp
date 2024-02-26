@@ -7,7 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>
 <script type="text/javascript">
-	var pcode = ${param.pcode}
+	var pcode = "${param.pcode}";
 </script>
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"

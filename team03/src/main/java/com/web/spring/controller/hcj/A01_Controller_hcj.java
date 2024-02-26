@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.function.EntityResponse;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 import com.web.spring.service.hcj.A02_Service_hcj;
@@ -54,44 +55,21 @@ public class A01_Controller_hcj {
 	}
 	
 	
-	@ResponseBody
 	@PostMapping("insertProject")
-	public ModelAndView insertProject(Project_f ins) {
-		
+	public ResponseEntity<String> insertProject(Project_f ins) {
 		System.out.println("일단들어옴!!!!!!!");
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setView(new MappingJackson2JsonView());
-
-		modelAndView.addObject("msg", service.insertProject(ins));
-		return modelAndView;
+		return ResponseEntity.ok(service.insertProject(ins) );
 	}
-	@ResponseBody
+
+	
 	@PostMapping("updateProject")
-	public ModelAndView updateProject(Project_f upt) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setView(new MappingJackson2JsonView());
-		System.out.println("---------------데이터 확인!!---------------");
-		System.out.println("매니저번호:"+upt.getEmpno());
-		System.out.println("프로젝트 이름:"+upt.getPname());
-		System.out.println("시작일:"+upt.getStartdte());
-		System.out.println("마감일:"+upt.getEnddte());
-		System.out.println("상태:"+upt.getStatus());
-		System.out.println("번호:"+upt.getStartdte());
-		System.out.println("프로젝트 번호:"+upt.getPcode());
-		System.out.println("프로젝트명:"+upt.getPname());
-		
-		System.out.println("---------------확인완료---------------");
-		System.out.println("---------------업데이트 컨트롤러 접근!!---------------");
-		modelAndView.addObject("msg", service.updateProject(upt));
-		return modelAndView;
+	public ResponseEntity<String> updateProject(Project_f upt) {
+		return ResponseEntity.ok(service.updateProject(upt));
 	}
 	
 	@PostMapping("deleteProject")
-	public ModelAndView deleteProject(Project_f del) {
-		ModelAndView modelAndView = new ModelAndView();
-		modelAndView.setView(new MappingJackson2JsonView());
-		modelAndView.addObject("msg", service.deleteProject(del));
-		return modelAndView;
+	public ResponseEntity<String> deleteProject(Project_f del) {
+		return ResponseEntity.ok(service.deleteProject(del));
 	}
 
 	@RequestMapping("empsearch")
@@ -127,7 +105,8 @@ public class A01_Controller_hcj {
 		return "hcj/z05_bootTmp/gantt";
 	}
 	@PostMapping("loadpinfo")
-	public ResponseEntity<?> loadpinfo(@RequestParam("pcode")int pcode) {	
+	public ResponseEntity<?> loadpinfo(@RequestParam("pcode")int pcode) {
+		System.out.println(pcode);
 		return ResponseEntity.ok(service.getProjectInfo(pcode));
 	}
 	@PostMapping("Tmem")

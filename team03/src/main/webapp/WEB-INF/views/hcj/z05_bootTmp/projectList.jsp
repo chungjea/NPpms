@@ -70,7 +70,7 @@ td{text-align:center;}
 					<form id="frm01" class="row"  method="post">
 					<div class="col-auto">
 			    		<select class="form-control" name="status">
-			    			<option hidden value="">프로젝트 상태를 선택해주세요</option>
+			    			<option value="">프로젝트 상태를 선택해주세요</option>
 			    			<option>예정</option>
 			    			<option>진행중</option>
 			    			<option>중단</option>
@@ -143,8 +143,7 @@ td{text-align:center;}
 					  	<li class="page-item">
 					  	<a class="page-link" 
 					  		href="javascript:goPage(${sch.startBlock-1})">이전</a></li>
-						<c:forEach var="pNo" begin="${sch.startBlock}" 
-											  end="${sch.endBlock}">
+						<c:forEach var="pNo" begin="${sch.startBlock}" end="${sch.endBlock}">
 					  	<li class="page-item ${sch.curPage==pNo?'active':''}">
 					  		<a class="page-link" 
 					  			href="javascript:goPage(${pNo})">${pNo}</a></li>

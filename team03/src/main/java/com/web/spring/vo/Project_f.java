@@ -1,5 +1,6 @@
 package com.web.spring.vo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
@@ -9,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 //team03.vo.Project_f
 
-public class Project_f {
+public class Project_f implements Serializable { 
 	private int rownum;
 	private int pcode;
 	private String pname;
