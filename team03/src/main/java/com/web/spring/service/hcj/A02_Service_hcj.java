@@ -4,8 +4,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,8 +21,6 @@ import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
 import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.Workcnt;
-
-import jakarta.mail.Multipart;
 
 @Service
 public class A02_Service_hcj {
@@ -73,7 +71,8 @@ public class A02_Service_hcj {
 				dao.getprojectsAdmin(emp):dao.getprojectsNormal(emp);
 	}
 	
-	
+	@Value("${file.upload}")
+	   private String path;
 	
 	// 프로젝트 생성
 	public String insertProject(Project_f ins) {
@@ -82,7 +81,7 @@ public class A02_Service_hcj {
 		System.out.println(ins.getReports());
 		if(ins.getReports()!= null) {	
 			System.out.println("아이콘이미지 생성 시도!!!");
-			String path = "C:/a01_springbt/workspace/maven.1708074911159/team03/src/main/resources/static/z01_upload/";
+			
 			String dbpath = "/z01_upload/";
 			try {
 						
