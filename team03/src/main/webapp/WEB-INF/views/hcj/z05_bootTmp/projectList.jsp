@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"
-    import="java.util.*"
-    import="backendweb.z01_vo.*"
-    import="backendweb.d01_dao.*"
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -31,8 +28,7 @@ td{text-align:center;}
 
  	
  </script>
-	<link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
-	<link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
+	
      <!-- Custom fonts for this template-->
     <link href="${path}/a00_com/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
@@ -69,10 +65,10 @@ td{text-align:center;}
 				<!-- Begin Page Content -->
 				<div class="container-fluid">
 				<!--  내용 -->
-					<form id="frm01" class="form"  method="post">
-	  					<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	  					<input type="hidden" name="curPage" value="${sch.curPage}"/>
-			    		<input class="form-control" name="pname" placeholder="프로젝트명으로 검색"/>
+				<div class="card shadow mb-4">
+						<div class="card-header py-3 d-flex justify-content-between">
+					<form id="frm01" class="row"  method="post">
+					<div class="col-auto">
 			    		<select class="form-control" name="status">
 			    			<option hidden value="">프로젝트 상태를 선택해주세요</option>
 			    			<option>예정</option>
@@ -80,12 +76,31 @@ td{text-align:center;}
 			    			<option>중단</option>
 			    			<option>완료</option>
 			    		</select>	
-		    			<button class="btn btn-info" type="submit">검색</button>
-		    			<c:if test="${emp.auth=='admin'}">
-		    			<button class="btn btn-success" data-toggle="modal" data-target="#newprojectModal" type="button">프로젝트 생성</button>
+			   		</div>
+			   		<div class="col-auto">
+		    			<div class="input-group">
+								<input type="text" class="form-control bg-light border-0 small"
+									placeholder="프로젝트명으로 검색" name="pname" value="${sch.pname}" aria-label="Search"
+									aria-describedby="basic-addon2">
+									<div class="input-group-append">
+											<button class="btn btn-primary" type="submit">
+												<i class="fas fa-search fa-sm"></i>
+											</button>
+									</div>
+						</div>
+					</div>
+		    			
+		    			<c:if test="${emp.auth=='관리자'}">
+		    			<div class="col-auto " align="right">
+		    			<button class="btn btn-success " data-toggle="modal" data-target="#newprojectModal" type="button">프로젝트 생성</button>
+		    			</div>
 		    			</c:if>
-	 					</nav>
+					 <input type="hidden" name="curPage" value="${sch.curPage}"/>
 					</form>
+					</div>
+					
+					<div class="card-body">
+							<div class="table-responsive">
    					<table class="table table-hover table-striped">
 					   	<col width="6/1">
 					   	<col width="6/1">
@@ -94,7 +109,7 @@ td{text-align:center;}
 					   	<col width="6/1">
 					   	<col width="6/1">
 	    				<thead>
-	      					<tr class="table-success text-center">
+	      					<tr class="text-center" style="background-color:skyblue;">
 								<th>팀</th>
 								<th>프로젝트 명</th>
 								<th>프로젝트 유형</th>
@@ -105,17 +120,21 @@ td{text-align:center;}
 	    				</thead>	
 	    				<tbody>
 					   	<c:forEach var="pj" items="${projectSchList}">
-					   	<tr>
+					   	<tr ondblclick="goproject(${pj.pcode})">
 						   	<td>${pj.tname}</td>
 						   	<td>${pj.pname}</td>
 						   	<td>${pj.ptype}</td>
 						   	<td>${pj.enddte}</td>
 						   	<td>${pj.status}</td>
-					   		<td><div class="progress">
-				<div class="progress-bar" role="progressbar"
-					style="width:${pj.progress}%" aria-valuenow="${pj.progress}" aria-valuemin="0"
-					aria-valuemax="100">${pj.progress}%</div>
-			</div></td>
+					   		<td><div class="progress" >
+									<div class="progress-bar" role="progressbar"
+									style="width:${pj.progress*100}%" aria-valuenow="${pj.progress*100}" aria-valuemin="0"
+									aria-valuemax="100"><fmt:formatNumber value="${pj.progress*100}" pattern="00"/>%</div>
+								</div>
+								<c:if test="${emp.auth=='관리자'}">
+		    						<button style="float:right" class="btn btn-success" data-toggle="modal" data-target="#newprojectModal" type="button" onclick="loadProjectinfo(${pj.pcode})">관리</button>	
+		    					</c:if>
+		    				</td>	
 					   	</tr>
 					   	</c:forEach>
 	    				</tbody>
@@ -134,8 +153,14 @@ td{text-align:center;}
 					  	<a class="page-link" 
 					  		href="javascript:goPage(${sch.endBlock+1})">다음</a></li>
 					</ul>
+						</div>
+					</div>
+				</div>
   				<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/newprojectModal.jsp" %>
 				<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/empsch.jsp" %>
+				<form id="goprojectfrm" action="project">
+					<input type="hidden" name="pcode"/>
+				</form>
 				</div>
 				<!-- /.container-fluid -->
 
@@ -175,7 +200,9 @@ td{text-align:center;}
 
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
-<script type="text/javascript">
+<script src="${path}/customjs/slidbar.js"></script>
+<script src="${path}/customjs/projectmodal.js"></script>
+<!-- <script type="text/javascript">
 	$("#regBtn").click(function(){
 		//### 유효성 검사 ###
 		if($("[name=pname]").val()==""){
@@ -332,16 +359,25 @@ td{text-align:center;}
 		}
 	}
 	
-	function goPage(pNo){
-		$("[name=curPage]").val(pNo)
-		$("#frm01").submit()
-	}
+	
 </script>
-<!-- Page level plugins -->
+Page level plugins -->
 
 
 <!-- Page level custom scripts -->
 <%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script> --%>
+<script type="text/javascript">
+$("[name=status]").val("${sch.status}")
+
+function goPage(pNo){
+	$("[name=curPage]").val(pNo)
+	$("#frm01").submit()
+}
+function goproject(pcode){
+	$("[name=pcode]").val(pcode)
+	$("#goprojectfrm").submit()
+}
+</script>
 </body>
 </html>

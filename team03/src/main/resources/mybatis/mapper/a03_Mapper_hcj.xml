@@ -9,14 +9,14 @@
 <mapper namespace="com.web.spring.dao.hcj.A03_Dao_hcj">
 
 <!-- ########################프로젝트#################### -->
-<insert id="insertProject" parameterType="project" >
+	<insert id="insertProject" parameterType="project" >
 		INSERT INTO PROJECT_F values(project_seq.nextval, #{pname}, 
 		to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),
 		#{status},#{empno},#{tname},#{ptype},#{content})
-</insert>
+	</insert>
 
 
-<update id="updateProject" parameterType="project">
+	<update id="updateProject" parameterType="project">
 			UPDATE  PROJECT_F 
 				SET 	pname = #{pname},
 				startdte = to_date(#{startdte},'YYYY-MM-DD'),
@@ -52,7 +52,7 @@
 		WHERE member = #{empno}
 		GROUP BY STATUS 
 	</select>
-
+	
 	<select id="getMyErrsListNormal" parameterType="int" resultType="errs">
 		SELECT rownum ,fin.* 
 		from
@@ -161,6 +161,7 @@
 		WHERE tf.EMPNO = epf.EMPNO
 		and pcode = #{pcode}
 	</select>
+	
 	
 	
 </mapper>

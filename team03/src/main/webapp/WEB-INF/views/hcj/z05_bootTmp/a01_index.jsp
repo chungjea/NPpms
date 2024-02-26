@@ -5,8 +5,8 @@
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
-<html>
-<head>
+<html> 
+<head> 
 <meta charset="UTF-8">
 <title>Good day!!</title>
 <style>
@@ -14,7 +14,7 @@
 </style>
 
 
-
+  
 <%--
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script
@@ -67,8 +67,7 @@
 				 <%-- <%@ include file="backendweb/z05_bootTmp/a03_topBar.jsp" %>   
 				     <jsp:include page="${path}/z05_bootTmp/a03_topBar.jsp"/> --%>
 				
-				<!-- Topbar   %>  
-				-->
+				<!-- Topbar   %>  -->
 				<%@ include file="/z05_bootTmp/a03_topBar.jsp" %> 
 				<!-- End of Topbar -->
 				<!-- Begin Page Content -->

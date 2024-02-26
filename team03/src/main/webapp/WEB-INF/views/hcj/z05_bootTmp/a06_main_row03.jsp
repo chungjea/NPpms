@@ -21,8 +21,8 @@
 		</div>
 		<!-- Card Body -->
 		<div class="card-body">
-			<h5 id="dchartheader">전체 프로젝트:${allprojectCnt}개</h5>
-			<div class="chart-pie">
+			<h5 id="dchartheader"></h5>
+			<div class="chart-pie" style="height: 250px;margin:5px">
 				<canvas id="myProjectChart"></canvas>
 			</div>
 		
@@ -37,13 +37,13 @@
 			</div>
 		</div>
 		<div class="card-body">
-			<div class="chart-bar">
+			<div class="chart-bar" style="height: 250px">
 				<canvas id="myBarChart"></canvas>
 			</div>
 			<hr>
-			<select class="form-select form-select-sm" style="margin:0px">
+			<select class="form-select form-select-sm" style="margin:0px" id="pjselect" onchange="selectpjwork()">
 			<c:forEach var="pj" items="${projects}">
-				<option>${pj.pname}</option>
+				<option value="${pj.pcode}">${pj.pname}</option>
 				</c:forEach>
 			</select>
 		</div>
@@ -53,6 +53,7 @@
 
 <script src="${path}/a00_com/vendor/chart.js/Chart.min.js"></script>
 <script type="text/javascript">
+
 var labeldata = [];
 var cntdata =[];
 var totcnt =0;
@@ -61,14 +62,15 @@ var totcnt =0;
 	cntdata["${sts.index}"] = "${pj.cnt}"
 	totcnt += ${pj.cnt}
 </c:forEach>
-	
+	document.getElementById("dchartheader").innerText = "전체 프로젝트 "+totcnt+"건"
+
 	 console.log(labeldata)
 	//도넛차트
 	var ctx = document.getElementById("myProjectChart");
 	var myProjectChart = new Chart(ctx, {
 	  type: 'doughnut',
 	  data: {
-	    labels:labeldata ,
+	    labels:labeldata,
 	    datasets: [{
 	      data: cntdata,
 	      backgroundColor: ['#4e73df', '#1cc88a','#eded1f',"#ed261f"],
@@ -111,7 +113,7 @@ var totcnt =0;
       hoverBackgroundColor: "#2e59d9",
       borderColor: "#4e73df",
       barPercentage: 0.5,
-      data: [7, 5, 2]   
+      data: []   
     }],
   },
   options: {
@@ -126,8 +128,8 @@ var totcnt =0;
       borderWidth: 1,
       xPadding: 10,
       yPadding: 10,
-      displayColors: true,
-      caretPadding: 10,
+      displayColors: true
+ 
     },  
     scales: {
     	xAxes: [{

@@ -225,6 +225,8 @@ public class A01_Controller_cjw {
 	
 	// 채팅
 	// http://localhost:3333/chatting?empno=202301018
+	@Value("${socketServer}")
+	private String socketServer;	
 	@GetMapping("chatting")
 	public String chatting(int empno, Model d) {
 		d.addAttribute("crlist", service.chatroomlist(empno));
@@ -243,9 +245,6 @@ public class A01_Controller_cjw {
 		return "pageJsonReport";
 	}
 	
-	
-	@Value("${socketServer}")
-	private String socketServer;	
 
 	// enterChRoom
 	@PostMapping("enterChRoom")

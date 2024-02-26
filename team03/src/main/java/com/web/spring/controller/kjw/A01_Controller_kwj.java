@@ -139,53 +139,83 @@ public String HRFilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_his_f 
 		return "권한이 없는 사용자입니다.";
 	}
 }
+@RequestMapping("FIFilter")
+public String FIFilter(@ModelAttribute("sch") sal_f sal, Model d,HttpSession session) {
+	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
+	if(emp.getDname().equals("재무팀")) {
+		d.addAttribute("salList", service.getSalList(sal));
+		return "kjw/z05_bootTmp/a70_tablesadmin";
+
+	}else {
+		System.out.println("등록되지않은 유저입니다");
+		return "${path}/mainpage";
+	}
+}
 @RequestMapping("commute_frm")
 public String commuteFrm() {
 	return "kjw/z05_bootTmp/a20_cards";
 }
 @RequestMapping(value ="commute_s", method = {RequestMethod.POST,RequestMethod.GET})
-public String commute_s(Commute_f ins,Commute_f sch,Model d,@DateTimeFormat(pattern="HH:mm:ss") Date starttime,HttpSession session) {
-	
+public String commute_s(Commute_f ins,Commute_f sch,Model d,Commute_f csch,@DateTimeFormat(pattern="HH:mm:ss") Date starttime,HttpSession session,String div) {
+	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",service.commute_s(ins)>0?"출근등록성공":"출근등록실패");
+	d.addAttribute("inputS", service.starttime_c(csch));
+	d.addAttribute("inputE", service.endtime_c(csch));
+	d.addAttribute("LatestEmp", service.LatestEmp());
 	return "kjw/z05_bootTmp/a20_cards";
 	
 }
-@Autowired(required = false)
-@RequestMapping(value="confirming", method = {RequestMethod.POST,RequestMethod.GET})
-public String mailSend(MailSender email,  Model d) {
-	d.addAttribute("LatestEmp", service.LatestEmp());
-	if(email.getEmail()!=null) {
-	System.out.println("email:"+email.getEmail());
-	System.out.println("password:"+email.getPassword());
-	d.addAttribute("msg", service.sendMail(email));
-	
-	}else {
-		return "mailVo.getReceiver()";
+@RequestMapping("commute_start")
+public String commute_start(Commute_f ins, Model d,HttpSession session,Commute_f csch) {
+	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
+	if(ins.getEmpno()!=0) {/// form에 입력값이 있을 때..처리
+		d.addAttribute("inputS", service.starttime_c(csch));
+		d.addAttribute("inputE", service.endtime_c(csch));
+		d.addAttribute("msg",service.commute_s(ins)>0?"출근등록성공":"출근등록실패");
 	}
-	return "kjw/z05_bootTmp/a84_register";
+	return "kjw/z05_bootTmp/a20_cards";
 }
+@RequestMapping("commute_end")
+public String commute_end(Commute_f ins, Model d,HttpSession session,Commute_f csch) {
+	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
+	if(ins.getEmpno()!=0) {/// form에 입력값이 있을 때..처리
+		d.addAttribute("inputS", service.starttime_c(csch));
+		d.addAttribute("inputE", service.endtime_c(csch));
+		d.addAttribute("msg",service.commute_e(ins)>0?"퇴근등록성공":"퇴근등록실패");
+	}
+	return "kjw/z05_bootTmp/a20_cards";
+}
+/*
+ * @Autowired(required = false)
+ * 
+ * @RequestMapping(value="confirming", method =
+ * {RequestMethod.POST,RequestMethod.GET}) public String mailSend(String email,
+ * Model d,String div) { d.addAttribute("LatestEmp", service.LatestEmp());
+ * if(email.getEmail()!=null) { System.out.println("email:"+email.getEmail());
+ * System.out.println("password:"+email.getPassword()); d.addAttribute("msg",
+ * service.sendMail(email,div));
+ * 
+ * }else { return "mailVo.getReceiver()"; } return
+ * "kjw/z05_bootTmp/a84_register"; }
+ */
 
 @RequestMapping("registerFrm")
 public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
-public String register(Emp_master_f ins,Model d,MailSender email,HttpSession session) {
-	
-	d.addAttribute("LatestEmp", service.LatestEmp());
-	if(email.getEmail()!=null) {
-	System.out.println("email:"+email.getEmail());
-	System.out.println("password:"+email.getPassword());
-	System.out.println("empno:"+email.getEmpno());
-	d.addAttribute("msg", service.sendMail(email));
+public String register(Emp_master_f ins,Model d,HttpSession session) {
+	String result = service.register(ins);
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
-	}
-	else {
-			System.out.println("등록되지않은 메시지입니다");
-		}
-	return "kjw/z05_bootTmp/a84_register";
+	d.addAttribute("msg",result);
+	d.addAttribute("LatesteEmps",service.LatestEmp());
+	String div="reg";
+	if("등록성공".equals(result)) {
+		d.addAttribute("Emsg",service.sendMail(ins.getEmail(), div));
 	}
 
+	return "kjw/z05_bootTmp/a84_register";
+}
 @RequestMapping("updateFrm")
 public String updateFrm() {
 	return "kjw/z05_bootTmp/detailpage";

@@ -17,6 +17,7 @@
 	<foreach item="empno" collection="list" open="(" separator="," close=")">
 	#{empno}
 	</foreach>
+	
 	</delete>
 	<delete id="deleteEmpsagain"  parameterType="EmpHistory">
 	delete from emp_master_his_f
@@ -25,6 +26,7 @@
 	#{empno}
 	</foreach>
 	</delete>
+	
 	<select id="getEmpList" 
 			resultType="emplist" 
 			parameterType="emplist">
@@ -33,10 +35,12 @@
 		WHERE empno like '%'|| #{empno} || '%'
 		and dname like '%' ||#{dname}||'%'
 	</select>
+	
 <select id="sumProj" parameterType="int" resultType="int">
 SELECT count(*)FROM TMEM_F  
 WHERE empno=#{empno}
 </select>
+
 	<select id="getSalList" 
 			resultType="sallist" 
 			parameterType="sallist">
@@ -44,26 +48,61 @@ WHERE empno=#{empno}
 		from sal_f
 		WHERE empno like '%'|| #{empno} || '%'
 	</select>
-		<select id="LatestEmp" resultType="int" > 
+	
+<select id="LatestEmp" resultType="int" > 
 SELECT last_number FROM user_sequences WHERE sequence_name='EMPNOC'
 </select>
+
 <select id="doneProj" parameterType="int" resultType="int">
 SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno}
 </select>
+
 <select id="empcnt" parameterType="emplist">
 SELECT COUNT(*) FROM emp_master_f
 </select>
+
 <insert id="commute_s"  parameterType="commute_s">
-INSERT INTO Commute_f(empno,ename,starttime) values(#{empno},#{ename},sysdate)
+INSERT INTO Commute_f(empno,ename,ALLTIME,status) values(#{empno},#{ename},sysdate,#{status})
 </insert>
+
+<insert id="commute_e" parameterType="commute_e">
+INSERT INTO Commute_f(empno,ename,ALLTIME,status) values(#{empno},#{ename},sysdate,#{status})
+</insert>
+
 <select id="commute_f" parameterType="commute_s">
 select * from commute_f where empno=#{empno}
 </select>
+
 <update id="updateinfo" parameterType="emplist">
 update emp_master_f set dname=#{dname},ename=#{ename},email=#{email},auth=#{auth},passwd=#{passwd},lastone=#{lastone},lastfix=sysdate where empno =#{empno}
 </update>
+
 <select id="EmpHistory" resultType="EmpHistory"  parameterType="EmpHistory">
 select * from emp_master_his_f WHERE empno like '%'|| #{empno} || '%'
 		and dname like '%' ||#{dname}||'%'
 </select>
+
+<select id="starttime_c" resultType="date">
+ <![CDATA[
+            SELECT ALLTIME
+            FROM commute_f
+            WHERE TRUNC(ALLTIME) = TRUNC(SYSDATE)
+              AND ROWNUM <= 1
+              AND status = 's'
+              AND empno LIKE '%' || #{empno} || '%'
+        ]]>
+</select>
+
+<select id="endtime_c" resultType="date">
+ <![CDATA[
+            SELECT ALLTIME
+            FROM commute_f
+            WHERE TRUNC(ALLTIME) = TRUNC(SYSDATE)
+              AND ROWNUM <= 1
+              AND status = 'e'
+              AND empno LIKE '%' || #{empno} || '%'
+        ]]>
+</select>
+<select id="getnewinfo" parameterType="string" resultType="emp"> 
+SELECT * FROM emp_master_f WHERE email=#{email} </select>
 </mapper>

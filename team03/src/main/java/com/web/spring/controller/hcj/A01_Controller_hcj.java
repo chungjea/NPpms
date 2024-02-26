@@ -19,7 +19,6 @@ import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Task_f;
-import com.web.spring.vo.Tmem_f;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -40,33 +39,21 @@ public class A01_Controller_hcj {
 			// 프로젝트 할당
 			d.addAttribute("projects", service.getprojects(emp));
 			d.addAttribute("pjcnt",service.getProjectCntAdmin(emp));
-			
-			if (emp.getAuth().equals("관리자")) {
-				
 	
-				
-				d.addAttribute("projectCnt", service.getProceedProjectCntAdmin(emp.getEmpno()));
-				d.addAttribute("allprojectCnt", service.getAllMyProjectCntAdmin(emp.getEmpno()));
-				d.addAttribute("workList", service.getProjectWorkByEmpnoAdmin(emp.getEmpno()));
-				d.addAttribute("workcnt", service.getmyWorkCntAdmin(emp.getEmpno()));
-				d.addAttribute("errList", service.getMyErrsListAdmin(emp.getEmpno()));
-				d.addAttribute("errcnt", service.getMyErrorCntAdmin(emp.getEmpno()));
-			} else {
-				
-				
-				d.addAttribute("projectCnt", service.getProceedProjectCntNormal(emp.getEmpno()));
-				d.addAttribute("allprojectCnt", service.getAllMyProjectCntNormal(emp.getEmpno()));
-				d.addAttribute("workList", service.getProjectWorkByEmpnoNormal(emp.getEmpno()));
-				d.addAttribute("workcnt", service.getmyWorkCntNormal(emp.getEmpno()));
-				d.addAttribute("errList", service.getMyErrsListNormal(emp.getEmpno()));
-				d.addAttribute("errcnt", service.getMyErrorCntNormal(emp.getEmpno()));
-			}
-			
 		}
-		
-		
+	
 		return "hcj/z05_bootTmp/a01_index";
 	}
+	@PostMapping("workcnt")
+	public ResponseEntity<?> workcnt(@RequestParam("pcode")int pcode,@RequestParam("empno")int empno,
+									@RequestParam("auth")String auth){
+		System.out.println("컨트롤러 접근!");
+		System.out.println("pcode:"+pcode);
+		System.out.println("empno:"+empno);
+		System.out.println("auth:"+auth);
+		return ResponseEntity.ok(service.getWorkCnt(empno, pcode, auth));
+	}
+	
 	
 	@ResponseBody
 	@PostMapping("insertProject")
@@ -106,8 +93,7 @@ public class A01_Controller_hcj {
 		if (empnoStr == null || empnoStr == "")
 			empnoStr = "0";
 		sch.setEmpno(Integer.parseInt(empnoStr));
-		if (sch.getDname() == null)
-			sch.setDname("");
+	
 		d.addAttribute("elist", service.getemplist(sch));
 		return "pageJsonReport";
 	}

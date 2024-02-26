@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ page import="java.text.SimpleDateFormat" %>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
@@ -16,12 +17,14 @@
 
 
 <%
-/* 
+
 Date time1 = new Date();
 SimpleDateFormat formatter1 = new SimpleDateFormat(
 		"yyyy-MM-dd: (E) HH:mm:ss", Locale.KOREA
-		); */
-
+		); 
+Date starttime=(Date) session.getAttribute("inputS");
+Date endtime=(Date) session.getAttribute("inputE");
+long timeDifference;
 %>
 
 
@@ -79,37 +82,41 @@ SimpleDateFormat formatter1 = new SimpleDateFormat(
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												근태관리</div>
-											<div class="card-body">$"{formatter1.format(time1)}"</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">0h0m</div>
+											<div class="card-body"><%=formatter1.format(time1)%></div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">${inputE}-${inputS}</div>
 											<div class="progress progress-sm mr-2"></div>
 
 											<div class="h5 mb-0 font-weight-bold text-gray-800">출근시간
-												:${commute_s.starttime}</div>
+												:${inputS}</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">퇴근시간
-												:${commute_s.endtime}</div>
+												:${inputE}</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">야근시간
 												:${commute_s.overtime}</div>
 											<hr
 												style="border-width: 1px 0 0 0; border-style: dotted; border-color: #bbb;">
-											<form method="post" class="user" action="${path}/commute_s"
-												class="btn btn-light btn-icon-split">
-												<a href='javascript:$(".user").submit()' id="StartBtn"
-													class="btn btn-light btn-icon-split"> <span
+											<form method="post" class="user" action ="${path}/commute_start">
+												
+												<a href='javascript:$(".user").submit()' id="StartBtn" class="btn btn-light btn-icon-split"> <span
 													class="text">&nbsp &nbsp &nbsp &nbsp출근&nbsp &nbsp
 														&nbsp &nbsp</span>
 												</a> <input type="hidden" name="empno" value="${emp.empno}">
 												<input type="hidden" name="ename" value="${emp.ename}">
-												<input type="hidden" name="starttime" value="">
+												<input type="hidden" name="ALLTIME" value="">
+												<input type="hidden" name="status" value="s">
 												
 
 											</form>
-											<form method="post" id="send" action="${path}/ECommute"
-												class="btn btn-light btn-icon-split">
-												<a href="#" id="EndBtn" class="btn btn-light btn-icon-split">
+											<form method="post" class="user1" action ="${path}/commute_end">
+												
+												<a href='javascript:$(".user1").submit()' id="EndBtn" class="btn btn-light btn-icon-split"> <span
+													class="text">&nbsp &nbsp &nbsp &nbsp퇴근&nbsp &nbsp
+														&nbsp &nbsp</span>
+												</a> <input type="hidden" name="empno" value="${emp.empno}">
+												<input type="hidden" name="ename" value="${emp.ename}">
+												<input type="hidden" name="ALLTIME" value="">
+												<input type="hidden" name="status" value="e">
+												
 
-													<span class="text">&nbsp &nbsp &nbsp &nbsp퇴근&nbsp
-														&nbsp &nbsp &nbsp </span>
-												</a>
 											</form>
 										</div>
 
@@ -251,8 +258,14 @@ SimpleDateFormat formatter1 = new SimpleDateFormat(
 <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 	<script>
+var starttime=new Date('<%= formatter.format(starttime) %>');
+var endtime=${inputE}
+
 	$("#StartBtn").click(function(){
-		$("#user").submit()
+		location.href="${path}/commute_start";
+	})
+		$("#EndBtn").click(function(){
+		location.href="${path}/commute_end";
 	})
 
 

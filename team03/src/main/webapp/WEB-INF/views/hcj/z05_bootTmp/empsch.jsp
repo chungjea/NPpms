@@ -7,7 +7,9 @@
 <fmt:requestEncoding value="utf-8"/>     
 <link rel="stylesheet" href="${path}/a00_com/bootstrap.min.css" >
 <link rel="stylesheet" href="${path}/a00_com/jquery-ui.css" >
+<style>
 
+</style>
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://developers.google.com/web/ilt/pwa/working-with-the-fetch-api" type="text/javascript"></script>
     <link
@@ -36,7 +38,7 @@
 	    
  	</nav>
 	</form>
-   <table class="table table-hover table-striped">
+   <table class="table table-hover table-striped" style="margin-bottom : 0px">
    	<col width="30%">
    	<col width="30%">
    	<col width="30%">
@@ -50,11 +52,18 @@
         <th>이름</th>
         <th>부서</th>
         <th></th>
-
+	
  
       </tr>
-    </thead>	
-    <tbody id="empSchTbody">
+    </thead>
+    </table>
+    <div style="max-height:300px;overflow-y:scroll ">
+    <table class="table table-hover table-striped">	
+    	<col width="30%">
+   		<col width="30%">
+   		<col width="30%">
+   		<col width="10%">
+    <tbody id="empSchTbody" >
     	<c:forEach var="emp" items="${elist}">
     	<tr>
 	    	<td>${emp.empno}</td>
@@ -66,10 +75,11 @@
 	 		</td>
  		</tr>
     	</c:forEach>
-    </tbody>
-	</table>    
+    </tbody >
+	</table>
+	</div>    
       </div>
-      <div class="modal-footer">    
+      <div class="modal-footer" >    
         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="echclsBtn">닫기</button>
       </div>
     </div>
