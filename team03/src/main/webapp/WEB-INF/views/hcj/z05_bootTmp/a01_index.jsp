@@ -96,7 +96,7 @@
 					
 					<c:choose> 
 						
-						<c:when test="${allprojectCnt>0}">
+						<c:when test="${projects.size()>0}">
 						<div class="row">
 							<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a12_main_row2.jsp" %>
 						</div>
@@ -165,6 +165,25 @@
 <script type="text/javascript">
 $("#uptBtn").hide();
 $("#delBtn").hide();
+selectpjwork()
+function selectpjwork(){
+	$.ajax({
+		url:"workcnt",
+		type:"post",
+		data:"pcode="+$("#pjselect").val()+"&empno=${emp.empno}&auth=${emp.auth}",
+		dataType:"json",
+		success:function(datas){
+		
+			myBarChart.data.datasets[0].data = Object.keys(datas).map(item =>datas[item]);
+			myBarChart.update();
+		},
+		error:function(){
+			console.log(err)
+		}
+	})
+	
+	
+}
 /* 	var members = new Map();
 
  	//----프로젝트 생성------

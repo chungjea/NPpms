@@ -18,16 +18,14 @@ import jakarta.servlet.http.HttpServletResponse;
 @Component("downloadViewer_lsd")
 public class DownloadViewer_lsd extends AbstractView {
 	// 다운로드할 경로 설정(공통)
-	/*@Value("${file.upload}")
-	private String path;*/
+	@Value("${file.upload}")
+	private String path;
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 
 		String path="C:\\a01_springbt\\workspace\\maven.1708065300599\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 
-		//String path="C:\\Users\\82108\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
-		//String path="C:\\Users\\Administrator\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 
 		String fileName = (String)model.get("downloadFile");
 		String realfile = (String)model.get("realFile");

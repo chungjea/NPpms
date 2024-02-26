@@ -272,8 +272,9 @@
 					    </tbody>
 					</table>
 					<form method="post" id="frm02" action="${path}/detailrsk">
-							<input id="test" name="rskno" type="hidden">
-							<input name="pcode" type="hidden" value="${param.pcode}">
+						<input id="test" name="rskno" type="hidden">
+                    	<input type="hidden" name="empno" value="${emp.empno}" />
+						<input name="pcode" type="hidden" value="${param.pcode}">
 					</form>
 					<script type="text/javascript">
 					    function goDetail(no){

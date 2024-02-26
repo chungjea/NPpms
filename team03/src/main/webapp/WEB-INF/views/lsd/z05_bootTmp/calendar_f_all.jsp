@@ -141,12 +141,24 @@ body {
 				$("#frm01")[0].reset()
 				console.log("#일정 클릭시#")
 				console.log(arg.event)
+				console.log(arg.event.extendedProps.empno + " 작성자")
+				console.log(${emp.empno} + " 지금 로그인")
 				addForm(arg.event)
 				console.log("ddd" + empno)
 				$("#calTitle").text("일정상세")
 				$("#regBtn").hide()
-				$("#uptBtn").show()
-				$("#delBtn").show()
+				
+				if (arg.event.extendedProps.empno != ${emp.empno}) {
+					console.log("작성자와 로그인 다름")
+					$("#uptBtn").hide()
+					$("#delBtn").hide()
+				} else {
+					console.log("작성자와 로그인 같음")
+					$("#uptBtn").show()
+					$("#delBtn").show()
+				}
+				
+				
 				$("#calModal").click()
 			},
 			eventDrop : function(arg) {
@@ -276,6 +288,7 @@ body {
 
 		}
 		function addForm(evt) {
+			console.log("addForm")
 			// evt.속성 : 기본적으로 fullcalendar에서 사용하는 속성 
 			// evt.extendedProps.속성 : 기본속성이 아닌 추가적으로 
 			//		상세화면에 출력시 사용되는 속성
@@ -304,7 +317,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>${emp.dname},${emp.ename}의 일정,업무 전체</h2>
+		<h2>${emp.dname} 부서의 ${emp.ename}의 일정</h2>
 	</div>
 	<%-- 
 		
@@ -331,7 +344,7 @@ body {
 					<form id="frm01" class="form" method="post">
 						<input type="hidden" name="id" value="0" />
 						<input type="hidden" name="pcode" value="${pcode}" />
-						
+						<input type="hidden" name="empno" value="0"/>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
@@ -412,7 +425,6 @@ body {
 					
 					<button type="button" id="uptBtn" class="btn btn-info">일정수정</button>
 					<button type="button" id="delBtn" class="btn btn-warning">일정삭제</button>
-					
 					<button type="button" id="clsBtn" class="btn btn-secondary"
 						data-dismiss="modal">Close</button>
 				</div>

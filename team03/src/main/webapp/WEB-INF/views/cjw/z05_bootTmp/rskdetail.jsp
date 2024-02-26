@@ -76,7 +76,7 @@
 			$("#finBtn").hide()
 		}else{
 			if(charge==""){
-				if(manager==1000){
+				if(manager==empno){
 					$("#ckModal").show();
 					$("#finBtn").hide();
 				}else{
@@ -306,7 +306,7 @@
 										</div>
 										<select name="cempno" class="form-control" style="width:70%;">
 											<c:forEach var="dm" items="${dmlist}">
-												<option value="${dm.empno}">${dm.ename}(${dm.dname})</option>
+												<option value="${dm.member}">${dm.name}</option>
 											</c:forEach>
 										</select>
 									</div>

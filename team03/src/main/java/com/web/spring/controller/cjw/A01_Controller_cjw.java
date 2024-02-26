@@ -51,8 +51,8 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("insertapvFrm")
-	public String insertapvFrm(int pcode, Model d) {
-		d.addAttribute("dmlist", service.getteammen(pcode));
+	public String insertapvFrm(@Param("empno") int empno, @Param("pcode") int pcode, Model d) {
+		d.addAttribute("dmlist", service.getteammen(empno, pcode));
 		return "cjw/z05_bootTmp/apvinsert";
 	}
 	
@@ -123,6 +123,7 @@ public class A01_Controller_cjw {
 	
 	@PostMapping("insertrskFrm")
 	public String insertrskFrm(int pcode, Model d) {
+		System.out.println(pcode);
 		d.addAttribute("mempno", service.getmymanager(pcode));
 		return "cjw/z05_bootTmp/rskinsert";
 	}
@@ -134,10 +135,10 @@ public class A01_Controller_cjw {
 	}
 	
 	@PostMapping("detailrsk")
-	public String detailrsk(@Param("rskno")int rskno, @Param("team")int pcode, Model d) {
+	public String detailrsk(@Param("rskno")int rskno, @Param("empno") int empno, @Param("team")int pcode, Model d) {
 		d.addAttribute("drsk", service.detailrsk(rskno));
 		d.addAttribute("drskfile", service.getrskfile(rskno));
-		d.addAttribute("dmlist", service.getteammen(pcode));
+		d.addAttribute("dmlist", service.getteammen(empno, pcode));
 		return "cjw/z05_bootTmp/rskdetail";
 	}
 	

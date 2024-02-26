@@ -2,6 +2,7 @@ package com.web.spring.controller.lsd;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,7 +19,6 @@ import com.web.spring.service.lsd.A02_Service_lsd;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.NoticeSch_f;
 import com.web.spring.vo.Noticeboard_f;
-import com.web.spring.vo.Project_f;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -98,13 +98,13 @@ public class A01_Controller_lsd {
 	// 공지 등록 폼
 	// http://localhost:3333/springweb/insertNoticeFrm
 	@RequestMapping("insertNoticeFrm")
-	public String insertNoticeFrm(Noticeboard_f noticeIns,int pcode) {
+	public String insertNoticeFrm(Noticeboard_f noticeIns, int pcode) {
 		return "lsd/z05_bootTmp/InsertNotice";
 	}// insertNoticeFrm()
 
 	 //공지 등록 === pcode ===
 	@RequestMapping("insertNotice")
-	public String insertNotice(@RequestParam("pcode")int pcode, @ModelAttribute("sch") NoticeSch_f sch, Noticeboard_f ins, Model d, HttpSession session) {
+	public String insertNotice(@RequestParam("pcode") int pcode, @ModelAttribute("sch") NoticeSch_f sch, Noticeboard_f ins, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
 		System.out.println("이엠피 나와라"+emp);
 		if(emp!=null) {

@@ -27,11 +27,11 @@
 			) 
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
-	<select id="getdeptmen" resultType="team" parameterType="int">
-		SELECT a.*, ename||'('||dname||')' "NAME"
+	<select id="getteammen" resultType="team" parameterType="int">
+		SELECT a.*, ename||'('||dname||')' name
 		FROM (SELECT DISTINCT pcode, empno "MEMBER" FROM VIEW_PROJECT_ALL_INFO_TMEMBER
 			UNION SELECT pcode, MEMBER FROM VIEW_PROJECT_ALL_INFO_TMEMBER) a, EMP_PINFO_F epf 
-		WHERE a.MEMBER = epf.EMPNO AND pcode = #{pcode}
+		WHERE a.MEMBER = epf.EMPNO AND a.MEMBER != #{empno} AND pcode = #{pcode}
 	</select>
 	<select id="detailapv" resultType="approve" parameterType="int">
 		SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
@@ -112,7 +112,7 @@
 			values(met_seq.nextval,#{title}, to_date(#{metdteStr},'YYYY-MM-DD'), 
 					to_date(#{metdteStr}||'T'||#{starttmStr}||'+09:00','YYYY-MM-DD"T"HH24:MI"+09:00"'), 
 					to_date(#{metdteStr}||'T'||#{fintmStr}||'+09:00','YYYY-MM-DD"T"HH24:MI"+09:00"'), 
-					#{participant}, #{wempno}, #{content}, #{conclusion}, sysdate. #{pcode})
+					#{participant}, #{wempno}, #{content}, #{conclusion}, sysdate, #{pcode})
 	</insert>
 	<select id="detailmet" resultType="meeting" parameterType="int">
 		SELECT mf.METNO, to_char(mf.METDTE, 'YYYY-MM-DD') metdteStr, 

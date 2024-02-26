@@ -140,7 +140,7 @@
 							</div>
 							<select name="mempno" class="form-control">
 								<c:forEach var="dm" items="${dmlist}">
-									<option value="${dm.empno}">${dm.ename}(${dm.dname})</option>
+									<option value="${dm.member}">${dm.name}</option>
 								</c:forEach>
 							</select>	
 						</div>	

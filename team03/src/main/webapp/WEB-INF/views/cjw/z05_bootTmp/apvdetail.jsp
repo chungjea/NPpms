@@ -91,12 +91,14 @@
 		$("#noBtn").click(function(){
 			apvajax()
 		})
-		if(mempno==empno){
-			$("#okModal").show();
-			$("#noModal").show();
-		}else{
-			$("#okModal").hide();
-			$("#noModal").hide();
+		if("${dapv.sts}"=="대기"){
+			if(mempno==empno){
+					$("#okModal").show();
+					$("#noModal").show();
+			}else{
+				$("#okModal").hide();
+				$("#noModal").hide();
+			}
 		}
 	});
 	function apvajax(){
