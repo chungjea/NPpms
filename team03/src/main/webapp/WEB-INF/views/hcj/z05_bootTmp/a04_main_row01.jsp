@@ -13,7 +13,7 @@
 					<div
 						class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 						진행중인 ${emp.auth=='관리자'?'담당':'참여' } 프로젝트</div>
-					<div class="h5 mb-0 font-weight-bold text-gray-800">${projectCnt}건</div>
+					<div class="h5 mb-0 font-weight-bold text-gray-800">${projects.size()}건</div>
 				</div>
 				<div class="col-auto">
 					<i class="fas fa-calendar fa-2x text-gray-300"></i>

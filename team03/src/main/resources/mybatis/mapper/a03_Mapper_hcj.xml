@@ -86,30 +86,27 @@
 <!-- ######################### 관리자 담당 프로젝트 ########################## -->
 
 								<!-- 리스트 -->
-	<select id="getprojectListAdmim" parameterType="projectSch" resultType="project">
-		SELECT fin.*
-		FROM 
-			(SELECT rownum cnt, PROJECT_F.*,pg.progress
-				FROM PROJECT_F ,
-					(SELECT pcode,avg(PROGRESS) PROGRESS 
-					FROM PROJECT_WORK_F pwf 
-					GROUP BY pcode) pg
-				WHERE PROJECT_F.pcode = pg.pcode(+)
+	<select id="getprojectListAdmim" parameterType="projectSch" resultType="project">		
+		SELECT * 
+		from
+			(SELECT rownum cnt, addnum.*
+				from
+				(SELECT * FROM VIEW_PROJECT_ALL_INFO vpai 
+				WHERE pname LIKE '%'||#{pname}||'%'
 				AND empno = #{empno}
-				AND pname LIKE '%'||#{pname}||'%'
 				<if test="status != null">
 				AND STATUS = #{status}
 				</if>
-				<![CDATA[AND rownum <= #{end} )]]> fin
-		WHERE cnt BETWEEN #{start} AND #{end}
+				ORDER BY pcode DESC) addnum)FIN
+		WHERE cnt BETWEEN #{start} AND #{end}		
 	</select>
 	
 								<!-- 데이터 갯수 -->
 	<select id="getprojectListCntAdmim" parameterType="projectSch" resultType="int">
-		SELECT count(*)
-		FROM PROJECT_F 
-		WHERE empno = #{empno}
-		AND pname LIKE '%'||#{pname}||'%'
+		SELECT count(*) 
+		FROM VIEW_PROJECT_ALL_INFO vpai 
+		WHERE pname LIKE '%'||#{pname}||'%'
+		and empno = #{empno}
 		<if test="status!=null">
 		AND STATUS = #{status}
 		</if>
@@ -117,37 +114,26 @@
 
 <!--  ######################### 사원 참가 프로젝트  ########################## -->	
 
-	<select id="getprojectListNormal" parameterType="projectSch" resultType="project">
-		SELECT *
+	<select id="getprojectListNormal" parameterType="projectSch" resultType="project">		
+		SELECT cnt, fin.*
 		from
-			(SELECT rownum cnt,fin.*
-			FROM 
-				(SELECT mypj.*,avpg.progress
-				from
-					(SELECT pf.pcode ,pf.pname ,pf.startdte ,pf.enddte,pf.status, pf.tname, pf.ptype, pf.content
-					FROM TMEM_F tf ,PROJECT_F pf
-					WHERE tf.EMPNO = #{empno}
-					AND tf.PCODE = pf.PCODE ) mypj,
-					(SELECT  pcode ,avg(PROGRESS) PROGRESS 
-					FROM PROJECT_WORK_F pwf 
-					GROUP BY PCODE) avpg
-				WHERE mypj.PCODE = avpg.pcode(+)
-				) fin
-			<![CDATA[WHERE rownum <= #{end}]]>
-			AND pname LIKE '%'||#{pname}||'%'
-			<if test="status != null">
-			AND status = #{status}
+			(SELECT rownum cnt, addnum.*
+			from
+			(SELECT * FROM VIEW_PROJECT_ALL_INFO_TMEMBER vpait
+			WHERE pname LIKE '%'||#{pname}||'%'
+			AND MEMBER = #{empno}
+			<if test="status!=null">
+				AND STATUS = #{status}
 			</if>
-			)
-		WHERE cnt BETWEEN #{start} AND #{end}
+			ORDER BY pcode DESC)addnum)fin
+		WHERE cnt BETWEEN #{start} AND #{end} 
 	</select>
 	
 	<select id="getprojectListCntNormal" parameterType="projectSch" resultType="int">
-		SELECT count(*)
-		FROM TMEM_F tf ,PROJECT_F pf
-		WHERE tf.EMPNO = #{empno}
-		AND tf.PCODE = pf.PCODE
-		AND pname LIKE '%'||#{pname}||'%'
+		SELECT count(*) 
+		FROM VIEW_PROJECT_ALL_INFO_TMEMBER vpait
+		WHERE PNAME like '%'||#{pname}||'%'
+		AND MEMBER = #{empno}
 		<if test="status!=null">
 		AND STATUS = #{status}
 		</if>
