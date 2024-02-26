@@ -69,7 +69,7 @@
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
 				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, 
-					emf.ENAME||' / '||df.DNAME charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
+					emf.ENAME||'('||df.DNAME||')' charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
 				FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
 				WHERE rf.rskno = rf2.rskno AND rf2.cempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
 				AND rf2.cempno = #{cempno} AND rf.sts = '처리중' AND rf.pcode = #{pcode} AND rf.title like '%'||#{title}||'%' 
@@ -81,10 +81,10 @@
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
 				(SELECT rf.rskNO, rf.TITLE, rf.writer, rf.WEMPNO, 
-					emf.ENAME||' / '||df.DNAME charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
+					emf.ENAME||'('||df.DNAME||')' charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
 				FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
 				WHERE rf.rskno = rf2.rskno AND rf2.cempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
-				AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' AND rf.pcode = #{pcode} AND rf.title like '%'||#{title}||'%' 
+				AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '완료' AND rf.pcode = #{pcode} AND rf.title like '%'||#{title}||'%' 
 				ORDER BY rskNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
