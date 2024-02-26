@@ -126,7 +126,8 @@ public class A02_Service_lsd {
 				//  등록되는 갯수만큼 numbering 처리..
 					ck02+=dao.insertNoticeFile(
 							new NoticeFile_f(fname,path,ins.getTitle(),fno));
-					dao.insertfileNF(fname, path, fno);
+					int pcode = ins.getPcode();
+					dao.insertfileNF(fname, path, fno, pcode);
 					
 				}
 			} catch (IllegalStateException e) {

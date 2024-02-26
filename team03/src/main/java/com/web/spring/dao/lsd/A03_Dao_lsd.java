@@ -94,8 +94,8 @@ public interface A03_Dao_lsd {
 	int insertNoticeFile(NoticeFile_f ins);
 	
 	// 공지 파일 문서관리 DB에 저장
-	@Insert("Insert into file_f values(file_seq.nextval, '공지', board_seq.currval, #{fname}, #{path}, sysdate, #{fno}, 0)")
-	int insertfileNF(String fname, String path, String fno);
+	@Insert("Insert into file_f values(file_seq.nextval, '공지', board_seq.currval, #{fname}, #{path}, sysdate, #{fno}, 0, #{pcode})")
+	int insertfileNF(String fname, String path, String fno, int pcode);
 
 	// 저장된 파일 이름 불러오기
 	@Select("SELECT fno FROM NoticeFile_f WHERE no = #{no}")
