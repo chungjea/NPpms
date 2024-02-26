@@ -80,30 +80,37 @@
 		$("#regBtn").click(function(){
 			if($("[name=metdte]").val()==""){
 				alert("회의 날짜를 입력하세요")
+				$("[name=metdte]").focus()
 				return;
 			}
 			if($("[name=starttm]").val()==""){
 				alert("회의 시간을 입력하세요")
+				$("[name=starttm]").focus()
 				return;
 			}
 			if($("[name=fintm]").val()==""){
 				alert("회의 시간을 입력하세요")
+				$("[name=fintm]").focus()
 				return;
 			}
 			if($("[name=participant]").val()==""){
 				alert("참석자를 입력하세요")
+				$("[name=participant]").focus()
 				return;
 			}
 			if($("[name=title]").val()==""){
 				alert("회의 목적을 입력하세요")
+				$("[name=title]").focus()
 				return;
 			}
 			if($("[name=content]").val()==""){
 				alert("회의 내용을 입력하세요")
+				$("[name=content]").focus()
 				return;
 			}
 			if($("[name=conclusion]").val()==""){
 				alert("회의 결론을 입력하세요")
+				$("[name=conclusion]").focus()
 				return;
 			}
 			if(confirm("등록하시겠습니까?")){

@@ -61,12 +61,12 @@
 			$("#frmapv").submit()
 		}		
 		$("#regBtn").click(function(){
-			if($("[name=title]").val()==""){
-				alert("제목을 입력하세요")
-				return;
-			}
 			if($("[name=content]").val()==""){
 				alert("내용을 입력하세요")
+				return;
+			}
+			if($("[name=title]").val()==""){
+				alert("제목을 입력하세요")
 				return;
 			}
 			if(confirm("등록하시겠습니까?")){
@@ -109,13 +109,13 @@
                     	<form method="post" enctype="multipart/form-data" action="${path}/insertapv">
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
-								<span class="input-group-text w-100 justify-content-center">제목(*)</span>
+								<span class="input-group-text w-100 justify-content-center">제목</span>
 							</div>
 							<input name="title" class="form-control" value="" />	
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
-								<span class="input-group-text w-100 justify-content-center">작성자(*)</span>
+								<span class="input-group-text w-100 justify-content-center">작성자</span>
 							</div>
 							<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important"/>	
 							<input type="hidden" name="wempno" value="${emp.empno}"  readonly />
@@ -136,7 +136,7 @@
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
-								<span class="input-group-text w-100 justify-content-center">결재자(*)</span>
+								<span class="input-group-text w-100 justify-content-center">결재자</span>
 							</div>
 							<select name="mempno" class="form-control">
 								<c:forEach var="dm" items="${dmlist}">

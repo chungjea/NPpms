@@ -193,6 +193,17 @@ public interface A03_Dao_cjw {
 	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno}, 0)")
 	int insertfilemy(String fname, String path, String fno, int empno);
 	
+	@Insert("Insert into file_f values(file_seq.nextval, '팀', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno}, #{pcode})")
+	int insertfileteam(String fname, String path, String fno, int empno, int pcode);
+	
+	List<File_f> teamfile(FileSch sch);
+	
+	@Select("SELECT pname FROM PROJECT_F WHERE pcode = #{pcode}")
+	String getpname(int pcode);
+	
+	@Select("SELECT count(*) FROM file_f WHERE  page = '팀' AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND pcode=#{pcode}")
+	int teamfilecnt(FileSch sch);
+	
 	List<File_f> myfile(FileSch sch);
 	
 	@Select("SELECT count(*) FROM file_f WHERE  page = '개인' AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND auth = #{empno}")
@@ -201,6 +212,7 @@ public interface A03_Dao_cjw {
 	@Delete("DELETE FROM file_f WHERE fno = #{fno}")
 	int deletefile(String fno);
 	
+	// 채팅
 	@Select("SELECT empno, ename||' ('||dname||')' ename FROM EMP_PINFO_F ORDER BY ename")
 	List<Emp_pinfo_f> empList();
 	
@@ -229,7 +241,7 @@ public interface A03_Dao_cjw {
 	@Delete("Delete from chatroom_f where  username=#{username}")
 	int delChatId(@Param("username") String username);	
 	
-	@Select("	SELECT DISTINCT crname FROM chatroom_f")
+	@Select("SELECT DISTINCT crname FROM chatroom_f")
 	List<String> getChRooms();
 	
 	@Select("SELECT username FROM chatroom_f WHERE crname = (SELECT crname FROM chatroom_f WHERE username=#{username})")

@@ -79,16 +79,29 @@
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">문서관리</h1>
-                        <a href="javascript:upload()" class="btn btn-secondary btn-icon-split">
+                        <a href="javascript:uploadteam()" class="btn btn-secondary btn-icon-split">
                                 <span class="icon text-white-50">
                                 	<i class="fas fa-arrow-right"></i>
                             	</span>
-                        	<span class="text">파일 업로드</span>
+                        	<span class="text">팀 파일 업로드</span>
+                        </a>
+                    </div>
+                    <div align="right">
+                        <a href="javascript:uploadmy()" class="btn btn-secondary btn-icon-split">
+                                <span class="icon text-white-50">
+                                	<i class="fas fa-arrow-right"></i>
+                            	</span>
+                        	<span class="text">개인 파일 업로드</span>
                         </a>
                     </div>
                     <script type="text/javascript">
                     	$(document).ready(function() {
-                    		$("#filefrm").hide()
+                    		if("${emp}"==""){
+								alert("로그인후 이용해주세요")
+								location.href="${path}/login"
+                    		}
+                    		$("#filefrmmy").hide()
+                    		$("#filefrmteam").hide()
                     		var msg = "${msg}"
                     		if(msg!=""){
                     			alert(msg)
@@ -133,8 +146,11 @@
                     			}
                     		})
                     	});
-                    	function upload(){
-                    		$("[name=reports]").click();
+                    	function uploadmy(){
+                    		$("#my").click();
+                    	}
+                    	function uploadteam(){
+                    		$("#team").click();
                     	}
                     </script>
 					<br>
@@ -152,6 +168,7 @@
 							<input type="hidden" name="empno" value="${sch.empno}"/>
 							<input type="hidden" name="pcode" value="${param.pcode}"/>
 							<input type="hidden" name="curPage" value="0"/>
+							<input type="hidden" name="curPage2" value="0"/>
 							<input type="hidden" name="curPage3" value="0"/>
 							<div class="input-group-append">
 								<button class="btn btn-primary" onclick="schfile()" type="button" id="schBtn">
@@ -238,28 +255,48 @@
 								}
 							</script>
 						</div>
-						<!-- 
 						<div style="width:33%; border-right: solid 1px; border-left: solid 1px; height:450px">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
-								<caption>팀</caption>
+								<caption>${pname} 팀</caption>
 	                    		<caption style="text-align:right; font-size:medium; font-weight: bolder; color:black;">결과: ${sch.count2}건</caption>
-							   	<col width="60%">
-							   	<col width="25%">
-							   	<col width="15%">
+							   	<col width="45%">
+							   	<col width="33%">
+							   	<col width="11%">
+							   	<col width="11%">
 							    <thead>
 							      <tr class="text-center" style="background-color:skyblue;">
 							        <th>파일명</th>
 							        <th>업무</th>
 							        <th></th>
+							        <th></th>
 							      </tr>
 							    </thead>	
 							    <tbody>
-							    	<tr><td>1</td><td>2</td>
-							    	<td><button type="button" title="다운로드" style="border: none; background-color: transparent;" onclick="download('${bf.fno}','${bf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td></tr>
+							    	<c:forEach var="tf" items="${tfile}">
+								    	<tr><td>${tf.fname}</td><td>${tf.page}</td>
+								    	<td><button type="button" title="다운로드" style="border: none; background-color: transparent;" onclick="download('${tf.fno}','${tf.fname}')"><img src="${path}/a00_com/img/down_icon.png" alt="↓" width="30" height="30"></button></td>
+								    	<c:choose>
+								    		<c:when test="${tf.auth==emp.empno}">
+								    			<td><button type="button" title="삭제" style="border: none; background-color: transparent;" onclick="deletefile('${tf.fno}','${tf.fname}')"><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="20" height="20"></button></td></tr>
+								    		</c:when>
+								    	</c:choose>
+								    	<c:otherwise>
+								    		<td></td></tr>
+								    	</c:otherwise>
+							    	</c:forEach>
 							    </tbody>
 							</table>
+							<br>
+							<ul class="pagination  justify-content-center">
+								<li class="page-item">
+								<a class="page-link" href="javascript:goPage3(${sch.startBlock2-1})">Previous</a></li>
+								<c:forEach var="pcnt2" begin="${sch.startBlock2}" end="${sch.endBlock2}">
+									<li class="page-item ${sch.curPage2==pcnt2?'active':''}">
+									<a class="page-link" href="javascript:goPage2(${pcnt2})">${pcnt2}</a></li>
+								</c:forEach>
+								<li class="page-item"><a class="page-link" href="javascript:goPage2(${sch.endBlock2+1})">Next</a></li>
+							</ul>
 						</div>
-						 -->
 						<div style="width:33%;">
 							<table class="table table-hover table-striped" style="width:80%; margin: auto;">
 								<caption>개인</caption>
@@ -302,6 +339,7 @@
 					<input type="hidden" name="fname" value="${sch.fname}"/>
 					<input type="hidden" name="page" value="${sch.page}"/>
 					<input type="hidden" name="curPage" value="${sch.curPage}"/>
+					<input type="hidden" name="curPage2" value="${sch.curPage2}"/>
 					<input type="hidden" name="curPage3" value="${sch.curPage3}"/>
 					<input type="hidden" name="empno" value="${sch.empno}"/>
 					<input type="hidden" name="pcode" value="${param.pcode}"/>
@@ -309,6 +347,10 @@
 				<script type="text/javascript">
 					function goPage(pcnt){
 						$("[name=curPage]").val(pcnt)
+						$("#ffrm").submit();
+					}
+					function goPage2(pcnt2){
+						$("[name=curPage2]").val(pcnt2)
 						$("#ffrm").submit();
 					}
 					function goPage3(pcnt3){
@@ -327,8 +369,13 @@
 					}
 				</script>
 				<!-- /.container-fluid -->
-                    <form id="filefrm" method="post" action="${path}/upload" enctype="multipart/form-data">
-                    	<input type="file" name="reports" multiple="multiple" value="" />
+                    <form id="filefrmmy" method="post" action="${path}/upload" enctype="multipart/form-data">
+                    	<input type="file" id="my" name="reports" multiple="multiple" value="" />
+                    	<input type="text" name="empno" value="${emp.empno}" />
+                    	<input type="text" name="pcode" value="${param.pcode}" />
+                    </form>
+                    <form id="filefrmteam" method="post" action="${path}/uploadteam" enctype="multipart/form-data">
+                    	<input type="file" id="team" name="reports" multiple="multiple" value="" />
                     	<input type="text" name="empno" value="${emp.empno}" />
                     	<input type="text" name="pcode" value="${param.pcode}" />
                     </form>

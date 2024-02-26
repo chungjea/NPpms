@@ -61,12 +61,12 @@
 			$("#frmrsk").submit()
 		}		
 		$("#regBtn").click(function(){
-			if($("[name=title]").val()==""){
-				alert("제목을 입력하세요")
-				return;
-			}
 			if($("[name=content]").val()==""){
 				alert("내용을 입력하세요")
+				return;
+			}
+			if($("[name=title]").val()==""){
+				alert("제목을 입력하세요")
 				return;
 			}
 			if(confirm("등록하시겠습니까?")){
@@ -110,13 +110,13 @@
                     	<form method="post" enctype="multipart/form-data" action="${path}/insertrsk">
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
-								<span class="input-group-text w-100 justify-content-center">제목(*)</span>
+								<span class="input-group-text w-100 justify-content-center">제목</span>
 							</div>
 							<input name="title" class="form-control" value="" />	
 						</div>	
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
-								<span class="input-group-text w-100 justify-content-center">작성자(*)</span>
+								<span class="input-group-text w-100 justify-content-center">작성자</span>
 							</div>
 							<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important"/>	
 							<input type="hidden" name="wempno" value="${emp.empno}" readonly />
@@ -125,7 +125,7 @@
 						</div>			
 						<div class="input-group mb-0">	
 							<div class="input-group-prepend ">
-								<span class="input-group-text w-100 justify-content-center">가능성(*)</span>
+								<span class="input-group-text w-100 justify-content-center">가능성</span>
 							</div>
 							<select name="probability" class="form-control">
 								<option value="최상">최상</option>
@@ -135,7 +135,7 @@
 								<option value="최하">최하</option>
 							</select>	
 							<div class="input-group-prepend ">
-								<span class="input-group-text w-100 justify-content-center">위험도(*)</span>
+								<span class="input-group-text w-100 justify-content-center">위험도</span>
 							</div>
 							<select name="danger" class="form-control">
 								<option value="최상">최상</option>

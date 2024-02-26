@@ -503,6 +503,72 @@ public class A02_Service_cjw {
 		return dao.boardfile(sch);
 	}
 	
+	// 문서관리 : 팀 파일 업로드
+	public String insertfileteam(File_f ins) {
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		String msg = "";
+		int ckf = 0;
+		MultipartFile[] mpfs = ins.getReports();
+		int empno = ins.getEmpno();
+		int pcode = ins.getPcode();
+		if(mpfs!=null && mpfs.length>0) {
+			try {
+				for(MultipartFile mpf:mpfs) {
+					if(mpf!=null) {
+						String fname = mpf.getOriginalFilename();
+						if(!fname.trim().equals("")) {
+							String fno = ""+dao.getfno();
+							mpf.transferTo(new File(path+fno));
+							ckf+=dao.insertfileteam(fname, path, fno, empno, pcode);
+						}
+					}
+				}
+			} catch (IllegalStateException e) {
+				System.out.println("#파일업로드 예외1:"+e.getMessage());
+				msg+="#파일업로드 예외1:"+e.getMessage()+"\\n";
+			} catch (IOException e) {
+				System.out.println("#파일업로드 예외2:"+e.getMessage());
+				msg+="#파일업로드 예외2:"+e.getMessage()+"\\n";
+			} catch(Exception e) {
+				System.out.println("#기타 예외3:"+e.getMessage());
+				msg+="#기타 예외3:"+e.getMessage()+"\\n";
+			}
+			msg+="파일 "+ckf+"건 등록 완료\\n";
+		}
+		return msg;
+	}
+
+	// 문서관리 : 팀명 가져오기
+	public String getpname(int pcode) {
+		return dao.getpname(pcode);
+	}
+	
+	// 문서관리 : 팀 리스트 출력
+	public List<File_f> teamfile(FileSch sch) {
+		if(sch.getType()==null) sch.setType("fname");
+		if(sch.getFname()==null) sch.setFname("");
+		if(sch.getPage()==null) sch.setPage("");
+		sch.setCount2(dao.teamfilecnt(sch));
+		if(sch.getPageSize2()==0) sch.setPageSize2(5);
+		int totPage2 = (int)Math.ceil(sch.getCount2()/(double)sch.getPageSize2());
+		sch.setPageCount2(totPage2);
+		if(sch.getCurPage2()>sch.getPageCount2()) sch.setCurPage2(sch.getPageCount2());
+		if(sch.getCurPage2()==0) sch.setCurPage2(1);
+		sch.setEnd2(sch.getCurPage2()*sch.getPageSize2());
+		if(sch.getCurPage2()*sch.getPageSize2()>sch.getCount2()) {
+			sch.setEnd2(sch.getCount2());
+		}
+		sch.setStart2((sch.getCurPage2()-1)*sch.getPageSize2()+1);
+		sch.setBlockSize2(3);
+		int blockNum2 = (int)Math.ceil(sch.getCurPage2()/(double)sch.getBlockSize2());
+		sch.setEndBlock2(blockNum2*sch.getBlockSize2());
+		if(sch.getEndBlock2()>sch.getPageCount2()) {
+			sch.setEndBlock2(sch.getPageCount2());
+		}
+		sch.setStartBlock2((blockNum2-1)*sch.getBlockSize2()+1);
+		return dao.teamfile(sch);
+	}
+	
 	// 문서관리 : 개인 파일 업로드
 	public String insertfilemy(File_f ins) {
 		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
@@ -538,7 +604,7 @@ public class A02_Service_cjw {
 		return msg;
 	}
 	
-	// 문서관리 : 개인 리스트 출력 (팀으로 바꿀 예정)
+	// 문서관리 : 개인 리스트 출력
 	public List<File_f> myfile(FileSch sch) {
 		if(sch.getType()==null) sch.setType("fname");
 		if(sch.getFname()==null) sch.setFname("");

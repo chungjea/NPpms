@@ -134,14 +134,14 @@
 	<select id="boardfile" parameterType="fileSch" resultType="file">
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
-				(SELECT * FROM file_f WHERE page NOT IN ('채팅','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND pcode = #{pcode} AND (auth = #{empno} OR auth = 0) ORDER BY NO DESC) a
+				(SELECT * FROM file_f WHERE page NOT IN ('팀','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND pcode = #{pcode} AND (auth = #{empno} OR auth = 0) ORDER BY NO DESC) a
 			) 
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
 	<select id="teamfile" parameterType="fileSch" resultType="file">
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
-				(SELECT * FROM file_f WHERE page = '개인' AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND auth = 1 AND pcode = #{pcode} ORDER BY NO DESC) a
+				(SELECT * FROM file_f WHERE page = '팀' AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND pcode = #{pcode} ORDER BY NO DESC) a
 			) 
 		WHERE cnt BETWEEN #{start2} AND #{end2}
 	</select>

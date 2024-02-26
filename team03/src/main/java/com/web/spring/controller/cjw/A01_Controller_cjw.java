@@ -208,7 +208,15 @@ public class A01_Controller_cjw {
 	@PostMapping("file")
 	public String file(@ModelAttribute("sch") FileSch sch, Model d) {
 		d.addAttribute("bfile", service.boardfile(sch));
+		d.addAttribute("tfile",service.teamfile(sch));
 		d.addAttribute("mfile", service.myfile(sch));
+		d.addAttribute("pname",service.getpname(sch.getPcode()));
+		return "cjw/z05_bootTmp/file";
+	}
+	
+	@PostMapping("uploadteam")
+	public String uploadteam(File_f ins, Model d) {
+		d.addAttribute("msg", service.insertfileteam(ins));
 		return "cjw/z05_bootTmp/file";
 	}
 	
