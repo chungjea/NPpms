@@ -8,13 +8,9 @@
 	</select>
 
 		<insert id="register" parameterType="emplist">
-				<![CDATA[
-		INSERT INTO emp_master_f values(#{empnoc},#{ename},#{egrade},0,#{dname},to_date(#{hiredate},'YYYY-MM-DD'),0,0,0,#{passwd},sysdate,#{email},#{lastone},#{auth, jdbcType=VARCHAR}) 
-	]]>
-	<selectKey keyProperty="empnoc" resultType="INT" order="BEFORE">
-		select empnoc.nextval from dual
-		</selectKey>
-	
+				
+		INSERT INTO emp_master_f values(empnoc.nextval,#{ename},#{egrade},0,#{dname},to_date(#{hiredate},'YYYY-MM-DD'),0,0,0,#{passwd},sysdate,#{email},0,#{auth, jdbcType=VARCHAR}) 
+
 	</insert>
 
 	<delete id="deleteEmps"  parameterType="emplist">
@@ -109,6 +105,6 @@ select * from emp_master_his_f WHERE empno like '%'|| #{empno} || '%'
               AND empno LIKE '%' || #{empno} || '%'
         ]]>
 </select>
-<select id="getnewinfo" parameterType="string" resultType="emp"> 
+<select id="getnewinfo" parameterType="string" resultType="emplist"> 
 SELECT * FROM emp_master_f WHERE email=#{email} </select>
 </mapper>

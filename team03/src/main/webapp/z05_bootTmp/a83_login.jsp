@@ -49,19 +49,19 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">로그인</h1>
                                     </div>
-                                    <form class="user" method="post">
+                                    <form class="user" method="post" id="users">
                                         <div class="form-group">
                                             <input type="text" name="empno" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
+                                                id="empno" aria-describedby="emailHelp"
                                                 placeholder="사번을 입력하세요">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" name="passwd"class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="Password">
+                                                id="passwd" placeholder="Password">
                                         </div>
                                         <div class="form-group">
                                         </div>
-                                        <a href='javascript:$(".user").submit()' class="btn btn-primary btn-user btn-block">
+                                        <a href='javascript:$(".user").submit()' class="btn btn-primary btn-user btn-block" id="logBtn">
                                             Login
                                          
                                         </a>
@@ -87,7 +87,7 @@
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
 <script
-	src="${path}/a00_com/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	src="${path}/a00_com/vendor/bo otstrap/js/bootstrap.bundle.min.js"></script>
 
 <!-- Core plugin JavaScript-->
 <script src="${path}/a00_com/vendor/jquery-easing/jquery.easing.min.js"></script>
@@ -117,7 +117,7 @@ $("[name=passwd]").keyup(function() {
 					alert("로그인 성공\n메인페이지로 이동")
 					location.href = "${path}/mainpage"
 				} else {
-					alert("로그인 실패2\n다시 로그인하세요")
+					alert("로그인 실패\n다시 로그인하세요")
 
 				}
 			}
@@ -125,6 +125,8 @@ $("[name=passwd]").keyup(function() {
 
 	}
 })
+
+
 </script>
 
 

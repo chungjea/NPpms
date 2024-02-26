@@ -115,15 +115,22 @@
 											<option value="@daum.net">daum.net</option>
 											<option value="@gmail.com">gmail.com</option>
 										</select>
-										  <input type="hidden" id="password" name="password" value=""> 
-										<input type="hidden" id="passwd" name="passwd" value="">
+										  <!-- <input type="hidden" id="password" name="password" value=""> 
+										 -->
 										<input type="hidden" id="email" name="email" value="">
-										 <input type="hidden" id="empno" name="empno" value=""> 
-										  <input type="hidden" id="lastone" name="lastone" value=""> 
-										  <input type="hidden" id="receiver" name="receiver" value=""> 
-										<input type="hidden" id="title" name="title"
+											<div class="col-sm-6 mb-3 mb-sm-0">
+										<select name="auth" id="auth" class="form-control">
+											<option value="직원">직원</option>
+											<option value="관리자">관리자</option>
+										
+										</select>
+										  <!-- <input type="hidden" id="password" name="password" value=""> 
+										 -->
+										<input type="hidden" id="email" name="email" value="">
+							<input type="hidden" id="passwd" name="passwd" value="">
+										<!-- <input type="hidden" id="title" name="title"
 											value="회원등록된 정보를 전송해드립니다.">
-
+ -->
 
 
 
@@ -200,8 +207,7 @@
 							$("#email").submit()
 						} */
             	
-						   var n_empno="${LatestEmp}";
-			            var empno="${emp.empno}";
+
             	
 						$("#regBtn").click(function(){ //등록
 							temp_pw_issuance();
@@ -213,32 +219,39 @@
 							
 							  
 							document.getElementById('email').value= emailH+emailE;
-							 document.getElementById('password').value = password; 
 							 document.getElementById('passwd').value= passwd; 
-							 document.getElementById('receiver').value= email; 
-							 document.getElementById('lastone').value= empno; 
-							 document.getElementById('empno').value= n_empno; 
-console.log(email);
-console.log(receiver);
-console.log(lastone);
-console.log(empno);
-console.log(passwd);
+
+
 							 
 
+/* 							 var msg = "${msg}"
+								 if (msg !== "") {
+						               var confirmMessage = msg;
+						               alert(msg)
+								 } */
+						               
+						               
+						               
 
+		if (confirm("등록하시겠습니까?")) {
+						if ($("[name=ename]").val() == "") {
+							alert("이름을 입력해야합니다.")
+							return;
+						}
+						var msg = "${msg}"
+						var Emsg = "${Emsg}"
+						if (msg != "") {
+							var confirmMessage = msg;
 							
-							if(confirm("등록하시겠습니까?")){
-								if($("[name=ename]").val()==""){
-									alert("이름을 입력해야합니다.")
-									return;
-								}
-								$("#send").submit()
-									
+							if (emailMsg != "") {
+								confirmMessage += "\n" + Emsg;
 							}
+						}
+						alert(confirmMessage)
+						$("#send").submit()
+					}
+				});
 
-			
-							
-						})
 		/* 	var msg = "${msg}"
 			if(msg!=""){
 				
@@ -247,35 +260,32 @@ console.log(passwd);
 						
 				}
 			} */
-			
-			
-			
-			
-			
-			
-			
-			
 
-			         //비밀번호 생성기
-			function temp_pw_issuance() {
-				let ranValue1 = ['1','2','3','4','5','6','7','8','9','0'];
-				let ranValue2 = ['A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'];
-				let ranValue3 = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
-				let ranValue4 = ['!','@','#','$','%','^','&','*','(',')'];
-				
-				var temp_pw = "";
-				
-				for(i=0 ; i<2; i++) {
-					let ranPick1 = Math.floor(Math.random() * ranValue1.length);
-					let ranPick2 = Math.floor(Math.random() * ranValue2.length);
-					let ranPick3 = Math.floor(Math.random() * ranValue3.length);
-					let ranPick4 = Math.floor(Math.random() * ranValue4.length);
-					temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2] + ranValue3[ranPick3] + ranValue4[ranPick4];
-				}
- return temp_pw;
+		//비밀번호 생성기
+		function temp_pw_issuance() {
+			let ranValue1 = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ];
+			let ranValue2 = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+					'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+					'W', 'X', 'Y', 'Z' ];
+			let ranValue3 = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+					'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+					'w', 'x', 'y', 'z' ];
+			let ranValue4 = [ '!', '@', '#', '$', '%', '^', '&', '*', '(', ')' ];
+
+			var temp_pw = "";
+
+			for (i = 0; i < 2; i++) {
+				let ranPick1 = Math.floor(Math.random() * ranValue1.length);
+				let ranPick2 = Math.floor(Math.random() * ranValue2.length);
+				let ranPick3 = Math.floor(Math.random() * ranValue3.length);
+				let ranPick4 = Math.floor(Math.random() * ranValue4.length);
+				temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2]
+						+ ranValue3[ranPick3] + ranValue4[ranPick4];
 			}
-			document.getElementById('passwd').value = temp_pw_issuance();
-			/* document.getElementById('password').value = temp_pw_issuance(); */
-			</script>
+			return temp_pw;
+		}
+		document.getElementById('passwd').value = temp_pw_issuance();
+		/* document.getElementById('password').value = temp_pw_issuance(); */
+	</script>
 </body>
 </html>

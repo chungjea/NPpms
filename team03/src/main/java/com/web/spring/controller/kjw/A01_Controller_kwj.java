@@ -211,12 +211,13 @@ public String register(Emp_master_f ins,Model d,HttpSession session) {
 	String result = service.register(ins);
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",result);
-	System.out.println(service.LatestEmp());
-	d.addAttribute("LatestEmp",service.LatestEmp());
-	String div="reg";
-	if("등록성공".equals(result)) {
-		d.addAttribute("Emsg",service.sendMail(ins.getEmail(), div));
-	}
+	/* d.addAttribute("LatestEmp",service.LatestEmp()); */ 
+
+	
+	  if("등록성공".equals(result)) {
+		  
+	  d.addAttribute("Emsg",service.sendMail(ins.getEmail())); 
+	  }
 
 	return "kjw/z05_bootTmp/a84_register";
 }

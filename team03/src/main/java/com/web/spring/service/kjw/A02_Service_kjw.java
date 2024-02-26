@@ -148,7 +148,7 @@ public class A02_Service_kjw {
 	// 메일발송 메서드
 	@Autowired(required = false)
 	// 메일발송 메서드
-	public String sendMail(String email,String div) {
+	public String sendMail(String email) {
 		String Emsg = "";
 		String message="";
 		Emp_master_f Einform = dao.getnewinfo(email);
@@ -157,14 +157,13 @@ public class A02_Service_kjw {
 		// 2. 해당 객체로 화면단에 입력된 내용 할당
 		try {
 			
-			if(div.equals("reg")) {
 			// 1) 제목
 			mmsg.setSubject("PMS시스템 사원번호와 임시비밀번호입니다");
 			// 2) 수신자
 			mmsg.setRecipient(RecipientType.TO, new InternetAddress(Einform.getEmail()));
 			// 3) 내용
 			mmsg.setText("사번:" + Einform.getEmpno() + "비번:" + Einform.getPasswd());
-			}
+			
 			// 4) 발송처리..
 			sender.send(mmsg);
 			Emsg = "메일발송 성공";
