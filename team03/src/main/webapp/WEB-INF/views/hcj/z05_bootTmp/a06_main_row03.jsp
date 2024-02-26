@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
@@ -11,6 +11,69 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<%
+
+Date time1 = new Date();
+SimpleDateFormat formatter1 = new SimpleDateFormat(
+		"yyyy-MM-dd: (E) HH:mm:ss", Locale.KOREA
+		); 
+Date starttime=(Date) session.getAttribute("inputS");
+Date endtime=(Date) session.getAttribute("inputE");
+long timeDifference;
+%>
+
+<div class="col-xl-3 col-md-6 mb-4">
+							<div class="card border-left-primary shadow h-100 py-2">
+								<div class="card-body">
+									<div class="row no-gutters align-items-center">
+										<div class="col mr-2">
+											<div
+												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+												근태관리</div>
+											<div class="card-body"><%=formatter1.format(time1)%></div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">${inputE}-${inputS}</div>
+											<div class="progress progress-sm mr-2"></div>
+
+											<div class="h5 mb-0 font-weight-bold text-gray-800">출근시간
+												:${inputS}</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">퇴근시간
+												:${inputE}</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">야근시간
+												:${commute_s.overtime}</div>
+											<hr
+												style="border-width: 1px 0 0 0; border-style: dotted; border-color: #bbb;">
+											<form method="post" class="user" action ="${path}/commute_start">
+												
+												<a href='javascript:$(".user").submit()' id="StartBtn" class="btn btn-light btn-icon-split"> <span
+													class="text">&nbsp &nbsp &nbsp &nbsp출근&nbsp &nbsp
+														&nbsp &nbsp</span>
+												</a> <input type="hidden" name="empno" value="${emp.empno}">
+												<input type="hidden" name="ename" value="${emp.ename}">
+												<input type="hidden" name="ALLTIME" value="">
+												<input type="hidden" name="status" value="s">
+												
+
+											</form>
+											<form method="post" class="user1" action ="${path}/commute_end">
+												
+												<a href='javascript:$(".user1").submit()' id="EndBtn" class="btn btn-light btn-icon-split"> <span
+													class="text">&nbsp &nbsp &nbsp &nbsp퇴근&nbsp &nbsp
+														&nbsp &nbsp</span>
+												</a> <input type="hidden" name="empno" value="${emp.empno}">
+												<input type="hidden" name="ename" value="${emp.ename}">
+												<input type="hidden" name="ALLTIME" value="">
+												<input type="hidden" name="status" value="e">
+												
+
+											</form>
+										</div>
+
+
+									</div>
+								</div>
+							</div>
+						</div>
 
 <div class="col-xl-4">
 	<div class="card shadow ">

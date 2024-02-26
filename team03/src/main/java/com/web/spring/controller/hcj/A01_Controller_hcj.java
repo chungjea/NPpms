@@ -39,7 +39,6 @@ public class A01_Controller_hcj {
 			// 프로젝트 할당
 			d.addAttribute("projects", service.getprojects(emp));
 			d.addAttribute("pjcnt",service.getProjectCntAdmin(emp));
-	
 		}
 	
 		return "hcj/z05_bootTmp/a01_index";
@@ -87,6 +86,13 @@ public class A01_Controller_hcj {
 		return modelAndView;
 	}
 	
+	@PostMapping("deleteProject")
+	public ModelAndView deleteProject(Project_f del) {
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("msg", service.deleteProject(del));
+		return modelAndView;
+	}
 
 	@RequestMapping("empsearch")
 	public String empsearch(Emp_pinfo_f sch, String empnoStr, Model d) {
@@ -167,7 +173,7 @@ public class A01_Controller_hcj {
 	@ResponseBody
     @RequestMapping(value = "deleteTask", method = RequestMethod.POST)
 	public ModelAndView deleteTask(@RequestBody Task_f del) {
-		System.out.println("일단 들어옴 -update-");
+		System.out.println("일단 들어옴 -delete-");
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("msg", service.deleteTask(del));

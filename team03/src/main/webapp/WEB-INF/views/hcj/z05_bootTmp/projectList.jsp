@@ -92,7 +92,7 @@ td{text-align:center;}
 		    			
 		    			<c:if test="${emp.auth=='관리자'}">
 		    			<div class="col-auto " align="right">
-		    			<button class="btn btn-success " data-toggle="modal" data-target="#newprojectModal" type="button">프로젝트 생성</button>
+		    			<button class="btn btn-success " data-toggle="modal" data-target="#newprojectModal" type="button" id="newProject">프로젝트 생성</button>
 		    			</div>
 		    			</c:if>
 					 <input type="hidden" name="curPage" value="${sch.curPage}"/>
@@ -194,6 +194,24 @@ td{text-align:center;}
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
     <script type="text/javascript">
 $("[name=status]").val("${sch.status}")
+
+$("#newProject").click(function(){
+	$("#uptBtn").hide()
+	$("#delBtn").hide()
+	$("#regBtn").show()
+	$("#frm02")[0].reset()
+	imgbox.style.display="none";
+	img.src=""
+	$("#frm02 #teams_name").html("");
+	members.clear()
+})
+
+$("#delBtn").click(function(){
+	if(confirm("정말 삭제하시겠습니까?"))functproject("deleteProject");
+})
+$("#uptBtn").click(function(){
+	if(confirm("정말 수정하시겠습니까?"))functproject("updateProject");
+})
 
 function goPage(pNo){
 	$("[name=curPage]").val(pNo)

@@ -7,6 +7,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.web.spring.dao.hcj.A03_Dao_hcj;
 import com.web.spring.vo.Data;
@@ -20,6 +21,8 @@ import com.web.spring.vo.Project_work_f;
 import com.web.spring.vo.Task_f;
 import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.Workcnt;
+
+import jakarta.mail.Multipart;
 
 @Service
 public class A02_Service_hcj {
@@ -136,10 +139,16 @@ public class A02_Service_hcj {
 			}
 		}
 
-		if(upt.getReports()!=null) {
-			System.out.println("파일:"+upt.getReports());
-		}
+
+			MultipartFile test = upt.getReports();
+			System.out.println("파일:"+test.getOriginalFilename());
+
 		return msg;
+	}
+	
+	public String deleteProject(Project_f del) {
+		dao.deleteTmemALL(del.getPcode());
+		return dao.deleteProject(del)>0?"프로젝트 삭제":"프로젝트 삭제 실패";
 	}
 	
 	// 사원 검색

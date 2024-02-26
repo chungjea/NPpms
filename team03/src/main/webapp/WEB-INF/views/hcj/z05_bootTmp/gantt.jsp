@@ -88,17 +88,10 @@ html, body {
 				<div class="container-fluid">
 					<div class=" text-center">
 						<h2 style="border-radius: 10px; background: #a1b6f2; color: white; padding: 10px 0px" id="titleheader">
-						
+							${pinfo.pname}
 						</h2>
 							
-						<ul class="nav nav-tabs nav-justified">
-							<li class="nav-item"><a class="nav-link active" href="#">간트차트</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">회의록</a></li>
-							<li class="nav-item"><a class="nav-link" href="#">결제</a></li>
-							<li class="nav-item"><input class="btn" type="button"  value="수정/삭제"  id="uptOrDel" data-toggle="modal" data-target="#newprojectModal"/>
-							
-							</li>
-						</ul>
+						
 					</div>
 
 					<div class="main-content">
@@ -107,7 +100,7 @@ html, body {
 							style='width: 100%; height: 100%; padding: 0px;'></div>
 						</div>
 					
-					<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/newprojectModal.jsp" %>	
+				
 				</div>
 
 				<!-- /.container-fluid -->
@@ -148,13 +141,11 @@ html, body {
 
 	<!-- Custom scripts for all pages-->
 	<script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
-	<script src="${path}/customjs/projectmodal.js"></script>
+
 	<script src="${path}/customjs/slidbar.js"></script>
 	<!-- Page level plugins -->
-	<script>
-	
-		
-	$("#delBtn").click(function(){
+	<script>	
+	/* $("#delBtn").click(function(){
 		if(confirm("정말로 삭제하시겠습니까?")){
 			
 		}
@@ -162,12 +153,8 @@ html, body {
 	$("#uptBtn").click(function(){
 		functproject("updateProject")
 	})
-	
+	 */
 	//프로젝트 수정 정보 불러오기
-	
-	loadProjectinfo("${pcode}")
-	
-	
 						gantt.plugins({
 							quick_info: false,
 							tooltip: true,
@@ -187,10 +174,7 @@ html, body {
 							{name: "start_date",label:"시작일",align: "center", width: 90, resize: true},
 							{name: "duration",label:"작업일수" ,align: "center", width: 80, resize: true},
 							{name:"writer",label:"담당자",resize: true},
-							{name: "add", width: 40},
-							{name: "del", width: 40,resize: true, align: "center",template: function () {
-					            return `<img src="${path}/a00_com/gantt/common/sample_images/close.gif" onclick="delTask()"`
-							}}
+							{name: "add", width: 40}
 						];
 						gantt.templates.lightbox_header = function(start_date,end_date,task){
 						    return  task.text;
@@ -214,8 +198,7 @@ html, body {
 							}},
 							{unit: "day", step: 1, format: "%d일"}
 						];
-						
-		
+							
 						var tmem;
 							$.ajax({
 								url:"${path}/Tmem",
@@ -283,6 +266,7 @@ html, body {
 						    //any custom logic here
 						    if(mode === "move"){
 						    	bdforeMoveDate = Task.start_date
+						    	
 						    }
 						    return true;
 						});
@@ -378,20 +362,7 @@ html, body {
 					return year+"-"+month+"-"+day;
 				}
 			
-				function delTask(){
-				gantt.confirm({
-				    text: "정말 삭제하시겠습니까??",
-				    ok:"네", 
-				    cancel:"아니요",
-				    callback: function(result){
-				        if(result){
-				            gantt.message("삭제되었습니다");
-				        }else{
-				            gantt.message("삭제에 실패했습니다.");
-				        }
-				    }
-				});
-				}
+			
 					</script>
 
 	<!-- Page level custom scripts -->

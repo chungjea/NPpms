@@ -2,32 +2,32 @@
 var members = new Map();
 	$("#regBtn").click(function(){
 		//### 유효성 검사 ###
-		if($("[name=pname]").val()==""){
+		if($("#frm02 [name=pname]").val()==""){
 			alert("프로젝트명을 입력해주세요")
-			$("[name=pname]").focus()
+			$("#frm02 [name=pname]").focus()
 			return;
 		}
-		if($("[name=ptype]").val()==0){
+		if($("#frm02 [name=ptype]").val()==0){
 			alert("프로젝트유형을 선택해주세요")
-			$("[name=ptype]").focus()
+			$("#frm02 [name=ptype]").focus()
 			return;
 		}
-		if($("[name=startdte]").val()==""||$("[name=enddte]").val()==""){
+		if($("#frm02 [name=startdte]").val()==""||$("#frm02 [name=enddte]").val()==""){
 			alert("프로젝트 기간을 입력해주세요")
 			
-			if($("[name=startdte]").val()==""){
-				$("[name=startdte]").focus()
+			if($("#frm02 [name=startdte]").val()==""){
+				$("#frm02 [name=startdte]").focus()
 			}else {
-				$("[name=enddte]").focus()
+				$("#frm02 [name=enddte]").focus()
 			}
 			return;
 		}
-		if($("[name=status]").val()==0){
+		if($("#frm02 [name=status]").val()==0){
 			alert("프로젝트상태를 선택해주세요")
-			$("[name=status]").focus()
+			$("#frm02 [name=status]").focus()
 			return;
 		}
-		if($("#teams").val()==""){
+		if($("#frm02 #teams").val()==""){
 			if(!confirm("팀원이 존재하지 않습니다\n그대로 진행하시겠습니까? "))return;
 			
 		}
@@ -99,10 +99,6 @@ var members = new Map();
 			formdata.append("tmem["+memidx+"].label",value)
 			memidx++;
 		})   
-	
-		  for (let value of formdata) {
-			  console.log(value)
-			  }
 		
 		  $.ajax({
 			type:"post",
@@ -149,9 +145,12 @@ var members = new Map();
 				$("#frm02 [name=content]").val(pinfo.content);
 				$("#frm02 [name=status]").val(pinfo.status);
 				$("#frm02 [name=teams]").val(pinfo.tname);
-				pinfo.tmem.forEach(function(mem){
+				
+				$("#frm02 #teams_name").html("");
+				members.clear()
+				pinfo.tmem.forEach(function(mem){	
 					$("#frm02 #teams_name").append('<button type="button" id="'+mem.key+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+mem.label+'</button>');
-					members.set(mem.key,mem.label);
+					members.set(mem.key,mem.label);			
 				})
 				
 				
