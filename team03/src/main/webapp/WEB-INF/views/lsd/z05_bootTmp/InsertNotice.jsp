@@ -132,7 +132,7 @@
 			var msg = "${msg}"
 			
 				if (msg === '등록성공') {
-					if (!confirm("등록되었습니다.")) {
+					if (!confirm("등록됐습니다")) {
 						location.href = "${path}/noticePage?pcode=" + pcode
 					}
 				}

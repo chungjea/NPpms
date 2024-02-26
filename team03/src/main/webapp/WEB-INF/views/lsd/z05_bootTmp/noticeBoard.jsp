@@ -207,7 +207,7 @@
 	</a>
 	<script type="text/javascript">
 		$("#insBtn").click(function() {
-			location.href = "${path}/insertNoticeFrm"
+			location.href = "${path}/insertNoticeFrm?pcode=" + ${param.pcode}
 		})
 	</script>
 	<!-- Logout Modal-->
