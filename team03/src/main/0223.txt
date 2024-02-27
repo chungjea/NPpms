@@ -1,0 +1,29 @@
+사번
+ dao
+ 		select 시퀀스명.nextval from dual
+ 		
+ 		insertEmp
+ 			insert emp values('''')
+ 	
+ 
+ 요청값 화면 => VO
+ 
+ 
+ service
+ 	  public String regEmp(Emp ins){
+ 	  	int empno = dao.getEmpno()
+ 	  	
+ 	  	ins.setEmpno(empno);
+ 	  	ins.setPwd(임의의비번);
+ 	  	
+ 	  	dao.inserEmp(ins)
+ 	  	
+ 	  	// 메일전송..
+ 	  	  ins.getEmail() 
+ 	  	  내용
+ 	  	  ins.getEmpno()/ins.getPwd() 발송처리./
+ 	  	
+ 	  	
+ 	  
+ 	  
+ 		
