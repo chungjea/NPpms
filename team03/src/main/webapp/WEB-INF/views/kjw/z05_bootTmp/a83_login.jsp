@@ -71,7 +71,7 @@
                      <h6 id="emptypwd">※비밀번호를 입력해주세요</h6>
                               </div>
                               <div class="form-group"></div>
-                              <a href='javascript:$(".user").submit()' type="button" onclick="check";
+                              <a href='javascript:$(".user").submit()' type="button" onclick="check"
                                  class="btn btn-primary btn-user btn-block"> <spring:message
                                     code="login" />
                               </a>
@@ -126,12 +126,12 @@
    document.getElementById("emptyempno").style.color = "red";
    document.getElementById("emptypwd").style.color = "red";
    var empno = "${emp.empno}"
-   var sessEmpno = "${emp.empno}"
    var emptyempno;
    var emptypwd;
    function check(){
-         if ($("[name=passwd]").val() != "") {
-            if ($("[name=empno]").val() != "") {
+         if ($("[name=passwd]").val() != "") { //비밀번호값이 들어가있을때
+            if ($("[name=empno]").val() != "") { //비밀번호값과 사번값이 들어가있을때
+            	alert(0)
                $("#emptyempno").hide();
                $("#emptypwd").hide();
                $(".user").submit();
@@ -139,11 +139,11 @@
                alert("아이디를 입력해주세요")
                $("#emptyempno").show();
             }
-         } else if ($("[name=empno]").val() == "") {
+         } else if ($("[name=empno]").val() == ""&& $("[name=passwd]").val() == "") { //사번값과 비밀번호값이 공백일때
             alert("아이디와 비밀번호를 입력해주세요")
             $("#emptyempno").show();
             $("#emptypwd").show();
-         } else {
+         } else { //비밀번호값이 들어가 있지않을때
             alert("비밀번호를 입력해주세요")
             $("#emptypwd").show();
          }
@@ -177,6 +177,7 @@ if ("${param.empno}" != "") {
 }
 
 
+
       $("[name=passwd]").keyup(function() {
       if (event.keyCode == 13) {
              check();
@@ -187,10 +188,10 @@ if ("${param.empno}" != "") {
  
 
             
-      window.history.forward();
+/*       window.history.forward();
       function noBack() {
          window.history.forward();
-      }
+      } */
    </script>
 
 </body>

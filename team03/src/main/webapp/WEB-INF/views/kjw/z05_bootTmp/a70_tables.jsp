@@ -38,8 +38,7 @@
 
 
 </head>
-<body id="page-top" onload="noBack();"
-	onpageshow="if(event.persisted) noBack();" onunload="">
+<body id="page-top" >
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
@@ -71,7 +70,7 @@
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												현재 사원수</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800"
-												id="checking">42</div>
+												id="checking">${empcnt}</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>

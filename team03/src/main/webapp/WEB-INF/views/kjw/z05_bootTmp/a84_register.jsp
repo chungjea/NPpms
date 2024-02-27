@@ -119,7 +119,12 @@
 										 -->
 										<input type="hidden" id="email" name="email" value="">
 											<div class="col-sm-6 mb-3 mb-sm-0">
-										<input type="hidden" id="auth" name="auth" value="">
+										<select name="auth" class="form-control form-control-user">
+											<option value="">권한</option>
+											<option value="직원">직원</option>
+											<option value="관리자">관리자</option>
+											<br>
+										</select>
 									
 										
 										</select>
@@ -211,7 +216,6 @@
 						$("#regBtn").click(function(){ //등록
 							temp_pw_issuance();
 							 var egrade=document.getElementById('egrade'); 
-							 var auth=document.getElementById('auth'); 
 							 var passwd=document.getElementById('passwd').value; 
 							 var emailE=document.getElementById('emailE').value;
 								var emailH=document.getElementById('emailH').value;
@@ -222,11 +226,7 @@
 							 document.getElementById('passwd').value= passwd; 
 							
 
-if(egrade.value==="사원"||egrade.value===""){
-	auth.value='직원';
-}else if(egrade.value==="팀장"||egrade.value==="전무"||egrade.value==="사장"){
-	auth='관리자';
-}
+
 
 							 
 

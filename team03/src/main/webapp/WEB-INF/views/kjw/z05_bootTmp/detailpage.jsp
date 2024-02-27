@@ -105,7 +105,7 @@
                                 <div class="form-group row">
                                 <div class="col-sm-6 ">
                                     <select name="dname" id="dname" class="form-control form-control-user" value="${emp.dname}">
-                                    <option value="">${emp.dname}	</option>
+                                    <option value="${emp.dname}">${emp.dname}	</option>
                                     <option value="디자인팀">디자인팀</option>
                                     <option value="인사팀">인사팀	</option>
                                     <option value="재무팀">재무팀	</option>
@@ -130,7 +130,7 @@
                                          <select name="emailE" id="emailE" class="form-control">
                                     <option value="@naver.com">naver.com</option>
                                     <option value="@daum.net">daum.net</option>
-                                    <option value="@google.com">google.com</option>
+                                    <option value="@gmail.com">gmail.com</option>
                                     </select>
                                     <input type="hidden" id="email" name="email" value="">
                                     <input type="hidden" name="lastone" value="${emp.empno}">
@@ -140,7 +140,7 @@
                                     </div>
                                     <div class="col-sm-6 ">
                                     <select name="auth" class="form-control form-control-user">
-                                    <option value="">${emp.auth}	</option>
+                                    <option value="${emp.auth}">${emp.auth}	</option>
                                     <option value="직원">직원</option>
                                     <option value="관리자">관리자	</option>
                                     </select>

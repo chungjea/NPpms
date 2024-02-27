@@ -118,7 +118,6 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f 
 		d.addAttribute("salList", service.getSalList(sch1));
 		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 		d.addAttribute("empcnt", service.empcnt(cnt));
-		d.addAttribute("doneProjA", service.doneProjA(0));
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
