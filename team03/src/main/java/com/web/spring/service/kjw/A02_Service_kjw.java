@@ -16,6 +16,7 @@ import com.web.spring.vo.Emp_master_f;
 import com.web.spring.vo.Emp_master_his_f;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
+import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.sal_f;
 
@@ -46,7 +47,7 @@ public class A02_Service_kjw {
 	public int sumProj(int empno) {
 		return dao.sumProj(empno);
 	}
-
+ 
 	public int LatestEmp() {
 		System.out.println("test");
 		return dao.LatestEmp();
@@ -57,11 +58,11 @@ public class A02_Service_kjw {
 
 	}
 
-	public int doneProjA(int empno) {
-		return dao.doneProjA(empno);
+	public List<Project_f> doneProjA(Emp_pinfo_f emp) {
+		return dao.doneProjA(emp);
 	}
-	public int doneProjN(int empno) {
-		return dao.doneProjN(empno);
+	public List<Project_f> doneProjN(Emp_pinfo_f emp) {
+		return dao.doneProjN(emp);
 	}
 	public int getsal() {
 		return dao.getsal();

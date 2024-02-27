@@ -119,6 +119,7 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f 
 		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 		d.addAttribute("empcnt", service.empcnt(cnt));
 		d.addAttribute("getsal",service.getsal());
+		d.addAttribute("doneProjA", service.doneProjA(emp));
 
 		
 			return "kjw/z05_bootTmp/a70_tablesadmin";
@@ -129,6 +130,7 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f 
 			d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 			d.addAttribute("empcnt", service.empcnt(cnt));
 			d.addAttribute("getsal",service.getsal());
+			d.addAttribute("doneProjN", service.doneProjN(emp));
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }
