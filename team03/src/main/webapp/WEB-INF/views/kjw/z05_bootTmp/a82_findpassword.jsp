@@ -62,7 +62,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                                     </div>
                                     <form method="post" id="send" action="${path}/register">
                                         <div class="form-group">
-                                            <input type="empno" class="form-control form-control-user"
+                                            <input type="empno" name="empno" class="form-control form-control-user"
                                                 id="empno" 
                                                 placeholder="사번을 입력하세요">
                                                 <input type="hidden" id="password" value="">
@@ -100,30 +100,22 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
 <script>
-function temp_pw_issuance() {
-	let ranValue1 = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ];
-	let ranValue2 = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
-			'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
-			'W', 'X', 'Y', 'Z' ];
-	let ranValue3 = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
-			'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
-			'w', 'x', 'y', 'z' ];
-	let ranValue4 = [ '!', '@', '#', '$', '%', '^', '&', '*', '(', ')' ];
+$(document).ready(function(){
+	$("#sendBtn").click(function(){
+		var empno=$("#empno").val();
+		if(empno===""){
+			$("#empno").focus();
+			return;
+		}
+		$("#send").submit();
+	})
 
-	var temp_pw = "";
-
-	for (i = 0; i < 2; i++) {
-		let ranPick1 = Math.floor(Math.random() * ranValue1.length);
-		let ranPick2 = Math.floor(Math.random() * ranValue2.length);
-		let ranPick3 = Math.floor(Math.random() * ranValue3.length);
-		let ranPick4 = Math.floor(Math.random() * ranValue4.length);
-		temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2]
-				+ ranValue3[ranPick3] + ranValue4[ranPick4];
+});
+$("#empno").keyup(function(event) {
+	if (event.keyCode === 13) {
+		$("#sendBtn").click();
 	}
-	return temp_pw;
-}
-document.getElementById('password').value = temp_pw_issuance();
-
+});
 </script>
 </body>
 </html>

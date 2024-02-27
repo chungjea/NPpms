@@ -9,6 +9,34 @@
 <head>
 <meta charset="UTF-8">
 <title>Good day!!</title>
+<style>
+#dataTable th {
+	position: sticky;
+	top: 0;
+	background-color: white;
+	text-align: center;
+}
+
+#dataTable td {
+	text-align: right;
+}
+
+#dataTable1 th {
+	position: sticky;
+	top: 0;
+	background-color: white;
+	text-align: center;
+}
+
+#dataTable2 th {
+	position: sticky;
+	top: 0;
+	background-color: white;
+	text-align: center;
+}
+
+
+</style>
 
 
 
@@ -44,7 +72,7 @@
 
 		<!-- Sidebar -->
 
-		<%@ include file="a02_sliderBar.jsp"%>
+		<%@ include file="/z05_bootTmp/a02_sliderBar.jsp"%>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -54,7 +82,7 @@
 			<div id="content">
 
 				<!-- Topbar-->
-				<%@ include file="a03_topBar.jsp"%>
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp"%>
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
@@ -70,7 +98,7 @@
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												현재 사원수</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800"
-												id="checking">${empcnt}</div>
+												>${empcnt}</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -295,8 +323,8 @@
 								<div style="width: 100%; height: 200px; ">
 									<c:if test='${emp.dname.equals("인사팀")}'>
 
-										<table class="table table-bordered border-white"  id="dataTable"
-											width="100%" cellspacing="0">
+										<table class="table table-bordered  border-7 border-white "
+														id="dataTable" width="100%" cellspacing="0">
 											
 											<thead>
 												<tr>

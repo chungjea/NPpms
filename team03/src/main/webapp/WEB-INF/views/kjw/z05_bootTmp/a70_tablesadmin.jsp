@@ -78,7 +78,7 @@
 
 		<!-- Sidebar -->
 
-		<%@ include file="a02_sliderBar.jsp"%>
+		<%@ include file="/z05_bootTmp/a02_sliderBar.jsp"%>
 		<!-- End of Sidebar -->
 
 		<!-- Content Wrapper -->
@@ -88,7 +88,7 @@
 			<div id="content">
 
 				<!-- Topbar-->
-				<%@ include file="a03_topBar.jsp"%>
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp"%>
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
@@ -176,7 +176,7 @@
 							id="homeBtn">전체회원</a></li>
 						<li class="nav-item"><a class="nav-link" href="#tab02"
 							id="tab02Btn">삭제인원리스트</a></li>
-						<li class="nav-item"><a class="nav-link " href="#"></a></li>
+						<li class="nav-item"><a class="nav-link " href="#tab03" id="tab03Btn">에러로그페이지</a></li>
 						<li class="nav-item"><a class="nav-link " href="#"></a></li>
 					</ul>
 
@@ -274,7 +274,7 @@
 											<div style="width: 100%; height: 200px;" class="tables">
 												<c:if
 													test='${!emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
-													<table class="table table-bordered border-white"
+													<table class="table table-bordered  border-7 border-white "
 														id="dataTable" width="100%" cellspacing="0">
 														<thead>
 
@@ -418,6 +418,14 @@
 									<!-- Footer -->
 								</div>
 							</div>
+							<div id="tab03" class="tab-pane fade">
+							<span>에러페이지</span>
+							<div id="errorList">
+    <ul th:each="error : ${errorList}">
+        <li th:text="${error}"></li>
+    </ul>
+</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -509,8 +517,7 @@ $(function() {
 
 });
 
-$("#checking").hide();
-$("#checking1").hide();
+
 	var sessId = "${emp.empno}"
 	if(sessId==""){
 		alert("로그인을 하여야 현재화면을 볼 수 있습니다\n로그인 페이지 이동")
@@ -662,11 +669,54 @@ $("#tab02Btn").click(function(){
 	}else {
         // 클릭 막기
         alert("유효하지 않은 부서입니다.");
-         $("#option2").hide();
+         $("#tab02").hide();
         return "false";
     }
 
 		
+})
+$("#tab03Btn").click(function(){
+	home=false;
+	tab02=true;
+	 $("#textchange").text('삭제');
+	if (AUTH === '관리자' && (DNAME === '개발1팀' || DNAME === '개발2팀' || DNAME === '개발3팀')) { 
+		
+		  
+		   $("#option2").show(); //삭제인원페이지
+
+	}else {
+        // 클릭 막기
+        alert("유효하지 않은 부서입니다.");
+         $("#tab02").hide();
+        return "false";
+    }
+
+	var stompClient = null;
+
+	function connect() {
+	    var socket = new SockJS('/ws-endpoint');
+	    stompClient = Stomp.over(socket);
+	    stompClient.connect({}, function (frame) {
+	        console.log('Connected: ' + frame);
+	        stompClient.subscribe('/topic/errorList', function (errorList) {
+	            showErrors(JSON.parse(errorList.body));
+	        });
+	    });
+	}
+
+	function showErrors(errors) {
+	    var errorListDiv = document.getElementById("errorList");
+	    errorListDiv.innerHTML = "";
+	    errors.forEach(function (error) {
+	        var listItem = document.createElement("li");
+	        listItem.textContent = error;
+	        errorListDiv.appendChild(listItem);
+	    });
+	}
+
+	document.addEventListener("DOMContentLoaded", function () {
+	    connect();
+	});
 })
 			
 </script>

@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="col-sm-6">
  										 <select name="egrade" id="egrade" class="form-control form-control-user">
-                                    <option value="">${emp.egrade }</option>
+                                    <option value="" disabled selected>${emp.egrade}</option>
                                     <option value="사원">사원</option>
                                     <option value="팀장">팀장</option>
                                     <option value="전무">전무</option>
@@ -104,8 +104,8 @@
                                 </div>
                                 <div class="form-group row">
                                 <div class="col-sm-6 ">
-                                    <select name="dname" id="dname" class="form-control form-control-user" value="${emp.dname}">
-                                    <option value="${emp.dname}">${emp.dname}	</option>
+                                    <select name="dname" id="dname" class="form-control form-control-user">
+                                   <option value="" disabled selected>${emp.dname}</option>
                                     <option value="디자인팀">디자인팀</option>
                                     <option value="인사팀">인사팀	</option>
                                     <option value="재무팀">재무팀	</option>
@@ -140,7 +140,7 @@
                                     </div>
                                     <div class="col-sm-6 ">
                                     <select name="auth" class="form-control form-control-user">
-                                    <option value="${emp.auth}">${emp.auth}	</option>
+                                    <option value=""disabled selected>${emp.auth}</option>
                                     <option value="직원">직원</option>
                                     <option value="관리자">관리자	</option>
                                     </select>

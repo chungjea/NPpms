@@ -103,8 +103,9 @@
 								<div class="form-group row">
 
 									<div class="col-sm-5 mb-3 mb-sm-0">
-										<input type="text" name="emailH" id="emailH"
+										<input type="text" name="emailH" id="emailH" 
 											class="form-control form-control-user" placeholder="이메일주소" />
+	
 									</div>
 
 
@@ -115,6 +116,7 @@
 											<option value="@daum.net">daum.net</option>
 											<option value="@gmail.com">gmail.com</option>
 										</select>
+										<div id="resultArea"></div>
 										  <!-- <input type="hidden" id="password" name="password" value=""> 
 										 -->
 										<input type="hidden" id="email" name="email" value="">
@@ -211,52 +213,27 @@
 							$("#email").submit()
 						} */
             	
-
             	
-						$("#regBtn").click(function(){ //등록
-							temp_pw_issuance();
-							 var egrade=document.getElementById('egrade'); 
-							 var passwd=document.getElementById('passwd').value; 
-							 var emailE=document.getElementById('emailE').value;
-								var emailH=document.getElementById('emailH').value;
-							var receiver=document.getElementById('emailH').value+document.getElementById('emailE').value;
-							
-							  
-							document.getElementById('email').value= emailH+emailE;
-							 document.getElementById('passwd').value= passwd; 
-							
+						if (confirm("등록하시겠습니까?")) {
+			                // 이름이 비어있는지 확인
+			                if (ename === "") {
+			                    alert("이름을 입력해야합니다.");
+			                    return;
+			                }
 
-
-
-							 
-
-/* 							 var msg = "${msg}"
-								 if (msg !== "") {
-						               var confirmMessage = msg;
-						               alert(msg)
-								 } */
-						               
-						               
-						               
-
-		if (confirm("등록하시겠습니까?")) {
-						if ($("[name=ename]").val() == "") {
-							alert("이름을 입력해야합니다.")
-							return;
-						}
-						var msg = "${msg}"
-						var Emsg = "${Emsg}"
-						if (msg != "") {
-							var confirmMessage = msg;
-							
-							if (Emsg != "") {
-								confirmMessage += "\n" + Emsg;
-							}
-						}
-						alert(confirmMessage)
-						$("#send").submit()
-					}
-				});
+			                // Ajax를 통해 서버로 데이터 전송
+			                $.ajax({
+			                    type: "POST",
+			                    url: "${path}/register",
+			                    data: $("#send").serialize(), // 폼 데이터 전송
+			                    success: function (response) {
+			                        // 서버 응답을 화면에 표시
+			                        alert(response);
+			                    },
+			                    error: function () {
+			                        alert("서버 오류가 발생했습니다.");
+			                    }
+			                });
 
 		/* 	var msg = "${msg}"
 			if(msg!=""){
@@ -292,6 +269,19 @@
 		}
 		document.getElementById('passwd').value = temp_pw_issuance();
 		/* document.getElementById('password').value = temp_pw_issuance(); */
+		
+		
+		
+		
+		//ajax를 통해 실시간으로 db저장된 이메일값 비교
+		
+        
+		
+		
+		
+		
+		
+		
 	</script>
 </body>
 </html>

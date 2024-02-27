@@ -53,7 +53,7 @@
                                  <spring:message code="login" />
                               </h1>
                            </div>
-                           <form class="user" method="post">
+                           <form class="user" method="post" id="userform">
                               <div class="form-group">
                                  <input type="text" name="empno"
                                     class="form-control form-control-user"
@@ -71,10 +71,10 @@
                      <h6 id="emptypwd">※비밀번호를 입력해주세요</h6>
                               </div>
                               <div class="form-group"></div>
-                              <a href='javascript:$(".user").submit()' type="button" onclick="check()"
+                              <button type="button" onclick="check()"
                                  class="btn btn-primary btn-user btn-block"> <spring:message
                                     code="login" />
-                              </a>
+                              </button>
                              <input type="hidden" name="multiLang" value="">
                               <hr>
                               <select class="form-control" id="selectLan">
@@ -129,25 +129,27 @@
    var emptyempno;
    var emptypwd;
    function check(){
-         if ($("[name=passwd]").val() != "") { //비밀번호값이 들어가있을때
-            if ($("[name=empno]").val() != "") { //비밀번호값과 사번값이 들어가있을때
-            	
-               $("#emptyempno").hide();
-               $("#emptypwd").hide();
-               $(".user").submit();
-            } else {
-               alert("아이디를 입력해주세요")
-               $("#emptyempno").show();
-            }
-         } else if ($("[name=empno]").val() == ""&& $("[name=passwd]").val() == "") { //사번값과 비밀번호값이 공백일때
-            alert("아이디와 비밀번호를 입력해주세요")
-            return false;
-            $("#emptyempno").show();
-            $("#emptypwd").show();
-         } else { //비밀번호값이 들어가 있지않을때
-            alert("비밀번호를 입력해주세요")
-            $("#emptypwd").show();
-         }
+	   if ($("[name=empno]").val() == "" && $("[name=passwd]").val() == "") { // 사번 값과 비밀번호 값이 공백일 때
+	        alert("아이디와 비밀번호를 입력해주세요");
+	        $("#emptyempno").show();
+	        $("#emptypwd").show();
+	        return false;
+	    } else if ($("[name=empno]").val() == "") { // 사번 값이 공백일 때
+	        alert("아이디를 입력해주세요");
+	        $("#emptyempno").show();
+	        $("#emptypwd").hide();
+	        return false;
+	    } else if ($("[name=passwd]").val() == "") { // 비밀번호 값이 공백일 때
+	        alert("비밀번호를 입력해주세요");
+	        $("#emptypwd").show();
+	        $("#emptyempno").hide();
+	        return false;
+	    } else { // 비밀번호 값과 사번 값이 모두 입력되어 있을 때
+	        $("#emptyempno").hide();
+	        $("#emptypwd").hide();
+	        $("#userform").submit();
+	        return true;
+	    }
 
    }
    
@@ -179,6 +181,11 @@ if ("${param.empno}" != "") {
 
 
       $("[name=passwd]").keyup(function() {
+      if (event.keyCode == 13) {
+             check();
+         }
+      })
+      $("[name=empno]").keyup(function() {
       if (event.keyCode == 13) {
              check();
          }

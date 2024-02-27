@@ -18,6 +18,26 @@ public class Emp_pinfo_f {
 	private int deptno;
 	private String auth;
 	private int lastone;
+	private String egrade;
+	public Emp_pinfo_f() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public Emp_pinfo_f(int empno, Date birth_date, int pnumber, String passwd, String email, String dname, String ename,
+			int deptno, String auth, int lastone, String egrade) {
+		super();
+		this.empno = empno;
+		this.birth_date = birth_date;
+		this.pnumber = pnumber;
+		this.passwd = passwd;
+		this.email = email;
+		this.dname = dname;
+		this.ename = ename;
+		this.deptno = deptno;
+		this.auth = auth;
+		this.lastone = lastone;
+		this.egrade = egrade;
+	}
 	public int getEmpno() {
 		return empno;
 	}
@@ -84,27 +104,7 @@ public class Emp_pinfo_f {
 	public void setEgrade(String egrade) {
 		this.egrade = egrade;
 	}
-	public Emp_pinfo_f(int empno, Date birth_date, int pnumber, String passwd, String email, String dname, String ename,
-			int deptno, String auth, int lastone, String egrade) {
-		super();
-		this.empno = empno;
-		this.birth_date = birth_date;
-		this.pnumber = pnumber;
-		this.passwd = passwd;
-		this.email = email;
-		this.dname = dname;
-		this.ename = ename;
-		this.deptno = deptno;
-		this.auth = auth;
-		this.lastone = lastone;
-		this.egrade = egrade;
-	}
-	public Emp_pinfo_f() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	private String egrade;
-	
+
 	
 
 }

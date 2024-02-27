@@ -1,15 +1,18 @@
 package com.web.spring.controller.kjw;
 
 
+
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 
 import com.web.spring.service.kjw.A02_Service_kjw;
@@ -29,6 +33,10 @@ import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.MailSender;
 import com.web.spring.vo.sal_f;
 
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+
+import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -58,6 +66,8 @@ HttpServletResponse response) {
 	Locale locale = new Locale(lang);
 	localeResolver.setLocale(request, response, locale);
 	Emp_pinfo_f emp = service.login(emplogin);
+
+    
 	System.out.println("선택한 언어:"+lang);
 
 	
@@ -219,7 +229,6 @@ public String register(Emp_master_f ins,Model d,HttpSession session) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",result);
 
-
 	
 	  if("등록성공".equals(result)) {
 		  
@@ -228,7 +237,15 @@ public String register(Emp_master_f ins,Model d,HttpSession session) {
 
 	return "kjw/z05_bootTmp/a84_register";
 }
-
+@GetMapping("forgot")
+public String forgotFrm() {
+	return "a82_findpassword";
+}
+@PostMapping("forgot")
+public String forgot(@RequestParam("empno") int empno, Model d) {
+	d.addAttribute("msg", service.forgot(email));
+	return "forgot";
+}
 /*
  * @RequestMapping(value="findpwd",method=
  * {RequestMethod.POST,RequestMethod.GET}) public String findpwd(Emp_master_f
@@ -283,7 +300,11 @@ public String updateinfo(Emp_master_f upt,HttpSession session,Model d) {
 
 	}
 
+	
+	
 }
+
+
 
 
 /*
