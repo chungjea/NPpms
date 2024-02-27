@@ -40,6 +40,8 @@ public class A01_Controller_hcj {
 			// 프로젝트 할당
 			d.addAttribute("projects", service.getprojects(emp));
 			d.addAttribute("pjcnt",service.getProjectCntAdmin(emp));
+			d.addAttribute("ristcnt",service.getRisk(emp.getEmpno(),emp.getAuth()));
+			d.addAttribute("workcnt",service.getmyWorkCnt(emp.getEmpno(), emp.getAuth()));
 		}
 	
 		return "hcj/z05_bootTmp/a01_index";

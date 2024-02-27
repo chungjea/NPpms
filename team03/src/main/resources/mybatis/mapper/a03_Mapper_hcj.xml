@@ -30,15 +30,26 @@
 	
 
 	<select id="getprojectsAdmin" parameterType="emp" resultType="project">
-		SELECT * FROM VIEW_PROJECT_ALL_INFO
-		WHERE status = '진행중'
-		AND empno = #{empno}
+		SELECT VPAI.*,addrisk.rcnt 
+		FROM VIEW_PROJECT_ALL_INFO vpai ,
+		(SELECT pcode,sts,count(*) rcnt 
+		FROM RISK_F rf 
+		where sts = '발생예정'
+		group BY pcode,sts) addrisk
+		where VPAI.PCODE = addrisk.pcode(+)
+		and VPAI.EMPNO = #{empno}
+		AND vpai.STATUS ='진행중'
 	</select>
 	
 	<select id="getprojectsNormal" parameterType="emp" resultType="project">
-		SELECT * FROM VIEW_PROJECT_ALL_INFO_Tmember
-		WHERE status = '진행중'
-		AND MEMBER = #{empno}
+		SELECT VPAIT.*,risk.rcnt FROM VIEW_PROJECT_ALL_INFO_TMEMBER vpait ,
+			(SELECT pcode,wempno,sts,count(*) rcnt FROM RISK_F
+			where sts = '처리중'
+			GROUP BY pcode,WEMPNO,sts) risk
+			WHERE VPAIT.PCODE = risk.pcode(+)
+			AND VPAIT.MEMBER = risk.wempno(+)
+			AND MEMBER = #{empno}
+			AND STATUS ='진행중'	
 	</select>
 	
 
@@ -138,8 +149,18 @@
 		AND STATUS = #{status}
 		</if>
 	</select>
+	<!--  -->
+	<select id="getRiskNormal" parameterType="int" resultType="int">
+		SELECT count(*) FROM RISK_F 
+		WHERE sts = '처리중'
+		AND WEMPNO = #{empno}
+	</select>
 	
-	
+	<select id="getRiskAdmin" parameterType="int" resultType="int">
+		SELECT count(*) FROM RISKADMIN_F 
+		WHERE MANAGER = #{empno}
+		and cempno = 0
+	</select>
 	
 	<select id="getTeamMemeber" parameterType="int" resultType="tmem">
 		SELECT tf.empno key, epf.ENAME label  

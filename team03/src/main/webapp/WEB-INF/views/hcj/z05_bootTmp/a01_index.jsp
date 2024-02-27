@@ -104,9 +104,9 @@
 						<div class="row">
 							<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a06_main_row03.jsp" %>
 						</div>
-						<div class="row">
+						<%-- <div class="row">
 						<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/a05_main_row02.jsp" %>
-					</div>
+					</div> --%>
 						</c:when> 
 						<c:otherwise>
 							<h1>진행한 프로젝트가 없습니다</h1>

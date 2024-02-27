@@ -17,6 +17,7 @@ import com.web.spring.vo.ProjectCnt;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
+import com.web.spring.vo.TaskRink_f;
 import com.web.spring.vo.Task_f;
 import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.Workcnt;
@@ -93,6 +94,9 @@ public interface A03_Dao_hcj {
 	List<Project_f> getprojectsAdmin(Emp_pinfo_f emp);
 	// 내가 참여한 진행중인 프로젝트 5개까지 받아오기 (일반 사원)
 	List<Project_f> getprojectsNormal(Emp_pinfo_f emp);
+	
+	int getRiskNormal(int empno);
+	int getRiskAdmin(int empno);
 	
 //---------------------------전체 프로젝트 검색----------------------------------
 	// 내 담당 프로젝트 검색해서 가져오기 count,list(관리자)
@@ -242,6 +246,9 @@ public interface A03_Dao_hcj {
 	int updateTask(Task_f upt);
 	@Delete("DELETE FROM PROJECT_WORK_F WHERE wno = #{id}")
 	int deleteTask(Task_f del);
+	
+	@Insert("INSERT INTO taskRink_F values(#{id},#{source},#{target},#{type},#{pcode})")
+	int insertRink(TaskRink_f ins,int pcode);
 	
 	
 	List<Tmem_f> getTeamMemeber(int pcode);

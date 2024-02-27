@@ -52,8 +52,8 @@
 				<div class="col mr-2">
 					<div
 						class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-						${emp.auth=='관리자'?'담당':'참여' } 프로젝트의 미처리된 이슈</div>
-					<div class="h5 mb-0 font-weight-bold text-gray-800">${errcnt}건</div>
+						${emp.auth=="관리자"?"발생한 리스크":"처리중인 리스크"}</div>
+					<div class="h5 mb-0 font-weight-bold text-gray-800">${ristcnt}건</div>
 				</div>
 				<div class="col-auto">
 					<i class="fas fa-comments fa-2x text-gray-300"></i>

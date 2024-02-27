@@ -18,6 +18,7 @@ import com.web.spring.vo.ProjectCnt;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
 import com.web.spring.vo.Project_work_f;
+import com.web.spring.vo.TaskRink_f;
 import com.web.spring.vo.Task_f;
 import com.web.spring.vo.Tmem_f;
 import com.web.spring.vo.Workcnt;
@@ -70,6 +71,11 @@ public class A02_Service_hcj {
 		return emp.getAuth().equals("관리자")?
 				dao.getprojectsAdmin(emp):dao.getprojectsNormal(emp);
 	}
+	
+	public int getRisk(int empno, String auth) {
+		return auth.equals("관리자")?dao.getRiskAdmin(empno):dao.getRiskNormal(empno);
+	}
+	
 	
 	@Value("${file.upload}")
 	   private String path;
@@ -155,13 +161,10 @@ public class A02_Service_hcj {
 		if(sch.getDname()==null||sch.getDname()=="")return dao.getemplist(sch);
 		return dao.getemplistByLike(sch);
 	}
-	// 미완료 상태인 담당프로젝트의 작업들건수 불러오기(Admin)
-	public int getmyWorkCntAdmin(int empno) {
-		return dao.getmyWorkCntAdmin(empno);
-	}
+	
 	// 미완료 상태인 내프로젝트의 작업들건수 불러오기(Normal)
-		public int getmyWorkCntNormal(int empno) {
-			return dao.getmyWorkCntNormal(empno);
+		public int getmyWorkCnt(int empno,String auth) {
+			return auth.equals("관리자")?dao.getmyWorkCntAdmin(empno):dao.getmyWorkCntNormal(empno);
 		}
 	
 	
@@ -260,6 +263,10 @@ public class A02_Service_hcj {
 		System.out.println("pname"+pinfo.getPname());
 		 pinfo.setTmem(dao.getTmemEmp(pcode)); 
 		return pinfo;
+	}
+	
+	public int insertRink(TaskRink_f ins,int pcode) {
+		return dao.insertRink(ins,pcode);
 	}
 	
 }

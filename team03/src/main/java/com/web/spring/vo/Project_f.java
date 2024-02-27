@@ -29,6 +29,7 @@ public class Project_f implements Serializable {
 	private String ext;
 	private String mgname;
 	private List<Tmem_f> tmem;
+	private int rcnt;
 	
 
 	public Project_f() {
@@ -59,6 +60,14 @@ public class Project_f implements Serializable {
 		this.path = path;
 		this.ino = ino;
 		this.ext = ext;
+	}
+
+	
+	public int getRcnt() {
+		return rcnt;
+	}
+	public void setRcnt(int rcnt) {
+		this.rcnt = rcnt;
 	}
 
 	public List<Tmem_f> getTmem() {

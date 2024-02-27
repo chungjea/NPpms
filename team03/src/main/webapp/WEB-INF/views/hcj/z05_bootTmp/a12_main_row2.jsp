@@ -113,7 +113,7 @@
 				<div class="progress-bar" role="progressbar" style="width: ${pj.progress*100}%"
 					aria-valuenow="${pj.progress*100}" aria-valuemin="0" aria-valuemax="100"><fmt:formatNumber value="${pj.progress*100}" pattern="00"/>%</div>
 			</div>
-			<span class="d_day">7</span>
+			<c:if test="${pj.rcnt>0}"><span class="d_day">${pj.rcnt}</span></c:if>
 		</div>
 	</c:forEach>
 </div>
