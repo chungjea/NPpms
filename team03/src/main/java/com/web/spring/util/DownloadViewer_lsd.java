@@ -24,7 +24,7 @@ public class DownloadViewer_lsd extends AbstractView {
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest req, HttpServletResponse res)
 			throws Exception {
 
-		String path="C:\\a01_springbt\\workspace\\maven.1708065300599\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path="C:\\a01_springbt\\workspace\\maven.1708065300599\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
 
 
 		String fileName = (String)model.get("downloadFile");
