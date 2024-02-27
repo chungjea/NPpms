@@ -19,6 +19,7 @@ import com.web.spring.service.hcj.A02_Service_hcj;
 import com.web.spring.vo.Emp_pinfo_f;
 import com.web.spring.vo.ProjectSch;
 import com.web.spring.vo.Project_f;
+import com.web.spring.vo.TaskRink_f;
 import com.web.spring.vo.Task_f;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -124,6 +125,7 @@ public class A01_Controller_hcj {
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("data", service.getTaskdatas(pcode));
+		modelAndView.addObject("links", service.getRink(pcode));
 		return modelAndView;
 	}
 	
@@ -159,6 +161,18 @@ public class A01_Controller_hcj {
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("msg", service.deleteTask(del));
 		return modelAndView;
+	}
+	
+	@ResponseBody
+	@PostMapping("insertLink")
+	public ResponseEntity<?> insertTaskLink(@RequestBody TaskRink_f ins){
+		return ResponseEntity.ok(service.insertRink(ins));
+	}
+	
+	@ResponseBody
+	@PostMapping("deleteLink")
+	public ResponseEntity<?> deleteTaskLink(@RequestBody TaskRink_f del){
+		return ResponseEntity.ok(service.deleteLink(del));
 	}
 
 }

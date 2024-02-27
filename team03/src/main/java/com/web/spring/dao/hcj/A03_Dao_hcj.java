@@ -258,7 +258,7 @@ public interface A03_Dao_hcj {
 	int deleteTask(Task_f del);
 	
 	@Insert("INSERT INTO taskRink_F values(#{id},#{source},#{target},#{type},#{pcode})")
-	int insertRink(TaskRink_f ins,int pcode);
+	int insertRink(TaskRink_f ins);
 	
 	
 	List<Tmem_f> getTeamMemeber(int pcode);
@@ -274,4 +274,14 @@ public interface A03_Dao_hcj {
 	@Select("SELECT empno KEY, ename label FROM view_tmem_add_empinfo "
 			+ "WHERE pcode = #{pcode}")
 	List<Tmem_f> getTmemEmp(int  pcode); 
+	
+	@Select("SELECT id, SOURCE, target, type FROM TASKRINK_F\r\n"
+			+ "WHERE pcode = #{pcode}")
+	List<TaskRink_f> getRink(int pcode);
+	
+	@Insert("INSERT INTO TASKRINK_F values(#{id},#{source},#{target},#{type},#{pcode})")
+	int insertTaskLink(TaskRink_f ins);
+	
+	@Delete("delete from TASKRINK_F where id = #{id} ")
+	int deleteTaskLink(TaskRink_f del);
 }

@@ -284,6 +284,10 @@ public class A02_Service_hcj {
 	public List<Data> getTaskdatas(int pcode) {
 		return dao.getTaskdatas(pcode);
 	}
+	public List<TaskRink_f> getRink(int pcode){
+		return dao.getRink(pcode);
+	}
+	
 	
 	public String insertTask(Task_f ins) {
 		System.out.println("--insertTask 서비스 접근--");
@@ -302,14 +306,15 @@ public class A02_Service_hcj {
 	}
 	public Project_f getProjectInfo(int pcode) {
 		Project_f pinfo =dao.getProjectInfo(pcode);
-		System.out.println("-----------pinfo---------");
-		System.out.println("pname"+pinfo.getPname());
 		 pinfo.setTmem(dao.getTmemEmp(pcode)); 
 		return pinfo;
 	}
 	
-	public int insertRink(TaskRink_f ins,int pcode) {
-		return dao.insertRink(ins,pcode);
+	public String insertRink(TaskRink_f ins) {
+		return dao.insertRink(ins)>0?"링크 생성 성공":"링크 생성 실패";
 	}
 	
+	public String deleteLink(TaskRink_f del) {
+		return dao.deleteTaskLink(del)>0?"링크 삭제 성공":"링크 삭제 실패";
+	}
 }

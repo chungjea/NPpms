@@ -222,28 +222,12 @@ html, body {
 						gantt.locale.labels.section_time = "기간";
 						gantt.locale.labels.section_assignor = "담당배정"
 					
-					
-						
-					
-							gantt.attachEvent("onLightbox", function (task_id){
-							   console.log("작업생성 모달 열림")
-							   console.log(gantt.getLightboxValues());
-							   console.log("date:"+gantt.getLightboxValues().start_date.toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }))
-							   console.log("date:"+gantt.getLightboxValues().start_date.toLocaleDateString())
-							  
-							});
-						gantt.attachEvent("onLightboxCancel", function(id){
-							console.log("취소버튼 클릭")
-						})
-						// 업데이트시 활용하면 됨
-						gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
-							console.log("테스크 드래그 후 놓기 완료")
-							
+
+						gantt.attachEvent("onAfterLinkAdd", function(id,item){
+						    funclink("insertLink",item)
 						});
-						// 테스크의 인덱스 위치를 바꿨을때로 추측
-						gantt.attachEvent("onAfterTaskMove", function(id, parent, tindex){
-							console.log("onmove:움직임이 있을때")
-						
+						gantt.attachEvent("onAfterLinkDelete", function(id,item){
+							funclink("deleteLink",item)
 						});
 						
 						/* gantt.attachEvent("onBeforeTaskUpdate", function(id,new_item){
@@ -268,6 +252,7 @@ html, body {
 						    	bdforeMoveDate = Task.start_date
 						    	
 						    }
+							
 						    return true;
 						});
 						gantt.attachEvent("onAfterTaskDrag", function(id, mode, e){
@@ -283,10 +268,31 @@ html, body {
 							    		childTask.end_date.setDate(childTask.end_date.getDate()+moveStep)
 							    		funcTask("updateTask",childTask)
 							    	})
-							    	console.log(moveStep)
 							    	gantt.render()
+							
 						    	}
 						    }
+						    if(mode === "resize"){
+								if(gantt.getChildren(id) !=0){
+									var sendmsg = "";
+									gantt.getChildren(id).forEach(function(childid){
+										var childTask = gantt.getTask(childid)
+										if(Task.start_date>childTask.start_date){
+											Task.start_date = childTask.start_date
+											sendmsg = "하위 작업보다 시작일이 빠를수 없습니다"
+										}else if(Task.end_date<childTask.end_date){
+											Task.end_date=childTask.end_date
+											sendmsg = "하위 작업보다 마감일이 빠를수 없습니다"
+										}
+									})
+									funcTask("updateTask",Task)
+									gantt.render()
+									if(sendmsg != "")
+									gantt.message(sendmsg)
+								
+								}
+							}
+						    
 						    return true;
 						});
 								
@@ -300,7 +306,6 @@ html, body {
 								const Siblings = gantt.getChildren(item.parent)
 								const parentdata = gantt.getTask(parent)
 								var tot = 0;
-								console.log(parentdata)
 								Siblings.forEach(function(Siblingid){
 									var Sibling = gantt.getTask(Siblingid)
 									tot +=Sibling.progress;
@@ -310,20 +315,25 @@ html, body {
 								var progress = tot/Siblings.length
 								parentdata.progress = Math.round(progress * 10)/10
 								// 업데이트 후 랜더
-								funcTask("updateTask",parentdata)									
+								
+								funcTask("updateTask",parentdata)
 								gantt.render()
+								gantt.updateTask(parentdata.id)
+								
+								
 							}
 						});
 						
 						gantt.attachEvent("onAfterTaskAdd", function(id,item){
-							console.log("onAfterTaskAdd:테스크 생성시 사용")
-							funcTask("insertTask",item)			
+					
+							funcTask("insertTask",item)	
+				
 						});
 						
 						gantt.attachEvent("onAfterTaskDelete", function(id,item){
-							console.log("onAfterTaskDelete:테스크 삭제시 쓰면 될듯")
 							
 							funcTask("deleteTask",item)
+			
 						});
 						
 						gantt.init("gantt_here");
@@ -340,12 +350,10 @@ html, body {
 								url:"${path}/"+type,
 								type:"post",
 								contentType: "application/json",
-								dataType:"json",
+								dataType:"text",
 								data :JSON.stringify(data),
-								success:function(data){
-									//alert(data.msg)
-									//gantt.message(data.msg);
-									
+								success:function(msg){
+				
 								},
 								error:function(err){
 									console.log(err)
@@ -353,7 +361,22 @@ html, body {
 							})
 				}
 				
-				
+				function funclink(url,item){
+					var linkdata = {...item,...{pcode:"${pcode}"}}
+				 	$.ajax({
+						url:url,
+						type:"post",
+						dataType:"text",
+						contentType: "application/json",
+						data:JSON.stringify(linkdata),
+						success:function(msg){
+							gantt.message(msg)
+						},
+						error:function(err){
+							console.log(err)
+						}
+					}) 
+				}
 						
 				function transferDateformat(date){
 					const year = date.getFullYear()
