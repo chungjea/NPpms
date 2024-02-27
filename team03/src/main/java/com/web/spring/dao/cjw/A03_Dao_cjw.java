@@ -110,7 +110,7 @@ public interface A03_Dao_cjw {
 	@Insert("INSERT INTO RISK_F values(rsk_seq.nextval,#{title},sysdate,NULL,#{wempno},#{writer},#{content},'발생예정',#{pcode})")
 	int insertrsk(Risk_f ins);
 	
-	@Insert("INSERT INTO RISKADMIN_F VALUES(rsk_seq.currval,NULL,NULL,NULL,NULL,#{manager},#{probability},#{danger})")
+	@Insert("INSERT INTO RISKADMIN_F VALUES(rsk_seq.currval,NULL,0,NULL,NULL,#{manager},#{probability},#{danger})")
 	int insertrsk2(Risk_f ins);
 	
 	@Select("SELECT empno FROM project_f WHERE pcode = #{pcode}")
