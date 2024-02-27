@@ -152,7 +152,7 @@ display:show;
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												프로젝트 완료 갯수:</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">총
-												${doneProj}건</div>
+												건</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>

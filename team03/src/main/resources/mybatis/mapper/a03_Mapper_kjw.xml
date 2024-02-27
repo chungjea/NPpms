@@ -55,10 +55,10 @@ WHERE empno=#{empno}
 SELECT last_number FROM user_sequences WHERE sequence_name='EMPNOC'
 </select>
 
-<select id="doneProjN" parameterType="int" resultType="int">
+<select id="doneProjN" resultType="int">
 SELECT count(*) FROM VIEW_PROJECT_ALL_INFO_TMEMBER WHERE member=#{empno}
 </select>
-<select id="doneProjA" parameterType="int" resultType="int">
+<select id="doneProjA" resultType="int">
 SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno}
 </select>
 

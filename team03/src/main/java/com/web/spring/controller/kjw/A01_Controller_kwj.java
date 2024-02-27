@@ -118,6 +118,8 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f 
 		d.addAttribute("salList", service.getSalList(sch1));
 		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 		d.addAttribute("empcnt", service.empcnt(cnt));
+
+		
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
@@ -125,6 +127,7 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f 
 			d.addAttribute("salList", service.getSalList(sch1));
 			d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 			d.addAttribute("empcnt", service.empcnt(cnt));
+
 		return "kjw/z05_bootTmp/a70_tables";
 		}
 }
