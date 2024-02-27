@@ -112,8 +112,8 @@ public class A01_Controller_lsd {
 			service.insertNotice(ins);
 			d.addAttribute("msg", "등록성공");
 		}
-		return "redirect:noticePage?pcode=" + pcode;
-	}// insertNotice()
+		return "lsd/z05_bootTmp/InsertNotice";
+	}// insertNotice() "redirect:noticePage?pcode=" + pcode;
 	
 	// 공지 등록 == dname있는데 pcode
 //	@RequestMapping("insertNotice")

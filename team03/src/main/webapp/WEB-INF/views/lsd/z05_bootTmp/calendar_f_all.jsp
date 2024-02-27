@@ -317,7 +317,7 @@ body {
 
 <body>
 	<div class="jumbotron text-center">
-		<h2>${emp.dname} 부서의 ${emp.ename}의 일정</h2>
+		<h2>${emp.dname} 부서 ${emp.ename}의 일정</h2>
 	</div>
 	<%-- 
 		
@@ -422,7 +422,6 @@ body {
 				</div>
 				<div class="modal-footer">
 					<button type="button" id="regBtn" class="btn btn-primary">일정등록</button>
-					
 					<button type="button" id="uptBtn" class="btn btn-info">일정수정</button>
 					<button type="button" id="delBtn" class="btn btn-warning">일정삭제</button>
 					<button type="button" id="clsBtn" class="btn btn-secondary"
