@@ -186,7 +186,6 @@
                     </div>
                     <script type="text/javascript">
 	                    function goPage1(no){
-	                    	$("[name=title]").val("")
 							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
@@ -195,7 +194,6 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage2(no){
-	                    	$("[name=title]").val("")
 							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
@@ -204,7 +202,6 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage3(no){
-	                    	$("[name=title]").val("")
 							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)
@@ -213,7 +210,6 @@
 					    	$("#frm01").submit()
 	            		}
 	                    function goPage4(no){
-	                    	$("[name=title]").val("")
 							$("[name=curPage]").val("0")
 					    	$("#1").val(no)
 					    	$("#2").val(no)

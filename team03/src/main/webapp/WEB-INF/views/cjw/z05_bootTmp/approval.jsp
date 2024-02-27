@@ -158,11 +158,11 @@
                     	<li class="page-item ${sch.sts=='대기'?'active':''}">
                     	<a class="page-link" id="mysubmit" href="javascript:goPage1('대기')">상신한 문서</a></li>
                     	<li class="page-item ${sch.sts=='반려'?'active':''}">
-                    	<a class="page-link" id="return" href="javascript:goPage1('반려')">반려된 문서</a></li>
+                    	<a class="page-link" id="return" href="javascript:goPage2('반려')">반려된 문서</a></li>
                     	<li class="page-item ${sch.sts=='결재'?'active':''}">
-                    	<a class="page-link" id="tocheck" href="javascript:goPage2('결재')">결재할 문서</a></li>
+                    	<a class="page-link" id="tocheck" href="javascript:goPage3('결재')">결재할 문서</a></li>
                     	<li class="page-item ${sch.sts=='완료'?'active':''}">
-                    	<a class="page-link" id="finish" href="javascript:goPage1('완료')">완료된 문서</a></li>
+                    	<a class="page-link" id="finish" href="javascript:goPage4('완료')">완료된 문서</a></li>
                     	</ul>
                     	<form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 								id="frm01" class="form" method="post">
@@ -191,18 +191,30 @@
 		                })
 	                    function goPage1(sts){
 	                    	$("#sts").val(sts)
-	                    	$("[name=title]").val("")
 	                    	$("[name=curPage]").val("0")
 	                    	$("#ck").val("0")
 							$("#frm01").attr("action","${path}/myapv")
 					    	$("#frm01").submit()
 	            		}
-	                    function goPage2(sts){
+		                function goPage2(sts){
 	                    	$("#sts").val(sts)
-	                    	$("[name=title]").val("")
+	                    	$("[name=curPage]").val("0")
+	                    	$("#ck").val("0")
+							$("#frm01").attr("action","${path}/badapv")
+					    	$("#frm01").submit()
+	            		}
+	                    function goPage3(sts){
+	                    	$("#sts").val(sts)
 	                    	$("[name=curPage]").val("0")
 	                    	$("#ck").val("1")
 							$("#frm01").attr("action","${path}/ckapv")
+					    	$("#frm01").submit()
+	            		}
+		                function goPage4(sts){
+	                    	$("#sts").val(sts)
+	                    	$("[name=curPage]").val("0")
+	                    	$("#ck").val("0")
+							$("#frm01").attr("action","${path}/goodapv")
 					    	$("#frm01").submit()
 	            		}
 	                   var title = "${sch.title}"

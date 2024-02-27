@@ -37,11 +37,9 @@ public class A02_Service_cjw {
 		return dao.getfnamebyfno(fno);
 	}
 	
-	// 결재 : 상신한 대기/반려/완료 문서 리스트
+	// 결재 : 상신한 대기 문서 리스트
 	public List<Approve_f> myapv(ApproveSch sch){
 		if(sch.getSts()==null) sch.setSts("대기");
-		if(sch.getWempno()==0) sch.setWempno(1000);
-		if(sch.getMempno()==0) sch.setMempno(1000);
 		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.mycnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
@@ -63,10 +61,54 @@ public class A02_Service_cjw {
 		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
 		return dao.myapv(sch);
 	}	
+	// 결재 : 반려된 문서 리스트
+	public List<Approve_f> badapv(ApproveSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
+		sch.setCount(dao.badcnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
+		return dao.badapv(sch);
+	}
+	// 결재 : 승인된 문서 리스트
+	public List<Approve_f> goodapv(ApproveSch sch){
+		if(sch.getTitle()==null) sch.setTitle("");
+		sch.setCount(dao.goodcnt(sch));
+		if(sch.getPageSize()==0) sch.setPageSize(5);
+		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
+		sch.setPageCount(totPage);
+		if(sch.getCurPage()>sch.getPageCount()) sch.setCurPage(sch.getPageCount());
+		if(sch.getCurPage()==0) sch.setCurPage(1);
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		if(sch.getCurPage()*sch.getPageSize()>sch.getCount()) {
+			sch.setEnd(sch.getCount());
+		}
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(5);
+		int blockNum = (int)Math.ceil(sch.getCurPage()/(double)sch.getBlockSize());
+		sch.setEndBlock(blockNum*sch.getBlockSize());
+		if(sch.getEndBlock()>sch.getPageCount()) {
+			sch.setEndBlock(sch.getPageCount());
+		}
+		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
+		return dao.goodapv(sch);
+	}
 	// 결재 : 결재처리를 해야하는 문서 리스트
 	public List<Approve_f> ckapv(ApproveSch sch){
-		if(sch.getWempno()==0) sch.setWempno(1000);
-		if(sch.getMempno()==0) sch.setMempno(1000);
 		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.tocnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);

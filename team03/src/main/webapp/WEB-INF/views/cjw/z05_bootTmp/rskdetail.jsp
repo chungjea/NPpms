@@ -65,6 +65,7 @@
 	var name = "${emp.ename}(${emp.dname})"
 	var rskno = "${drsk.rskno}"
 	var charge = "${drsk.charge}"
+	var cempno = "${drsk.cempno}"
 	var sts = "${drsk.sts}"
 	var manager = "${drsk.manager}"
 	$(document).ready(function(){
@@ -75,7 +76,7 @@
 			$("#ckModal").hide();
 			$("#finBtn").hide()
 		}else{
-			if(charge==""){
+			if(cempno==0){
 				if(manager==empno){
 					$("#ckModal").show();
 					$("#finBtn").hide();
@@ -83,7 +84,7 @@
 					$("#ckModal").hide();
 					$("#finBtn").hide()
 				}
-			}else{
+			}else if(cempno==empno){
 				$("#ckModal").hide();
 				$("#finBtn").show();
 			}

@@ -40,6 +40,26 @@ public class A01_Controller_cjw {
 		return "cjw/z05_bootTmp/approval";
 	}
 	
+	@PostMapping("badapv")
+	public String badapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
+		d.addAttribute("apvList", service.badapv(sch));
+		d.addAttribute("myapvcnt", service.myapvcnt(sch));
+		d.addAttribute("badapvcnt", service.badapvcnt(sch));
+		d.addAttribute("goodapvcnt", service.goodapvcnt(sch));
+		d.addAttribute("toapvcnt", service.toapvcnt(sch));
+		return "cjw/z05_bootTmp/approval";
+	}
+	
+	@PostMapping("goodapv")
+	public String goodapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
+		d.addAttribute("apvList", service.goodapv(sch));
+		d.addAttribute("myapvcnt", service.myapvcnt(sch));
+		d.addAttribute("badapvcnt", service.badapvcnt(sch));
+		d.addAttribute("goodapvcnt", service.goodapvcnt(sch));
+		d.addAttribute("toapvcnt", service.toapvcnt(sch));
+		return "cjw/z05_bootTmp/approval";
+	}
+	
 	@PostMapping("ckapv")
 	public String ckapv(@ModelAttribute("sch") ApproveSch sch, Model d) {
 		d.addAttribute("apvList", service.ckapv(sch));

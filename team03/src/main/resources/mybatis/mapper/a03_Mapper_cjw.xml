@@ -7,10 +7,34 @@
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
 				(SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
-						emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, af.REGDTE, af.sts 
+						emf.ENAME||'('||df.DNAME||')' manager, aaf.MEMPNO, af.REGDTE, af.sts 
 					FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
 					WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
-					AND af.wempno = #{wempno} AND af.sts = #{sts} AND af.pcode = #{pcode} AND af.title like '%'||#{title}||'%'
+					AND af.wempno = #{wempno} AND af.sts = '대기' AND af.pcode = #{pcode} AND af.title like '%'||#{title}||'%'
+					ORDER BY APVNO DESC) a
+			) 
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="badapv" resultType="approve" parameterType="apvSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
+						emf.ENAME||'('||df.DNAME||')' manager, aaf.MEMPNO, af.REGDTE, af.sts 
+					FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
+					WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
+					AND (af.wempno = #{wempno} OR aaf.mempno = #{mempno}) AND af.sts = '반려' AND af.pcode = #{pcode} AND af.title like '%'||#{title}||'%'
+					ORDER BY APVNO DESC) a
+			) 
+		WHERE cnt BETWEEN #{start} AND #{end}
+	</select>
+	<select id="goodapv" resultType="approve" parameterType="apvSch">
+		SELECT * FROM 
+			(SELECT rownum cnt, a.* FROM 
+				(SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
+						emf.ENAME||'('||df.DNAME||')' manager, aaf.MEMPNO, af.REGDTE, af.sts 
+					FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
+					WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
+					AND (af.wempno = #{wempno} OR aaf.mempno = #{mempno}) AND af.sts = '완료' AND af.pcode = #{pcode} AND af.title like '%'||#{title}||'%'
 					ORDER BY APVNO DESC) a
 			) 
 		WHERE cnt BETWEEN #{start} AND #{end}
@@ -19,7 +43,7 @@
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
 				(SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
-					emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, af.REGDTE, af.sts 
+					emf.ENAME||'('||df.DNAME||')' manager, aaf.MEMPNO, af.REGDTE, af.sts 
 				FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df 
 				WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
 				AND aaf.mempno = #{mempno} AND af.sts = '대기' AND af.pcode = #{pcode} AND af.title like '%'||#{title}||'%' 
@@ -72,7 +96,7 @@
 					emf.ENAME||'('||df.DNAME||')' charge, rf2.cempno, rf2.finalDTE, rf.sts, rf2.priority 
 				FROM RISK_F rf, RISKADMIN_F rf2 , EMP_MASTER_F emf, DEPT_F df 
 				WHERE rf.rskno = rf2.rskno AND rf2.cempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO 
-				AND rf2.cempno = #{cempno} AND rf.sts = '처리중' AND rf.pcode = #{pcode} AND rf.title like '%'||#{title}||'%' 
+				AND (rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '처리중' AND rf.pcode = #{pcode} AND rf.title like '%'||#{title}||'%' 
 				ORDER BY rskNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}

@@ -29,10 +29,20 @@ public interface A03_Dao_cjw {
 	// 결재
 	List<Approve_f> myapv(ApproveSch sch);
 	
+	List<Approve_f> badapv(ApproveSch sch);
+	
+	List<Approve_f> goodapv(ApproveSch sch);
+	
 	List<Approve_f> ckapv(ApproveSch sch);
 	
 	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts=#{sts} and title like '%'||#{title}||'%' and pcode = #{pcode}")
 	int mycnt(ApproveSch sch);
+	
+	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND (af.wempno=#{wempno} OR aaf.mempno=#{mempno}) and af.sts='반려' and af.title like '%'||#{title}||'%' and af.pcode = #{pcode}")
+	int badcnt(ApproveSch sch);
+	
+	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND (af.wempno=#{wempno} OR aaf.mempno=#{mempno}) and af.sts='완료' and af.title like '%'||#{title}||'%' and af.pcode = #{pcode}")
+	int goodcnt(ApproveSch sch);
 	
 	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기' and af.title like '%'||#{title}||'%' and af.pcode = #{pcode}")
 	int tocnt(ApproveSch sch);
@@ -40,10 +50,10 @@ public interface A03_Dao_cjw {
 	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='대기' and pcode = #{pcode}")
 	int myapvcnt(ApproveSch sch);
 	
-	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='반려' and pcode = #{pcode}")
+	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND (af.wempno = #{wempno} OR aaf.mempno=#{mempno}) and af.sts='반려' and af.pcode = #{pcode}")
 	int badapvcnt(ApproveSch sch);
 	
-	@Select("SELECT count(*) FROM APPROVE_F WHERE wempno=#{wempno} and sts='완료' and pcode = #{pcode}")
+	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND (af.wempno = #{wempno} OR aaf.mempno=#{mempno}) and af.sts='완료' and af.pcode = #{pcode}")
 	int goodapvcnt(ApproveSch sch);
 	
 	@Select("SELECT count(af.apvno) FROM APPROVE_F af, approveadmin_f aaf WHERE af.apvno = aaf.apvno AND aaf.mempno=#{mempno} and af.sts='대기' and af.pcode = #{pcode}")
@@ -89,7 +99,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
 	int ckrskcntp(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '처리중' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
 	int torskcntp(RiskSch sch);
 	
 	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '완료' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
@@ -101,7 +111,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.manager = #{manager} AND rf.sts = '발생예정' and rf.pcode = #{pcode}")
 	int ckrskcnt(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.pcode = #{pcode}")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '처리중' and rf.pcode = #{pcode}")
 	int torskcnt(RiskSch sch);
 	
 	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '완료' and rf.pcode = #{pcode}")
