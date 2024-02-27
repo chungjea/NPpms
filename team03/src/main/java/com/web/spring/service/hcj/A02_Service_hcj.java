@@ -183,6 +183,19 @@ public class A02_Service_hcj {
 	
 	public String deleteProject(Project_f del) {
 		dao.deleteTmemALL(del.getPcode());
+		MultipartFile file = del.getReports();
+		String filename = "icon"+dao.getfilename(del.getPcode());
+		File deletefile = new File(path+filename);
+		System.out.println("파일이름:"+filename);
+		System.out.println("경로+파일이름:"+path+filename);
+		System.out.println("삭제파일생성:"+deletefile.getName());
+			if(deletefile.exists()) {
+				System.out.println(deletefile.getName()+" 삭제!!");
+				deletefile.delete();
+				dao.deletefile(del.getPcode());
+				System.out.println("iconrep삭제");
+			}
+		
 		return dao.deleteProject(del)>0?"프로젝트 삭제":"프로젝트 삭제 실패";
 	}
 	

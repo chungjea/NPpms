@@ -80,10 +80,10 @@
 					</div>
 					<div class="row">
 						<div class="col">
-							시작일 <input type="date" class="form-control" name="startdte" />
+							시작일 <input type="date" class="form-control" name="startdte" onchange="datacheck()"/>
 						</div>
 						<div class="col">
-							마감일 <input type="date" class="form-control" name="enddte" />
+							마감일 <input type="date" class="form-control" name="enddte" onchange="datacheck()"/>
 						</div>
 					</div>
 					<div class="row">

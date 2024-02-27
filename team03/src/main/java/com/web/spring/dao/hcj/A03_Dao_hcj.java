@@ -136,7 +136,8 @@ public interface A03_Dao_hcj {
 	@Update("update ICONREP_F set fname = #{fname},ext = #{ext} where ino = #{ino}")
 	int updatefile(String fname,String ext,int ino);
 	
-	
+	@Delete("delete from ICONREP_F where pcode = #{pcode}")
+	int deletefile(int pcode);
 	
 	// 팀 멤버 추가
 	@Insert("insert into TMEM_F values(#{empno},project_seq.currval)")

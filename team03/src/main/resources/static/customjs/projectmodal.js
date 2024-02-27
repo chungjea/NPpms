@@ -130,7 +130,7 @@ var members = new Map();
 			data:"pcode="+pcode,
 			datatype:"json",
 			success:function(pinfo){
-					
+				console.log("icon"+pinfo.ino);
 				$("#frm02 #titleheader").text(pinfo.pname);
 				$("#frm02 [name=pcode]").val(pinfo.pcode);
 				$("#frm02 [name=pname]").val(pinfo.pname);
@@ -156,6 +156,7 @@ var members = new Map();
 				}else{
 					imgbox.style.display="";				
 					img.src=pinfo.path+"icon"+pinfo.ino+pinfo.ext;
+					alert(img.src)
 				}
 				
 			},
