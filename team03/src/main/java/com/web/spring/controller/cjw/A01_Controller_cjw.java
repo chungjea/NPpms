@@ -165,14 +165,12 @@ public class A01_Controller_cjw {
 	@PostMapping("insertmetFrm")
 	public String insertmetFrm(int pcode, Model d) {
 		d.addAttribute("type", "reg");
-		System.out.println(pcode);
 		return "cjw/z05_bootTmp/metinsert";
 	}
 
 	@PostMapping("insertmet")
 	public String insertmet(Meeting_f ins, Model d) {
 		d.addAttribute("msg", service.insertmet(ins));
-		System.out.println(ins.getPcode());
 		return "cjw/z05_bootTmp/metinsert";
 	}
 	

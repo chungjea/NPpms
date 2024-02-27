@@ -107,11 +107,19 @@
                     			alert(msg)
                     			$("#frmfile").submit();
                     		}
-                    		$("[name=reports]").change(function(){
+                    		$("#my").change(function(){
                     			if(confirm("파일을 업로드하시겠습니까?")){
-                    				$("#filefrm").submit()
+                    				$("#filefrmmy").submit()
                     			}else{
-                    				$("[name=reports]").val("")
+                    				$("#my").val("")
+                    				return
+                    			}
+                    		})
+                    		$("#team").change(function(){
+                    			if(confirm("파일을 업로드하시겠습니까?")){
+                    				$("#filefrmteam").submit()
+                    			}else{
+                    				$("#team").val("")
                     				return
                     			}
                     		})
@@ -279,10 +287,10 @@
 								    		<c:when test="${tf.auth==emp.empno}">
 								    			<td><button type="button" title="삭제" style="border: none; background-color: transparent;" onclick="deletefile('${tf.fno}','${tf.fname}')"><img src="${path}/a00_com/img/delete_icon.png" alt="X" width="20" height="20"></button></td></tr>
 								    		</c:when>
+									    	<c:otherwise>
+									    		<td> </td></tr>
+									    	</c:otherwise>
 								    	</c:choose>
-								    	<c:otherwise>
-								    		<td></td></tr>
-								    	</c:otherwise>
 							    	</c:forEach>
 							    </tbody>
 							</table>

@@ -89,7 +89,7 @@
 			}
 		}
 		$("#okBtn").click(function(){
-			if($("[name=finaldte]").val()==""){
+			if($("[name=finaldteStr]").val()==""){
 				alert("마감일을 지정하세요")
 				return;
 			}

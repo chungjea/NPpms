@@ -30,10 +30,8 @@ import com.web.spring.vo.Team;
 public class A02_Service_cjw {
 	@Autowired(required = false)
 	private A03_Dao_cjw dao;
-	
 	@Value("${file.upload}")
 	private String path;
-	
 	// 파일명 가져오기
 	public String getfnamebyfno(String fno) {
 		return dao.getfnamebyfno(fno);
@@ -505,7 +503,7 @@ public class A02_Service_cjw {
 	
 	// 문서관리 : 팀 파일 업로드
 	public String insertfileteam(File_f ins) {
-		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\resources\\static\\z01_upload\\";
 		String msg = "";
 		int ckf = 0;
 		MultipartFile[] mpfs = ins.getReports();
@@ -571,7 +569,7 @@ public class A02_Service_cjw {
 	
 	// 문서관리 : 개인 파일 업로드
 	public String insertfilemy(File_f ins) {
-		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\resources\\static\\z01_upload\\";
 		String msg = "";
 		int ckf = 0;
 		MultipartFile[] mpfs = ins.getReports();
@@ -630,10 +628,10 @@ public class A02_Service_cjw {
 		return dao.myfile(sch);
 	}
 	
-	// 문서관리 : 개인 파일 삭제
+	// 문서관리 : 파일 삭제
 	public String deletefile(String fno) {
 		String fname = dao.getfnamebyfno(fno);
-		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\webapp\\WEB-INF\\z01_upload\\";
+		//String path = "C:\\Users\\user\\git\\NPpms\\team03\\src\\main\\resources\\static\\z01_upload\\";
 		File fileToDelete = new File(path+fname);
 		if(fileToDelete.exists()) fileToDelete.delete();
 		String msg = "";
