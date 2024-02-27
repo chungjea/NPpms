@@ -18,7 +18,9 @@ import com.web.spring.vo.Noticeboard_f;
 public class A02_Service_lsd {
 	@Autowired(required = false)
 	private A03_Dao_lsd dao;
-
+	
+	@Value("${file.upload}")
+	private String path;
 	// 프로젝트별 조회
 //	public List<Noticeboard_f> projectSearch(int pcode){
 //		return dao.projectSearch(pcode);
@@ -96,8 +98,6 @@ public class A02_Service_lsd {
 	}// insertNotice() 공지 등록*/
 	
 	
-	@Value("${file.upload}")
-	private String path;
 	// 파일 업로드랑 같이
 	public String insertNotice(Noticeboard_f ins) {
 		System.out.println("서비스 시작");
