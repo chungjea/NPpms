@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
-<%@ page import="java.util.Objects" %> 
+<%@ page import="java.util.Objects"%>
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
@@ -13,29 +13,33 @@
 <title>Good day!!</title>
 
 <style>
-      #dataTable th {
+#dataTable th {
 	position: sticky;
 	top: 0;
-	background-color:white;
-	text-align:center;
+	background-color: white;
+	text-align: center;
 }
+
 #dataTable td {
-text-align:right;
+	text-align: right;
 }
-      #dataTable1 th {
+
+#dataTable1 th {
 	position: sticky;
 	top: 0;
-	background-color:white;
-	text-align:center;
+	background-color: white;
+	text-align: center;
 }
-      #dataTable2 th {
+
+#dataTable2 th {
 	position: sticky;
 	top: 0;
-	background-color:white;
-	text-align:center;
+	background-color: white;
+	text-align: center;
 }
-#home{
-display:show;
+
+#home {
+	display: show;
 }
 </style>
 
@@ -92,7 +96,7 @@ display:show;
 					<div class="row">
 						<div class="col-xl-3 col-md-6 mb-4" id="link1">
 							<div class="card border-left-primary shadow h-100 py-2">
-								<div class="card-body">	
+								<div class="card-body">
 									<div class="row no-gutters align-items-center">
 										<div class="col mr-2">
 											<div
@@ -134,7 +138,10 @@ display:show;
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												총수익</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800"
-												id="checking1">1,000,000,000원</div>
+												id="checking1">
+												<fmt:formatNumber value="${getsal}" pattern="#,###" />
+												원
+											</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -151,8 +158,7 @@ display:show;
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												프로젝트 완료 갯수:</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">총
-												건</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">총 건</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -166,52 +172,54 @@ display:show;
 
 					<h1 class="h3 mb-2 text-gray-800">${emp.dname}${emp.auth}페이지</h1>
 					<ul class="nav nav-tabs nav-justified">
-						<li class="nav-item "><a class="nav-link active" href="#home" id="homeBtn">전체회원</a></li>
-						<li class="nav-item"><a class="nav-link" href="#tab02" id="tab02Btn">삭제인원리스트</a></li>
+						<li class="nav-item "><a class="nav-link active" href="#home"
+							id="homeBtn">전체회원</a></li>
+						<li class="nav-item"><a class="nav-link" href="#tab02"
+							id="tab02Btn">삭제인원리스트</a></li>
 						<li class="nav-item"><a class="nav-link " href="#"></a></li>
 						<li class="nav-item"><a class="nav-link " href="#"></a></li>
 					</ul>
 
 
 					<!-- DataTales Example -->
-					
-							<div class="card shadow mb-4">
-							
-								<div class="card-header py-3">
-								
-								<div class="row">
-									<c:if test='${emp.dname.equals("인사팀")}'>
-										
-										<a class="btn btn-danger btn-icon-split" id="delBtn"> <span
-											class="icon text-white-50"> <i class="fas fa-trash"></i>
-										</span> <span class="text" id="textchange">삭제</span>
-										</a>
 
+					<div class="card shadow mb-4">
 
+						<div class="card-header py-3">
 
-										<a href="${path}/registerFrm"
-											class="btn btn-success btn-icon-split"> <span
-											class="icon text-white-50"> <i class="fas fa-check"></i>
-										</span> <span class="text">사원등록</span>
-										</a>
-									</c:if>
+							<div class="row">
+								<c:if test='${emp.dname.equals("인사팀")}'>
 
-
-									<button type="button" class="btn btn-warning btn-circle"
-										id="excelDownload" onclick='exportExcel'>
-										<img src="${path}/a00_com/img/down_icon.png" width="15"
-											height="15">
-									</button>
-
-									<a href="${path}/updateFrm"
-										class="btn btn-warning btn-icon-split"> <span
-										class="icon text-white-50"> <i
-											class="fas fa-exclamation-triangle"></i>
-
-									</span> <span class="text">개인정보수정</span>
+									<a class="btn btn-danger btn-icon-split" id="delBtn"> <span
+										class="icon text-white-50"> <i class="fas fa-trash"></i>
+									</span> <span class="text" id="textchange">삭제</span>
 									</a>
 
-							<div class="col-md-auto" >
+
+
+									<a href="${path}/registerFrm"
+										class="btn btn-success btn-icon-split"> <span
+										class="icon text-white-50"> <i class="fas fa-check"></i>
+									</span> <span class="text">사원등록</span>
+									</a>
+								</c:if>
+
+
+								<button type="button" class="btn btn-warning btn-circle"
+									id="excelDownload" onclick='exportExcel'>
+									<img src="${path}/a00_com/img/down_icon.png" width="15"
+										height="15">
+								</button>
+
+								<a href="${path}/updateFrm"
+									class="btn btn-warning btn-icon-split"> <span
+									class="icon text-white-50"> <i
+										class="fas fa-exclamation-triangle"></i>
+
+								</span> <span class="text">개인정보수정</span>
+								</a>
+
+								<div class="col-md-auto">
 									<form
 										class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search"
 										id="frm01" class="form" method="post">
@@ -240,11 +248,11 @@ display:show;
 									</form>
 								</div>
 
-</div>
+							</div>
 
-								</div>
+						</div>
 
-								<%--           포멧                            <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
+						<%--           포멧                            <c:if test='${emp.dname.equals("인사팀")&&emp.auth.equals("관리자")}'>
                                          <a href="#" class="btn btn-warning btn-icon-split">
                                         <span class="icon text-white-50">
                            
@@ -255,164 +263,164 @@ display:show;
                                         <span class="text">사원정보수정</span>
                                     </a>
                                     </c:if> --%>
-                            <div class="tab-content">        
-						<div id="home" class="tab-pane fade in active">
+						<div class="tab-content">
+							<div id="home" class="tab-pane fade in active">
+
+
 						
-	
-								<div id="home option">
-								<div class="card-body">
-									<div class="table-responsive">
+									<div class="card-body" id="option">
+										<div class="table-responsive">
 
-										<div style="width: 100%; height: 200px;" class="tables">
-											<c:if test='${!emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}' >
-												<table class="table table-bordered border-white" id="dataTable" width="100%" cellspacing="0">
-												<thead>
-												
+											<div style="width: 100%; height: 200px;" class="tables">
+												<c:if
+													test='${!emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
+													<table class="table table-bordered border-white"
+														id="dataTable" width="100%" cellspacing="0">
+														<thead>
+
+															<tr>
+																<th>사원번호</th>
+																<th>사원명</th>
+																<th>부서명</th>
+																<th>입사일</th>
+																<th>급여</th>
+																<th>패널티횟수</th>
+																<th>마지막수정시각</th>
+																<th>로그인여부</th>
+																<th>마지막수정인</th>
+																<th><input type="checkbox" id="chkAll"></th>
+															</tr>
+														</thead>
+
+														<tbody>
+															<c:forEach var="el" items="${empList}">
 																<tr>
-																	<th>사원번호</th>
-																	<th>사원명</th>
-																	<th>부서명</th>
-																	<th>입사일</th>
-																	<th>급여</th>
-																	<th>패널티횟수</th>
-																	<th>마지막수정시각</th>
-																	<th>로그인여부</th>
-																	<th>마지막수정인</th>
-																	<th><input type="checkbox" id="chkAll"></th>
-																</tr>
-															</thead>
-												
-															<tbody>
-																<c:forEach var="el" items="${empList}">
-																	<tr>
-																		<td >${el.empno}</td>
-																		<td >${el.ename}</td>
-																		<td >${el.dname}</td>
-																		<td >${el.hiredate}</td>
-																		<td ><fmt:formatNumber value="${el.salary}" pattern="#,###"/></td>
-																		<td >${el.panaltytot}</td>
-																		<td >${el.lastfix}</td>
-																		<td> </td>
-																		<td >${el.lastone}</td>
-																		<td><input type="checkbox" id="chk"
-																			class="chkGrp" value="${el.empno}"
-																			name="checkboxModel"></td>
-																			
-																	</tr>
-																</c:forEach>
-															</tbody>
-															</table>
-											</c:if>
-										</div>
-									</div>
+																	<td>${el.empno}</td>
+																	<td>${el.ename}</td>
+																	<td>${el.dname}</td>
+																	<td>${el.hiredate}</td>
+																	<td><fmt:formatNumber value="${el.salary}"
+																			pattern="#,###" /></td>
+																	<td>${el.panaltytot}</td>
+																	<td>${el.lastfix}</td>
+																	<td></td>
+																	<td>${el.lastone}</td>
+																	<td><input type="checkbox" id="chk" class="chkGrp"
+																		value="${el.empno}" name="checkboxModel"></td>
 
-								</div>
-								</div>
-								<div id="home option2">
+																</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</c:if>
+											</div>
+										</div>
+
+									</div>
+								
+								
+									<div class="card-body" id="option2">
+										<div class="table-responsive">
+											<div style="width: 100%; height: 200px;">
+												<c:if test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
+
+													<table class="table table-bordered border-5 border-white" id="dataTable1" width="100%" cellspacing="0" >
+														<thead>
+															<tr>
+																<th>사원번호</th>
+																<th>사원명</th>
+																<th>부서명</th>
+																<th>입사일</th>
+																<th>급여</th>
+																<th>인센티브</th>
+																<th>마지막수정시각</th>
+																<th><input type="checkbox" id="chkAll"></th>
+															</tr>
+														</thead>
+
+														<tbody>
+															<c:forEach var="sl" items="${salList}">
+																<tr>
+																	<td>${sl.empno}</td>
+																	<td>${sl.ename}</td>
+																	<td>${sl.dname}</td>
+																	<td>${sl.egrade}</td>
+																	<td>${sl.salary}</td>
+																	<td>${sl.incentive}</td>
+																	<td>${sl.lastfix}</td>
+																	<td><input type="checkbox" id="chk" class="chkGrp"
+																		value="${sl.empno}" name="checkboxModel"></td>
+																</tr>
+															</c:forEach>
+														</tbody>
+													</table>
+												</c:if>
+											</div>
+										</div>
+
+									</div>
+								
+
+							</div>
+
+
+
+							<div id="tab02" class="tab-pane fade">
 								<div class="card-body">
 									<div class="table-responsive">
-
 										<div style="width: 100%; height: 200px;">
-											<c:if test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
+											<c:if test='${emp.auth.equals("관리자")}'>
 
-												<table class="table table-bordered border-white"  id="dataTable1"
-													width="100%" cellspacing="0">
+												<table class="table table-bordered border-white"
+													id="dataTable2" width="100%" cellspacing="0">
 													<thead>
+
 														<tr>
 															<th>사원번호</th>
 															<th>사원명</th>
 															<th>부서명</th>
 															<th>입사일</th>
 															<th>급여</th>
-															<th>인센티브</th>
+															<th>패널티횟수</th>
 															<th>마지막수정시각</th>
+															<th>마지막수정인</th>
 															<th><input type="checkbox" id="chkAll"></th>
 														</tr>
 													</thead>
 
 													<tbody>
-														<c:forEach var="sl" items="${salList}">
+														<c:forEach var="eh" items="${EmpHistory}">
 															<tr>
-																<td>${sl.empno}</td>
-																<td>${sl.ename}</td>
-																<td>${sl.dname}</td>
-																<td>${sl.egrade}</td>
-																<td>${sl.salary}</td>
-																<td>${sl.incentive}</td>
-																<td>${sl.lastfix}</td>
+																<td>${eh.empno}</td>
+																<td>${eh.ename}</td>
+																<td>${eh.dname}</td>
+																<td>${eh.hiredate}</td>
+																<td>${eh.salary}</td>
+																<td>${eh.panaltytot}</td>
+																<td>${eh.lastfix}</td>
+																<td>${eh.lastone}</td>
 																<td><input type="checkbox" id="chk" class="chkGrp"
-																	value="${sl.empno}" name="checkboxModel"></td>
+																	value="${eh.empno}" name="checkboxModel"></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 												</table>
 											</c:if>
 										</div>
+
+										<%@page buffer="8192kb" autoFlush="true"%>
 									</div>
+									<!-- /.container-fluid -->
 
+
+									<!-- End of Main Content -->
+
+									<!-- Footer -->
 								</div>
-
 							</div>
-</div>
-						
-
-
-						<div id="tab02" class="tab-pane fade">
-							<div class="card-body">
-								<div class="table-responsive">
-										<div style="width: 100%; height: 200px;">
-											<c:if test='${emp.auth.equals("관리자")}'>
-
-												<table class="table table-bordered border-white" id="dataTable2" width="100%" cellspacing="0">
-												<thead>
-												
-																<tr>
-																	<th>사원번호</th>
-																	<th>사원명</th>
-																	<th>부서명</th>
-																	<th>입사일</th>
-																	<th>급여</th>
-																	<th>패널티횟수</th>
-																	<th>마지막수정시각</th>
-																	<th>마지막수정인</th>
-																	<th><input type="checkbox" id="chkAll"></th>
-																</tr>
-															</thead>
-												
-															<tbody>
-																<c:forEach var="eh" items="${EmpHistory}">
-																	<tr>
-																		<td >${eh.empno}</td>
-																		<td >${eh.ename}</td>
-																		<td >${eh.dname}</td>
-																		<td >${eh.hiredate}</td>
-																		<td >${eh.salary}</td>
-																		<td >${eh.panaltytot}</td>
-																		<td >${eh.lastfix}</td>
-																		<td >${eh.lastone}</td>
-																		<td><input type="checkbox" id="chk"
-																			class="chkGrp" value="${eh.empno}"
-																			name="checkboxModel"></td>
-																	</tr>
-																</c:forEach>
-															</tbody>
-															</table>
-											</c:if>
-										</div>
-
-								<%@page buffer="8192kb" autoFlush="true"%>
-							</div>
-							<!-- /.container-fluid -->
-
-
-							<!-- End of Main Content -->
-
-							<!-- Footer -->
-						</div>
 						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		</div>
 	</div>
@@ -629,17 +637,17 @@ $("#homeBtn").click(function(){
 	$("#textchange").text('삭제');
 if(AUTH == '관리자' && DNAME!='재무팀') {
 
-   $("#home option").css("display");//인사,전체
-   $("#home option2").hide(); //재무
+   $("#option").show();//인사,전체
+   $("#option2").hide();  //재무
 
 } else if (AUTH =='관리자' && DNAME=='재무팀') {
 
-  $("#home option").hide();
-  $("#home option2").css("display");
+  $("#option").hide();
+  $("#option2").show();
 
 }else{
-	$("#home option").hide();
-	  $("#home option2").hide();
+	$("#option").hide();
+	  $("#option2").hide();
 }
 })
 $("#tab02Btn").click(function(){
@@ -649,12 +657,14 @@ $("#tab02Btn").click(function(){
 	if(AUTH == '관리자' && DNAME=='인사팀') {
 		
 		  
-		   $("#dataTable2").css("display"); //삭제인원페이지
+		   $("#option2").show(); //삭제인원페이지
 
-	}else if(AUTH == '관리자' && !DNAME=='인사팀') {
-			alert("허가되지 않은 부서입니다. 인사팀 관리자만 사용가능합니다.")
-			$("#dataTable2").css("display","none");
-		}
+	}else {
+        // 클릭 막기
+        alert("유효하지 않은 부서입니다.");
+         $("#option2").hide();
+        return "false";
+    }
 
 		
 })

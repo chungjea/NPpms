@@ -113,4 +113,7 @@ SELECT * FROM emp_master_f WHERE email=#{email} </select>
 <select id="getnewpwd" parameterType="int" resultType="emplist">
 select * from emp_master_f where empno=#{empno}
 </select>
+<select id="getsal" resultType="int">
+SELECT sum(salary) FROM sal_f
+</select>
 </mapper>

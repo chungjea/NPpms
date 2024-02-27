@@ -63,6 +63,9 @@ public class A02_Service_kjw {
 	public int doneProjN(int empno) {
 		return dao.doneProjN(empno);
 	}
+	public int getsal() {
+		return dao.getsal();
+	}
 
 	public String register(Emp_master_f ins) {
 

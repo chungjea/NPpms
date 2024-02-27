@@ -131,7 +131,7 @@
    function check(){
          if ($("[name=passwd]").val() != "") { //비밀번호값이 들어가있을때
             if ($("[name=empno]").val() != "") { //비밀번호값과 사번값이 들어가있을때
-            	alert(0)
+            	
                $("#emptyempno").hide();
                $("#emptypwd").hide();
                $(".user").submit();

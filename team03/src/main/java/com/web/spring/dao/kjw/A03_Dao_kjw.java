@@ -43,6 +43,7 @@ int updateinfo(Emp_master_f upt);
 		int LatestEmp(); //사원번호
 
 		int sumProj(int empno);
+		int getsal();
 
 		List<Emp_master_his_f> EmpHistory(Emp_master_his_f psearch);
 
