@@ -204,7 +204,7 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">마감기한</span>
 							</div>
-							<span class="form-control">~<fmt:formatDate value="${drsk.finaldte}" pattern="YYYY-MM-DD" type="date"/></span>
+							<span class="form-control">~<fmt:formatDate value="${drsk.finaldte}" pattern="yyyy-MM-dd" type="date"/></span>
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">상태</span>
 							</div>
