@@ -163,11 +163,11 @@ body {
 			},
 			eventDrop : function(arg) {
 				addForm(arg.event)
-				ajaxFunc("updateCalendar.do", "post")
+				ajaxFunc("uptCal_f", "post")
 			},
 			eventResize : function(arg) {
 				addForm(arg.event)
-				ajaxFunc("updateCalendar.do", "post")
+				ajaxFunc("uptCal_f", "post")
 			},
 			editable : true,
 			dayMaxEvents : true, // allow "more" link when too many events
@@ -350,8 +350,8 @@ body {
 								<span class="input-group-text  justify-content-center">
 									제목</span>
 							</div>
-							<input type="text" name="title" class="form-control" value="" style="background-color:white !important;" />
-						</div>
+								<input type="text" name="title" class="form-control" value="" style="background-color:white !important;" />
+							</div>
 						<div class="input-group mb-0">
 							<div class="input-group-prepend ">
 								<span class="input-group-text  justify-content-center">
