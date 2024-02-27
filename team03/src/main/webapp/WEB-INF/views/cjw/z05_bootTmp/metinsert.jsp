@@ -78,19 +78,20 @@
 			$("#files").hide();
 		}
 		$("#regBtn").click(function(){
-			if($("[name=metdte]").val()==""){
+			console.log($("[name=metdteStr]").val()+"dd")
+			if($("[name=metdteStr]").val() == ""){
 				alert("회의 날짜를 입력하세요")
-				$("[name=metdte]").focus()
+				$("[name=metdteStr]").focus()
 				return;
 			}
-			if($("[name=starttm]").val()==""){
+			if($("[name=starttmStr]").val()==""){
 				alert("회의 시간을 입력하세요")
-				$("[name=starttm]").focus()
+				$("[name=starttmStr]").focus()
 				return;
 			}
-			if($("[name=fintm]").val()==""){
+			if($("[name=fintmStr]").val()==""){
 				alert("회의 시간을 입력하세요")
-				$("[name=fintm]").focus()
+				$("[name=fintmStr]").focus()
 				return;
 			}
 			if($("[name=participant]").val()==""){
@@ -119,32 +120,39 @@
 			}
 		})
 		$("#uptBtn").click(function(){
-			if($("[name=metdte]").val()==""){
+			if(!$("[name=metdteStr]").val()){
 				alert("회의 날짜를 입력하세요")
+				$("[name=metdte]").focus()
 				return;
 			}
-			if($("[name=starttm]").val()==""){
+			if(!$("[name=starttmStr]").val()){
 				alert("회의 시간을 입력하세요")
+				$("[name=starttmStr]").focus()
 				return;
 			}
-			if($("[name=fintm]").val()==""){
+			if(!$("[name=fintmStr]").val()){
 				alert("회의 시간을 입력하세요")
+				$("[name=fintmStr]").focus()
 				return;
 			}
 			if($("[name=participant]").val()==""){
 				alert("참석자를 입력하세요")
+				$("[name=participant]").focus()
 				return;
 			}
 			if($("[name=title]").val()==""){
 				alert("회의 목적을 입력하세요")
+				$("[name=title]").focus()
 				return;
 			}
 			if($("[name=content]").val()==""){
 				alert("회의 내용을 입력하세요")
+				$("[name=content]").focus()
 				return;
 			}
 			if($("[name=conclusion]").val()==""){
 				alert("회의 결론을 입력하세요")
+				$("[name=conclusion]").focus()
 				return;
 			}
 			if(confirm("수정하시겠습니까?")){
@@ -194,20 +202,19 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">회의 날짜</span>
 							</div>
-							<input type="date" name="metdteStr" class="form-control" value="${umet.metdteStr}" />	
+							<input type="date" name="metdteStr" class="form-control" value="${umet.metdteStr}"/>	
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">작성자</span>
 							</div>
 							<c:choose>
 								<c:when test="${not empty umet}">
-									<input name="writer" class="form-control" value="${umet.ename}(${umet.dname})" readonly style="background-color:white !important;"/>	
-									<input type="hidden" name="wempno" value="${umet.empno}" readonly />
-									<input type="hidden" name="pcode" value="${param.pcode}" readonly />
+									<input name="writer" class="form-control" value="${umet.writer}" readonly style="background-color:white !important;"/>	
+									<input type="hidden" name="pcode" value="${param.pcode}"/>	
 								</c:when>
 								<c:otherwise>
-									<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important;"/>	
-									<input type="hidden" name="wempno" value="${emp.empno}" readonly />
-									<input type="hidden" name="pcode" value="${param.pcode}" readonly />
+									<input name="writer" class="form-control" value="${emp.ename}(${emp.dname})" readonly style="background-color:white !important;"/>
+									<input type="hidden" name="wempno" value="${emp.empno}"/>
+									<input type="hidden" name="pcode" value="${param.pcode}"/>	
 								</c:otherwise>
 							</c:choose>
 						</div>	

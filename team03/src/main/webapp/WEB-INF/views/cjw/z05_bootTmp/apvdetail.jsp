@@ -91,14 +91,13 @@
 		$("#noBtn").click(function(){
 			apvajax()
 		})
-		if("${dapv.sts}"=="대기"){
-			if(mempno==empno){
-					$("#okModal").show();
-					$("#noModal").show();
-			}else{
-				$("#okModal").hide();
-				$("#noModal").hide();
-			}
+		var btnsh = "${param.btnsh}"
+		if(btnsh == 1){
+			$("#okModal").show();
+			$("#noModal").show();
+		}else{
+			$("#okModal").hide();
+			$("#noModal").hide();
 		}
 	});
 	function apvajax(){

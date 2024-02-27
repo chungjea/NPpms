@@ -92,7 +92,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
 	int torskcntp(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '완료' and rf.title like '%'||#{title}||'%' and rf.pcode = #{pcode}")
 	int finrskcntp(RiskSch sch);
 	
 	@Select("SELECT count(*) FROM RISK_F WHERE wempno = #{wempno} AND sts = '발생예정' and pcode = #{pcode}")
@@ -104,7 +104,7 @@ public interface A03_Dao_cjw {
 	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND rf2.cempno = #{cempno} AND rf.sts = '처리중' and rf.pcode = #{pcode}")
 	int torskcnt(RiskSch sch);
 	
-	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno}) AND rf.sts = '완료' and rf.pcode = #{pcode}")
+	@Select("SELECT count(rf.rskNO) FROM RISK_F rf, RISKADMIN_F rf2 WHERE rf.rskno = rf2.rskno AND (rf.wempno = #{wempno} OR rf2.cempno = #{cempno} OR rf2.manager = #{manager}) AND rf.sts = '완료' and rf.pcode = #{pcode}")
 	int finrskcnt(RiskSch sch);
 	
 	@Insert("INSERT INTO RISK_F values(rsk_seq.nextval,#{title},sysdate,NULL,#{wempno},#{writer},#{content},'발생예정',#{pcode})")

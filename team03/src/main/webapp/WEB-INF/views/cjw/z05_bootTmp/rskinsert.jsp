@@ -61,12 +61,14 @@
 			$("#frmrsk").submit()
 		}		
 		$("#regBtn").click(function(){
-			if($("[name=content]").val()==""){
-				alert("내용을 입력하세요")
+			if(!$("[name=title]").val()){
+				alert("제목을 입력하세요")
+				$("[name=title]").focus()
 				return;
 			}
-			if($("[name=title]").val()==""){
-				alert("제목을 입력하세요")
+			if(!$("[name=content]").val()){
+				alert("내용을 입력하세요")
+				$("[name=content]").focus()
 				return;
 			}
 			if(confirm("등록하시겠습니까?")){
@@ -155,7 +157,7 @@
 							<div class="input-group-prepend ">
 								<span class="input-group-text w-100 justify-content-center">내용</span>
 							</div>
-							<textarea id="chatArea" name="content" class="form-control" style="height:400px;" > </textarea>	
+							<textarea id="chatArea" name="content" class="form-control" style="height:400px;" ></textarea>	
 						</div>	
 						<br>
 						<div style="text-align:center;">

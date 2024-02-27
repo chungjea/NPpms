@@ -117,7 +117,7 @@
 	<select id="detailmet" resultType="meeting" parameterType="int">
 		SELECT mf.METNO, to_char(mf.METDTE, 'YYYY-MM-DD') metdteStr, 
 			to_char(mf.STARTTM, 'HH24:MI') starttmStr, to_char(mf.finTM, 'HH24:MI') fintmStr, 
-			mf.regdte, mf.wempno, emf.ENAME||' / '||df.DNAME writer, 
+			mf.regdte, mf.wempno, emf.ENAME||'('||df.DNAME||')' writer, 
 			mf.PARTICIPANT, mf.TITLE, mf.content, mf.conclusion 
 		FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df 
 		WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND metno = #{metno}

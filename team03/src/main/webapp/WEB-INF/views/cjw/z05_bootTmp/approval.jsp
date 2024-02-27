@@ -173,6 +173,7 @@
 								<input type="hidden" name="mempno" value="${emp.empno}"/>
 								<input type="hidden" id="sts" name="sts" value="${sch.sts}"/>
 								<input type="hidden" name="pcode" value="${param.pcode}"/>
+								<input id="ck" name="btnsh" type="hidden" value="0"/>
 								<div class="input-group-append">
 									<button class="btn btn-primary" onclick="schapv()" type="button" id="schBtn">
 										<i class="fas fa-search fa-sm"></i>
@@ -192,6 +193,7 @@
 	                    	$("#sts").val(sts)
 	                    	$("[name=title]").val("")
 	                    	$("[name=curPage]").val("0")
+	                    	$("#ck").val("0")
 							$("#frm01").attr("action","${path}/myapv")
 					    	$("#frm01").submit()
 	            		}
@@ -199,6 +201,7 @@
 	                    	$("#sts").val(sts)
 	                    	$("[name=title]").val("")
 	                    	$("[name=curPage]").val("0")
+	                    	$("#ck").val("1")
 							$("#frm01").attr("action","${path}/ckapv")
 					    	$("#frm01").submit()
 	            		}
@@ -246,6 +249,7 @@
 					<form method="post" id="frm02" action="${path}/detailapv">
 						<input id="test" name="apvno" type="hidden">
 						<input name="pcode" type="hidden" value="${param.pcode}"/>
+						<input name="btnsh" type="hidden" value="${param.btnsh}"/>
 					</form>
 					<script type="text/javascript">
 					    function goDetail(no){

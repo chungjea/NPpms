@@ -70,7 +70,7 @@ public class A02_Service_cjw {
 		if(sch.getWempno()==0) sch.setWempno(1000);
 		if(sch.getMempno()==0) sch.setMempno(1000);
 		if(sch.getTitle()==null) sch.setTitle("");
-		sch.setCount(dao.toapvcnt(sch));
+		sch.setCount(dao.tocnt(sch));
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
