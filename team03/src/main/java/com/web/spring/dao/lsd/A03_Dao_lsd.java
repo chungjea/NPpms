@@ -50,11 +50,19 @@ public interface A03_Dao_lsd {
 	@Select(" select * from Noticeboard_f where title like '%'||#{title}||'%' ")
 	List<Noticeboard_f> noticeSch(Noticeboard_f sch);
 
+	
 	// 페이징 처리, 전체조회
-	@Select("select * \r\n" + "	from(\r\n" + "SELECT rownum cnt, nf.*\r\n"
+	/*@Select("select * from(\r\n" + "SELECT rownum cnt, nf.*\r\n"
 			+ "	from Noticeboard_f nf\r\n" + "where 1=1\r\n" + "and title like '%'||#{title}||'%' \r\n"
-			+ "		and pcode=#{pcode})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
-	List<Noticeboard_f> noticePage(NoticeSch_f sch);
+			+ "		and pcode=#{pcode} order by notice_num desc)" + "		WHERE cnt BETWEEN #{start} AND #{end} ")*/
+	@Select("SELECT * FROM \r\n"
+			+ "         (SELECT rownum cnt, a.* FROM \r\n"
+			+ "            (SELECT * from Noticeboard_f nf where 1=1 and title like '%'||#{title}||'%' and pcode=#{pcode} ORDER BY notice_num DESC) a\r\n"
+			+ "         ) \r\n"
+			+ "      WHERE cnt BETWEEN #{start} AND #{end}")
+	
+	
+ List<Noticeboard_f> noticePage(NoticeSch_f sch);
 	
 //	@Select("select * \r\n" + "		from(\r\n" + "		SELECT rownum cnt, nf.*\r\n"
 //			+ "		from Noticeboard_f nf\r\n" + "		where dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")
