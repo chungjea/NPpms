@@ -5,7 +5,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
-<fmt:requestEncoding value="utf-8"/>     
+<fmt:requestEncoding value="utf-8"/>
+<script type="text/javascript">
+	var pcode = "${param.pcode}";
+</script>
 		<ul
 			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
 			id="accordionSidebar">
@@ -14,7 +17,7 @@
 			<br>
 			<a
 				class="sidebar-brand d-flex align-items-center justify-content-center"
-				href="${path}/z05_bootTmp/a01_index.jsp">
+				href="${path}/mainpage">
 				<div class="sidebar-brand-icon rotate-n-15">
 				</div>
 					<img class="sidebar-card-illustration mb-2"
@@ -26,7 +29,7 @@
 
 			<!-- Nav Item - Dashboard -->
 			<li class="nav-item active"><a class="nav-link"
-				href="${path}/z05_bootTmp/a01_index.jsp"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>대시보드 Dashboard</span></a>
+				href="${path}/mainpage"> <i class="fas fa-fw fa-tachometer-alt"></i> <span>대시보드 Dashboard</span></a>
 			</li>
 
 			<!-- Divider -->
@@ -36,26 +39,33 @@
 			<div class="sidebar-heading">category</div>
 
 			<!-- Nav Item - Pages Collapse Menu -->
-			<li class="nav-item"><a class="nav-link collapsed" href="#"
-				data-toggle="collapse" data-target="#collapsePages"
-				aria-expanded="true" aria-controls="collapsePages"> <i
-					class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
-			</a>
-				<div id="collapsePages" class="collapse"
-					aria-labelledby="headingPages" data-parent="#accordionSidebar">
-					<div class="bg-white py-2 collapse-inner rounded">
-						<a class="collapse-item" href="http://localhost:5080/team03/getnoticeboard">공지 게시판</a> 
-						<a class="collapse-item" href="${path}/z05_bootTmp/a84_register.jsp">캘린더</a> 
-						<a class="collapse-item" href="${path}/z05_bootTmp/a82_forgot-password.jsp">결재</a>
-						<a class="collapse-item" href="${path}/z05_bootTmp/a50_404.jsp">리스크 관리</a> <a
-							class="collapse-item" href="${path}/z05_bootTmp/a51_blank.jsp">회의록</a>
-					</div>
-				</div></li>
-
-			<li class="nav-item"><a class="nav-link" href="${path}/z05_bootTmp/a60_chart.jsp">
+			<c:choose>
+				<c:when test="${param.pcode != null && param.pcode > 0}">
+					<li class="nav-item"><a class="nav-link collapsed" href="#"
+						data-toggle="collapse" data-target="#collapsePages"
+						aria-expanded="true" aria-controls="collapsePages"> <i
+							class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span>
+					</a>
+					<div id="collapsePages" class="collapse"
+							aria-labelledby="headingPages" data-parent="#accordionSidebar">
+						<div class="bg-white py-2 collapse-inner rounded">
+							<a class="collapse-item" href="${path}/noticePage?pcode=${param.pcode}">공지 게시판</a> 
+							<a class="collapse-item" href="${path}/calendar_f_all?pcode=${param.pcode}">캘린더</a> 
+							<a class="collapse-item" href="javascript:goApv()">결재</a>
+							<a class="collapse-item" href="javascript:goRsk()">리스크 관리</a>
+							<a class="collapse-item" href="javascript:goMet()">회의록</a>
+						</div>
+					</div></li>
+				</c:when>
+				<c:otherwise>
+					<li class="nav-item"><a class="nav-link collapsed" href="projectList" > <i class="fas fa-fw fa-folder"></i> <span>프로젝트 관리</span> </a></li>
+				</c:otherwise>
+			</c:choose>
+			<c:if test="${param.pcode != null && param.pcode > 0}">
+			<li class="nav-item"><a class="nav-link" href="javascript:goFile()">
 					<span>문서관리</span>
 			</a></li>
-			
+			</c:if>
 			<li class="nav-item"><a class="nav-link" href="${path}/HRFilter">
 					<span>인사관리</span>
 			</a></li>
@@ -64,13 +74,13 @@
 					<span>재정관리</span>
 			</a></li>
 
-			<li class="nav-item"><a class="nav-link"  href="${path}/mypagefilter">
+			<li class="nav-item"><a class="nav-link"   href="${path}/mypagefilter">
 					<span>마이페이지</span>
 			</a></li>
  <script>
  onclick="f_clickFunc()"
 	var auth = "${emp.auth}"
-		1234
+		
 		var sessAuth = "${emp.auth}"
 				function f_clickFunc(){	
 		if(sessAuth=="관리자") {
@@ -103,7 +113,28 @@
 				<a class="btn btn-success btn-sm"
 					href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to
 					Pro!</a>
+					/
 				 --%>	
 			</div>
 
-		</ul>
+		</ul>     
+		<form id="frmapv" method="post" action="${path}/myapv">
+			<input type="hidden" name="wempno" value="${emp.empno}" />
+			<input type="hidden" name="mempno" value="${emp.empno}" />
+			<input type="hidden" name="sts" value="대기"/>
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
+		</form>
+		<form id="frmrsk" method="post" action="${path}/myrsk">
+			<input type="hidden" name="wempno" value="${emp.empno}"/>
+			<input type="hidden" name="cempno" value="${emp.empno}"/>
+			<input type="hidden" name="manager" value="${emp.empno}"/>
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
+		</form>
+		<form id="frmmet" method="post" action="${path}/meeting">
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
+		</form>
+		<form id="frmfile" method="post" action="${path}/file">
+			<input type="hidden" name="empno" value="${emp.empno}"/>
+			<input type="hidden" name="pcode" value="${param.pcode}"/>
+		</form>
+		

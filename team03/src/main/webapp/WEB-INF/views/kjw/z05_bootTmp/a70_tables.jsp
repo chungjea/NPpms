@@ -162,7 +162,7 @@
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												진행중 프로젝트 수</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">???건</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">{sumproj}건</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -198,7 +198,7 @@
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												진행예정 리스크</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800">총
-												??건</div>
+												건</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -296,7 +296,7 @@
 								<div style="width: 100%; height: 200px; ">
 									<c:if test='${emp.dname.equals("인사팀")}'>
 
-										<table class="table table-bordered"  id="dataTable"
+										<table class="table table-bordered border-white"  id="dataTable"
 											width="100%" cellspacing="0">
 											
 											<thead>
@@ -339,7 +339,7 @@
 											<c:if
 												test='${emp.dname.equals("재무팀")}'>
 
-												<table class="table table-bordered" id="dataTable1"
+												<table class="table table-bordered border-white" id="dataTable1"
 													width="100%" cellspacing="0">
 													<thead>
 														<tr>

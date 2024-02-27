@@ -25,7 +25,8 @@ public interface A03_Dao_kjw {
 	 
 	List<Emp_master_f> getEmpList(Emp_master_f sch);
 		
-	int doneProj(int empno);
+	int doneProjA(int empno);
+	int doneProjN(int empno);
 	
 int updateinfo(Emp_master_f upt);
 		List<sal_f> getSalList(sal_f ssah); //급여리스트
@@ -49,6 +50,7 @@ int updateinfo(Emp_master_f upt);
 		List<Commute_f> starttime_c(Commute_f csch);
 		List<Commute_f> endtime_c(Commute_f csch);
 		Emp_master_f getnewinfo(String email);
+		Emp_master_f getnewpwd(int empno); //비밀번호 찾기
 }
 
 

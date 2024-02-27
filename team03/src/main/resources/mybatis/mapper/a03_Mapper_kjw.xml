@@ -55,7 +55,10 @@ WHERE empno=#{empno}
 SELECT last_number FROM user_sequences WHERE sequence_name='EMPNOC'
 </select>
 
-<select id="doneProj" parameterType="int" resultType="int">
+<select id="doneProjN" parameterType="int" resultType="int">
+SELECT count(*) FROM VIEW_PROJECT_ALL_INFO_TMEMBER WHERE member=#{empno}
+</select>
+<select id="doneProjA" parameterType="int" resultType="int">
 SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno}
 </select>
 
@@ -107,4 +110,7 @@ select * from emp_master_his_f WHERE empno like '%'|| #{empno} || '%'
 </select>
 <select id="getnewinfo" parameterType="string" resultType="emplist"> 
 SELECT * FROM emp_master_f WHERE email=#{email} </select>
+<select id="getnewpwd" parameterType="int" resultType="emplist">
+select * from emp_master_f where empno=#{empno}
+</select>
 </mapper>

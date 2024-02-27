@@ -118,6 +118,7 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f 
 		d.addAttribute("salList", service.getSalList(sch1));
 		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
 		d.addAttribute("empcnt", service.empcnt(cnt));
+		d.addAttribute("doneProjA", service.doneProjA(0));
 			return "kjw/z05_bootTmp/a70_tablesadmin";
 
 		} else { /* if(emp.getAuth()=="직원") */
@@ -207,7 +208,7 @@ public String registerFrm() {
 	return "kjw/z05_bootTmp/a84_register";
 }
 @RequestMapping(value="register", method = {RequestMethod.POST,RequestMethod.GET})
-public String register(Emp_master_f ins,Model d,String div,HttpSession session) {
+public String register(Emp_master_f ins,Model d,HttpSession session) {
 	String result = service.register(ins);
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
 	d.addAttribute("msg",result);
@@ -221,6 +222,23 @@ public String register(Emp_master_f ins,Model d,String div,HttpSession session) 
 
 	return "kjw/z05_bootTmp/a84_register";
 }
+
+/*
+ * @RequestMapping(value="findpwd",method=
+ * {RequestMethod.POST,RequestMethod.GET}) public String findpwd(Emp_master_f
+ * find,Model d,HttpSession session) { Emp_pinfo_f emp
+ * =(Emp_pinfo_f)session.getAttribute("emp"); String result =
+ * service.getnewpwd(find); d.addAttribute("message",result);
+ * if("검색성공".equals(result)) {
+ * d.addAttribute("message",service.resetpwd(find.getEmail())); } return
+ * "kjw/z05_bootTmp/a82_findpassword";
+ * 
+ * }
+ */
+@RequestMapping("test")
+public String test() {
+	return "kjw/z05_bootTmp/a82_findpassword";
+}
 @RequestMapping("updateFrm")
 public String updateFrm() {
 	return "kjw/z05_bootTmp/detailpage";
@@ -228,8 +246,11 @@ public String updateFrm() {
 @RequestMapping("updateinfo")
 public String updateinfo(Emp_master_f upt,HttpSession session,Model d) {
 	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
+
 	Emp_master_f emplist =(Emp_master_f)session.getAttribute("emplist");
+	session.setAttribute("emplist", emplist);
 	d.addAttribute("msg",service.updateinfo(upt)>0?"수정성공":"수정실패");
+	
 	return "kjw/z05_bootTmp/detailpage";
 }
 

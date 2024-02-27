@@ -55,7 +55,7 @@
 			<div id="content">
 
 				<!-- Topbar-->
-				<%@ include file="a03_topBar.jsp"%>
+				<%@ include file="/z05_bootTmp/a03_topBar.jsp"%>
 				<!-- End of Topbar -->
 
 				<!-- Begin Page Content -->
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="col-sm-6">
  										 <select name="egrade" id="egrade" class="form-control form-control-user">
-                                    <option value="선택">직급</option>
+                                    <option value="">${emp.egrade }</option>
                                     <option value="사원">사원</option>
                                     <option value="팀장">팀장</option>
                                     <option value="전무">전무</option>
@@ -105,7 +105,7 @@
                                 <div class="form-group row">
                                 <div class="col-sm-6 ">
                                     <select name="dname" id="dname" class="form-control form-control-user" value="${emp.dname}">
-                                    <option value="선택">부서선택	</option>
+                                    <option value="">${emp.dname}	</option>
                                     <option value="디자인팀">디자인팀</option>
                                     <option value="인사팀">인사팀	</option>
                                     <option value="재무팀">재무팀	</option>
@@ -123,7 +123,7 @@
                                 <div class="form-group row">
 
                                     <div class="col-sm-5 mb-3 mb-sm-0">
-                                        <input type="emailH" name="emailH" id="emailH" class="form-control form-control-user"   placeholder="이메일주소" />	
+                                        <input type="emailH" name="emailH" id="emailH" class="form-control form-control-user"   placeholder="${emp.email}" />	
                                     </div>
                                     <span class="col-sm-0 mb-3 mb-sm-0">@</span>
                                     <div class="col-sm-6 mb-3 mb-sm-0">
@@ -140,7 +140,7 @@
                                     </div>
                                     <div class="col-sm-6 ">
                                     <select name="auth" class="form-control form-control-user">
-                                    <option value="선택">권한선택	</option>
+                                    <option value="">${emp.auth}	</option>
                                     <option value="직원">직원</option>
                                     <option value="관리자">관리자	</option>
                                     </select>
@@ -153,8 +153,8 @@
                                     </div>
                                 </div>
                                 
-                                <a class="btn btn-primary btn-user btn-block" id="uptBtn">
-                                    정보수정
+                                <input type="button"  class="btn btn-primary btn-user btn-block" id="uptBtn" value="정보수정">
+                                    
                                 </a>
                                 <hr>
 
@@ -234,6 +234,9 @@
 
 <script type="text/javascript">
 
+
+
+
 $("#dname").val("${emplist.dname}").prop("selected", true);
 $("#egrade").val("${emplist.egrade}").prop("selected", true);
 $("#uptBtn").click(function(){
@@ -252,6 +255,7 @@ if(confirm("수정하시겠습니까?")){
 var msg = "${msg}"
 if(msg!=""){
 if(!confirm(msg+"\n계속 수정하시겠습니까?")){
+	session.getAttribute("emp");
 location.href="${path}/mainpage"
 }
 }

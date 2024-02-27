@@ -3,6 +3,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html>
@@ -47,82 +48,46 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
         <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
-	<div class="input-group mb-3" style="display:none;">	
-		<div class="input-group-prepend ">
-			<span class="input-group-text  justify-content-center">
-				발신자</span>
-		</div>
-		<input readonly class="form-control" 
-			value="ssangyoung5555@gmail.com" />	
-	</div>
-	<div class="input-group mb-3" >	
-		<div class="input-group-prepend "  style="display:none;">
-			<span class="input-group-text  justify-content-center">
-				제목</span>
-		</div>
-		<input name="title"   class="form-control" />	
-	</div>	
+
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                          <form method="post">
-                            
+                            <img src="${path}/a00_com/img/logo.png"  class="col-lg-6 d-none d-lg-block " />
+                            <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                       		<div class="input-group-prepend " style="display:none;">
-			<a>하단에 이메일을 적고 전송버튼을 누르시면 현재 비밀번호가 이메일로 전송됩니다.</a>
-		</div>
+                                        <h1 class="h4 text-gray-900 mb-2">비밀번호를 찾아드립니다</h1>
+                                        <p class="mb-4">하단에 사번을 입력하여 저장된 이메일로 비밀번호를 전달해드립니다.</p>
                                     </div>
-                                    <div class="input-group-prepend " style="display:none;">
-			<span class="input-group-text  justify-content-center">
-				메일내용</span>
-				<textarea id="chatArea" name="content"
-			 class="form-control"  >${emp.passwd}</textarea>	
-				
-		</div>
-		<div class="input-group-prepend " style="display:none;">
-			<span class="input-group-text  justify-content-center">
-				사번</span>
-				<input name="title"  placeholder="사번" class="form-control" />	
-				
-		</div>
-	
-                                    
+                                    <form method="post" id="send" action="${path}/register">
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                               name="receiver" aria-describedby="emailHelp"
-                                               placeholder="메일 주소 입력" >
+                                            <input type="empno" class="form-control form-control-user"
+                                                id="empno" 
+                                                placeholder="사번을 입력하세요">
+                                                <input type="hidden" id="password" value="">
                                         </div>
-                                    
-                                     <input type="submit" id="SendBtn" class="btn btn-primary btn-user btn-block">
-                                           
-                                        
-			<script type="text/javascript">
-			var msg = "${msg}"
-			if(msg!=""){
-				alert(msg);
-			}
-		</script>
+                                        <a type="button" id="sendBtn" class="btn btn-primary btn-user btn-block">
+                                            전송
+                                        </a>
                                     </form>
-                                    <div class="text-center">
-                                        <a class="small" href="${path}/login">계정이 있을시 클릭</a>
-                                    </div>
+                                    <hr>
                                     
+                                    <div class="text-center">
+                                        <a class="small" href="${path}/login">계정이 있으십니까? 이 링크를 눌러 로그인 해주세요</a>
+                                    </div>
                                 </div>
-                                
                             </div>
-                            
                         </div>
-                        
                     </div>
-                    
                 </div>
 
             </div>
 
-       
+        </div>
+
+    </div>
+	
 <!-- Bootstrap core JavaScript-->
     <script src="${path}/a00_com/vendor/jquery/jquery.min.js"></script>
 <script
@@ -134,6 +99,31 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <!-- Custom scripts for all pages-->
 <script src="${path}/a00_com/js/sb-admin-2.min.js"></script>
 
-	
+<script>
+function temp_pw_issuance() {
+	let ranValue1 = [ '1', '2', '3', '4', '5', '6', '7', '8', '9', '0' ];
+	let ranValue2 = [ 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',
+			'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V',
+			'W', 'X', 'Y', 'Z' ];
+	let ranValue3 = [ 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j',
+			'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v',
+			'w', 'x', 'y', 'z' ];
+	let ranValue4 = [ '!', '@', '#', '$', '%', '^', '&', '*', '(', ')' ];
+
+	var temp_pw = "";
+
+	for (i = 0; i < 2; i++) {
+		let ranPick1 = Math.floor(Math.random() * ranValue1.length);
+		let ranPick2 = Math.floor(Math.random() * ranValue2.length);
+		let ranPick3 = Math.floor(Math.random() * ranValue3.length);
+		let ranPick4 = Math.floor(Math.random() * ranValue4.length);
+		temp_pw = temp_pw + ranValue1[ranPick1] + ranValue2[ranPick2]
+				+ ranValue3[ranPick3] + ranValue4[ranPick4];
+	}
+	return temp_pw;
+}
+document.getElementById('password').value = temp_pw_issuance();
+
+</script>
 </body>
 </html>

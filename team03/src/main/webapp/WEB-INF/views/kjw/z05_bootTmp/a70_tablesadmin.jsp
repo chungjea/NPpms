@@ -166,8 +166,8 @@ display:show;
 
 					<h1 class="h3 mb-2 text-gray-800">${emp.dname}${emp.auth}페이지</h1>
 					<ul class="nav nav-tabs nav-justified">
-						<li class="nav-item "><a class="nav-link active" href="#home">전체회원</a></li>
-						<li class="nav-item"><a class="nav-link" href="#tab02">삭제인원리스트</a></li>
+						<li class="nav-item "><a class="nav-link active" href="#home" id="homeBtn">전체회원</a></li>
+						<li class="nav-item"><a class="nav-link" href="#tab02" id="tab02Btn">삭제인원리스트</a></li>
 						<li class="nav-item"><a class="nav-link " href="#"></a></li>
 						<li class="nav-item"><a class="nav-link " href="#"></a></li>
 					</ul>
@@ -265,7 +265,7 @@ display:show;
 
 										<div style="width: 100%; height: 200px;" class="tables">
 											<c:if test='${!emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}' >
-												<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+												<table class="table table-bordered border-white" id="dataTable" width="100%" cellspacing="0">
 												<thead>
 												
 																<tr>
@@ -315,7 +315,7 @@ display:show;
 										<div style="width: 100%; height: 200px;">
 											<c:if test='${emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
 
-												<table class="table table-bordered" id="dataTable1"
+												<table class="table table-bordered border-white"  id="dataTable1"
 													width="100%" cellspacing="0">
 													<thead>
 														<tr>
@@ -363,7 +363,7 @@ display:show;
 										<div style="width: 100%; height: 200px;">
 											<c:if test='${emp.auth.equals("관리자")}'>
 
-												<table class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+												<table class="table table-bordered border-white" id="dataTable2" width="100%" cellspacing="0">
 												<thead>
 												
 																<tr>
@@ -476,8 +476,8 @@ display:show;
 </body>
 
 <script type="text/javascript">
-var home=false; //전체인사목록페이지(재무팀제외 열람가능)
-var tab02=false; //인사팀만열람가능
+var home=true; //전체인사목록페이지(재무팀제외 열람가능)
+var tab02=true; //인사팀만열람가능
 var url=(home===true)?'${path}/deleteEmps':'${path}/deleteEmpsagain';
 
 $(document).ready(function(){
@@ -623,7 +623,7 @@ var AUTH='${emp.auth}';
 
 
 
-$("#home").click(function(){
+$("#homeBtn").click(function(){
 	home=true;
 	tab02=false;
 	$("#textchange").text('삭제');
@@ -642,10 +642,10 @@ if(AUTH == '관리자' && DNAME!='재무팀') {
 	  $("#home option2").hide();
 }
 })
-$("#tab02").click(function(){
+$("#tab02Btn").click(function(){
 	home=false;
 	tab02=true;
-	 $("#textchange").text('복구');
+	 $("#textchange").text('삭제');
 	if(AUTH == '관리자' && DNAME=='인사팀') {
 		
 		  
@@ -653,6 +653,7 @@ $("#tab02").click(function(){
 
 	}else if(AUTH == '관리자' && !DNAME=='인사팀') {
 			alert("허가되지 않은 부서입니다. 인사팀 관리자만 사용가능합니다.")
+			$("#dataTable2").css("display","none");
 		}
 
 		

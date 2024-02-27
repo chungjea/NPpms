@@ -170,7 +170,7 @@ if ("${param.empno}" != "") {
       location.href = "${path}/mainpage"
       
    } else {
-      alert("로그인 실패2\n다시 로그인하세요")
+      alert("로그인 실패\n다시 로그인하세요")
       console.log(${param.empno})
 
    }

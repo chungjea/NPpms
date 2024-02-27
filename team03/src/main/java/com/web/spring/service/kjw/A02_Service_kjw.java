@@ -57,18 +57,21 @@ public class A02_Service_kjw {
 
 	}
 
-	public int doneProj(int empno) {
-		return dao.doneProj(empno);
+	public int doneProjA(int empno) {
+		return dao.doneProjA(empno);
+	}
+	public int doneProjN(int empno) {
+		return dao.doneProjN(empno);
 	}
 
-	
 	public String register(Emp_master_f ins) {
 
-
-
-			return dao.register(ins)>0?"등록성공":"등록실패";
+		return dao.register(ins) > 0 ? "등록성공" : "등록실패";
 	}
-	
+
+	public String getnewpwd(Emp_master_f find) {
+		return dao.register(find) > 0 ? "검색성공" : "검색실패";
+	}
 
 	public int commute_e(Commute_f ins) {
 		if (ins.getEmpno() == 0)
@@ -78,6 +81,7 @@ public class A02_Service_kjw {
 
 		return dao.commute_e(ins);
 	}
+
 	public int commute_s(Commute_f ins) {
 		if (ins.getEmpno() == 0)
 			ins.setEmpno(0);
@@ -130,17 +134,19 @@ public class A02_Service_kjw {
 			ssah.setEmpno(0);
 		return dao.getSalList(ssah);
 	}
-	public List<Commute_f> starttime_c(Commute_f csch){
-		if(csch.getEmpno()==0)
+
+	public List<Commute_f> starttime_c(Commute_f csch) {
+		if (csch.getEmpno() == 0)
 			csch.setEmpno(0);
-		if(csch.getALLTIME()==null)
+		if (csch.getALLTIME() == null)
 			csch.setALLTIME(null);
 		return dao.starttime_c(csch);
 	}
-	public List<Commute_f> endtime_c(Commute_f csch){
-		if(csch.getEmpno()==0)
+
+	public List<Commute_f> endtime_c(Commute_f csch) {
+		if (csch.getEmpno() == 0)
 			csch.setEmpno(0);
-		if(csch.getALLTIME()==null)
+		if (csch.getALLTIME() == null)
 			csch.setALLTIME(null);
 		return dao.endtime_c(csch);
 	}
@@ -150,20 +156,19 @@ public class A02_Service_kjw {
 	// 메일발송 메서드
 	public String sendMail(String email) {
 		String Emsg = "";
-		String message="";
 		Emp_master_f Einform = dao.getnewinfo(email);
 		// 1. 메일 발송 데이터 전송을 위한 객체 생성.
 		MimeMessage mmsg = sender.createMimeMessage();
 		// 2. 해당 객체로 화면단에 입력된 내용 할당
 		try {
-			
+
 			// 1) 제목
 			mmsg.setSubject("PMS시스템 사원번호와 임시비밀번호입니다");
 			// 2) 수신자
 			mmsg.setRecipient(RecipientType.TO, new InternetAddress(Einform.getEmail()));
 			// 3) 내용
 			mmsg.setText("사번:" + Einform.getEmpno() + "비번:" + Einform.getPasswd());
-			
+
 			// 4) 발송처리..
 			sender.send(mmsg);
 			Emsg = "메일발송 성공";
@@ -181,5 +186,27 @@ public class A02_Service_kjw {
 		}
 		return Emsg;
 	}
+
+	/*
+	 * @Autowired(required = false) // 메일발송 메서드 public String resetpwd(String email)
+	 * { String message=""; Emp_master_f find = dao.getnewpwd(empno); // 1. 메일 발송
+	 * 데이터 전송을 위한 객체 생성. MimeMessage mmsg = sender.createMimeMessage(); // 2. 해당 객체로
+	 * 화면단에 입력된 내용 할당 try {
+	 * 
+	 * // 1) 제목 mmsg.setSubject("PMS시스템 임시비밀번호입니다"); // 2) 수신자
+	 * mmsg.setRecipient(RecipientType.TO, new InternetAddress(find.getEmail())); //
+	 * 3) 내용 mmsg.setText("비번:" + find.getPasswd());
+	 * 
+	 * // 4) 발송처리.. sender.send(mmsg); message = "메일발송 성공";
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * } catch (MessagingException e) { System.out.println("메시지 전송 에러 발송:" +
+	 * e.getMessage()); message = "메일 발송 에러 발생:" + e.getMessage(); } catch
+	 * (Exception e) { System.out.println("기타 에러 :" + e.getMessage()); message =
+	 * "기타 에러 발생:" + e.getMessage(); } return message; }
+	 */
 
 }
