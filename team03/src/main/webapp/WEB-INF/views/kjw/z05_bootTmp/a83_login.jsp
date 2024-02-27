@@ -71,7 +71,7 @@
                      <h6 id="emptypwd">※비밀번호를 입력해주세요</h6>
                               </div>
                               <div class="form-group"></div>
-                              <a href='javascript:$(".user").submit()' type="button" onclick="check"
+                              <a href='javascript:$(".user").submit()' type="button" onclick="check()"
                                  class="btn btn-primary btn-user btn-block"> <spring:message
                                     code="login" />
                               </a>
@@ -141,14 +141,14 @@
             }
          } else if ($("[name=empno]").val() == ""&& $("[name=passwd]").val() == "") { //사번값과 비밀번호값이 공백일때
             alert("아이디와 비밀번호를 입력해주세요")
+            return false;
             $("#emptyempno").show();
             $("#emptypwd").show();
          } else { //비밀번호값이 들어가 있지않을때
             alert("비밀번호를 입력해주세요")
             $("#emptypwd").show();
          }
-      
-         
+
    }
    
    

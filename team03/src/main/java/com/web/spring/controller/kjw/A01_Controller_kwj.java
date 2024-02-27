@@ -71,6 +71,7 @@ HttpServletResponse response) {
 		session.setAttribute("emp", emp);
 
 	}
+	
 	return "kjw/z05_bootTmp/a83_login";
 }
 
@@ -145,7 +146,7 @@ public String HRFilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_his_f 
 
 	}else {
 		System.out.println("권한이 없습니다.");
-		return "kjw/z05_bootTmp/filteringauth";
+		return "false";
 	}
 }
 @RequestMapping("FIFilter")
@@ -156,8 +157,8 @@ public String FIFilter(@ModelAttribute("sch") sal_f sal, Model d,HttpSession ses
 		return "kjw/z05_bootTmp/a70_tablesadmin";
 
 	}else {
-		System.out.println("등록되지않은 유저입니다");
-		return"kjw/z05_bootTmp/filteringauth2";
+	return null;
+
 	}
 }
 @RequestMapping("commute_frm")
