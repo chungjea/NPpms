@@ -75,7 +75,8 @@ public class A02_Service_lsd {
 	// === pcode ===
 		public Noticeboard_f noticeboardDetail(int notice_num, int pcode) {
 			// 조회할 떄, 조회수 +1
-			//System.out.println("##############조회수 수정성공:"+dao.readCntUptNotice(notice_num));
+			dao.readCntUptNotice(notice_num);
+			//System.out.println("##############조회수 수정성공:"+);
 			Noticeboard_f f =noticeDetail(notice_num,pcode);
 			//System.out.println("#####조회수결과 : "+f.getReadcnt());
 			return noticeDetail(notice_num,pcode);

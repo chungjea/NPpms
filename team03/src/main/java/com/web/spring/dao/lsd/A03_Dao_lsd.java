@@ -59,10 +59,8 @@ public interface A03_Dao_lsd {
 			+ "         (SELECT rownum cnt, a.* FROM \r\n"
 			+ "            (SELECT * from Noticeboard_f nf where 1=1 and title like '%'||#{title}||'%' and pcode=#{pcode} ORDER BY notice_num DESC) a\r\n"
 			+ "         ) \r\n"
-			+ "      WHERE cnt BETWEEN #{start} AND #{end}")
-	
-	
- List<Noticeboard_f> noticePage(NoticeSch_f sch);
+			+ "      WHERE cnt BETWEEN #{start} AND #{end} order by notice_num desc")
+	List<Noticeboard_f> noticePage(NoticeSch_f sch);
 	
 //	@Select("select * \r\n" + "		from(\r\n" + "		SELECT rownum cnt, nf.*\r\n"
 //			+ "		from Noticeboard_f nf\r\n" + "		where dname=#{dname})" + "		WHERE cnt BETWEEN #{start} AND #{end}")

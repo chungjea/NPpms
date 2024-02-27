@@ -260,15 +260,15 @@ body {
 						} else {
 							alert("수정실패");
 						}
-					} else {
-						alert(data.msg)
+					} else  if(data.crud === 'delete') {
 						if (data.msg === '삭제성공') {
 							alert("삭제성공"); // 등록성공/등록실패
-						} else {
-							alert("삭제실패");
+						}else{
+							alert("삭제실패")
 						}
+							
 					}
-
+				
 					$("#clsBtn").click() // 등록 모달창 닫기..
 					// 기존일정 삭제(full api에 등록된 데이터 삭제 js) 
 
