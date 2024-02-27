@@ -128,6 +128,15 @@ public interface A03_Dao_hcj {
 	@Select("select 'icon'||seq_icon.nextval from dual")
 	String getIconNum();
 	
+	@Select("select ino||ext from ICONREP_F where pcode = #{pcode}")
+	String getfilename(int pcode);
+	@Select("select ino from ICONREP_F where pcode = #{pcode}")
+	int getIconNumupdate(int pcode);
+	
+	@Update("update ICONREP_F set fname = #{fname},ext = #{ext} where ino = #{ino}")
+	int updatefile(String fname,String ext,int ino);
+	
+	
 	
 	// 팀 멤버 추가
 	@Insert("insert into TMEM_F values(#{empno},project_seq.currval)")

@@ -109,11 +109,9 @@ var members = new Map();
 			contentType: false,
 			dataType:"text",
 			success:function(data){
-				console.log(data)
-				if(data.msg!=""){
-					alert(data.msg)
+			
 					location.reload()
-				}	
+				
 			},
 			error:function(err){
 				console.log(err)
@@ -147,15 +145,19 @@ var members = new Map();
 				
 				$("#frm02 #teams_name").html("");
 				members.clear()
-				if(pinfo.tmem.size() >0){
+				if(pinfo.tmem.length >0){
 						pinfo.tmem.forEach(function(mem){	
 						$("#frm02 #teams_name").append('<button type="button" id="'+mem.key+'" class="btn btn-outline-secondary btn-sm" onclick="deleteTeams(this)">'+mem.label+'</button>');
 						members.set(mem.key,mem.label);			
 					})
 				}
+				if(pinfo.ino == ""){
+							imgbox.style.display="none";	
+				}else{
+					imgbox.style.display="";				
+					img.src=pinfo.path+"icon"+pinfo.ino+pinfo.ext;
+				}
 				
-				imgbox.style.display="";
-				img.src=pinfo.path+"icon"+pinfo.ino+pinfo.ext;	
 			},
 			error:function(err){
 				console.log(err)

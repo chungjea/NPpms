@@ -87,7 +87,6 @@ public class A02_Service_hcj {
 		System.out.println(ins.getReports());
 		if(ins.getReports()!= null) {	
 			System.out.println("아이콘이미지 생성 시도!!!");
-			
 			String dbpath = "/z01_upload/";
 			try {
 						
@@ -145,9 +144,40 @@ public class A02_Service_hcj {
 		}
 
 
-			MultipartFile test = upt.getReports();
-			System.out.println("파일:"+test.getOriginalFilename());
-
+			MultipartFile file = upt.getReports();
+			if(file !=null)System.out.println("!null");
+			if(!(file.getOriginalFilename().equals("")))System.out.println("파일이름있음");
+			if(file !=null&&(!file.getOriginalFilename().equals(""))) {
+				String filename = "icon"+dao.getfilename(upt.getPcode());
+				File deletefile = new File(path+filename);
+				System.out.println("파일이름:"+filename);
+				System.out.println("경로+파일이름:"+path+filename);
+				System.out.println("삭제파일생성:"+deletefile.getName());
+				if(deletefile.exists()) {
+					System.out.println(deletefile.getName()+" 삭제!!");
+					deletefile.delete();
+					System.out.println("삭제 완료");
+					try {
+						System.out.println("업데이트 파일 생성 시도");
+						String uptfilename = upt.getReports().getOriginalFilename();
+						System.out.println(uptfilename+"파일 생성 시도");
+						String fname = uptfilename.substring(0, uptfilename.lastIndexOf("."));
+						String ext = uptfilename.substring(uptfilename.lastIndexOf("."));
+						int ino = dao.getIconNumupdate(upt.getPcode());
+						upt.getReports().transferTo(new File(path+"icon"+ino+ext));
+						System.out.println(uptfilename+"파일 생성 완료");
+						dao.updatefile(fname, ext, ino);
+						System.out.println("DB업데이트 완료");
+					} catch (IllegalStateException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+				}
+			}
 		return msg;
 	}
 	

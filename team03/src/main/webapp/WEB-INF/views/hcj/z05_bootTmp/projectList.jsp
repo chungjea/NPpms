@@ -199,7 +199,7 @@ $("#newProject").click(function(){
 	$("#delBtn").hide()
 	$("#regBtn").show()
 	$("#frm02")[0].reset()
-	imgbox.style.display="none";
+
 	img.src=""
 	$("#frm02 #teams_name").html("");
 	members.clear()

@@ -103,7 +103,7 @@
 				<img class="pjiconImg"
 					src="${pj.path}icon${pj.ino}${pj.ext}">
 					<script type="text/javascript">
-					console.log("${pj.path}icon${pj.ino}${pj.ext}")
+					
 					</script>	
 			</div>
 			<div class="pjtitle">${pj.pname}</div>
