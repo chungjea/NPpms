@@ -105,8 +105,9 @@ public class A02_Service_kjw {
 		return dao.updateinfo(upt);
 	}
 
-	public String getnewpwd(int empno) {
-		return dao.getpwd(empno) > 0 ? "검색성공" : "검색실패";
+	public int findpwd(int empno) {
+		sendMail1(empno);
+		return dao.checkEmail(empno) > 0 ? empno : 0;
 
 	}
 
@@ -217,32 +218,38 @@ public class A02_Service_kjw {
 	 * (Exception e) { System.out.println("기타 에러 :" + e.getMessage()); message =
 	 * "기타 에러 발생:" + e.getMessage(); } return message; }
 	 */
-	/*
-	 * public String forgot(String email) { String div = "sch"; sendMail1(email);
-	 * return dao.checkEmpno(email) > 0 ? "계정찾기 성공" :
-	 * "계정찾기 실패\\n해당 이메일 주소를 찾을 수 없습니다."; }
-	 */
 
-	/*
-	 * @Autowired(required = false) // 메일발송 메서드 public String sendMail1(String
-	 * email) { String Emsg = ""; Emp_master_f fsch = dao.getnewpwd(empno); // 1. 메일
-	 * 발송 데이터 전송을 위한 객체 생성. MimeMessage mmsg = sender.createMimeMessage(); // 2. 해당
-	 * 객체로 화면단에 입력된 내용 할당 try {
-	 * 
-	 * // 1) 제목 mmsg.setSubject("PMS시스템 사원번호와 임시비밀번호입니다"); // 2) 수신자
-	 * mmsg.setRecipient(RecipientType.TO, new InternetAddress(fsch.getEmail())); //
-	 * 3) 내용 mmsg.setText( "비번:" + fsch.getPasswd());
-	 * 
-	 * // 4) 발송처리.. sender.send(mmsg); Emsg = "메일발송 성공";
-	 * 
-	 * 
-	 * 
-	 * 
-	 * 
-	 * } catch (MessagingException e) { System.out.println("메시지 전송 에러 발송:" +
-	 * e.getMessage()); Emsg = "메일 발송 에러 발생:" + e.getMessage(); } catch (Exception
-	 * e) { System.out.println("기타 에러 :" + e.getMessage()); Emsg = "기타 에러 발생:" +
-	 * e.getMessage(); } return Emsg; }
-	 */
+
+	
+	@Autowired(required=false) // 메일발송 메서드 
+	public String sendMail1(int empno)
+
+	{ String Emsg = "";
+	MimeMessage mmsg = sender.createMimeMessage();
+	Emp_master_f fsch = dao.findpwd(empno); // 1. 메일발송 데이터 전송을 위한 객체 생성.  // 2. 해당객체로 화면단에 입력된 내용 할당 
+	try {
+	  
+	 // 1) 제목 
+		mmsg.setSubject("PMS시스템 현재비밀번호입니다"); 
+		// 2) 수신자
+	  mmsg.setRecipient(RecipientType.TO, new InternetAddress(fsch.getEmail())); 
+	  //3) 내용 
+mmsg.setText( "비번:" + fsch.getPasswd());
+	 
+	  // 4) 발송처리.. 
+sender.send(mmsg); 
+Emsg = "메일발송 성공";
+	  
+	  
+	  
+	  
+	 
+	  } catch (MessagingException e) { System.out.println("메시지 전송 에러 발송:" +
+	 e.getMessage()); Emsg = "메일 발송 에러 발생:" + e.getMessage(); } catch (Exception
+	  e) { System.out.println("기타 에러 :" + e.getMessage()); Emsg = "기타 에러 발생:" +
+	  e.getMessage(); 
+	  } 
+	return Emsg; 
+	}
 
 }

@@ -1,4 +1,4 @@
-a<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -60,7 +60,7 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
                                         <h1 class="h4 text-gray-900 mb-2">비밀번호를 찾아드립니다</h1>
                                         <p class="mb-4">하단에 사번을 입력하여 저장된 이메일로 비밀번호를 전달해드립니다.</p>
                                     </div>
-                                    <form method="post" id="send" action="${path}/register">
+                                    <form method="post" id="send" action="${path}/findpwd">
                                         <div class="form-group">
                                             <input type="empno" name="empno" class="form-control form-control-user"
                                                 id="empno" 
@@ -102,19 +102,42 @@ a<%@ page language="java" contentType="text/html; charset=UTF-8"
 <script>
 $(document).ready(function(){
 	$("#sendBtn").click(function(){
-		var empno=$("#empno").val();
-		if(empno===""){
-			$("#empno").focus();
-			return;
-		}
-		$("#send").submit();
-	})
+		var params = {
+				empno: $("#empno").val();
+      }
+          
+      // ajax 통신
+      $.ajax({
+          type : "POST",            // HTTP method type(GET, POST) 형식이다.
+          url : "${path}/findpwd",      // 컨트롤러에서 대기중인 URL 주소이다.
+          data : params,            // Json 형식의 데이터이다.
+          success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+              // 응답코드 > 0000
+              alert("성공")
+          },
+          error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+              alert("통신 실패.")
+          }
+      });
+  });
+
 
 });
 $("#empno").keyup(function(event) {
 	if (event.keyCode === 13) {
-		$("#sendBtn").click();
-	}
+		 $.ajax({
+	          type : "POST",            // HTTP method type(GET, POST) 형식이다.
+	          url : "${path}/findpwd",      // 컨트롤러에서 대기중인 URL 주소이다.
+	          data : params,            // Json 형식의 데이터이다.
+	          success : function(res){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+	              // 응답코드 > 0000
+	              alert("실패")
+	          },
+	          error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+	              alert("통신 실패.")
+	          }
+	      });
+	  });
 });
 </script>
 </body>

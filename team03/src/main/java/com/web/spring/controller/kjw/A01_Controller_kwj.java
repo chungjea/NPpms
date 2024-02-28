@@ -237,14 +237,16 @@ public String register(Emp_master_f ins,Model d,HttpSession session) {
 
 	return "kjw/z05_bootTmp/a84_register";
 }
-@GetMapping("forgot")
-public String forgotFrm() {
-	return "a82_findpassword";
+
+@GetMapping("findpwd")
+public String findpwdFrm() {
+	return "kjw/z05_bootTmp/a82_findpassword";
 }
-@PostMapping("forgot")
-public String forgot(@RequestParam("empno") int empno, Model d) {
-	d.addAttribute("msg", service.forgot(email));
-	return "forgot";
+@PostMapping("findpwd")
+public String findpwd(@RequestParam("empno") int empno, Model d) {
+	d.addAttribute("msg", service.findpwd(empno));
+
+	return "kjw/z05_bootTmp/a82_findpassword";
 }
 /*
  * @RequestMapping(value="findpwd",method=

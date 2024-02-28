@@ -52,8 +52,8 @@ int updateinfo(Emp_master_f upt);
 		List<Commute_f> starttime_c(Commute_f csch);
 		List<Commute_f> endtime_c(Commute_f csch);
 		Emp_master_f getnewinfo(String email);
-		Emp_master_f getnewpwd(int empno);//비밀번호 찾기
-		int checkEmpno(String email);
+		Emp_master_f findpwd(int empno);//비밀번호 찾기
+		int checkEmail(int empno); //계정찾기
 		
 }
 

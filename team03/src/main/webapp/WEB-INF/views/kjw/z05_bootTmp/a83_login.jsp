@@ -89,8 +89,7 @@
                            </form>
                            <hr>
                            <div class="text-center">
-                              <a class="small" href="forgot-password.jsp">Forgot
-                                 Password?</a>
+                              <a class="small" href="${path}/findpwd">비밀번호찾기</a>
                            </div>
                         </div>
                      </div>
