@@ -209,7 +209,11 @@ if("${emp}"==""){
 								data:"pcode=${pcode}",
 								dataType:"json",
 								success:function(data){
-									tmem = data.mem;	
+									
+									tmem =data.mem;
+									console.log("tmem------------------");
+									console.log(tmem);
+									
 								},
 								error:function(err){								
 								}	
@@ -233,6 +237,7 @@ if("${emp}"==""){
 						});
 						gantt.attachEvent("onAfterLinkDelete", function(id,item){
 							funclink("deleteLink",item)
+							
 						});
 						/* gantt.attachEvent("onBeforeTaskUpdate", function(id,new_item){
 							if(gantt.getChildren(id) !=0){
@@ -332,6 +337,8 @@ if("${emp}"==""){
 						});
 						gantt.attachEvent("onAfterTaskDelete", function(id,item){
 							funcTask("deleteTask",item)
+							funcTask("deleteChildTask",item)
+
 						});
 						
 						gantt.init("gantt_here");

@@ -161,6 +161,17 @@ public class A01_Controller_hcj {
 	}
 	
 	@ResponseBody
+    @RequestMapping(value = "deleteChildTask", method = RequestMethod.POST)
+	public ModelAndView deleteChildTask(@RequestBody Task_f cdel) {
+		System.out.println("일단 들어옴 -delete-");
+		ModelAndView modelAndView = new ModelAndView();
+		modelAndView.setView(new MappingJackson2JsonView());
+		modelAndView.addObject("msg", service.deleteAllChildTask(cdel));
+		return modelAndView;
+	}
+	
+	
+	@ResponseBody
 	@PostMapping("insertLink")
 	public ResponseEntity<?> insertTaskLink(@RequestBody TaskRink_f ins){
 		return ResponseEntity.ok(service.insertRink(ins));

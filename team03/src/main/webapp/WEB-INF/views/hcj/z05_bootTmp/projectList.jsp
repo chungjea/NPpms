@@ -322,6 +322,7 @@ var members = new Map();
 			contentType: false,
 			dataType:"text",
 			success:function(data){
+				alert(data)
 					location.reload()	
 			},
 			error:function(err){

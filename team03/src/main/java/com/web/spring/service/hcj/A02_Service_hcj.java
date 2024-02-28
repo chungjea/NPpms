@@ -2,6 +2,7 @@ package com.web.spring.service.hcj;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,7 +83,7 @@ public class A02_Service_hcj {
 		System.out.println("프로젝트 생성 시작!!!");
 		String msg = dao.insertProject(ins)>0?"프로젝트 생성성공!":"프로젝트 생성 실패";
 		System.out.println(ins.getReports());
-		if(ins.getReports()!= null) {	
+		if(ins.getReports()!= null&&!ins.getReports().getOriginalFilename().equals("")) {	
 			System.out.println("아이콘이미지 생성 시도!!!");
 			String dbpath = "/z01_upload/";
 			try {
@@ -133,12 +134,33 @@ public class A02_Service_hcj {
 		
 		dao.deleteTmemALL(upt.getPcode());
 
-		if(upt.getTmem()!=null) {			
+		if(upt.getTmem()!=null) {	
+			int pcode = upt.getPcode();
+			List<Integer> uptmem = new ArrayList<Integer>();
+			List<Integer> curmem = dao.getCurMem(pcode);
+			
 			for(Tmem_f mem: upt.getTmem()) {
-				System.out.println(mem.getLabel()+" 팀원 추가");
-				dao.insertTMemProject(mem.getKey(),upt.getPcode());
+				uptmem.add(mem.getKey());
+				/*
+				 * System.out.println(mem.getLabel()+" 팀원 추가");
+				 * dao.insertTMemProject(mem.getKey(),upt.getPcode());
+				 */
+			}
+			// 현태팀원이 upt팀원에 없을경우 삭제
+			for(int mem:curmem) {
+				if(uptmem.indexOf(mem)==-1) {
+					dao.deleteTMem(mem,pcode);
+				}
+			}
+			
+			for(int mem:uptmem) {
+				if(curmem.indexOf(mem)==-1) {
+					dao.insertTMemProject(mem, pcode);
+				}
 			}
 		}
+			
+		
 
 
 			MultipartFile file = upt.getReports();
@@ -273,7 +295,10 @@ public class A02_Service_hcj {
 	}
 	///--------------프로젝트----------------------
 	public List<Tmem_f> getTeamMemeber(int pcode){
-		return dao.getTeamMemeber(pcode);
+		List<Tmem_f> mem = new ArrayList<Tmem_f>();
+		mem.add(new Tmem_f(0,"배정없음"));
+		mem.addAll(dao.getTeamMemeber(pcode));
+		return mem;
 	}
 	// 프로젝트 테스크 출력
 	public List<Data> getTaskdatas(int pcode) {
@@ -299,6 +324,11 @@ public class A02_Service_hcj {
 		System.out.println("--deleteTask 서비스 접근--");
 		return dao.deleteTask(del)>0?"삭제성공":"삭제실패";
 	}
+	
+	public int deleteAllChildTask(Task_f cdel) {
+		return dao.deleteAllChildTask(cdel);
+	}
+	
 	public Project_f getProjectInfo(int pcode) {
 		Project_f pinfo =dao.getProjectInfo(pcode);
 		 pinfo.setTmem(dao.getTmemEmp(pcode)); 

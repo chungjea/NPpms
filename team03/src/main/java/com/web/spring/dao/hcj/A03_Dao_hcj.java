@@ -81,7 +81,8 @@ public interface A03_Dao_hcj {
 				+ "count(CASE WHEN PROGRESS<1 THEN 1 end) AS Proceeding, \r\n"
 				+ "count(CASE WHEN PROGRESS = 1 THEN 1 END) AS complete\r\n"
 				+ "FROM project_work_f\r\n"
-				+ "where PCODE = #{pcode}")
+				+ "where PCODE = #{pcode}"
+				+ "and empno != 0 ")
 		Workcnt getWorkCntAdmin(@Param("pcode")int pcode);
 		
 		List<ProjectCnt> getProjectCntByStatusAdmin(int empno);
@@ -150,6 +151,8 @@ public interface A03_Dao_hcj {
 	// 팀 멤버 삭제
 	@Delete("delete from Tmem_f where empno = #{empno} and pcode = #{pcode}")
 	int deleteTMem(@Param("empno")int empno,@Param("pcode")int pcode);
+	
+	
 	
 	// 팀멤버 전체 삭제
 	@Delete("delete from Tmem_f where pcode=#{pcode}")
@@ -255,12 +258,18 @@ public interface A03_Dao_hcj {
 	int updateTask(Task_f upt);
 	@Delete("DELETE FROM PROJECT_WORK_F WHERE wno = #{id}")
 	int deleteTask(Task_f del);
+	@Delete("delete FROM PROJECT_WORK_F WHERE refno = #{id}")
+	int deleteAllChildTask(Task_f cdel);
 	
 	@Insert("INSERT INTO taskRink_F values(#{id},#{source},#{target},#{type},#{pcode})")
 	int insertRink(TaskRink_f ins);
 	
 	
 	List<Tmem_f> getTeamMemeber(int pcode);
+	
+	
+	@Select("SELECT empno FROM TMEM_F tf  WHERE pcode = #{pcode}")
+	List<Integer> getCurMem(int pcode);
 	
 	@Select("SELECT pf.*,if2.ino,IF2.PATH, IF2.EXT, epf.ENAME mgname \r\n"
 			+ "FROM PROJECT_F pf ,ICONREP_F if2,EMP_PINFO_F epf \r\n"
