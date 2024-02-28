@@ -136,7 +136,7 @@
 										<div class="col mr-2">
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-												총수익</div>
+												총인건비</div>
 											<div class="h5 mb-0 font-weight-bold text-gray-800"
 												id="checking1">
 												<fmt:formatNumber value="${getsal}" pattern="#,###" />
@@ -176,7 +176,7 @@
 							id="homeBtn">전체회원</a></li>
 						<li class="nav-item"><a class="nav-link" href="#tab02"
 							id="tab02Btn">삭제인원리스트</a></li>
-						<li class="nav-item"><a class="nav-link " href="#tab03" id="tab03Btn">에러로그페이지</a></li>
+						<li class="nav-item"><a class="nav-link " id="tab03Btn"></a></li>
 						<li class="nav-item"><a class="nav-link " href="#"></a></li>
 					</ul>
 
@@ -298,7 +298,7 @@
 																	<td>${el.empno}</td>
 																	<td>${el.ename}</td>
 																	<td>${el.dname}</td>
-																	<td>${el.hiredate}</td>
+																	<td><fmt:formatDate type="time" value="${el.hiredate}"/></td>
 																	<td><fmt:formatNumber value="${el.salary}"
 																			pattern="#,###" /></td>
 																	<td>${el.panaltytot}</td>

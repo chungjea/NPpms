@@ -38,8 +38,7 @@
 
 
 </head>
-<body id="page-top" onload="noBack();"
-	onpageshow="if(event.persisted) noBack();" onunload="">
+<body id="page-top" >
 	<!-- Page Wrapper -->
 	<div id="wrapper">
 
@@ -66,9 +65,8 @@
 					<!-- Page Heading -->
 					<h1 class="h3 mb-2 text-gray-800">상세페이지</h1>
 <ul class="nav nav-tabs nav-justified">
-                     
-                  </ul>
 
+                  </ul>
 					<!-- DataTales Example -->
 					<div class="card shadow mb-4">
 						
@@ -239,7 +237,7 @@ $(document).ready(function(){
 		location.href="${path}/login"
 	}
 	
-
+})
 
 
 $("#dname").val("${emplist.dname}").prop("selected", true);
@@ -261,7 +259,7 @@ var msg = "${msg}"
 if(msg!=""){
 if(!confirm(msg+"\n계속 수정하시겠습니까?")){
 	session.getAttribute("emp");
-location.href="${path}/mainpage"
+location.href="${path}/logout"
 }
 }
 </script>

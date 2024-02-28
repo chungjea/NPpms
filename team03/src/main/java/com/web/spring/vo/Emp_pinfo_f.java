@@ -8,17 +8,17 @@ import java.util.Date;
 //로그인 및 게시판외 페이지정보 공유용
 public class Emp_pinfo_f {
 
-	private int empno;
-	private Date birth_date;
-	private int pnumber;
-	private String passwd;
-	private String email;
-	private String dname;
-	private String ename;
-	private int deptno;
-	private String auth;
-	private int lastone;
-	private String egrade;
+	private int empno;  //사원번호
+	private Date birth_date; //생년월일
+	private int pnumber; //전화번호
+	private String passwd; //비밀번호
+	private String email; //이메일
+	private String dname; //부서명
+	private String ename; //사원명
+	private int deptno;  //부서번호
+	private String auth; //권한
+	private int lastone; //마지막수정인
+	private String egrade; //직급
 	public Emp_pinfo_f() {
 		super();
 		// TODO Auto-generated constructor stub

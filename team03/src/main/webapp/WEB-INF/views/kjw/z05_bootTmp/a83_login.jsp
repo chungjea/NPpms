@@ -154,7 +154,7 @@
    
    
 $(document).ready(function() {
-   // 이전화면에서 요청된 내용을 선택하게 하게, 선택할 때, 서버에 언어 선택 내용 전달.
+   // 다국어처리와 로그인관련 경고글
    $("#selectLan").val("${param.lang}").change(function() {
       var chVal = $(this).val()
        $("[name=multiLang]").val = $(this).val()

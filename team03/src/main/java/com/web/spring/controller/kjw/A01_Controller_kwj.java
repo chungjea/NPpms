@@ -66,22 +66,9 @@ HttpServletResponse response) {
 	Locale locale = new Locale(lang);
 	localeResolver.setLocale(request, response, locale);
 	Emp_pinfo_f emp = service.login(emplogin);
-
-    
-	System.out.println("선택한 언어:"+lang);
-
-	
-	
-
-	System.out.println("데이터 check:");
-	System.out.println(emp); // null or 주소값
 	if(emp!=null) {
-		System.out.println("DB 속성:"+emp.getEmpno());
-
 		session.setAttribute("emp", emp);
-
 	}
-	
 	return "kjw/z05_bootTmp/a83_login";
 }
 
@@ -271,11 +258,11 @@ public String updateFrm() {
 	return "kjw/z05_bootTmp/detailpage";
 }
 @RequestMapping("updateinfo")
-public String updateinfo(Emp_master_f upt,HttpSession session,Model d) {
-	Emp_pinfo_f emp =(Emp_pinfo_f)session.getAttribute("emp");
+public String updateinfo(Emp_master_f upt,Emp_pinfo_f emplogin,HttpSession session,Model d) {
+	   session.removeAttribute("emp");
+	Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
+    Emp_master_f emplist = (Emp_master_f) session.getAttribute("emplist");
 
-	Emp_master_f emplist =(Emp_master_f)session.getAttribute("emplist");
-	session.setAttribute("emplist", emplist);
 	d.addAttribute("msg",service.updateinfo(upt)>0?"수정성공":"수정실패");
 	
 	return "kjw/z05_bootTmp/detailpage";

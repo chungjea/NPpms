@@ -125,11 +125,13 @@
 											<option value="">권한</option>
 											<option value="직원">직원</option>
 											<option value="관리자">관리자</option>
-											<br>
+
 										</select>
-									
+									<br>
+									<br>
+									<br>
 										
-										</select>
+										
 										  <!-- <input type="hidden" id="password" name="password" value=""> 
 										 -->
 										<input type="hidden" id="email" name="email" value="">
@@ -205,19 +207,25 @@
 	<%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 	<script type="text/javascript">
-	$(document).ready(function(){
-		if("${emp}"==""){
-			alert("로그인후 이용해주세요")
-			location.href="${path}/login"
-		}
-		
+
             	/* var msg = "${msg}"
 						if(msg!=""){
 							alert(msg);
 						}else{
 							$("#email").submit()
 						} */
-            	
+												$("#regBtn").click(function(){ //등록
+														temp_pw_issuance();
+													 var egrade=document.getElementById('egrade'); 
+													 var passwd=document.getElementById('passwd').value; 
+														 var emailE=document.getElementById('emailE').value;
+															var emailH=document.getElementById('emailH').value;
+														var receiver=document.getElementById('emailH').value+document.getElementById('emailE').value;
+														
+														  
+														document.getElementById('email').value= emailH+emailE;
+														 document.getElementById('passwd').value= passwd; 
+													
             	
 						if (confirm("등록하시겠습니까?")) {
 			                // 이름이 비어있는지 확인
@@ -233,13 +241,14 @@
 			                    data: $("#send").serialize(), // 폼 데이터 전송
 			                    success: function (response) {
 			                        // 서버 응답을 화면에 표시
-			                        alert(response);
+			                        alert("등록성공");
 			                    },
 			                    error: function () {
 			                        alert("서버 오류가 발생했습니다.");
 			                    }
 			                });
-
+						}
+						})
 		/* 	var msg = "${msg}"
 			if(msg!=""){
 				
