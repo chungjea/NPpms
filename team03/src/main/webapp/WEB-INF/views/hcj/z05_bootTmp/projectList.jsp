@@ -256,21 +256,16 @@ var members = new Map();
 	
 	})
 	
-
 	// 사원 조회 모달 - 검색버튼 클릭
 	$("#schBtn").click(function(){
-
 		 $.ajax({
 			type:"post",
 			url:"empsearch",
 			data:$("#frmEmpSch").serialize(),
 			dataType:"json",
-			success:function(data){
-				
-				var emphtml = ""
-				
+			success:function(data){			
+				var emphtml = ""				
 				$.each(data.elist,function(idx, emp){
-					
 					emphtml += "<tr>"
 					emphtml += "<td>"+emp.empno+"</td>"
 					emphtml += "<td>"+emp.ename+"</td>"
@@ -279,7 +274,6 @@ var members = new Map();
 					emphtml += '<i class="fas fa-check"></i></a></td>'
 					emphtml += "</tr>"
 				})
-			
 				// 조회된 내용으로 tbody 변경
 				$("#empSchTbody").html(emphtml)
 		
@@ -319,7 +313,6 @@ var members = new Map();
 			formdata.append("tmem["+memidx+"].label",value)
 			memidx++;
 		})   
-		
 		  $.ajax({
 			type:"post",
 			enctype: 'multipart/form-data',
@@ -329,9 +322,7 @@ var members = new Map();
 			contentType: false,
 			dataType:"text",
 			success:function(data){
-			
-					location.reload()
-				
+					location.reload()	
 			},
 			error:function(err){
 				console.log(err)
@@ -362,7 +353,6 @@ var members = new Map();
 				$("#frm02 [name=content]").val(pinfo.content);
 				$("#frm02 [name=status]").val(pinfo.status);
 				$("#frm02 [name=teams]").val(pinfo.tname);
-				
 				$("#frm02 #teams_name").html("");
 				members.clear()
 				if(pinfo.tmem.length >0){
@@ -376,9 +366,7 @@ var members = new Map();
 				}else{
 					imgbox.style.display="";				
 					img.src=pinfo.path+"icon"+pinfo.ino+pinfo.ext;
-					alert(img.src)
 				}
-				
 			},
 			error:function(err){
 				console.log(err)

@@ -58,10 +58,7 @@ public class A02_Service_hcj {
 	
 	
 	public Workcnt getWorkCnt(int empno, int pcode,String auth) {
-		System.out.println("서비스 접근!");
-		System.out.println("pcode:"+pcode);
-		System.out.println("empno:"+empno);
-		System.out.println("auth:"+auth);
+
 			return auth.equals("관리자")?
 					dao.getWorkCntAdmin(pcode):dao.getWorkCntNormal(empno, pcode);
 	}
@@ -200,8 +197,10 @@ public class A02_Service_hcj {
 	}
 	
 	// 사원 검색
-	public List<Emp_pinfo_f> getemplist(Emp_pinfo_f sch){
-		if(sch.getDname()==null||sch.getDname()=="")return dao.getemplist(sch);
+	public List<Emp_pinfo_f> getemplist(Emp_pinfo_f sch,String empnoSch){
+		if(sch.getDname()==null)sch.setDname("");
+		if(empnoSch == ""||empnoSch ==null)empnoSch="0";
+		sch.setEmpno(Integer.parseInt(empnoSch));
 		return dao.getemplistByLike(sch);
 	}
 	
@@ -246,12 +245,9 @@ public class A02_Service_hcj {
 		if(sch.getPname()==null)sch.setPname("");	
 		if(sch.getStatus()!=null&&sch.getStatus().equals(""))sch.setStatus(null);
 		sch.setEmpno(empno);
-		//권한이 관리자인지 사원인지 판별해서 총데이터 할당
 		if(auth.equals("관리자")) sch.setTotdata(dao.getprojectListCntAdmim(sch));
 		else sch.setTotdata(dao.getprojectListCntNormal(sch));
-		
-		System.out.println("Totdata:"+sch.getTotdata());
-		
+
 		if(sch.getPageSize()==0)sch.setPageSize(10);
 		
 		sch.setPageCount((int)Math.ceil(sch.getTotdata()/(double)sch.getPageSize()));
@@ -273,7 +269,6 @@ public class A02_Service_hcj {
 		sch.setEndBlock(blockCount*sch.getBolckSize());
 		if(sch.getEndBlock()>sch.getPageCount()) sch.setEndBlock(sch.getPageCount());
 		sch.setStartBlock((blockCount-1)*sch.getBolckSize()+1);
-		System.out.println("시작블록:");
 		return auth.equals("관리자")?dao.getprojectListAdmim(sch):dao.getprojectListNormal(sch);
 	}
 	///--------------프로젝트----------------------

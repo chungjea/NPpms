@@ -186,15 +186,12 @@ if("${emp}"==""){
 						    return  task.text;
 						};
 						gantt.config.date_format = "%Y-%m-%d";
-						
 						gantt.templates.rightside_text = function (start, end, task) {
 							if (task.type == gantt.config.types.milestone)
 								return task.text + " / ID: #" + task.id;
 							return "";
 						};
-					
 						gantt.config.start_on_monday = true;
-					
 						gantt.config.scale_height = 36 * 3;
 						gantt.config.scales = [
 							{unit: "month", step: 1, format: "%m월"},
@@ -204,7 +201,6 @@ if("${emp}"==""){
 							}},
 							{unit: "day", step: 1, format: "%d일"}
 						];
-							
 						var tmem;
 							$.ajax({
 								url:"${path}/Tmem",
@@ -227,19 +223,17 @@ if("${emp}"==""){
 						gantt.locale.labels.section_description = "작업명";
 						gantt.locale.labels.section_time = "기간";
 						gantt.locale.labels.section_assignor = "담당배정"
-					
-						 if("${emp.auth !='관리자'}"){
+						
+						 if("${emp.auth}" != "관리자"){
 							gantt.config.readonly = true;
 						} 
 						
-
 						gantt.attachEvent("onAfterLinkAdd", function(id,item){
 						    funclink("insertLink",item)
 						});
 						gantt.attachEvent("onAfterLinkDelete", function(id,item){
 							funclink("deleteLink",item)
 						});
-						
 						/* gantt.attachEvent("onBeforeTaskUpdate", function(id,new_item){
 							if(gantt.getChildren(id) !=0){
 								
@@ -260,7 +254,6 @@ if("${emp}"==""){
 						    //any custom logic here
 						    if(mode === "move"){
 						    	bdforeMoveDate = Task.start_date
-						    	
 						    }
 							
 						    return true;
@@ -334,20 +327,15 @@ if("${emp}"==""){
 							}
 						});
 						
-						gantt.attachEvent("onAfterTaskAdd", function(id,item){
-					
+						gantt.attachEvent("onAfterTaskAdd", function(id,item){				
 							funcTask("insertTask",item)	
-				
 						});
-						
 						gantt.attachEvent("onAfterTaskDelete", function(id,item){
-							
 							funcTask("deleteTask",item)
-			
 						});
 						
 						gantt.init("gantt_here");
-						gantt.load("${path}/Taskdata?pcode="+${param.pcode},"json")
+						gantt.load("${path}/Taskdata?pcode="+${pcode},"json")
 								
 				function funcTask(type,item){
 						var datas = item
@@ -363,7 +351,6 @@ if("${emp}"==""){
 								dataType:"text",
 								data :JSON.stringify(data),
 								success:function(msg){
-				
 								},
 								error:function(err){
 									console.log(err)

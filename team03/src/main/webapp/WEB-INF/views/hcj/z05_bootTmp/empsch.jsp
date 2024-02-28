@@ -32,7 +32,7 @@
       <div class="modal-body">
 		<form id="frmEmpSch" class="form"  method="post">
   	<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	    <input type="number" placeholder="사원번호" name="empnoStr"  class="form-control mr-sm-2" />
+	    <input type="number" placeholder="사원번호" name="empnoSch"  class="form-control mr-sm-2"  />
 	    <input placeholder="부서" name="dname"  class="form-control mr-sm-2"/>
 	    <button class="btn btn-info" type="button" id="schBtn">검색</button>
 	    

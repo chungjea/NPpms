@@ -51,7 +51,13 @@
 			AND MEMBER = #{empno}
 			AND STATUS ='진행중'	
 	</select>
-	
+	<select id="getemplistByLike" parameterType="emp" resultType="emp">
+	select * from emp_pinfo_f 
+	where dname like '%'||#{dname}||'%'
+	<if test="empno !=0">
+	and empno = #{empno}
+	</if> 
+	</select>
 
 	<select id="getProjectCntByStatusAdmin" parameterType="int" resultType="pjcnt">
 		SELECT STATUS ,count(*) cnt FROM PROJECT_F pf

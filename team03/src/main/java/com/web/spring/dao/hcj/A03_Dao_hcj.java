@@ -236,15 +236,14 @@ public interface A03_Dao_hcj {
 	
 //-------------사원조회 모달-----------------------	
 	//사원 조회
-	@Select("select * from emp_pinfo_f where empno = #{empno} or dname like '%'||#{dname}||'%'")
+
 	List<Emp_pinfo_f> getemplistByLike(Emp_pinfo_f sch);
-	@Select("select * from emp_pinfo_f where empno = #{empno} or dname = #{dname}")
-	List<Emp_pinfo_f> getemplist(Emp_pinfo_f sch);
+
 	
 	
 	// 프로젝트 간트차트
 	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'YYYY-MM-DD') \r\n "
-			+ "start_date, CASE when ENDDTE-STARTDTE < 1 THEN 1 else ENDDTE-STARTDTE END  duration, PROGRESS,"
+			+ "start_date, ENDDTE-STARTDTE +1  duration, PROGRESS,"
 			+ "REFNO parent \r\n"
 			+ "FROM PROJECT_WORK_F pwf \r\n"
 			+ "where pcode = #{pcode}")

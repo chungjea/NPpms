@@ -50,17 +50,12 @@ public class A01_Controller_hcj {
 	@PostMapping("workcnt")
 	public ResponseEntity<?> workcnt(@RequestParam("pcode")int pcode,@RequestParam("empno")int empno,
 									@RequestParam("auth")String auth){
-		System.out.println("컨트롤러 접근!");
-		System.out.println("pcode:"+pcode);
-		System.out.println("empno:"+empno);
-		System.out.println("auth:"+auth);
 		return ResponseEntity.ok(service.getWorkCnt(empno, pcode, auth));
 	}
 	
 	
 	@PostMapping("insertProject")
 	public ResponseEntity<String> insertProject(Project_f ins) {
-		System.out.println("일단들어옴!!!!!!!");
 		return ResponseEntity.ok(service.insertProject(ins) );
 	}
 
@@ -76,12 +71,9 @@ public class A01_Controller_hcj {
 	}
 
 	@RequestMapping("empsearch")
-	public String empsearch(Emp_pinfo_f sch, String empnoStr, Model d) {
-		if (empnoStr == null || empnoStr == "")
-			empnoStr = "0";
-		sch.setEmpno(Integer.parseInt(empnoStr));
+	public String empsearch(Emp_pinfo_f sch,String empnoSch, Model d) {
 	
-		d.addAttribute("elist", service.getemplist(sch));
+		d.addAttribute("elist", service.getemplist(sch,empnoSch));
 		return "pageJsonReport";
 	}
 
