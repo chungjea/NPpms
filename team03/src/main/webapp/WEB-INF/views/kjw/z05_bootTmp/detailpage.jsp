@@ -243,23 +243,40 @@ $(document).ready(function(){
 $("#dname").val("${emplist.dname}").prop("selected", true);
 $("#egrade").val("${emplist.egrade}").prop("selected", true);
 $("#uptBtn").click(function(){
-if(confirm("수정하시겠습니까?")){
-	var emailE = document.getElementById('emailE').value;
-	var emailH = document.getElementById('emailH').value;
-	var email = emailH+emailE;
-	if($("[name=ename]").val()==""){
-		alert("이름을 입력해야합니다.")
-		return;
+	if (confirm("수정하시겠습니까?")) {
+	    var emailE = document.getElementById('emailE').value;
+	    var emailH = document.getElementById('emailH').value;
+	    var email = emailH + emailE;
+	    $("#email").val(email);
+
+	    console.log(email);
+
+	    if ($("[name=ename]").val() == "") {
+	        alert("이름을 입력해야합니다.");
+	        return;
+	    }
+
+	    // Ajax 요청 수행
+	    $.ajax({
+	        type: 'POST',
+	        url: '${path}/updateinfo',
+	        data: $("#send").serialize(),
+	        success: function(response) {
+	        	alert("수정성공");
+	        	return;
+	        },
+	        error: function(xhr, status, error) {
+	            console.log('업데이트 에러:', error);
+	        }
+	    });
 	}
-	$("#send").submit()
-}
 
 })
 var msg = "${msg}"
 if(msg!=""){
 if(!confirm(msg+"\n계속 수정하시겠습니까?")){
-	session.getAttribute("emp");
-location.href="${path}/logout"
+	session.setAttribute("emp",emp);
+location.href="${path}/updateinfo"
 }
 }
 </script>

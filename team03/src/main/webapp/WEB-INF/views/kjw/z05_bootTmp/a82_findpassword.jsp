@@ -133,7 +133,7 @@ $(document).ready(function(){
                 data: params,
                 success: function(res){
                     // 응답코드 > 0000
-                    alert("실패");
+                    alert("성공");
                 },
                 error: function(XMLHttpRequest, textStatus, errorThrown){
                     alert("통신 실패.");

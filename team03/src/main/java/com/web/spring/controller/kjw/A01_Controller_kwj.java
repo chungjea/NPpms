@@ -259,10 +259,11 @@ public String updateFrm() {
 }
 @RequestMapping("updateinfo")
 public String updateinfo(Emp_master_f upt,Emp_pinfo_f emplogin,HttpSession session,Model d) {
-	   session.removeAttribute("emp");
+
 	Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
     Emp_master_f emplist = (Emp_master_f) session.getAttribute("emplist");
-
+    session.setAttribute("emp", emp);
+    session.setAttribute("emplist", emplist);
 	d.addAttribute("msg",service.updateinfo(upt)>0?"수정성공":"수정실패");
 	
 	return "kjw/z05_bootTmp/detailpage";

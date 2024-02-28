@@ -37,7 +37,10 @@
 	background-color: white;
 	text-align: center;
 }
+#dataTable2 td {
 
+	text-align: right;
+}
 #home {
 	display: show;
 }
@@ -274,7 +277,7 @@
 											<div style="width: 100%; height: 200px;" class="tables">
 												<c:if
 													test='${!emp.dname.equals("재무팀")&&emp.auth.equals("관리자")}'>
-													<table class="table table-bordered  border-7 border-white "
+													<table class="table table-bordered  border-10 border-white "
 														id="dataTable" width="100%" cellspacing="0">
 														<thead>
 
@@ -283,10 +286,8 @@
 																<th>사원명</th>
 																<th>부서명</th>
 																<th>입사일</th>
-																<th>급여</th>
-																<th>패널티횟수</th>
 																<th>마지막수정시각</th>
-																<th>로그인여부</th>
+																
 																<th>마지막수정인</th>
 																<th><input type="checkbox" id="chkAll"></th>
 															</tr>
@@ -295,14 +296,12 @@
 														<tbody>
 															<c:forEach var="el" items="${empList}">
 																<tr>
-																	<td>${el.empno}</td>
+																	<td class="empno" data-empno="${el.empno}">${el.empno}</td>
 																	<td>${el.ename}</td>
 																	<td>${el.dname}</td>
-																	<td>${el.hiredate}</td>
-																	<td><fmt:formatNumber value="${el.salary}" pattern="#,###" /></td>
-																	<td>${el.panaltytot}</td>
-																	<td><fmt:formatDate type="both" value="${el.lastfix}"/></td>
-																	<td></td>
+																	<fmt:parseDate value="${el.hiredate}" pattern="yyyy-MM-dd" var='hiredate'/>
+																	<td><fmt:formatDate value="${hiredate}" pattern="yyyy-MM-dd"/></td>
+																	<td><fmt:formatDate value="${el.lastfix}" type="both" /></td>	
 																	<td>${el.lastone}</td>
 																	<td><input type="checkbox" id="chk" class="chkGrp"
 																		value="${el.empno}" name="checkboxModel"></td>
@@ -379,8 +378,6 @@
 															<th>사원명</th>
 															<th>부서명</th>
 															<th>입사일</th>
-															<th>급여</th>
-															<th>패널티횟수</th>
 															<th>마지막수정시각</th>
 															<th>마지막수정인</th>
 															<th><input type="checkbox" id="chkAll"></th>
@@ -394,9 +391,7 @@
 																<td>${eh.ename}</td>
 																<td>${eh.dname}</td>
 																<td>${eh.hiredate}</td>
-																<td>${eh.salary}</td>
-																<td>${eh.panaltytot}</td>
-																<td>${eh.lastfix}</td>
+																	<td><fmt:formatDate value="${eh.lastfix}" type="both" /></td>	
 																<td>${eh.lastone}</td>
 																<td><input type="checkbox" id="chk" class="chkGrp"
 																	value="${eh.empno}" name="checkboxModel"></td>
@@ -646,20 +641,18 @@ $("#homeBtn").click(function(){
 	home=true;
 	tab02=false;
 	$("#textchange").text('삭제');
-if(AUTH == '관리자' && DNAME!='재무팀') {
-
-   $("#option").show();//인사,전체
-   $("#option2").hide();  //재무
-
-} else if (AUTH =='관리자' && DNAME=='재무팀') {
-
-  $("#option").hide();
-  $("#option2").show();
-
-}else{
-	$("#option").hide();
-	  $("#option2").hide();
-}
+    if (AUTH == '관리자' && DNAME != '재무팀') {
+        $("#option").show();  // 인사, 전체
+        $("#dataTable").show();
+        $("#option2").hide(); // 재무
+        $("#dataTable2").hide();
+    } else if (AUTH == '관리자' && DNAME == '재무팀') {
+        $("#option").hide();
+        $("#option2").show();
+    } else {
+        $("#option").hide();
+        $("#option2").hide();
+    }
 })
 $("#tab02Btn").click(function(){
 	home=false;
@@ -669,60 +662,18 @@ $("#tab02Btn").click(function(){
 		
 		  
 		   $("#option2").show(); //삭제인원페이지
-
+		 $("#dataTable2").show();
 	}else {
         // 클릭 막기
         alert("유효하지 않은 부서입니다.");
-         $("#tab02").hide();
+         $("#tab02").block();
         return "false";
     }
 
 		
 })
-$("#tab03Btn").click(function(){
-	home=false;
-	tab02=true;
-	 $("#textchange").text('삭제');
-	if (AUTH === '관리자' && (DNAME === '개발1팀' || DNAME === '개발2팀' || DNAME === '개발3팀')) { 
-		
-		  
-		   $("#option2").show(); //삭제인원페이지
+   
 
-	}else {
-        // 클릭 막기
-        alert("유효하지 않은 부서입니다.");
-         $("#tab02").hide();
-        return "false";
-    }
-
-	var stompClient = null;
-
-	function connect() {
-	    var socket = new SockJS('/ws-endpoint');
-	    stompClient = Stomp.over(socket);
-	    stompClient.connect({}, function (frame) {
-	        console.log('Connected: ' + frame);
-	        stompClient.subscribe('/topic/errorList', function (errorList) {
-	            showErrors(JSON.parse(errorList.body));
-	        });
-	    });
-	}
-
-	function showErrors(errors) {
-	    var errorListDiv = document.getElementById("errorList");
-	    errorListDiv.innerHTML = "";
-	    errors.forEach(function (error) {
-	        var listItem = document.createElement("li");
-	        listItem.textContent = error;
-	        errorListDiv.appendChild(listItem);
-	    });
-	}
-
-	document.addEventListener("DOMContentLoaded", function () {
-	    connect();
-	});
-})
-			
 </script>
 
 </html>
