@@ -298,11 +298,10 @@
 																	<td>${el.empno}</td>
 																	<td>${el.ename}</td>
 																	<td>${el.dname}</td>
-																	<td><fmt:formatDate type="time" value="${el.hiredate}"/></td>
-																	<td><fmt:formatNumber value="${el.salary}"
-																			pattern="#,###" /></td>
+																	<td>${el.hiredate}</td>
+																	<td><fmt:formatNumber value="${el.salary}" pattern="#,###" /></td>
 																	<td>${el.panaltytot}</td>
-																	<td>${el.lastfix}</td>
+																	<td><fmt:formatDate type="both" value="${el.lastfix}"/></td>
 																	<td></td>
 																	<td>${el.lastone}</td>
 																	<td><input type="checkbox" id="chk" class="chkGrp"

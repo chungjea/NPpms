@@ -189,7 +189,7 @@
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												진행중 프로젝트 수</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">{sumproj}건</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">${doneProjN}건</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -252,12 +252,7 @@
 								</span> <span class="text">사원 삭제</span>
 								</a>
 
-								<a href="#" class="btn btn-warning btn-icon-split"> <span
-									class="icon text-white-50"> <i
-										class="fas fa-exclamation-triangle"></i>
 
-								</span> <span class="text">사원정보수정</span>
-								</a>
 
 
 								<a href="${path}/registerFrm"
