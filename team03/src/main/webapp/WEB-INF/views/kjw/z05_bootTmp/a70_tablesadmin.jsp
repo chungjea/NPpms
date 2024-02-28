@@ -120,7 +120,7 @@
 											<div
 												class="text-xs font-weight-bold text-primary text-uppercase mb-1">
 												진행중 프로젝트 수</div>
-											<div class="h5 mb-0 font-weight-bold text-gray-800">${sumProj}건</div>
+											<div class="h5 mb-0 font-weight-bold text-gray-800">${doneProjA1}건</div>
 										</div>
 										<div class="col-auto">
 											<i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -497,6 +497,11 @@ var tab02=true; //인사팀만열람가능
 var url=(home===true)?'${path}/deleteEmps':'${path}/deleteEmpsagain';
 
 $(document).ready(function(){
+		if("${emp}"==""){
+			alert("로그인후 이용해주세요")
+			location.href="${path}/login"
+		}
+	
 	  $(".nav-tabs a").click(function(){
 	    $(this).tab('show');
 	  });

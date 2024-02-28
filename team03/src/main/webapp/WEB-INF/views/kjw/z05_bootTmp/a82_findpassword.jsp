@@ -101,6 +101,12 @@
 
 <script>
 $(document).ready(function(){
+	$(document).ready(function(){
+		if("${emp}"==""){
+			alert("로그인후 이용해주세요")
+			location.href="${path}/login"
+		}
+		
 	$("#sendBtn").click(function(){
 		var params = {
 				empno: $("#empno").val();

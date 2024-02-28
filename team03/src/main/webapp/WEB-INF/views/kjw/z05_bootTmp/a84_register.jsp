@@ -205,7 +205,12 @@
 	<%-- <script src="${path}/a00_com/js/demo/chart-area-demo.js"></script>
 <script src="${path}/a00_com/js/demo/chart-pie-demo.js"></script>	 --%>
 	<script type="text/javascript">
-
+	$(document).ready(function(){
+		if("${emp}"==""){
+			alert("로그인후 이용해주세요")
+			location.href="${path}/login"
+		}
+		
             	/* var msg = "${msg}"
 						if(msg!=""){
 							alert(msg);

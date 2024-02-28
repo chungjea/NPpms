@@ -63,9 +63,15 @@ public class A02_Service_kjw {
 	public List<Project_f> doneProjA(Emp_pinfo_f emp) {
 		return dao.doneProjA(emp);
 	}
+	public List<Project_f> doneProjA1(Emp_pinfo_f emp) {
+		return dao.doneProjA1(emp);
+	}
 
 	public List<Project_f> doneProjN(Emp_pinfo_f emp) {
 		return dao.doneProjN(emp);
+	}
+	public List<Project_f> doneProjN1(Emp_pinfo_f emp) {
+		return dao.doneProjN1(emp);
 	}
 
 	public int getsal() {

@@ -27,7 +27,9 @@ public interface A03_Dao_kjw {
 	List<Emp_master_f> getEmpList(Emp_master_f sch);
 		
 	List<Project_f> doneProjA(Emp_pinfo_f emp);
+	List<Project_f> doneProjA1(Emp_pinfo_f emp);
 	List<Project_f> doneProjN(Emp_pinfo_f emp);
+	List<Project_f> doneProjN1(Emp_pinfo_f emp);
 	
 int updateinfo(Emp_master_f upt);
 		List<sal_f> getSalList(sal_f ssah); //급여리스트

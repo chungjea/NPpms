@@ -56,12 +56,17 @@ SELECT last_number FROM user_sequences WHERE sequence_name='EMPNOC'
 </select>
 
 <select id="doneProjN" resultType="int" parameterType="int">
-SELECT count(*) FROM VIEW_PROJECT_ALL_INFO_TMEMBER WHERE member=#{empno}
+SELECT count(*) FROM VIEW_PROJECT_ALL_INFO_TMEMBER WHERE member=#{empno} and status='완료'
+</select>
+<select id="doneProjN1" resultType="int" parameterType="int">
+SELECT count(*) FROM VIEW_PROJECT_ALL_INFO_TMEMBER WHERE member=#{empno} and status='진행 중'
 </select>
 <select id="doneProjA" resultType="int" parameterType="int">
-SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno}
+SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno} and status='완료'
 </select>
-
+<select id="doneProjA1" resultType="int" parameterType="int">
+SELECT count(*) FROM VIEW_PROJECT_ALL_INFO WHERE empno=#{empno} and status='진행 중'
+</select>
 <select id="empcnt" parameterType="emplist">
 SELECT COUNT(*) FROM emp_master_f
 </select>
