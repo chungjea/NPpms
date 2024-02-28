@@ -87,6 +87,9 @@
 			}else if(cempno==empno){
 				$("#ckModal").hide();
 				$("#finBtn").show();
+			}else{
+				$("#ckModal").hide();
+				$("#finBtn").hide()
 			}
 		}
 		$("#okBtn").click(function(){
