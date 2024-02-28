@@ -126,7 +126,7 @@
 	<select id="metlist" resultType="meeting" parameterType="metSch">
 		SELECT * FROM 
 			(SELECT rownum cnt, a.* FROM 
-				(SELECT * FROM MEETING_F WHERE pcode = #{pcode} AND title like '%'||#{title}||'%' 
+				(SELECT mf.*, emf.ENAME||'('||df.DNAME||')' writer FROM MEETING_F mf, EMP_MASTER_F emf, DEPT_F df WHERE mf.wempno = emf.EMPNO AND emf.DEPTNO = df.DEPTNO AND pcode = #{pcode} AND title like '%'||#{title}||'%' 
 				ORDER BY METNO DESC) a
 			)
 		WHERE cnt BETWEEN #{start} AND #{end}
