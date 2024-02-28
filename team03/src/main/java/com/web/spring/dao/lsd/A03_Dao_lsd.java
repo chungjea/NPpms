@@ -51,13 +51,15 @@ public interface A03_Dao_lsd {
 	List<Noticeboard_f> noticeSch(Noticeboard_f sch);
 
 	
-	// 페이징 처리, 전체조회
+
 	/*@Select("select * from(\r\n" + "SELECT rownum cnt, nf.*\r\n"
 			+ "	from Noticeboard_f nf\r\n" + "where 1=1\r\n" + "and title like '%'||#{title}||'%' \r\n"
 			+ "		and pcode=#{pcode} order by notice_num desc)" + "		WHERE cnt BETWEEN #{start} AND #{end} ")*/
+	// 페이징 처리, 전체조회
 	@Select("SELECT * FROM \r\n"
 			+ "         (SELECT rownum cnt, a.* FROM \r\n"
-			+ "            (SELECT * from Noticeboard_f nf where 1=1 and title like '%'||#{title}||'%' and pcode=#{pcode} ORDER BY notice_num DESC) a\r\n"
+			+ "            (SELECT * from Noticeboard_f nf where 1=1 and title like '%'||#{title}||'%' and pcode=#{pcode} "
+			+ "ORDER BY notice_num DESC) a\r\n"
 			+ "         ) \r\n"
 			+ "      WHERE cnt BETWEEN #{start} AND #{end} order by notice_num desc")
 	List<Noticeboard_f> noticePage(NoticeSch_f sch);
@@ -74,7 +76,7 @@ public interface A03_Dao_lsd {
 	@Select("select * from Noticeboard_f where notice_num=#{notice_num} and pcode=#{pcode}")
 	Noticeboard_f noticeboardDetail(@Param("notice_num") int notice_num, @Param("pcode") int pcode);
 
-	// 공지 등록 #{dname},있었음 - 오류날때
+	// 공지 등록 
 	@Insert("insert into Noticeboard_f values(board_seq.nextval,#{writer},#{content},sysdate,sysdate,#{title},0,#{pcode})")
 	int insertNotice(Noticeboard_f ins);
 

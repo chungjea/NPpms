@@ -73,7 +73,7 @@ public class A01_Controller_lsd {
 		return "lsd/z05_bootTmp/noticeBoard";
 	}
 
-	// 공지 전체 + 페이지 == dname있는데 pcode
+	// 공지 전체 + 페이지 pcode
 	// http://localhost:3333/noticePage
 	@RequestMapping("noticePage")
 	public String getNoticeboard(@ModelAttribute("sch") NoticeSch_f sch, @RequestParam("pcode") int pcode, HttpSession session, Model d) {
@@ -104,7 +104,8 @@ public class A01_Controller_lsd {
 
 	 //공지 등록 === pcode ===
 	@RequestMapping("insertNotice")
-	public String insertNotice(@RequestParam("pcode") int pcode, @ModelAttribute("sch") NoticeSch_f sch, Noticeboard_f ins, Model d, HttpSession session) {
+	public String insertNotice(@RequestParam("pcode") int pcode, @ModelAttribute("sch") NoticeSch_f sch, 
+			Noticeboard_f ins, Model d, HttpSession session) {
 		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
 		System.out.println("이엠피 나와라"+emp);
 		if(emp!=null) {
@@ -127,7 +128,8 @@ public class A01_Controller_lsd {
 	// 수정
 	// 게시글을 더블클릭했을 떄 상세화면이 나오고, 그 화면에서 내가 수정하면 수정이 되는것
 	@RequestMapping("updateNotice")
-	public String updateBoard(@RequestParam("notice_num")int notice_num, @RequestParam("pcode")int pcode, Noticeboard_f upt, Model d) {
+	public String updateBoard(@RequestParam("notice_num")int notice_num, @RequestParam("pcode")int pcode, 
+			Noticeboard_f upt, Model d) {
 		// 수정 처리 내용
 		upt.setNotice_num(notice_num);
 		upt.setPcode(pcode);

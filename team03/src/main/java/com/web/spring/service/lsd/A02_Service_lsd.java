@@ -47,10 +47,8 @@ public class A02_Service_lsd {
 		if(sch.getPageSize()==0) sch.setPageSize(5);
 		int totPage = (int)Math.ceil(sch.getCount()/(double)sch.getPageSize());
 		sch.setPageCount(totPage);
-		
 		if(sch.getCurPage()> sch.getPageCount()) sch.setCurPage(sch.getPageCount());
 		if(sch.getCurPage()==0) sch.setCurPage(1);
-		
 		sch.setEnd(sch.getCurPage()*sch.getPageSize());
 		if(sch.getEnd()>sch.getCount()) {
 			sch.setEnd(sch.getCount() );
@@ -64,7 +62,6 @@ public class A02_Service_lsd {
 			sch.setEndBlock(sch.getPageCount());
 		}
 		sch.setStartBlock((blockNum-1)*sch.getBlockSize()+1);
-//		System.out.println("매개변수 -> "+ sch);
 		List<Noticeboard_f> list = dao.noticePage(sch);
 		list.stream().forEach(it -> System.out.println(it.getNotice_num()));
 		return list;
