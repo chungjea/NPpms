@@ -63,6 +63,12 @@ html, body {
 
 
 </head>
+<script type="text/javascript">
+if("${emp}"==""){
+		alert("로그인후 이용해주세요")
+		location.href="${path}/login"
+	}
+</script>
 <body id="page-top">
 
 	<!-- Page Wrapper -->
@@ -222,6 +228,10 @@ html, body {
 						gantt.locale.labels.section_time = "기간";
 						gantt.locale.labels.section_assignor = "담당배정"
 					
+						 if("${emp.auth !='관리자'}"){
+							gantt.config.readonly = true;
+						} 
+						
 
 						gantt.attachEvent("onAfterLinkAdd", function(id,item){
 						    funclink("insertLink",item)

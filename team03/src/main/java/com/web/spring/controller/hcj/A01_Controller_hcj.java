@@ -102,9 +102,14 @@ public class A01_Controller_hcj {
 		return "hcj/z05_bootTmp/projectList";
 	}
 
-	@RequestMapping("project")
-	public String project(@ModelAttribute("pcode") int pcode,Model d) {
+	@PostMapping("project")
+	public String project(@ModelAttribute("pcode") int pcode,Model d,HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		
+		Emp_pinfo_f emp = (Emp_pinfo_f) session.getAttribute("emp");
+		if (emp != null) {			
 		d.addAttribute("pinfo", service.getProjectInfo(pcode));
+		}
 		return "hcj/z05_bootTmp/gantt";
 	}
 	@PostMapping("loadpinfo")

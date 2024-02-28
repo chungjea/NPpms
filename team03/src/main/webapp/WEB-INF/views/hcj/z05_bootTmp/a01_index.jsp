@@ -163,6 +163,12 @@
 
 <script src="${path}/customjs/slidbar.js"></script>
 <script type="text/javascript">
+function goproject(pcode){
+	$("#goprojectfrm [name=pcode]").val(pcode)
+	$("#goprojectfrm").submit()
+}
+
+
 $("#uptBtn").hide();
 $("#delBtn").hide();
 selectpjwork()

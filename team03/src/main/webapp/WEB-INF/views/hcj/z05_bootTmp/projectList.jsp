@@ -24,9 +24,7 @@ td{text-align:center;}
  		alert("로그인후 이용해주세요")
  		location.href="${path}/login"
  	}
- 	
 
- 	
  </script>
 	
      <!-- Custom fonts for this template-->
@@ -157,7 +155,7 @@ td{text-align:center;}
 				</div>
   				<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/newprojectModal.jsp" %>
 				<%@ include file="/WEB-INF/views/hcj/z05_bootTmp/empsch.jsp" %>
-				<form id="goprojectfrm" action="project">
+				<form id="goprojectfrm" action="project"  method="post">
 					<input type="hidden" name="pcode"/>
 				</form>
 				</div>

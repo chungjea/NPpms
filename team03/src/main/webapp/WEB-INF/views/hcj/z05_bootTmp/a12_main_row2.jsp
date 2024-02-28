@@ -94,10 +94,13 @@
 
 
 <!-- Content Column -->
-<h2>진행중인 프로젝트<c:if test="${emp.auth=='관리자'}"><input type="button" value="프로젝트 생성" data-toggle="modal" data-target="#newprojectModal"/></c:if> </h2>
+<h2>진행중인 프로젝트<c:if test="${emp.auth=='관리자'}"><input type="button" value="프로젝트 생성" data-toggle="modal" data-target="#newprojectModal" class="btn btn-secondary"/></c:if> </h2>
 <div class="pjcontainer">
+<form id="goprojectfrm" action="project"  method="post">
+					<input type="hidden" name="pcode"/>
+</form>
 	<c:forEach var="pj" items="${projects}">
-		<div class="pjbox" onclick="location.href='${path}/project?pcode=${pj.pcode}'">
+		<div class="pjbox"  onclick="goproject(${pj.pcode})">
 
 			<div class="pjicon">
 				<img class="pjiconImg"
