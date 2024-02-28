@@ -136,27 +136,35 @@ public String mypagefilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f 
 }
 
 @RequestMapping("HRFilter")
-public String HRFilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_his_f psearch, Model d,HttpSession session) {
+public String HRFilter(@ModelAttribute("sch") Emp_master_f sch,Emp_master_f cnt,Emp_master_his_f psearch, Model d,HttpSession session) {
 	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
 	if(emp.getDname().equals("인사팀")) {
 		d.addAttribute("empList", service.getEmpList(sch));
 		d.addAttribute("EmpHistory", service.EmpHistory(psearch));
+		d.addAttribute("empcnt", service.empcnt(cnt));
+		d.addAttribute("getsal",service.getsal());
+		d.addAttribute("doneProjA", service.doneProjA(emp));
+		d.addAttribute("doneProjA1", service.doneProjA1(emp));
 		return "kjw/z05_bootTmp/a70_tablesadmin";
 
 	}else {
 		System.out.println("권한이 없습니다.");
-		return "false";
+		return "null";
 	}
 }
 @RequestMapping("FIFilter")
-public String FIFilter(@ModelAttribute("sch") sal_f sal, Model d,HttpSession session) {
+public String FIFilter(@ModelAttribute("sch") sal_f sal,Emp_master_f cnt, Model d,HttpSession session) {
 	Emp_pinfo_f emp=(Emp_pinfo_f)session.getAttribute("emp");
 	if(emp.getDname().equals("재무팀")) {
 		d.addAttribute("salList", service.getSalList(sal));
+		d.addAttribute("empcnt", service.empcnt(cnt));
+		d.addAttribute("getsal",service.getsal());
+		d.addAttribute("doneProjN", service.doneProjN(emp));
+		d.addAttribute("doneProjN1", service.doneProjN1(emp));
 		return "kjw/z05_bootTmp/a70_tablesadmin";
 
 	}else {
-	return null;
+	return "null" ;
 
 	}
 }
