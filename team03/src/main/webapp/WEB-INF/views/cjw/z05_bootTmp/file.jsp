@@ -224,6 +224,7 @@
 								<input type="hidden" name="apvno" value=""/>
 								<input type="hidden" name="rskno" value=""/>
 								<input type="hidden" name="metno" value=""/>
+                    			<input type="hidden" name="empno" value="${emp.empno}" />
 								<input type="hidden" name="pcode" value="${param.pcode}"/>
 							</form>
 							<br>
