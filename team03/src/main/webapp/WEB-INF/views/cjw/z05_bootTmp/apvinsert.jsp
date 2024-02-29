@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Good day!!</title>
+<title>NPpms</title>
 
 
 
@@ -165,7 +165,7 @@
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2021</span>
+						<span>Copyright &copy; 늘품 PMS</span>
 					</div>
 				</div>
 			</footer>
