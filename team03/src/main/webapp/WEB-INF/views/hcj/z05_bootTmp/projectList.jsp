@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NPpms</title>
 <style>
 td{text-align:center;}
 	.jumbotron{padding:2%;}
@@ -168,7 +168,7 @@ td{text-align:center;}
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2021</span>
+						<span>Copyright &copy; NPpms</span>
 					</div>
 				</div>
 			</footer>

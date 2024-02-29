@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>NPpms</title>
 <style>
 html, body {
 	background: #fff;
@@ -118,7 +118,7 @@ if("${emp}"==""){
 			<footer class="sticky-footer bg-white">
 				<div class="container my-auto">
 					<div class="copyright text-center my-auto">
-						<span>Copyright &copy; Your Website 2024</span>
+						<span>Copyright &copy; NPpms</span>
 					</div>
 				</div>
 			</footer>
@@ -179,7 +179,7 @@ if("${emp}"==""){
 							{name: "text", label: "작업명", tree: true, width: 170, resize: true, min_width: 10},
 							{name: "start_date",label:"시작일",align: "center", width: 90, resize: true},
 							{name: "duration",label:"작업일수" ,align: "center", width: 80, resize: true},
-							{name:"writer",label:"담당자",resize: true},
+				
 							{name: "add", width: 40}
 						];
 						gantt.templates.lightbox_header = function(start_date,end_date,task){
