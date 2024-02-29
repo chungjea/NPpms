@@ -59,7 +59,7 @@
 	</select>
 	<select id="detailapv" resultType="approve" parameterType="int">
 		SELECT af.APVNO, af.TITLE, af.writer, af.WEMPNO, 
-			emf.ENAME||' / '||df.DNAME manager, aaf.MEMPNO, 
+			emf.ENAME||'('||df.DNAME||')' manager, aaf.MEMPNO, 
 			af.REGDTE, aaf.ckdte, af.sts, aaf.feedback , af.content
 		FROM APPROVE_F af, approveadmin_f aaf, EMP_MASTER_F emf, DEPT_F df
 		WHERE af.apvno = aaf.apvno AND aaf.mempno = emf.EMPNO AND 

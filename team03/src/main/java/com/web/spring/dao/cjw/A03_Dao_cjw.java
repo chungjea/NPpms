@@ -197,7 +197,7 @@ public interface A03_Dao_cjw {
 	// 문서관리
 	List<File_f> boardfile(FileSch sch);
 	
-	@Select("SELECT count(*) FROM file_f WHERE  page NOT IN ('채팅','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND (auth = #{empno} OR auth = 0) AND pcode = #{pcode}")
+	@Select("SELECT count(*) FROM file_f WHERE  page NOT IN ('팀','개인') AND fname like '%'||#{fname}||'%' AND page like '%'||#{page}||'%' AND (auth = #{empno} OR auth = 0) AND pcode = #{pcode}")
 	int boardfilecnt(FileSch sch);
 	
 	@Insert("Insert into file_f values(file_seq.nextval, '개인', file_seq.currval, #{fname}, #{path}, sysdate, #{fno}, #{empno}, 0)")
