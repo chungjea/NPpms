@@ -10,7 +10,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Good day!!</title>
+<title>NPpms</title>
 
 <style>
 #dataTable th {
@@ -38,6 +38,10 @@
 	text-align: center;
 }
 #dataTable2 td {
+
+	text-align: right;
+}
+#dataTable1 td {
 
 	text-align: right;
 }
@@ -343,8 +347,8 @@
 																	<td>${sl.ename}</td>
 																	<td>${sl.dname}</td>
 																	<td>${sl.egrade}</td>
-																	<td>${sl.salary}</td>
-																	<td>${sl.incentive}</td>
+																	<td><fmt:formatNumber value="${sl.salary}" pattern="#,###" /></td>
+																	<td><fmt:formatNumber value="${sl.incentive}" pattern="#,###" /></td>
 																	<td>${sl.lastfix}</td>
 																	<td><input type="checkbox" id="chk" class="chkGrp"
 																		value="${sl.empno}" name="checkboxModel"></td>
@@ -431,7 +435,7 @@
 	<footer class="sticky-footer bg-white">
 		<div class="container my-auto">
 			<div class="copyright text-center my-auto">
-				<span>Copyright &copy; Your Website 2021</span>
+				<span>Copyright &copy; 늘품 PMS</span>
 
 			</div>
 		</div>
@@ -666,7 +670,7 @@ $("#tab02Btn").click(function(){
 	}else {
         // 클릭 막기
         alert("유효하지 않은 부서입니다.");
-         $("#tab02").block();
+        $("#dataTable2").hide();
         return "false";
     }
 
