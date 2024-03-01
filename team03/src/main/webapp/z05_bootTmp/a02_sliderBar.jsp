@@ -66,11 +66,11 @@
 					<span>문서관리</span>
 			</a></li>
 			</c:if>
-			<li class="nav-item"><a class="nav-link" href="${path}/HRFilter">
+			<li class="nav-item"><a class="nav-link" onclick="f_clickFunc()">
 					<span>인사관리</span>
 			</a></li>
 			
-			<li class="nav-item"><a class="nav-link" href="${path}/FIFilter">
+			<li class="nav-item"><a class="nav-link"onclick="f_clickFunc1()">
 					<span>재정관리</span>
 			</a></li>
 
@@ -79,19 +79,47 @@
 			</a></li>
  <script>
  onclick="f_clickFunc()"
+ onclick="f_clickFunc1()"
+ 
 	var auth = "${emp.auth}"
+	var dname = "${emp.dname}"
 		
 		var sessAuth = "${emp.auth}"
+		var sessDname = "${emp.dname}"
 				function f_clickFunc(){	
 		if(sessAuth=="관리자") {
-			location.href="a70_tablesadmin.jsp" 
+			if(sessDname=="인사팀"){
+				alert("인사관리페이지로 이동합니다.")
+			location.href="${path}/mypagefilter" 
+			}
 			
-			
-		}else if(sessAuth=="직원"){
-			location.href="a70_tables.jsp" 
-		}else
-			console.log("관리자페이지 권한이 없습니다. 마이페이지로 이동합니다.")
+		else if(sessDname!="인사팀"){
+			alert("인사관리권한이 없습니다. 관리자페이지로 이동합니다.")
+			location.href="${path}/mypagefilter" 
 		}
+		}
+		else{
+			alert("인사관리권한이 없습니다. 마이페이지로 이동합니다.")
+			location.href="${path}/mypagefilter"
+		}
+		}
+		function f_clickFunc1(){	
+			if(sessAuth=="관리자") {
+				if(sessDname=="재무팀"){
+					alert("재정관리페이지로 이동합니다.")
+				location.href="${path}/mypagefilter" 
+				}
+				
+			else if(sessDname!="재무팀"){
+				alert("재정관리권한이 없습니다. 관리자페이지로 이동합니다.")
+				location.href="${path}/mypagefilter" 
+			}
+			}
+			else{
+				alert("재정관리권한이 없습니다. 마이페이지로 이동합니다.")
+				location.href="${path}/mypagefilter"
+			}
+			}
  </script>
 
 			
