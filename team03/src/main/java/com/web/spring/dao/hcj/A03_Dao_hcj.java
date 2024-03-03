@@ -193,7 +193,8 @@ public interface A03_Dao_hcj {
 			+ "		FROM PROJECT_F pf \r\n"
 			+ "		WHERE empno = #{empno}) pc,PROJECT_WORK_F pwf\r\n"
 			+ "	WHERE pc.pcode = pwf.pcode\r\n"
-			+ "	AND pwf.progress < 100")
+			+ "	AND pwf.progress < 100 "
+			+ "and pwf.empno != 0")
 	int getmyWorkCntAdmin(int empno);
 	
 	// 완료안된 내 작업 수(Normal)
@@ -247,7 +248,7 @@ public interface A03_Dao_hcj {
 	// 프로젝트 간트차트
 	@Select("SELECT WNO id, WNAME text, to_char(STARTDTE,'YYYY-MM-DD') \r\n "
 			+ "start_date, ENDDTE-STARTDTE +1  duration, PROGRESS,"
-			+ "REFNO parent \r\n"
+			+ "REFNO parent, empno assignor\r\n"
 			+ "FROM PROJECT_WORK_F pwf \r\n"
 			+ "where pcode = #{pcode}")
 	List<Data> getTaskdatas(int pcode);

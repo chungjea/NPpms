@@ -17,6 +17,7 @@ public class Data {
 	private int duration;
 	private double progress;
 	private long parent;
+	private int assignor;
 	public Data() {
 		// TODO Auto-generated constructor stub
 	}
@@ -33,6 +34,24 @@ public class Data {
 		this.duration = duration;
 		this.progress = progress;
 		this.parent = parent;
+	}
+
+
+
+
+
+	
+	public int getAssignor() {
+		return assignor;
+	}
+
+
+
+
+
+
+	public void setAssignor(int assignor) {
+		this.assignor = assignor;
 	}
 
 

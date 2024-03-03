@@ -174,12 +174,36 @@ if("${emp}"==""){
 								gantt.config.highlight_critical_path = true;
 							gantt.render();
 						};	
+						
+						var tmem;
+						$.ajax({
+							url:"${path}/Tmem",
+							type:"post",
+							async:false,
+							data:"pcode=${pcode}",
+							dataType:"json",
+							success:function(data){
+								
+								tmem =data.mem;
+								console.log("tmem------------------");
+								console.log(tmem);
+								
+							},
+							error:function(err){								
+							}	
+						})
 						gantt.config.columns = [
 							{name: "wbs", label: "번호", width: 40, template: gantt.getWBSCode, resize: true},
 							{name: "text", label: "작업명", tree: true, width: 170, resize: true, min_width: 10},
 							{name: "start_date",label:"시작일",align: "center", width: 90, resize: true},
-							{name: "duration",label:"작업일수" ,align: "center", width: 80, resize: true},
-				
+							{name: "duration",label:"작업일수" ,align: "center", width: 70, resize: true},
+							{name: "assignor",label:"담당자" ,align: "center", width: 70, resize: true,template: function (task) {
+								var label;
+								tmem.forEach(function(mem){
+									if(mem.key==task.assignor)label = mem.label
+								})
+					            return label
+					        }},
 							{name: "add", width: 40}
 						];
 						gantt.templates.lightbox_header = function(start_date,end_date,task){
@@ -201,28 +225,14 @@ if("${emp}"==""){
 							}},
 							{unit: "day", step: 1, format: "%d일"}
 						];
-						var tmem;
-							$.ajax({
-								url:"${path}/Tmem",
-								type:"post",
-								async:false,
-								data:"pcode=${pcode}",
-								dataType:"json",
-								success:function(data){
-									
-									tmem =data.mem;
-									console.log("tmem------------------");
-									console.log(tmem);
-									
-								},
-								error:function(err){								
-								}	
-							})
+						
 						gantt.config.lightbox.sections = [
 						    {name:"description", height:50, map_to:"text", type:"textarea", focus:true},
 						    {name:"assignor", height:30, type:"select", options:tmem,map_to:"assignor"},
 						    {name:"time", height:50, type:"duration", map_to:"auto",time_format:["%Y","%m","%d"]}   
 						];
+							
+						console.log(tmem)
 						gantt.config.lightbox_additional_height = 130;
 						gantt.locale.labels.section_description = "작업명";
 						gantt.locale.labels.section_time = "기간";
@@ -268,16 +278,15 @@ if("${emp}"==""){
 						    const Task = gantt.getTask(id)
 						    if(mode === "move"){
 						    	if(gantt.getChildren(id) !=0){
-							    	var moveStep =  Task.start_date.getDate() - bdforeMoveDate.getDate()  
+							    	var moveStep =  Task.start_date.getTime() - bdforeMoveDate.getTime()
+							    	var moveday = moveStep / (1000*60*60*24);
 							    	gantt.getChildren(id).forEach(function(childid){
 							    		var childTask = gantt.getTask(childid)
-							    		console.log(childTask.start_date.getDate())
-							    		childTask.start_date.setDate(childTask.start_date.getDate()+moveStep)
-							    		childTask.end_date.setDate(childTask.end_date.getDate()+moveStep)
+							    		childTask.start_date.setDate(childTask.start_date.getDate()+moveday)
+							    		childTask.end_date.setDate(childTask.end_date.getDate()+moveday)
 							    		funcTask("updateTask",childTask)
 							    	})
 							    	gantt.render()
-							
 						    	}
 						    }
 						    if(mode === "resize"){
@@ -330,6 +339,11 @@ if("${emp}"==""){
 								
 								
 							}
+						});
+						
+						gantt.attachEvent("onTaskLoading", function(task){
+						    console.log(task)
+						    return true;
 						});
 						
 						gantt.attachEvent("onAfterTaskAdd", function(id,item){				

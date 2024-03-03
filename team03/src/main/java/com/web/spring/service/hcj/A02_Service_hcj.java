@@ -141,10 +141,7 @@ public class A02_Service_hcj {
 			
 			for(Tmem_f mem: upt.getTmem()) {
 				uptmem.add(mem.getKey());
-				/*
-				 * System.out.println(mem.getLabel()+" 팀원 추가");
-				 * dao.insertTMemProject(mem.getKey(),upt.getPcode());
-				 */
+			
 			}
 			// 현태팀원이 upt팀원에 없을경우 삭제
 			for(int mem:curmem) {
@@ -158,11 +155,7 @@ public class A02_Service_hcj {
 					dao.insertTMemProject(mem, pcode);
 				}
 			}
-		}
-			
-		
-
-
+		}			
 			MultipartFile file = upt.getReports();
 			if(file !=null)System.out.println("!null");
 			if(!(file.getOriginalFilename().equals("")))System.out.println("파일이름있음");

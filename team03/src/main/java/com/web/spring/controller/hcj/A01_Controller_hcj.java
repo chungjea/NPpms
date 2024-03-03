@@ -133,6 +133,7 @@ public class A01_Controller_hcj {
 		System.out.println("일단 들어옴3ddasdasdtryyrt");
 		System.out.println("text:"+ins.getText());
 		System.out.println("pcode:"+ins.getPcode());
+		System.out.println("담당자:"+ins.getAssignor());
 		ModelAndView modelAndView = new ModelAndView();
 		modelAndView.setView(new MappingJackson2JsonView());
 		modelAndView.addObject("msg", service.insertTask(ins));
