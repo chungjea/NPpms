@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+
+
+
+<mapper namespace="com.web.spring.dao.hcj.ProjectDao">
+
+<!-- ########################프로젝트#################### -->
+	<insert id="insertProject" parameterType="project" >
+		INSERT INTO PROJECT_F values(project_seq.nextval, #{pname}, 
+		to_date(#{startdte},'YYYY-MM-DD'),to_date(#{enddte},'YYYY-MM-DD'),
+		#{status},#{empno},#{tname},#{ptype},#{content})
+	</insert>
+
+
+	<update id="updateProject" parameterType="project">
+			UPDATE  PROJECT_F 
+				SET 	pname = #{pname},
+				startdte = to_date(#{startdte},'YYYY-MM-DD'),
+				enddte = to_date(#{enddte},'YYYY-MM-DD'),
+				status = #{status},
+				tname = #{tname},
+				ptype = #{ptype},
+				content = #{content}
+			WHERE pcode = #{pcode}
+	</update>
+	
+
+	
+	<select id="getProjectCntByStatusAdmin" parameterType="int" resultType="pjcnt">
+		SELECT STATUS ,count(*) cnt FROM PROJECT_F pf
+		WHERE empno = #{empno}
+		GROUP BY STATUS 
+	</select>
+	<select id="getProjectCntByStatusNormal" parameterType="int" resultType="pjcnt">
+		SELECT STATUS ,count(*) cnt FROM VIEW_PROJECT_ALL_INFO_Tmember 
+		WHERE member = #{empno}
+		GROUP BY STATUS 
+	</select>
+	
+	<select id="getprojectsAdmin" parameterType="emp" resultType="project">
+		SELECT VPAI.*,addrisk.rcnt 
+		FROM VIEW_PROJECT_ALL_INFO vpai ,
+		(SELECT pcode,sts,count(*) rcnt 
+		FROM RISK_F rf 
+		where sts = '발생예정'
+		group BY pcode,sts) addrisk
+		where VPAI.PCODE = addrisk.pcode(+)
+		and VPAI.EMPNO = #{empno}
+		AND vpai.STATUS ='진행중'
+	</select>
+	
+	<select id="getprojectsNormal" parameterType="emp" resultType="project">
+		SELECT VPAIT.*,risk.rcnt FROM VIEW_PROJECT_ALL_INFO_TMEMBER vpait ,
+			(SELECT pcode,wempno,sts,count(*) rcnt FROM RISK_F
+			where sts = '처리중'
+			GROUP BY pcode,WEMPNO,sts) risk
+			WHERE VPAIT.PCODE = risk.pcode(+)
+			AND VPAIT.MEMBER = risk.wempno(+)
+			AND MEMBER = #{empno}
+			AND STATUS ='진행중'	
+	</select>
+	
+	
+<!-- ######################### 관리자 담당 프로젝트 ########################## -->
+
+								<!-- 리스트 -->
+	<select id="getprojectListAdmim" parameterType="projectSch" resultType="project">		
+		SELECT * 
+		from
+			(SELECT rownum cnt, addnum.*
+				from
+				(SELECT * FROM VIEW_PROJECT_ALL_INFO vpai 
+				WHERE pname LIKE '%'||#{pname}||'%'
+				AND empno = #{empno}
+				<if test="status != null">
+				AND STATUS = #{status}
+				</if>
+				ORDER BY pcode DESC) addnum)FIN
+		WHERE cnt BETWEEN #{start} AND #{end}		
+	</select>
+	
+								<!-- 데이터 갯수 -->
+	<select id="getprojectListCntAdmim" parameterType="projectSch" resultType="int">
+		SELECT count(*) 
+		FROM VIEW_PROJECT_ALL_INFO vpai 
+		WHERE pname LIKE '%'||#{pname}||'%'
+		and empno = #{empno}
+		<if test="status!=null">
+		AND STATUS = #{status}
+		</if>
+	</select>
+
+<!--  ######################### 사원 참가 프로젝트  ########################## -->	
+
+	<select id="getprojectListNormal" parameterType="projectSch" resultType="project">		
+		SELECT cnt, fin.*
+		from
+			(SELECT rownum cnt, addnum.*
+			from
+			(SELECT * FROM VIEW_PROJECT_ALL_INFO_TMEMBER vpait
+			WHERE pname LIKE '%'||#{pname}||'%'
+			AND MEMBER = #{empno}
+			<if test="status!=null">
+				AND STATUS = #{status}
+			</if>
+			ORDER BY pcode DESC)addnum)fin
+		WHERE cnt BETWEEN #{start} AND #{end} 
+	</select>
+	
+	<select id="getprojectListCntNormal" parameterType="projectSch" resultType="int">
+		SELECT count(*) 
+		FROM VIEW_PROJECT_ALL_INFO_TMEMBER vpait
+		WHERE PNAME like '%'||#{pname}||'%'
+		AND MEMBER = #{empno}
+		<if test="status!=null">
+		AND STATUS = #{status}
+		</if>
+	</select>
+	
+	<select id="getRiskNormal" parameterType="int" resultType="int">
+		SELECT count(*) FROM RISK_F 
+		WHERE sts = '처리중'
+		AND WEMPNO = #{empno}
+	</select>
+	
+	<select id="getRiskAdmin" parameterType="int" resultType="int">
+		SELECT count(*) FROM RISKADMIN_F 
+		WHERE MANAGER = #{empno}
+		and cempno = 0
+	</select>
+	
+
+</mapper>
